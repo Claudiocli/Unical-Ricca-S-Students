@@ -49,3 +49,7 @@ main h1 {
   display: none;
   color: rgba(255, 0, 0, 0.808);
 }
+#signup-div .form-group label {
+  padding-top: 20px;
+  padding-bottom: -1px;
+}

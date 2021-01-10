@@ -96,7 +96,7 @@ function checkRegisterInputs()	{
 		addressField.style.borderColor="red";
 		returnValue=false;
 	}
-	if (!validDateOfBirth(dobField.value)) {
+	if (!validDateOfBirth(dobField.value) || dobField.value.length==0) {
 		dobField.style.borderColor="red";
 		returnValue=false;
 	}
