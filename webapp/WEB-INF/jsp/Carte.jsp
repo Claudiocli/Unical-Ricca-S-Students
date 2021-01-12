@@ -10,18 +10,14 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="Script.js"></script>
 
-    <title>Riepilogo</title>
+	<link href="<c:url value="/resources/css/Carte.css" />" rel="stylesheet">
+	<script src="<c:url value="/resources/js/Carte.js" />"></script>
+
+    <title>Carte</title>
 
 </head>
-
 
 <body>
     <!-- Navbar -->
@@ -39,13 +35,15 @@
                                 </svg>
                             </li>
                             <li class="nav-item">
-                                <a id="riepilogo" class="nav-link nav-link-color" href="../Riepilogo/Home.html">Riepilogo</a>
+                                <a id="riepilogo" class="nav-link nav-link-color"
+                                    href="../Riepilogo/Home.html">Riepilogo</a>
                             </li>
                             <li class="nav-item">
                                 <a id="carte" class="nav-link nav-link-color" href="../Carte/carte.html">Carte</a>
                             </li>
                             <li class="nav-item">
-                                <a id="storico" class="nav-link nav-link-color" href="../Storico/Storico.html">Storico</a>
+                                <a id="storico" class="nav-link nav-link-color"
+                                    href="../Storico/Storico.html">Storico</a>
                             </li>
                             <li class="nav-item">
                                 <a id="aiuto" class="nav-link nav-link-color" href="../Aiuto/Aiuto.html">Aiuto</a>
@@ -101,208 +99,113 @@
     <!-- Center section -->
     <div class="banner banner-color">
         <div class="row h-100">
-            <div class="col-lg-2 col-md-2 h-100">
-                <div class="row details-list-left">
-                </div>
-            </div>
+            <div class="col-lg-2 col-md-2 h-100"></div>
             <div class="col-lg-8 col-md-8 h-100">
-                <div class="row padding-buongiorno">
-                    <h3 class="card-title text-lg-left">Buongiorno.</h3>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 col-md-5 h-100">
-                        <div class="container-md">
-                            <div class="card card-font-color">
-                                <div class="card-header">
-                                    <ul class="nav nav-tabs card-header-tabs">
-                                        <li class="nav-item">
-                                            <button type="button" class="btn card-button-options-font">Saldo</button>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="card-body card-body-text-color">
-                                    <div class="container-md">
-                                        <span id="saldo" class="saldo-font">EUR</span>
+                <div class="row h-100">
+                    <div class="col-lg-4 col-md-4 h-100">
+                        <h3 class="margin-top-elenco-carte">Elenco Carte</h3>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Numero</th>
+                            </tr>
+                            <tr>
+                                <td>Prepagata</td>
+                                <td>*************</td>
+                            </tr>
+                            <tr>
+                                <td>Carta di Credito</td>
+                                <td>*************</td>
+                            </tr>
+                            <tr>
+                                <td>Conto Corrente</td>
+                                <td>*************</td>
+                            </tr>
+                            <tr>
+                                <td>Prepagata</td>
+                                <td>*************</td>
+                            </tr>
+                            <tr>
+                        </table>
+                    </div>
+                    <div class="col-lg-8 col-md-8 h-100 elenco-carte-font text-center">
+                        <div>
+                            <ul class="list-inline mb-2 list-font">
+                                <li class="list-inline-item">
+                                    <h3>Aggiungi Carta</h3>
+                                </li>
+                                <li>
+                                    <div id="aggiungiCarta">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                            fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 0c-.176 0-.35.006-.523.017l.064.998a7.117 7.117 0 0 1 .918 0l.064-.998A8.113 8.113 0 0 0 8 0zM6.44.152c-.346.069-.684.16-1.012.27l.321.948c.287-.098.582-.177.884-.237L6.44.153zm4.132.271a7.946 7.946 0 0 0-1.011-.27l-.194.98c.302.06.597.14.884.237l.321-.947zm1.873.925a8 8 0 0 0-.906-.524l-.443.896c.275.136.54.29.793.459l.556-.831zM4.46.824c-.314.155-.616.33-.905.524l.556.83a7.07 7.07 0 0 1 .793-.458L4.46.824zM2.725 1.985c-.262.23-.51.478-.74.74l.752.66c.202-.23.418-.446.648-.648l-.66-.752zm11.29.74a8.058 8.058 0 0 0-.74-.74l-.66.752c.23.202.447.418.648.648l.752-.66zm1.161 1.735a7.98 7.98 0 0 0-.524-.905l-.83.556c.169.253.322.518.458.793l.896-.443zM1.348 3.555c-.194.289-.37.591-.524.906l.896.443c.136-.275.29-.54.459-.793l-.831-.556zM.423 5.428a7.945 7.945 0 0 0-.27 1.011l.98.194c.06-.302.14-.597.237-.884l-.947-.321zM15.848 6.44a7.943 7.943 0 0 0-.27-1.012l-.948.321c.098.287.177.582.237.884l.98-.194zM.017 7.477a8.113 8.113 0 0 0 0 1.046l.998-.064a7.117 7.117 0 0 1 0-.918l-.998-.064zM16 8a8.1 8.1 0 0 0-.017-.523l-.998.064a7.11 7.11 0 0 1 0 .918l.998.064A8.1 8.1 0 0 0 16 8zM.152 9.56c.069.346.16.684.27 1.012l.948-.321a6.944 6.944 0 0 1-.237-.884l-.98.194zm15.425 1.012c.112-.328.202-.666.27-1.011l-.98-.194c-.06.302-.14.597-.237.884l.947.321zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a6.999 6.999 0 0 1-.458-.793l-.896.443zm13.828.905c.194-.289.37-.591.524-.906l-.896-.443c-.136.275-.29.54-.459.793l.831.556zm-12.667.83c.23.262.478.51.74.74l.66-.752a7.047 7.047 0 0 1-.648-.648l-.752.66zm11.29.74c.262-.23.51-.478.74-.74l-.752-.66c-.201.23-.418.447-.648.648l.66.752zm-1.735 1.161c.314-.155.616-.33.905-.524l-.556-.83a7.07 7.07 0 0 1-.793.458l.443.896zm-7.985-.524c.289.194.591.37.906.524l.443-.896a6.998 6.998 0 0 1-.793-.459l-.556.831zm1.873.925c.328.112.666.202 1.011.27l.194-.98a6.953 6.953 0 0 1-.884-.237l-.321.947zm4.132.271a7.944 7.944 0 0 0 1.012-.27l-.321-.948a6.954 6.954 0 0 1-.884.237l.194.98zm-2.083.135a8.1 8.1 0 0 0 1.046 0l-.064-.998a7.11 7.11 0 0 1-.918 0l-.064.998zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                        </svg>
                                     </div>
-                                    <div class="container-md">
-                                        <span class="ppvx_text--sm cw_tile-currency_primary">Disponibile</span>
+                                </li>
+                                <li id="form" hidden>
+                                    <form class="font-form">
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Intestatario della
+                                                carta</label>
+                                            <input type="text" class="form-control " id="exampleInputEmail1"
+                                                placeholder="Mario Rossi" aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputEmail1" class="form-label">Numero Carta</label>
+                                            <input type="text" class="form-control " id="exampleInputEmail1"
+                                                placeholder="XXXXX-XXXXX-XXXXX-XXXXX" aria-describedby="emailHelp">
+                                            <div id="emailHelp" class="form-text">Noi non condividiamo con nessuno la
+                                                tua mail...</div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleInputPassword1" class="form-label">Scadenza</label>
+                                            <ul class="list-inline mb-2">
+                                                <li class="list-inline-item scadenza-width">
+                                                    <input type="number" class="form-control" placeholder="mm"
+                                                        id="mese">
+                                                </li>
+                                                <li class="list-inline-item scadenza-width">
+                                                    <input type="number" class="form-control" placeholder="aa"
+                                                        id="anno">
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="mb-3 form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1">Accetto i termini
+                                                d'uso</label>
+                                        </div>
+                                        <div class="mb-3 form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1">Ricorda questa
+                                                carta</label>
+                                        </div>
+                                        <button type="submit" class="btn submit-font">Submit</button>
+                                    </form>
+                                </li>
+                                <hr class="vx_hr-alt fiDetails-hr">
+                                <li class="list-inline-item">
+                                    <p class="vx_text-body-sm">Usa il tuo saldo per fare acquisti e inviare denaro.</p>
+                                </li>
+                                <li class="list-inline-item">
+                                    <div class="fiChoice-container">
+                                        <hr class="vx_hr-alt fiDetails-hr">
+                                        <div class="vx_text-6 fiChoice-info">Il saldo disponibile verrà usato quando fai
+                                            acquisti online o invii denaro.
+                                            <div>Se non hai denaro sufficiente sul tuo saldo, ti chiederemo di scegliere
+                                                un altro metodo di pagamento al momento del pagamento.</div>
+                                        </div>
                                     </div>
-                                    <ul class="list-inline mb-2 list-font">
-                                        <li class="list-inline-item">
-                                            <ul class="list-inline mb-2 list-font">
-                                                <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="25" height="25" fill="currentColor"
-                                                        class="bi bi-bag-dash-fill" viewBox="0 0 16 16">
-                                                        <path fill-rule="evenodd"
-                                                            d="M5.5 3.5a2.5 2.5 0 0 1 5 0V4h-5v-.5zm6 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM6 9.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z" />
-                                                    </svg></li>
-                                                <li class="list-inline-item"><button type="button"
-                                                        class="btn card-button-options-font">Invia</button></li>
-                                            </ul>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <ul class="list-inline mb-2 list-font padding-richiedi">
-                                                <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="25" height="25" fill="currentColor"
-                                                        class="bi bi-bag-check-fill" viewBox="0 0 16 16">
-                                                        <path fill-rule="evenodd"
-                                                            d="M5.5 3.5a2.5 2.5 0 0 1 5 0V4h-5v-.5zm6 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
-                                                    </svg></li>
-                                                <li class="list-inline-item"><button type="button"
-                                                        class="btn card-button-options-font">Richiedi</button></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="col-lg-1 col-md-1 h-100"></div>
-                    <div class="col-lg-5 col-md-5 h-100">
-                        <div class="container-md ">
-                            <div class="card card-font-color">
-                                <div class="card-header">
-                                    <ul class="nav nav-tabs card-header-tabs">
-                                        <li class="nav-item">
-                                            <div class="btn-group dropend">
-                                                <button type="button" class="btn card-button-options-font">
-                                                    Colletta
-                                                </button>
-                                                <button type="button"
-                                                    class="btn card-button-options-font dropdown-toggle dropdown-toggle-split"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <span class="visually-hidden">Toggle Dropright</span>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-font">
-                                                    <li><a class="dropdown-item colletta-dropdown-option"
-                                                            href="#">Colletta-1</a></li>
-                                                    <li><a class="dropdown-item colletta-dropdown-option"
-                                                            href="#">Colletta-2</a></li>
-                                                    <li><a class="dropdown-item colletta-dropdown-option"
-                                                            href="#">Colletta-3</a></li>
-                                                </ul>
-                                    </ul>
-                                </div>
-                                <div class="card-body card-body-text-color">
-                                        <path
-                                            d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-1 col-md-1 h-100"></div>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-2 h-100">
-                <div class="row">
-                    <ul class="list-inline mb-2 list-font">
-                        <li class="list-item">
-                            <h4>Amici</h4>
-                        </li>
-                        <li class="list-inline-item search-input-dim">
-                            <form class="row row-cols-lg-auto g-3 align-items-center">
-                                <div class="col-12">
-                                    <label class="visually-hidden" for="inlineFormInputGroupUsername">Username</label>
-                                    <div class="input-group">
-                                        <div class="input-group-text search-bar-font-1">#</div>
-                                        <input type="text" class="form-control search-bar-font-2"
-                                            id="inlineFormInputGroupUsername" placeholder="Tag/Username">
-                                    </div>
-                                </div>
-                        </li>
-                        <li class="list-inline-item"><a href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                    class="bi bi-search" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-                                    <path fill-rule="evenodd"
-                                        d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                                </svg>
-                            </a></li>
-                        <li class="list-inline-item"><a href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                    class="bi bi-person-plus" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                                </svg>
-                            </a></li>
-                    </ul>
-                </div>
-                <div class="row details-list-right">
-                    <table class="table memberListColor table-striped table-hover">
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                        <tr>
-                            <td>#******</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
+            <div class="col-lg-2 col-md-2 h-100"></div>
         </div>
     </div>
-
     <!-- Bottom section -->
     <section class="advertise-section text-center text-white">
         <div class="container">
@@ -396,15 +299,15 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
-    -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+-->
 </body>
 
 </html>

@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,19 +9,27 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="Script.js"></script>
-    <title>Carte</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        
+        <link href="<c:url value="/resources/css/Aiuto.css" />" rel="stylesheet">
 
+    <title>Aiuto</title>
 </head>
 
 <body>
-    <!-- Navbar -->
+    <!--Navbar-->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <div class="row w-100">
-                <div class="col-lg-11 col-md-11">
+                <div class="col-lg-11 col-md-11 col-sm-11">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
@@ -33,15 +40,13 @@
                                 </svg>
                             </li>
                             <li class="nav-item">
-                                <a id="riepilogo" class="nav-link nav-link-color"
-                                    href="../Riepilogo/Home.html">Riepilogo</a>
+                                <a id="riepilogo" class="nav-link nav-link-color" href="../Riepilogo/Home.html">Riepilogo</a>
                             </li>
                             <li class="nav-item">
                                 <a id="carte" class="nav-link nav-link-color" href="../Carte/carte.html">Carte</a>
                             </li>
                             <li class="nav-item">
-                                <a id="storico" class="nav-link nav-link-color"
-                                    href="../Storico/Storico.html">Storico</a>
+                                <a id="storico" class="nav-link nav-link-color" href="../Storico/Storico.html">Storico</a>
                             </li>
                             <li class="nav-item">
                                 <a id="aiuto" class="nav-link nav-link-color" href="../Aiuto/Aiuto.html">Aiuto</a>
@@ -49,7 +54,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-1 col-md-1">
+                <div class="col-lg-1 col-md-1 col-sm-1">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
@@ -94,116 +99,125 @@
         </div>
     </nav>
 
-    <!-- Center section -->
+    <!--Center Section-->
     <div class="banner banner-color">
         <div class="row h-100">
-            <div class="col-lg-2 col-md-2 h-100"></div>
-            <div class="col-lg-8 col-md-8 h-100">
-                <div class="row h-100">
-                    <div class="col-lg-4 col-md-4 h-100">
-                        <h3 class="margin-top-elenco-carte">Elenco Carte</h3>
-                        <table class="table table-striped">
-                            <tr>
-                                <th>Tipo</th>
-                                <th>Numero</th>
-                            </tr>
-                            <tr>
-                                <td>Prepagata</td>
-                                <td>*************</td>
-                            </tr>
-                            <tr>
-                                <td>Carta di Credito</td>
-                                <td>*************</td>
-                            </tr>
-                            <tr>
-                                <td>Conto Corrente</td>
-                                <td>*************</td>
-                            </tr>
-                            <tr>
-                                <td>Prepagata</td>
-                                <td>*************</td>
-                            </tr>
-                            <tr>
-                        </table>
+            <div class="col-lg-2 col-md-2 col-sm-2 h-100"></div>
+            <div class="col-lg-8 col-md-8 col-sm-8 h-100">
+                <h2 class="faq-padding">Domande Frequenti.</h2>
+                <div class="accordion-padding" id="accordion">
+                    <div class="card">
+                        <div class="card-header collapse-font" id="headingTwo">
+                            <h5 class="mb-0">
+                                <a href="#collapseOne" data-toggle="collapse" id="collapseOneButton"
+                                    class="btn btn-link collapsed collapse-button-font" aria-expanded="true"
+                                    aria-controls="collapseOne">
+                                    Come faccio a ricaricare il mio conto PayBall8 dal mio conto bancario?
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body collapse-button-font collapse-body-font">
+                                Puoi ricaricare il tuo saldo PayBall8 tramite un conto corrente di cui sei titolare,
+                                registrato nello stesso Paese del conto PayBall8. Verifica di averlo collegato al tuo
+                                conto PayBall8.
+
+                                Ecco come puoi fare per ricaricare il tuo conto PayPal dal tuo conto bancario:
+
+                                1)Accedi alle tue "Carte" e clicca "Trasferisci denaro".
+                                2)Clicca "Ricarica il tuo saldo" e segui le istruzioni.
+                                3)Verrà generato un codice IBAN virtuale, che userai per effettuare il bonifico
+                                bancario.
+                                Tale IBAN identifica in modo univoco il tuo trasferimento a PayBall8.
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-8 col-md-8 h-100 elenco-carte-font text-center">
-                        <div>
-                            <ul class="list-inline mb-2 list-font">
-                                <li class="list-inline-item">
-                                    <h3>Aggiungi Carta</h3>
-                                </li>
-                                <li>
-                                    <div id="aggiungiCarta">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                                            fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 0c-.176 0-.35.006-.523.017l.064.998a7.117 7.117 0 0 1 .918 0l.064-.998A8.113 8.113 0 0 0 8 0zM6.44.152c-.346.069-.684.16-1.012.27l.321.948c.287-.098.582-.177.884-.237L6.44.153zm4.132.271a7.946 7.946 0 0 0-1.011-.27l-.194.98c.302.06.597.14.884.237l.321-.947zm1.873.925a8 8 0 0 0-.906-.524l-.443.896c.275.136.54.29.793.459l.556-.831zM4.46.824c-.314.155-.616.33-.905.524l.556.83a7.07 7.07 0 0 1 .793-.458L4.46.824zM2.725 1.985c-.262.23-.51.478-.74.74l.752.66c.202-.23.418-.446.648-.648l-.66-.752zm11.29.74a8.058 8.058 0 0 0-.74-.74l-.66.752c.23.202.447.418.648.648l.752-.66zm1.161 1.735a7.98 7.98 0 0 0-.524-.905l-.83.556c.169.253.322.518.458.793l.896-.443zM1.348 3.555c-.194.289-.37.591-.524.906l.896.443c.136-.275.29-.54.459-.793l-.831-.556zM.423 5.428a7.945 7.945 0 0 0-.27 1.011l.98.194c.06-.302.14-.597.237-.884l-.947-.321zM15.848 6.44a7.943 7.943 0 0 0-.27-1.012l-.948.321c.098.287.177.582.237.884l.98-.194zM.017 7.477a8.113 8.113 0 0 0 0 1.046l.998-.064a7.117 7.117 0 0 1 0-.918l-.998-.064zM16 8a8.1 8.1 0 0 0-.017-.523l-.998.064a7.11 7.11 0 0 1 0 .918l.998.064A8.1 8.1 0 0 0 16 8zM.152 9.56c.069.346.16.684.27 1.012l.948-.321a6.944 6.944 0 0 1-.237-.884l-.98.194zm15.425 1.012c.112-.328.202-.666.27-1.011l-.98-.194c-.06.302-.14.597-.237.884l.947.321zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a6.999 6.999 0 0 1-.458-.793l-.896.443zm13.828.905c.194-.289.37-.591.524-.906l-.896-.443c-.136.275-.29.54-.459.793l.831.556zm-12.667.83c.23.262.478.51.74.74l.66-.752a7.047 7.047 0 0 1-.648-.648l-.752.66zm11.29.74c.262-.23.51-.478.74-.74l-.752-.66c-.201.23-.418.447-.648.648l.66.752zm-1.735 1.161c.314-.155.616-.33.905-.524l-.556-.83a7.07 7.07 0 0 1-.793.458l.443.896zm-7.985-.524c.289.194.591.37.906.524l.443-.896a6.998 6.998 0 0 1-.793-.459l-.556.831zm1.873.925c.328.112.666.202 1.011.27l.194-.98a6.953 6.953 0 0 1-.884-.237l-.321.947zm4.132.271a7.944 7.944 0 0 0 1.012-.27l-.321-.948a6.954 6.954 0 0 1-.884.237l.194.98zm-2.083.135a8.1 8.1 0 0 0 1.046 0l-.064-.998a7.11 7.11 0 0 1-.918 0l-.064.998zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-                                        </svg>
-                                    </div>
-                                </li>
-                                <li id="form" hidden>
-                                    <form class="font-form">
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Intestatario della
-                                                carta</label>
-                                            <input type="text" class="form-control " id="exampleInputEmail1"
-                                                placeholder="Mario Rossi" aria-describedby="emailHelp">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputEmail1" class="form-label">Numero Carta</label>
-                                            <input type="text" class="form-control " id="exampleInputEmail1"
-                                                placeholder="XXXXX-XXXXX-XXXXX-XXXXX" aria-describedby="emailHelp">
-                                            <div id="emailHelp" class="form-text">Noi non condividiamo con nessuno la
-                                                tua mail...</div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleInputPassword1" class="form-label">Scadenza</label>
-                                            <ul class="list-inline mb-2">
-                                                <li class="list-inline-item scadenza-width">
-                                                    <input type="number" class="form-control" placeholder="mm"
-                                                        id="mese">
-                                                </li>
-                                                <li class="list-inline-item scadenza-width">
-                                                    <input type="number" class="form-control" placeholder="aa"
-                                                        id="anno">
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="mb-3 form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">Accetto i termini
-                                                d'uso</label>
-                                        </div>
-                                        <div class="mb-3 form-check">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">Ricorda questa
-                                                carta</label>
-                                        </div>
-                                        <button type="submit" class="btn submit-font">Submit</button>
-                                    </form>
-                                </li>
-                                <hr class="vx_hr-alt fiDetails-hr">
-                                <li class="list-inline-item">
-                                    <p class="vx_text-body-sm">Usa il tuo saldo per fare acquisti e inviare denaro.</p>
-                                </li>
-                                <li class="list-inline-item">
-                                    <div class="fiChoice-container">
-                                        <hr class="vx_hr-alt fiDetails-hr">
-                                        <div class="vx_text-6 fiChoice-info">Il saldo disponibile verrà usato quando fai
-                                            acquisti online o invii denaro.
-                                            <div>Se non hai denaro sufficiente sul tuo saldo, ti chiederemo di scegliere
-                                                un altro metodo di pagamento al momento del pagamento.</div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+                    <div class="card">
+                        <div class="card-header collapse-font" id="headingTwo">
+                            <h5 class="mb-0">
+                                <a href="#collapseTwo" data-toggle="collapse" id="collapseTwoButton"
+                                    class="btn btn-link collapsed collapse-button-font" aria-expanded="true"
+                                    aria-controls="collapseTwo">
+                                    Cosa devo fare se ho un problema con il mio acquisto PayBall8?
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body collapse-button-font collapse-body-font">
+                                In caso di dubbi sul tuo acquisto, ti consigliamo innanzitutto di contattare
+                                direttamente il venditore. Spesso questo è il modo più semplice e rapido per chiarire un
+                                equivoco e risolvere un piccolo problema.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header collapse-font" id="headingTwo">
+                            <h5 class="mb-0">
+                                <a href="#collapseThree" data-toggle="collapse" id="collapseThreeButton"
+                                    class="btn btn-link collapsed collapse-button-font" aria-expanded="true"
+                                    aria-controls="collapseThree">
+                                    Perché il mio pagamento è bloccato e quando sarà disponibile?
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body collapse-button-font collapse-body-font">
+                                Ecco alcuni dei motivi più comuni per cui un pagamento potrebbe essere temporaneamente
+                                non disponibile:
+
+                                1)È necessario del tempo per creare una valida cronologia di transazioni.
+                                Non hai svolto attività di vendita di recente. I conti precedentemente inattivi possono
+                                essere soggetti a blocchi dei pagamenti mentre viene ricreata una cronologia di vendita
+                                positiva.
+
+                                2)Ricevi un numero elevato di rimborsi, contestazioni o chargeback. Ti consigliamo di
+                                comunicare spesso con i clienti e di collaborare con loro per risolvere eventuali
+                                problemi. Se il cliente ha presentato una contestazione o una richiesta di chargeback
+                                perché qualcun altro ha usato illecitamente il suo conto PayPal per effettuare una
+                                transazione, non spedire nessun articolo.
+
+                                3)L'andamento delle vendite è cambiato. Ad esempio, potrebbe essersi verificato un aumento
+                                insolito delle transazioni, un cambiamento del prezzo medio di vendita, il ricorso a una
+                                nuova piattaforma commerciale.
+
+                                4)La transazione include articoli a rischio elevato, tra cui biglietti, carte regalo,
+                                elettronica di consumo, computer e pacchetti di viaggio.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header collapse-font" id="headingThree">
+                            <h5 class="mb-0">
+                                <a href="#collapseFour" data-toggle="collapse" id="collapseFourButton"
+                                    class="btn btn-link collapsed collapse-button-font" aria-expanded="true"
+                                    aria-controls="collapseFour">
+                                    Posso annullare un pagamento?
+                                </a>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                            <div class="card-body collapse-button-font collapse-body-font">
+                                Puoi annullare solo i pagamenti non riscossi accanto ai quali è presente il link
+                                "Annulla".
+
+                                Per annullare un pagamento non riscosso dall'app PayBall8, tocca il pagamento che
+                                desideri
+                                annullare e seleziona "Annulla pagamento".
+
+                                Per annullare un pagamento non riscosso dal computer:
+
+                                1)Vai nello Storico e individua il pagamento.
+                                2)Clicca "Annulla" accanto alla transazione.
+                                3)Conferma la richiesta.
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-2 h-100"></div>
+            <div class="col-lg-2 col-md-2 col-sm-2 h-100"></div>
         </div>
     </div>
+
     <!-- Bottom section -->
     <section class="advertise-section text-center text-white">
         <div class="container">
@@ -216,7 +230,8 @@
                                 d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zm5.152-3.31a.5.5 0 0 0-.874.486c.33.595.958 1.007 1.687 1.007.73 0 1.356-.412 1.687-1.007a.5.5 0 0 0-.874-.486.934.934 0 0 1-.813.493.934.934 0 0 1-.813-.493z" />
                         </svg>
                         <h3>Facile</h3>
-                        <p class="lead mb-0 text-bold"> Per utonti provetti che vogliono entrare nel mondo smart.
+                        <p class="lead mb-0 text-bold"> Per utonti provetti che vogliono entrare nel mondo
+                            smart.
                         </p>
                     </div>
                 </div>
@@ -228,7 +243,8 @@
                                 d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z" />
                         </svg>
                         <h3>Veloce</h3>
-                        <p class="lead mb-0 text-bold"> Certificato come conto virtuale più rapido in Europa.</p>
+                        <p class="lead mb-0 text-bold"> Certificato come conto virtuale più rapido in Europa.
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-4 ">
@@ -240,7 +256,8 @@
                             <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
                         </svg>
                         <h3>Sicuro</h3>
-                        <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno può accedere ai vostri
+                        <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno può accedere
+                            ai vostri
                             dati sensibili ;-) .</p>
                     </div>
                 </div>
@@ -294,6 +311,7 @@
             </div>
         </div>
     </footer>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -303,9 +321,9 @@
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
--->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
 </body>
 
 </html>

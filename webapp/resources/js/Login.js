@@ -10,15 +10,15 @@ loginButton.addEventListener('click', ()	=>	{
 		firebase.auth().signInWithEmailAndPassword(email, password)
 		.then((user) => {
 			// Signed in
-			let c=getCookie('username');
+			let c=getCookie('uid');
 			if (c)	{
 				// TODO: handle with existing cookie
 				// TODO: handle redirecting without the needs to do a login
 			}
 			else	{
 				// TODO: handle with no cookie
-				// Setting a cookie for the user with expiration date by a day
-				setCookie('username', user.uid, 1);
+				// Setting a cookie for the user with expiration date by a week
+				setCookie('uid', user.uid, 7);
 			}
 			// TODO: redirect to main page
 		})
@@ -84,6 +84,10 @@ signupButton.addEventListener('click', ()	=>	{
 					$("#btn-search").prop("disabled", false);
 			        }
 			});
+			
+			// Set a cookie for the new user
+			setCookie('uid', user.uid, 7);
+			
 			// TODO: redirect to main page
 		})
 		.catch((error) => {

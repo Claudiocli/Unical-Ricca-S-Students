@@ -4,15 +4,14 @@
 <meta charset="utf-8" lang="it">
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-	<link rel="stylesheet" href="Login.css">
 	<!-- Font -->
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet"> 
 
 	<title>PayBall8 Login</title>
 
-	<script defer type="application/javascript" src="Login.js"></script>
+	<link href="<c:url value="/resources/css/Login.css" />" rel="stylesheet">
+	<script defer src="<c:url value="/resources/js/Login.js" />"></script>
 
 </head>
 <body>
