@@ -45,44 +45,29 @@ public class AccountController {
 			return accountRepository.findAll();
 		}
 		
-		@GetMapping(path = "/me")
-		public @ResponseBody Account me(Principal principal) {
+		@GetMapping(path = "/me/{id}")
+		public @ResponseBody Optional<Account> me(Principal principal, @PathVariable Long id) {
 			logger.info("USER_ME");
-			return accountRepository.findByEmail(principal.getName());
+			return accountRepository.findById(id);
 		}
 
-		@GetMapping(path = "/{email}")
-		public @ResponseBody Account getByUsername(Principal principal, @PathVariable String email) {
-			logger.info(String.format("USER_ONE filtered by username = %s", email));
-			return accountRepository.findByEmail(email);
-		}
 
-		@PostMapping(path = "/add")
-		@PreAuthorize("hasAuthority('ADMIN')")
-		ResponseEntity<Account> add(@RequestBody Account newUser) {
-			logger.info("USER_ADD added user by ENTITY: " + newUser.toString());
-			return ResponseEntity.ok(userDetailsService.save(newUser));
-		}
-
-		@PutMapping(path = "/update")
-		ResponseEntity<Account> update(Principal principal, @RequestBody Account newUser, Optional<Long> id) {
-			Account current_user = accountRepository.findByEmail(principal.getName());
-			
-			if (id.isPresent())
-				current_user = accountRepository.findById(id.get())
+		@PutMapping(path = "/update/{id}")
+		ResponseEntity<Account> update(Principal principal, @RequestBody Account newAccount, @PathVariable Long id) {
+			Account current_user = accountRepository.findById(id)
 						.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 		
-			logger.info("USER_UPDATE updated user with id = " + id + " by ENTITY " + newUser.toString());
-			if (newUser.getEmail() != null)
-				current_user.setEmail(newUser.getEmail());
-			if (newUser.getName() != null)
-				current_user.setName(newUser.getName());
-			if (newUser.getSurname() != null)
-				current_user.setSurname(newUser.getSurname());
+			logger.info("USER_UPDATE updated user with id = " + id + " by ENTITY " + newAccount.toString());
+			if (newAccount.getEmail() != null)
+				current_user.setEmail(newAccount.getEmail());
+			if (newAccount.getName() != null)
+				current_user.setName(newAccount.getName());
+			if (newAccount.getSurname() != null)
+				current_user.setSurname(newAccount.getSurname());
 			return ResponseEntity.ok(userDetailsService.save(current_user));
 		}
 
-		@DeleteMapping(path = "/delete/{id}")
+		@DeleteMapping(path = "/delete/{id}") // controllati se l'id di quello loggato è quello che losta eliminado 
 		void deleteById(@RequestParam Long id) {
 			logger.info(String.format("USER_DELETE deleted user with id: %d", id));
 			accountRepository.deleteById(id);

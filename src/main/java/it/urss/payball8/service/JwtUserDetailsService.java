@@ -41,6 +41,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 		newAccount.setPassword(bcryptEncoder.encode(newAccount.getPassword()));
 		return accountRepository.save(newAccount);
 	}
+	
+	// save cart con utilizzando il metodo di prima save(account)
 	@Bean
 	public PasswordEncoder encoder() {
 	    return new BCryptPasswordEncoder();
