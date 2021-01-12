@@ -46,6 +46,44 @@ signupButton.addEventListener('click', ()	=>	{
 		firebase.auth().createUserWithEmailAndPassword(email,
 		 password).then((user) => {
 			// Signed in 
+			let name=document.getElementById("name-input").value;
+			let surname=document.getElementById("surname-input").value;
+			let cf=document.getElementById("cf-input").value;
+			let address=document.getElementById("address-input").value;
+			let dob=document.getElementById("dob-input").value;
+			let json={
+				"email": email,
+				"id": user.uid,
+			      "name": name,
+			      "surname": surname,
+			      "cf": cf,
+			      "address": address,
+			      "dob": dob,
+			      "balance": "0"
+			}
+			$.ajax({
+				type: "POST",
+			      contentType: "application/json",
+			      url: "/account/add",
+			      data: json,
+			      dataType: 'json',
+			      cache: false,
+			      timeout: 600000,
+				success: function (data) {
+					var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
+						+ JSON.stringify(data, null, 4) + "&lt;/pre&gt;";
+					$('#feedback').html(json);
+					console.log("SUCCESS : ", data);
+					$("#btn-search").prop("disabled", false);
+			        },
+			      error: function (e) {
+					var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
+						+ e.responseText + "&lt;/pre&gt;";
+					$('#feedback').html(json);
+					console.log("ERROR : ", e);
+					$("#btn-search").prop("disabled", false);
+			        }
+			});
 			// TODO: redirect to main page
 		})
 		.catch((error) => {

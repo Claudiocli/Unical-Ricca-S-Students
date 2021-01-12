@@ -1,6 +1,5 @@
 package it.urss.payball8.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "account")
 public class Account {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -22,19 +21,19 @@ public class Account {
 	private String name;
 
 	private String surname;
-	
+
 	private String cf;
-	
+
 	private String address;
-	
+
 	private String dob;
-	
+
 	private String balance;
-	
+
 	public Account() {
 		balance = "0.0";
 	}
-	
+
 	public Account(Long id, String email, String password, String name, String surname, String cf, String address,
 			String dob, String balance) {
 		super();
@@ -126,7 +125,7 @@ public class Account {
 		return "Account [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", surname="
 				+ surname + ", cf=" + cf + ", address=" + address + ", dob=" + dob + ", balance=" + balance + "]";
 	}
-	
-	
+
+
 
 }

@@ -2,7 +2,6 @@ package it.urss.payball8.service;
 
 import java.util.Collection;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

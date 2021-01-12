@@ -1,12 +1,7 @@
 package it.urss.payball8.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,7 +28,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		Account account = accountRepository.findByEmail(email);
 		if (account == null)
 			throw new UsernameNotFoundException("User not found with email: " + account);
-		
+
 		return new MyUserPrincipal(account);
 	}
 
@@ -41,7 +36,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		newAccount.setPassword(bcryptEncoder.encode(newAccount.getPassword()));
 		return accountRepository.save(newAccount);
 	}
-	
+
 	// save cart con utilizzando il metodo di prima save(account)
 	@Bean
 	public PasswordEncoder encoder() {
