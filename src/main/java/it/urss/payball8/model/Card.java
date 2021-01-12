@@ -1,5 +1,5 @@
 package it.urss.payball8.model;
 
-public class Cart {
+public class Card {
 
 }

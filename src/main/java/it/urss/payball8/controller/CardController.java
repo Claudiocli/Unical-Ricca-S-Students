@@ -1,5 +1,5 @@
 package it.urss.payball8.controller;
 
-public class CartController {
+public class CardController {
 
 }
