@@ -29,7 +29,7 @@ import it.urss.payball8.service.JwtUserDetailsService;
 
 
 @RestController
-@RequestMapping(path = "/user")
+@RequestMapping(path = "/account")
 public class AccountController {
 		Logger logger = LoggerFactory.getLogger(AccountController.class);
 
@@ -40,7 +40,6 @@ public class AccountController {
 		private JwtUserDetailsService userDetailsService;
 		
 		@GetMapping(path = "/all")
-		@PreAuthorize("hasAuthority('ADMIN')")
 		Iterable<Account> getAll() {
 			logger.info("USER_ALL");
 			return accountRepository.findAll();
