@@ -32,7 +32,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 		Account account = accountRepository.findByEmail(email);
 		if (account == null)
-			throw new UsernameNotFoundException("User not found with username: " + account);
+			throw new UsernameNotFoundException("User not found with email: " + account);
 		
 		return new MyUserPrincipal(account);
 	}

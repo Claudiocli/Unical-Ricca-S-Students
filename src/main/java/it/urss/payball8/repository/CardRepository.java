@@ -2,8 +2,8 @@ package it.urss.payball8.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import it.urss.payball8.model.Cart;
+import it.urss.payball8.model.Card;
 
-public interface CartRepository extends JpaRepository<Cart,Long> {
+public interface CardRepository extends JpaRepository<Card,Long> {
 	
 }
