@@ -1,8 +1,11 @@
 package it.urss.payball8.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "account")
@@ -24,15 +27,14 @@ public class Account {
 	private String dob;
 
 	private String balance;
-
+	
 	public Account() {
-		balance = "1.0";
-		// 
+		//balance = "0.0";
+		
 	}
   
 	public Account(Long id, String email, String name, String surname, String cf, String address,
 			String dob, String balance) {
-		super();
 		this.id = id;
 		this.email = email;
 		this.name = name;
