@@ -25,14 +25,14 @@ public class JwtUserDetailsService implements UserDetailsService {
 		Account account = accountRepository.findByEmail(email);
 		if (account == null)
 			throw new UsernameNotFoundException("User not found with email: " + account);
-		
+
 		return new MyUserPrincipal(account);
 	}
 
 	public Account save(Account newAccount) {
 		return accountRepository.save(newAccount);
 	}
-	
+
 	// save cart con utilizzando il metodo di prima save(account)
 	@Bean
 	public PasswordEncoder encoder() {

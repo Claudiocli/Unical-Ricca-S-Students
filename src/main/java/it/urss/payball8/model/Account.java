@@ -7,7 +7,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "account")
 public class Account {
-	
+
 	@Id
 	private Long id;
 
@@ -16,20 +16,20 @@ public class Account {
 	private String name;
 
 	private String surname;
-	
+
 	private String cf;
-	
+
 	private String address;
-	
+
 	private String dob;
-	
+
 	private String balance;
-	
+
 	public Account() {
 		balance = "1.0";
 		// 
 	}
-	
+  
 	public Account(Long id, String email, String name, String surname, String cf, String address,
 			String dob, String balance) {
 		super();
@@ -112,7 +112,7 @@ public class Account {
 		return "Account [id=" + id + ", email=" + email + ", name=" + name + ", surname="
 				+ surname + ", cf=" + cf + ", address=" + address + ", dob=" + dob + ", balance=" + balance + "]";
 	}
-	
-	
+
+
 
 }

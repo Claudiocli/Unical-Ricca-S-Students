@@ -1,0 +1,58 @@
+.icons-navbar-color{
+    color: white;
+}
+.nav-link-color{
+    color: #fff;
+}
+.nav-link-color2{
+    color:black;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.navbar{
+    background-color:  blueviolet;
+}
+.esci-font{
+    background-color: blueviolet;
+    color: white;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.banner-color{
+    height: 41rem;
+    background-color: #CDA5F3;
+}
+.faq-padding{
+    padding-top: 2rem;
+}
+.accordion-padding{
+    padding-top: 3rem;
+}
+.collapse-button-font:hover{
+    color: #5c5c5c;
+}   
+.collapse-button-font{
+    color: black;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.collapse-font{
+    background-color: #c39de7;
+}
+.collapse-body-font{
+    background-color: #d7bdef;
+}
+.advertise-section{
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    background-color: blueviolet;
+}
+.text-bold{
+    color: white;
+    font-weight: 400;
+}
+footer{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background-color: blueviolet;
+}
