@@ -2,6 +2,7 @@ package it.urss.payball8.controller;
 
 
 import java.security.Principal;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,11 +41,11 @@ public class AccountController {
 
 		@GetMapping(path = "/me")
 		public @ResponseBody Optional<Account> me(@RequestBody JSONObject id) {
-		
 			logger.info("USER_ME");
 			Long id_long = new Long(id.getAsString("id"));
 			return accountRepository.findById(id_long);
-
+		}
+		
 		@PostMapping(path = "/add")
 		ResponseEntity<Account> add(@RequestBody Account newAccount) {
 			/*if(newAccount != null)
