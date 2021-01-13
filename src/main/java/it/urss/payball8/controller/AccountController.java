@@ -1,6 +1,8 @@
 package it.urss.payball8.controller;
 
-import java.util.Optional;
+
+import java.security.Principal;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,7 @@ import net.minidev.json.JSONObject;
 @RestController
 @RequestMapping(path = "/account")
 public class AccountController {
+	
 		Logger logger = LoggerFactory.getLogger(AccountController.class);
 
 		@Autowired
@@ -34,15 +37,21 @@ public class AccountController {
 		@Autowired
 		private JwtUserDetailsService userDetailsService;
 
-
 		@GetMapping(path = "/me")
 		public @ResponseBody Optional<Account> me(@RequestBody JSONObject id) {
 		
 			logger.info("USER_ME");
 			Long id_long = new Long(id.getAsString("id"));
 			return accountRepository.findById(id_long);
-		}
 
+		@PostMapping(path = "/add")
+		ResponseEntity<Account> add(@RequestBody Account newAccount) {
+			/*if(newAccount != null)
+				newAccount.setId(castUUID(newAccount.getId());
+			*/
+			logger.info("USER_ADD added user by ENTITY: " + newAccount.toString());
+			return ResponseEntity.ok(userDetailsService.save(newAccount));
+		}
 
 		@PutMapping(path = "/update")
 		ResponseEntity<Account> update(@RequestBody Account newAccount) {
@@ -63,5 +72,9 @@ public class AccountController {
 		void deleteById(@RequestParam String id) {
 			logger.info(String.format("USER_DELETE deleted user with id: %d", id));
 			accountRepository.deleteById(Long.parseLong(id));
+		}
+		
+		private UUID castUUID(Long id) {
+			return UUID.fromString(id.toString());
 		}
 }
