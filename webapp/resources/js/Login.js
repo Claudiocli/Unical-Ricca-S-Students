@@ -1,6 +1,7 @@
 let toggleSignupButton=document.getElementById("toggle-signup");
 let loginButton=document.getElementById("login-button");
 let signupButton=document.getElementById("register-button");
+var provider = new firebase.auth.GoogleAuthProvider();
 
 loginButton.addEventListener('click', ()	=>	{
 	let email=document.getElementById("mail-login-input").value;

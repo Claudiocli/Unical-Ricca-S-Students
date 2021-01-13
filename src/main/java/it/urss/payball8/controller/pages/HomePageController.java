@@ -15,7 +15,7 @@ public class HomePageController
 
 	@GetMapping("")
 	public String index()	{
-		return "index";
+		return "Login";
 	}
 
 	@PostMapping("/homepage")
