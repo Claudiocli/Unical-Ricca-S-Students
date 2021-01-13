@@ -23,13 +23,13 @@ import net.minidev.json.JSONObject;
 @RequestMapping(path = "/home")
 public class HomePageController {
 	Logger logger = LoggerFactory.getLogger(HomePageController.class);
-	
+
 	@Autowired
 	private AccountRepository accountRepository;
 
 	@Autowired
 	private FriendshipRepository friendshipRepository;
-	
+
 	@PostMapping("")
 	Account homePage(@RequestBody JSONObject id) {
 		Long id_long = new Long(id.getAsString("id"));
@@ -38,29 +38,29 @@ public class HomePageController {
 		logger.info("HOMEPAGE_ACCOUNT: " + current_user.getEmail());
 		return current_user;
 	}
-	
+
 	@PostMapping("/friendship")
-	List<Account> listFriendship(@RequestBody JSONObject id){
+	List<Account> listFriendship(@RequestBody JSONObject id) {
 		Long id_long = new Long(id.getAsString("id"));
 		logger.info("Frind:");
 		Account current_user = accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
-		
+
 		List<Account> list_account = new ArrayList<Account>();
 		List<Friendship> list_friends1 = friendshipRepository.findAllByaccount1(id_long);
 		List<Friendship> list_friends2 = friendshipRepository.findAllByaccount2(id_long);
-		for(Friendship friend :list_friends1) {
-			Account current_account = accountRepository.findById(friend.getAccount2()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
+		for (Friendship friend : list_friends1) {
+			Account current_account = accountRepository.findById(friend.getAccount2())
+					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 			list_account.add(current_account);
-		}	
-		for(Friendship friend :list_friends2) {
-			list_account.add(accountRepository.findById(friend.getAccount1()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user")));
 		}
-		
-		logger.info("LIST_FRIENDS:"+ list_account);
+		for (Friendship friend : list_friends2) {
+			list_account.add(accountRepository.findById(friend.getAccount1())
+					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user")));
+		}
+
+		logger.info("LIST_FRIENDS:" + list_account);
 		return list_account;
 	}
-
-
 
 }

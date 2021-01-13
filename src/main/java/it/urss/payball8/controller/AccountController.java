@@ -29,7 +29,7 @@ import net.minidev.json.JSONObject;
 @RestController
 @RequestMapping(path = "/account")
 public class AccountController {
-	
+
 		Logger logger = LoggerFactory.getLogger(AccountController.class);
 
 		@Autowired
@@ -44,7 +44,7 @@ public class AccountController {
 			Long id_long = new Long(id.getAsString("id"));
 			return accountRepository.findById(id_long);
 		}
-		
+
 		@PostMapping(path = "/add")
 		ResponseEntity<Account> add(@RequestBody Account newAccount) {
 			/*if(newAccount != null)
@@ -74,7 +74,7 @@ public class AccountController {
 			logger.info(String.format("USER_DELETE deleted user with id: %d", id));
 			accountRepository.deleteById(Long.parseLong(id));
 		}
-		
+
 		private UUID castUUID(Long id) {
 			return UUID.fromString(id.toString());
 		}

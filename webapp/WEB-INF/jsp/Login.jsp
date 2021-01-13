@@ -15,6 +15,8 @@
 	<link href="<c:url value="/resources/css/Login.css" />" rel="stylesheet">
 	<script defer src="<c:url value="/resources/js/Login.js" />"></script>
 
+	<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
 </head>
 <body>
 	<main>
