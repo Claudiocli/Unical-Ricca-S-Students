@@ -19,9 +19,6 @@ public class JwtUserDetailsService implements UserDetailsService {
 	@Autowired
 	private AccountRepository accountRepository;
 
-	@Autowired
-	private PasswordEncoder bcryptEncoder;
-
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
@@ -33,7 +30,6 @@ public class JwtUserDetailsService implements UserDetailsService {
 	}
 
 	public Account save(Account newAccount) {
-		newAccount.setPassword(bcryptEncoder.encode(newAccount.getPassword()));
 		return accountRepository.save(newAccount);
 	}
 

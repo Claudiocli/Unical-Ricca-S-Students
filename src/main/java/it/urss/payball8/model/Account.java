@@ -1,22 +1,20 @@
 package it.urss.payball8.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "account")
 public class Account {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String email;
-
-	private String password;
 
 	private String name;
 
@@ -29,17 +27,16 @@ public class Account {
 	private String dob;
 
 	private String balance;
-
+	
 	public Account() {
-		balance = "0.0";
+		//balance = "0.0";
+		
 	}
-
-	public Account(Long id, String email, String password, String name, String surname, String cf, String address,
+  
+	public Account(Long id, String email, String name, String surname, String cf, String address,
 			String dob, String balance) {
-		super();
 		this.id = id;
 		this.email = email;
-		this.password = password;
 		this.name = name;
 		this.surname = surname;
 		this.cf = cf;
@@ -62,14 +59,6 @@ public class Account {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getName() {
@@ -122,7 +111,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", email=" + email + ", password=" + password + ", name=" + name + ", surname="
+		return "Account [id=" + id + ", email=" + email + ", name=" + name + ", surname="
 				+ surname + ", cf=" + cf + ", address=" + address + ", dob=" + dob + ", balance=" + balance + "]";
 	}
 
