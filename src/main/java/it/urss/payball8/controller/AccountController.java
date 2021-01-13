@@ -1,16 +1,13 @@
 package it.urss.payball8.controller;
 
 import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +28,7 @@ import it.urss.payball8.service.JwtUserDetailsService;
 @RestController
 @RequestMapping(path = "/account")
 public class AccountController {
+	
 		Logger logger = LoggerFactory.getLogger(AccountController.class);
 
 		@Autowired
@@ -39,18 +37,21 @@ public class AccountController {
 		@Autowired
 		private JwtUserDetailsService userDetailsService;
 		
-		@GetMapping(path = "/all")
-		Iterable<Account> getAll() {
-			logger.info("USER_ALL");
-			return accountRepository.findAll();
-		}
 		
 		@GetMapping(path = "/me/{id}")
-		public @ResponseBody Optional<Account> me(Principal principal, @PathVariable Long id) {
+		public @ResponseBody Account me(Principal principal, @PathVariable Long id) {
 			logger.info("USER_ME");
-			return accountRepository.findById(id);
+			return accountRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 		}
 
+		@PostMapping(path = "/add")
+		ResponseEntity<Account> add(@RequestBody Account newAccount) {
+			/*if(newAccount != null)
+				newAccount.setId(castUUID(newAccount.getId());
+			*/
+			logger.info("USER_ADD added user by ENTITY: " + newAccount.toString());
+			return ResponseEntity.ok(userDetailsService.save(newAccount));
+		}
 
 		@PutMapping(path = "/update/{id}")
 		ResponseEntity<Account> update(Principal principal, @RequestBody Account newAccount, @PathVariable Long id) {
@@ -71,5 +72,9 @@ public class AccountController {
 		void deleteById(@RequestParam Long id) {
 			logger.info(String.format("USER_DELETE deleted user with id: %d", id));
 			accountRepository.deleteById(id);
+		}
+		
+		private UUID castUUID(Long id) {
+			return UUID.fromString(id.toString());
 		}
 }
