@@ -54,7 +54,7 @@ public class WebMvcConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 
 		httpSecurity.cors().and().csrf().disable().authorizeRequests()
-				.antMatchers("/account/**/**", "/account/**")
+				.antMatchers("/account/**/**", "/account/**", "/home/**")
 				.permitAll().anyRequest().authenticated();
 	}
 
