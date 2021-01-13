@@ -1,0 +1,46 @@
+.icons-navbar-color{
+    color: white;
+}
+.nav-link-color{
+    color: #fff;
+}
+.nav-link-color2{
+    color:black;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.navbar{
+    background-color:  blueviolet;
+}
+.esci-font{
+    background-color: blueviolet;
+    color: white;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.banner-color{
+    height: 41rem;
+    background-color: #CDA5F3;
+}
+.nav-bar-pagination{
+    background-color: #c39de7 !important;
+    color: black;
+}
+.nav-bar-pages{
+    background-color: #e1c9f8 !important;
+    color: black;
+}
+.advertise-section{
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    background-color: blueviolet;
+}
+.text-bold{
+    color: white;
+    font-weight: 400;
+}
+footer{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background-color: blueviolet;
+}
