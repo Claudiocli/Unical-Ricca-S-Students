@@ -17,19 +17,19 @@ public class Card {
 	
 	private String cvv;
 	
-	private String datatime;
+	private String datetime;
 	
 	private Long account;
 	
 	public Card() {
 	}
 
-	public Card(String pan, String holder, String expiration_date, String cvv, String datatime, Long account) {
+	public Card(String pan, String holder, String expiration_date, String cvv, String datetime, Long account) {
 		this.pan = pan;
 		this.holder = holder;
 		this.expiration_date = expiration_date;
 		this.cvv = cvv;
-		this.datatime = datatime;
+		this.datetime = datetime;
 		this.account = account;
 	}
 
@@ -65,12 +65,12 @@ public class Card {
 		this.cvv = cvv;
 	}
 
-	public String getDatatime() {
-		return datatime;
+	public String getDatetime() {
+		return datetime;
 	}
 
-	public void setDatatime(String datatime) {
-		this.datatime = datatime;
+	public void setDatetime(String datetime) {
+		this.datetime = datetime;
 	}
 
 	public Long getAccount() {
@@ -84,7 +84,7 @@ public class Card {
 	@Override
 	public String toString() {
 		return "Card [pan=" + pan + ", holder=" + holder + ", expiration_date=" + expiration_date
-				+ ", cvv=" + cvv + ", datatime=" + datatime + ", account=" + account + "]";
+				+ ", cvv=" + cvv + ", datetime=" + datetime + ", account=" + account + "]";
 	}
 	
 	

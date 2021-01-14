@@ -31,7 +31,7 @@ public class WebMvcConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.cors().and().csrf().disable().authorizeRequests()
-				.antMatchers("/account/**/**", "/account/**", "/home/**", "/home/**/**").
+				.antMatchers("/account/**/**", "/account/**", "/home/**", "/home/**/**", "/transaction/**", "/transaction/**/**", "/card/**").
 				permitAll().anyRequest().authenticated();
 	}
 

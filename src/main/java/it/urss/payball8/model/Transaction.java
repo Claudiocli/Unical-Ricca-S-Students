@@ -18,7 +18,7 @@ public class Transaction {
 		
 		private Float amount;
 		
-		private String datatime;
+		private String datetime;
 		
 		private String category;
 		
@@ -30,11 +30,10 @@ public class Transaction {
 		public Transaction() {
 		}
 
-		public Transaction(Long id, Float amount, String datatime, String category, Long sender, Long recipient) {
-			super();
+		public Transaction(Long id, Float amount, String datetime, String category, Long sender, Long recipient) {
 			this.id = id;
 			this.amount = amount;
-			this.datatime = datatime;
+			this.datetime = datetime;
 			this.category = category;
 			this.sender = sender;
 			this.recipient = recipient;
@@ -56,12 +55,12 @@ public class Transaction {
 			this.amount = amount;
 		}
 
-		public String getDatatime() {
-			return datatime;
+		public String getDatetime() {
+			return datetime;
 		}
 
-		public void setDatatime(String datatime) {
-			this.datatime = datatime;
+		public void setDatetime(String datetime) {
+			this.datetime = datetime;
 		}
 
 		public String getCategory() {
@@ -90,7 +89,7 @@ public class Transaction {
 
 		@Override
 		public String toString() {
-			return "Transaction [id=" + id + ", amount=" + amount + ", datatime=" + datatime + ", category=" + category
+			return "Transaction [id=" + id + ", amount=" + amount + ", datetime=" + datetime + ", category=" + category
 					+ ", sender=" + sender + ", recipient=" + recipient + "]";
 		}
 		
