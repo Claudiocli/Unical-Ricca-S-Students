@@ -42,17 +42,15 @@ public class HomePageController {
 	@PostMapping("/friendship")
 	List<Account> listFriendship(@RequestBody JSONObject id) {
 		Long id_long = new Long(id.getAsString("id"));
-		logger.info("Frind:");
-		Account current_user = accountRepository.findById(id_long)
+		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
 		List<Account> list_account = new ArrayList<Account>();
 		List<Friendship> list_friends1 = friendshipRepository.findAllByaccount1(id_long);
 		List<Friendship> list_friends2 = friendshipRepository.findAllByaccount2(id_long);
 		for (Friendship friend : list_friends1) {
-			Account current_account = accountRepository.findById(friend.getAccount2())
-					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
-			list_account.add(current_account);
+			list_account.add(accountRepository.findById(friend.getAccount2())
+					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user")));
 		}
 		for (Friendship friend : list_friends2) {
 			list_account.add(accountRepository.findById(friend.getAccount1())

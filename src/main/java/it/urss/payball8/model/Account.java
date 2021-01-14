@@ -24,15 +24,16 @@ public class Account {
 
 	private String dob;
 
-	private String balance;
+	private Float balance;
+	
+//	private List<Account> list_friendships;
 	
 	public Account() {
-		//balance = "0.0";
-		
+		balance = 0.0F;
 	}
   
 	public Account(Long id, String email, String name, String surname, String cf, String address,
-			String dob, String balance) {
+			String dob, Float balance) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
@@ -99,11 +100,11 @@ public class Account {
 		this.dob = dob;
 	}
 
-	public String getBalance() {
+	public Float getBalance() {
 		return balance;
 	}
 
-	public void setBalance(String balance) {
+	public void setBalance(Float balance) {
 		this.balance = balance;
 	}
 

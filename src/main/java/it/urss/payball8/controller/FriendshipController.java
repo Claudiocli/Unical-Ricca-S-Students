@@ -9,4 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/friendship")
 public class FriendshipController {
 	Logger logger = LoggerFactory.getLogger(FriendshipController.class);
+	
+	
 }

@@ -4,15 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/*
 @Entity
 @Table(name = "card")
- */
 public class Card {
 
 	@Id
-	private Long id;
-	
 	private String pan;
 	
 	private String holder;
@@ -23,27 +19,18 @@ public class Card {
 	
 	private String datatime;
 	
-	private Account account;
+	private Long account;
 	
 	public Card() {
 	}
 
-	public Card(Long id, String pan, String holder, String expiration_date, String cvv, String datatime, Account account) {
-		this.id = id;
+	public Card(String pan, String holder, String expiration_date, String cvv, String datatime, Long account) {
 		this.pan = pan;
 		this.holder = holder;
 		this.expiration_date = expiration_date;
 		this.cvv = cvv;
 		this.datatime = datatime;
 		this.account = account;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getPan() {
@@ -86,17 +73,17 @@ public class Card {
 		this.datatime = datatime;
 	}
 
-	public Account getAccount() {
+	public Long getAccount() {
 		return account;
 	}
 
-	public void setAccount(Account account) {
+	public void setAccount(Long account) {
 		this.account = account;
 	}
 	
 	@Override
 	public String toString() {
-		return "Card [id=" + id + ", pan=" + pan + ", holder=" + holder + ", expiration_date=" + expiration_date
+		return "Card [pan=" + pan + ", holder=" + holder + ", expiration_date=" + expiration_date
 				+ ", cvv=" + cvv + ", datatime=" + datatime + ", account=" + account + "]";
 	}
 	

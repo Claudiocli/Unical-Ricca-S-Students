@@ -8,11 +8,11 @@ import javax.persistence.Table;
 @Table(name = "friendship")
 public class Friendship {
 
-	
-	private String datetime;
 	@Id
+	private String datetime;
+
 	private Long account1;
-	
+
 	private Long account2;
 	
 	public Friendship() {

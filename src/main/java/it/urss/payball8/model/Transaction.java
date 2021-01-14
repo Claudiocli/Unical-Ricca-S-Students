@@ -1,17 +1,22 @@
 package it.urss.payball8.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/*@Entity
-@Table(name = "account")*/
+@Entity
+@Table(name = "transaction")
 public class Transaction {
 		
+		private static final long serialVersionUID = 1L;
+		
 		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Long id;
 		
-		private String amount;
+		private Float amount;
 		
 		private String datatime;
 		
@@ -25,7 +30,7 @@ public class Transaction {
 		public Transaction() {
 		}
 
-		public Transaction(Long id, String amount, String datatime, String category, Long sender, Long recipient) {
+		public Transaction(Long id, Float amount, String datatime, String category, Long sender, Long recipient) {
 			super();
 			this.id = id;
 			this.amount = amount;
@@ -43,11 +48,11 @@ public class Transaction {
 			this.id = id;
 		}
 
-		public String getAmount() {
+		public Float getAmount() {
 			return amount;
 		}
 
-		public void setAmount(String amount) {
+		public void setAmount(Float amount) {
 			this.amount = amount;
 		}
 
