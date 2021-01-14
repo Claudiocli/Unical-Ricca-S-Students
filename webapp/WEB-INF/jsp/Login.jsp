@@ -11,11 +11,11 @@
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet"> 
 
 	<title>PayBall8 Login</title>
-
+	<!-- Css & Js -->
 	<link href="<c:url value="/resources/css/Login.css" />" rel="stylesheet">
 	<script defer src="<c:url value="/resources/js/Login.js" />"></script>
-
-	<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+	<!-- Google platform library -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 </head>
 <body>
@@ -30,6 +30,13 @@
 			<button type="submit" id="login-button">Accedi</button>
 			<p>oppure</p>
 			<button type="button" id="toggle-signup">Registrati</button>
+			<p>oppure</p>
+			<div id="google-signin">
+				<div id="google-button" class="custom-google-button">
+					<span class="icon"></span>
+					<span class="buttonText">Accedi con Google</span>
+				</div>
+			</div>
 		</div>
 		<div id="signup-div">
 			<form class="form-group" id="signup-form">

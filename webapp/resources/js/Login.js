@@ -1,7 +1,35 @@
 let toggleSignupButton=document.getElementById("toggle-signup");
 let loginButton=document.getElementById("login-button");
 let signupButton=document.getElementById("register-button");
+
 var provider = new firebase.auth.GoogleAuthProvider();
+
+var googleUser = {};
+var auth2;
+var startApp = function() {
+	gapi.load('auth2', function(){
+		// Retrieve the singleton for the GoogleAuth library and set up the client.
+		auth2 = gapi.auth2.init({
+			client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+			cookiepolicy: 'single_host_origin',
+			// Request scopes in addition to 'profile' and 'email'
+			//scope: 'additional_scope'
+		});
+		attachSignin(document.getElementById('customBtn'));
+	});
+};
+
+	function attachSignin(element) {
+		auth2.attachClickHandler(element, {},
+		function(googleUser) {
+			// Success
+			document.getElementById('name').innerText = "Signed in: " +
+			googleUser.getBasicProfile().getName();
+		}, function(error) {
+		// Error logging in
+		alert(JSON.stringify(error, undefined, 2));
+	});
+}
 
 loginButton.addEventListener('click', ()	=>	{
 	let email=document.getElementById("mail-login-input").value;
