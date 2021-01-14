@@ -45,15 +45,14 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE public.account (
-    id serial NOT NULL,
-    name character varying(255),
-    surname character varying(255),
-    email character varying(255),
-    cf character varying(255),
-    address character varying(255),
-    dob character varying(255),
-    balance character varying(255), 
-    password character varying(255)
+    tag_id "char"[] NOT NULL,
+    name "char"[],
+    surname "char"[],
+    email "char"[],
+    cf "char"[],
+    address "char"[],
+    dob "char"[],
+    balance "char"[]
 );
 
 
@@ -69,7 +68,7 @@ CREATE TABLE public.card (
     expiration_date "char"[],
     cvv "char"[],
     datetime "char"[],
-    account serial
+    account "char"[]
 );
 
 
@@ -80,12 +79,12 @@ ALTER TABLE public.card OWNER TO postgres;
 --
 
 CREATE TABLE public.colletta (
-    id serial NOT NULL,
+    id "char"[] NOT NULL,
     datetime "char"[],
     amount "char"[],
     quote "char"[],
     amount_temp "char"[],
-    beneficiary serial
+    beneficiary "char"[]
 );
 
 
@@ -96,8 +95,8 @@ ALTER TABLE public.colletta OWNER TO postgres;
 --
 
 CREATE TABLE public.contribute (
-    contributor serial NOT NULL,
-    colletta serial NOT NULL
+    contributor "char"[] NOT NULL,
+    colletta "char"[] NOT NULL
 );
 
 
@@ -109,8 +108,8 @@ ALTER TABLE public.contribute OWNER TO postgres;
 
 CREATE TABLE public.friendship (
     datetime "char"[],
-    account1 serial NOT NULL,
-    account2 serial NOT NULL
+    account1 "char"[] NOT NULL,
+    account2 "char"[] NOT NULL
 );
 
 
@@ -121,10 +120,10 @@ ALTER TABLE public.friendship OWNER TO postgres;
 --
 
 CREATE TABLE public.recharge (
-    id serial NOT NULL,
+    id "char"[] NOT NULL,
     amount "char"[],
     datetime "char"[],
-    account serial,
+    account "char"[],
     card "char"[]
 );
 
@@ -136,12 +135,12 @@ ALTER TABLE public.recharge OWNER TO postgres;
 --
 
 CREATE TABLE public.transaction (
-    id serial NOT NULL,
+    id "char"[] NOT NULL,
     amount "char"[],
     datetime "char"[],
     category "char"[],
-    sender serial,
-    recipient serial
+    sender "char"[],
+    recipient "char"[]
 );
 
 
@@ -152,7 +151,7 @@ ALTER TABLE public.transaction OWNER TO postgres;
 --
 
 ALTER TABLE ONLY public.account
-    ADD CONSTRAINT account_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT account_pkey PRIMARY KEY (tag_id);
 
 
 --
@@ -208,7 +207,7 @@ ALTER TABLE ONLY public.transaction
 --
 
 ALTER TABLE ONLY public.card
-    ADD CONSTRAINT card_account_fkey FOREIGN KEY (account) REFERENCES public.account(id) NOT VALID;
+    ADD CONSTRAINT card_account_fkey FOREIGN KEY (account) REFERENCES public.account(tag_id) NOT VALID;
 
 
 --
@@ -216,7 +215,7 @@ ALTER TABLE ONLY public.card
 --
 
 ALTER TABLE ONLY public.colletta
-    ADD CONSTRAINT colletta_beneficiary_fkey FOREIGN KEY (beneficiary) REFERENCES public.account(id) NOT VALID;
+    ADD CONSTRAINT colletta_beneficiary_fkey FOREIGN KEY (beneficiary) REFERENCES public.account(tag_id) NOT VALID;
 
 
 --
@@ -232,7 +231,7 @@ ALTER TABLE ONLY public.contribute
 --
 
 ALTER TABLE ONLY public.contribute
-    ADD CONSTRAINT contribute_contributor_fkey FOREIGN KEY (contributor) REFERENCES public.account(id) NOT VALID;
+    ADD CONSTRAINT contribute_contributor_fkey FOREIGN KEY (contributor) REFERENCES public.account(tag_id) NOT VALID;
 
 
 --
@@ -240,7 +239,7 @@ ALTER TABLE ONLY public.contribute
 --
 
 ALTER TABLE ONLY public.friendship
-    ADD CONSTRAINT friendship_account1_fkey FOREIGN KEY (account1) REFERENCES public.account(id) NOT VALID;
+    ADD CONSTRAINT friendship_account1_fkey FOREIGN KEY (account1) REFERENCES public.account(tag_id) NOT VALID;
 
 
 --
@@ -248,7 +247,7 @@ ALTER TABLE ONLY public.friendship
 --
 
 ALTER TABLE ONLY public.friendship
-    ADD CONSTRAINT friendship_account2_fkey FOREIGN KEY (account2) REFERENCES public.account(id) NOT VALID;
+    ADD CONSTRAINT friendship_account2_fkey FOREIGN KEY (account2) REFERENCES public.account(tag_id) NOT VALID;
 
 
 --
@@ -256,7 +255,7 @@ ALTER TABLE ONLY public.friendship
 --
 
 ALTER TABLE ONLY public.recharge
-    ADD CONSTRAINT recharge_account_fkey FOREIGN KEY (account) REFERENCES public.account(id) NOT VALID;
+    ADD CONSTRAINT recharge_account_fkey FOREIGN KEY (account) REFERENCES public.account(tag_id) NOT VALID;
 
 
 --
@@ -272,7 +271,7 @@ ALTER TABLE ONLY public.recharge
 --
 
 ALTER TABLE ONLY public.transaction
-    ADD CONSTRAINT transaction_recipient_fkey FOREIGN KEY (recipient) REFERENCES public.account(id) NOT VALID;
+    ADD CONSTRAINT transaction_recipient_fkey FOREIGN KEY (recipient) REFERENCES public.account(tag_id) NOT VALID;
 
 
 --
@@ -280,7 +279,7 @@ ALTER TABLE ONLY public.transaction
 --
 
 ALTER TABLE ONLY public.transaction
-    ADD CONSTRAINT transaction_sender_fkey FOREIGN KEY (sender) REFERENCES public.account(id) NOT VALID;
+    ADD CONSTRAINT transaction_sender_fkey FOREIGN KEY (sender) REFERENCES public.account(tag_id) NOT VALID;
 
 
 --
