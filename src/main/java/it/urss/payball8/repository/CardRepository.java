@@ -9,4 +9,5 @@ import it.urss.payball8.model.Card;
 public interface CardRepository extends JpaRepository<Card, Long> {
 	Card findBypan(String pan);
 	List<Card> findAllByaccount(Long id);
+	void deleteBypan(String pan);
 }
