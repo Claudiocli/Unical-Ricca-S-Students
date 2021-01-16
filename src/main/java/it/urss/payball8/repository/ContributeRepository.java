@@ -4,8 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import it.urss.payball8.model.Colletta;
 import it.urss.payball8.model.Contribute;
 
 public interface ContributeRepository  extends JpaRepository<Contribute, Long> {
 	List<Contribute> findAllBycolletta(Long id);
+	List<Contribute> findAllBycontributor(Long id);
+	Contribute findByContributorAndColletta(Long contributor, Long colletta);
+	void deleteByContributorAndColletta(Long contributor, Long colletta);
 }

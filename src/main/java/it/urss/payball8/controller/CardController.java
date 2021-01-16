@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import it.urss.payball8.model.Account;
 import it.urss.payball8.model.Card;
 import it.urss.payball8.repository.AccountRepository;
 import it.urss.payball8.repository.CardRepository;
@@ -37,7 +35,7 @@ public class CardController {
 	List<Card> getAllMyCard(@RequestBody JSONObject id) {
 		logger.info("GET ALL MY CARD");
 		Long id_long = new Long(id.getAsString("id"));
-		Account current_user = accountRepository.findById(id_long)
+		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 		return cardRepository.findAllByaccount(id_long);
 	}

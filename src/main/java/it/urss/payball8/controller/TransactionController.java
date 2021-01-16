@@ -38,7 +38,7 @@ public class TransactionController {
 		Long id_long = new Long(id.getAsString("id"));
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
-		
+
 		logger.info("GET TRANSACTION");
 
 		List<Transaction> list_transaction = new ArrayList<Transaction>();
@@ -59,10 +59,10 @@ public class TransactionController {
 
 		List<Transaction> list_transaction = new ArrayList<Transaction>();
 
-		for(Transaction transaction: transactionRepository.findAllBysender(id_long)) {
+		for (Transaction transaction : transactionRepository.findAllBysender(id_long)) {
 			transaction.setAmount(transaction.getAmount() * -1);
 			list_transaction.add(transaction);
-		}	
+		}
 		list_transaction.addAll(transactionRepository.findAllByrecipient(id_long));
 
 		int startIndex = page * 10;
@@ -75,7 +75,6 @@ public class TransactionController {
 
 	@PostMapping(path = "/send")
 	ResponseEntity<Transaction> sendTransaction(@RequestBody Transaction transaction) {
-
 		Account account_sender = accountRepository.findById(transaction.getSender())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user sender"));
 		Account account_recipient = accountRepository.findById(transaction.getRecipient())

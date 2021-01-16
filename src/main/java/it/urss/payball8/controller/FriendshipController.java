@@ -36,7 +36,7 @@ public class FriendshipController {
 		logger.info("ADD FRIEND WITH ID");
 		return ResponseEntity.ok(friendshipRepository.save(friendship));
 	}
-	
+
 	@PostMapping(path = "/all")
 	List<Account> listFriendship(@RequestBody JSONObject id) {
 		Long id_long = new Long(id.getAsString("id"));
