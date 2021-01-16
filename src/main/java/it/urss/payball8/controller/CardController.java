@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -45,6 +47,12 @@ public class CardController {
 		logger.info("ADD CARD TO ACCOUNT");
 		return ResponseEntity.ok(cardRepository.save(card));
 
+	}
+
+	@DeleteMapping(path = "/deleteCard")
+	void deleteBypan(@RequestBody String pan) {
+		logger.info(String.format("USER_DELETE deleted card with pan: %d", pan));
+		cardRepository.deleteBypan(pan);
 	}
 
 }

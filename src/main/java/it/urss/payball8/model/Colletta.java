@@ -1,32 +1,39 @@
 package it.urss.payball8.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-/*
+
 @Entity
-@Table(name = "card")
- */
-public class Colletta {
+@Table(name = "colletta")
+public class Colletta implements java.io.Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String datatime;
+	private String datetime;
 	
-	private String amount;
+	private Float amount;
 	
-	private String quote;
+	private Float quote;
 	
-	private String amount_temp;
+	private Float amount_temp;
 	
-	private String beneficiary;
+	private Long beneficiary;
 	
 	public Colletta() {
+		amount_temp = 0.0F;
 	}
 
-	public Colletta(Long id, String datatime, String amount, String quote, String amount_temp, String beneficiary) {
+	public Colletta(Long id, String datetime, Float amount, Float quote, Float amount_temp, Long beneficiary) {
 		this.id = id;
-		this.datatime = datatime;
+		this.datetime = datetime;
 		this.amount = amount;
 		this.quote = quote;
 		this.amount_temp = amount_temp;
@@ -41,49 +48,49 @@ public class Colletta {
 		this.id = id;
 	}
 
-	public String getDatatime() {
-		return datatime;
+	public String getDatetime() {
+		return datetime;
 	}
 
-	public void setDatatime(String datatime) {
-		this.datatime = datatime;
+	public void setDatetime(String datetime) {
+		this.datetime = datetime;
 	}
 
-	public String getAmount() {
+	public Float getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(Float amount) {
 		this.amount = amount;
 	}
 
-	public String getQuote() {
+	public Float getQuote() {
 		return quote;
 	}
 
-	public void setQuote(String quote) {
+	public void setQuote(Float quote) {
 		this.quote = quote;
 	}
 
-	public String getAmount_temp() {
+	public Float getAmount_temp() {
 		return amount_temp;
 	}
 
-	public void setAmount_temp(String amount_temp) {
+	public void setAmount_temp(Float amount_temp) {
 		this.amount_temp = amount_temp;
 	}
 
-	public String getBeneficiary() {
+	public Long getBeneficiary() {
 		return beneficiary;
 	}
 
-	public void setBeneficiary(String beneficiary) {
+	public void setBeneficiary(Long beneficiary) {
 		this.beneficiary = beneficiary;
 	}
 
 	@Override
 	public String toString() {
-		return "Colletta [id=" + id + ", datatime=" + datatime + ", amount=" + amount + ", quote=" + quote
+		return "Colletta [id=" + id + ", datetime=" + datetime + ", amount=" + amount + ", quote=" + quote
 				+ ", amount_temp=" + amount_temp + ", beneficiary=" + beneficiary + "]";
 	}
 	
