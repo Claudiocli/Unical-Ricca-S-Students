@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.urss.payball8.model.Account;
+import it.urss.payball8.model.Recharge;
 import it.urss.payball8.model.Transaction;
 import it.urss.payball8.repository.AccountRepository;
+import it.urss.payball8.repository.RechargeRepository;
 import it.urss.payball8.repository.TransactionRepository;
 import net.minidev.json.JSONObject;
 
@@ -32,6 +34,9 @@ public class TransactionController {
 
 	@Autowired
 	private AccountRepository accountRepository;
+
+	@Autowired
+	private RechargeRepository rechargeRepository;
 
 	@PostMapping(path = "")
 	int getAll(@RequestBody JSONObject id) {
@@ -65,6 +70,15 @@ public class TransactionController {
 		}
 		list_transaction.addAll(transactionRepository.findAllByrecipient(id_long));
 
+		for (Recharge recharge : rechargeRepository.findAllByaccount(id_long)) {
+			Transaction transaction = new Transaction();
+			transaction.setAmount(recharge.getAmount());
+			transaction.setCategory("Colletta");
+			transaction.setRecipient(id_long);
+			transaction.setDatetime(recharge.getDatetime());
+			list_transaction.add(transaction);
+		}
+
 		int startIndex = page * 10;
 		int endIndex = startIndex + 9;
 		if (endIndex > list_transaction.size())
@@ -84,8 +98,7 @@ public class TransactionController {
 			account_sender.setBalance(account_sender.getBalance() - transaction.getAmount());
 			account_recipient.setBalance(account_recipient.getBalance() + transaction.getAmount());
 
-			logger.info("SALDO AGGIORNATO: " + account_sender.getBalance() + " REC " + account_recipient.getBalance()
-					+ "AMo" + transaction.getAmount());
+			logger.info("SALDO_AGGIORNATO");
 
 			ResponseEntity.ok(accountRepository.save(account_sender));
 			ResponseEntity.ok(accountRepository.save(account_recipient));

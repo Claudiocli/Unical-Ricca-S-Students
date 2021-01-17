@@ -8,14 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import it.urss.payball8.model.Account;
 import it.urss.payball8.model.Colletta;
 import it.urss.payball8.model.Contribute;
 import it.urss.payball8.model.WrapperObject;
@@ -51,8 +49,7 @@ public class CollettaController {
 
 		logger.info("CREATE NEW COLLETTA" + new_colletta);
 		ResponseEntity<Colletta> responseEntity = ResponseEntity.ok(collettaRepository.save(new_colletta));
-		logger.info("CREATE NEW COLLETTA CON ID: " + responseEntity.getBody().getId() + " DATE: ");
-
+		
 		for (Long id : ad.getList_id()) {
 			accountRepository.findById(id)
 					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
@@ -80,47 +77,6 @@ public class CollettaController {
 		return list_colletta;
 	}
 
-	@PostMapping(path = "/pay")
-	ResponseEntity<Colletta> payColletta(@RequestBody Contribute contribute) {
-		logger.info("COLLETTA_PAY_ID: " + contribute.getColletta());
-		Contribute current_contribute = contributeRepository.findByContributorAndColletta(contribute.getContributor(),
-				contribute.getColletta());
-
-		Account current_account = accountRepository.findById(current_contribute.getContributor())
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
-		Colletta current_colletta = collettaRepository.findById(current_contribute.getColletta())
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
-
-		if (current_account.getBalance() >= current_colletta.getQuote()) {
-			current_account.setBalance(current_account.getBalance() - current_colletta.getQuote());
-			current_colletta.setAmount_temp(current_colletta.getAmount_temp() + current_colletta.getQuote());
-		}
-		if (current_colletta.getAmount() >= current_colletta.getAmount_temp())
-			sendCollettaTobeneficiary(current_colletta);
-		ResponseEntity.ok(accountRepository.save(current_account));
-		return ResponseEntity.ok(collettaRepository.save(current_colletta));
-	}
-
-	@DeleteMapping(path = "/decline")
-	void declineContribute(@RequestBody Contribute contribute) {
-		logger.info("COLLETTA_PAY_ID: " + contribute.getColletta());
-		Contribute current_contribute = contributeRepository.findByContributorAndColletta(contribute.getContributor(),
-				contribute.getColletta());
-
-		Colletta current_colletta = collettaRepository.findById(current_contribute.getColletta())
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
-
-		current_colletta.setAmount(current_colletta.getAmount() - current_colletta.getQuote());
-		if (current_colletta.getAmount() >= current_colletta.getAmount_temp())
-			sendCollettaTobeneficiary(current_colletta);
-		contributeRepository.deleteByContributorAndColletta(contribute.getContributor(), contribute.getColletta());
-	}
-
-	private void sendCollettaTobeneficiary(Colletta colletta) {
-		Account beneficiary = accountRepository.findById(colletta.getBeneficiary())
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
-		beneficiary.setBalance(beneficiary.getBalance() + colletta.getAmount_temp());
-		ResponseEntity.ok(accountRepository.save(beneficiary));
-	}
+	
 
 }
