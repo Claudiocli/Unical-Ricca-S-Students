@@ -73,7 +73,7 @@ public class TransactionController {
 		for (Recharge recharge : rechargeRepository.findAllByaccount(id_long)) {
 			Transaction transaction = new Transaction();
 			transaction.setAmount(recharge.getAmount());
-			transaction.setCategory("Colletta");
+			transaction.setCategory("RECHARGE");
 			transaction.setRecipient(id_long);
 			transaction.setDatetime(recharge.getDatetime());
 			list_transaction.add(transaction);

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,10 +48,13 @@ public class CardController {
 
 	}
 
-	@DeleteMapping(path = "/deleteCard")
-	void deleteBypan(@RequestBody String pan) {
+	@DeleteMapping(path = "/deleteCard/{id}")
+	void deleteBypan(@RequestBody String pan, @PathVariable Long id) {
 		logger.info(String.format("USER_DELETE deleted card with pan: %d", pan));
-		cardRepository.deleteBypan(pan);
+		
+		Card current_card = cardRepository.findBypan(pan);
+		if(current_card.getAccount() == id)
+			cardRepository.deleteBypan(pan);
 	}
 
 }

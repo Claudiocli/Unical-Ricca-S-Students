@@ -1,5 +1,7 @@
 package it.urss.payball8.controller;
 
+import javax.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,7 @@ public class ContributeController {
 
 	@Autowired
 	private ContributeRepository contributeRepository;
-	
+
 	@PostMapping(path = "/pay")
 	ResponseEntity<Colletta> payColletta(@RequestBody Contribute contribute) {
 		logger.info("COLLETTA_PAY_ID: " + contribute.getColletta());
@@ -50,31 +52,34 @@ public class ContributeController {
 		}
 		if (current_colletta.getAmount() >= current_colletta.getAmount_temp())
 			sendCollettaTobeneficiary(current_colletta);
-		
+
 		ResponseEntity.ok(accountRepository.save(current_account));
 		return ResponseEntity.ok(collettaRepository.save(current_colletta));
 	}
 
 	@DeleteMapping(path = "/decline")
 	void declineContribute(@RequestBody Contribute contribute) {
-		logger.info("COLLETTA_PAY_ID: " + contribute.getColletta());
+		logger.info("COLLETTA_DECLINE_ID: " + contribute.getColletta() + " CONTRIBUTOR_ID: "+ contribute.getContributor());
 		Contribute current_contribute = contributeRepository.findByContributorAndColletta(contribute.getContributor(),
 				contribute.getColletta());
 
 		Colletta current_colletta = collettaRepository.findById(current_contribute.getColletta())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find colletta"));
 
+		accountRepository.findById(contribute.getContributor())
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
+
 		current_colletta.setAmount(current_colletta.getAmount() - current_colletta.getQuote());
-		
+
 		if (current_colletta.getAmount() >= current_colletta.getAmount_temp())
 			sendCollettaTobeneficiary(current_colletta);
-		
+
 		contributeRepository.deleteByContributorAndColletta(contribute.getContributor(), contribute.getColletta());
 	}
 
 	private void sendCollettaTobeneficiary(Colletta colletta) {
-		Account beneficiary = accountRepository.findById(colletta.getBeneficiary())
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user_beneficiaty"));
+		Account beneficiary = accountRepository.findById(colletta.getBeneficiary()).orElseThrow(
+				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user_beneficiaty"));
 		beneficiary.setBalance(beneficiary.getBalance() + colletta.getAmount_temp());
 		ResponseEntity.ok(accountRepository.save(beneficiary));
 	}

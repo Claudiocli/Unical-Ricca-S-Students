@@ -33,7 +33,7 @@ public class WebMvcConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.cors().and().csrf().disable().authorizeRequests()
 				.antMatchers("/account/**/**", "/account/**", "/home/**", "/home/**/**", "/transaction/**",
 						"/transaction/**/**", "/card/**", "/friendship/**", "/friendship/**/**", "/recharge/**",
-						"/recharge/**/**", "/colletta/**", "/colletta/**/**")
+						"/recharge/**/**", "/colletta/**", "/colletta/**/**", "/contribute/**", "/contribute/**/**")
 				.permitAll().anyRequest().authenticated();
 	}
 

@@ -37,7 +37,7 @@ public class AccountController {
 		@Autowired
 		private JwtUserDetailsService userDetailsService;
 
-		@GetMapping(path = "/me")
+		@PostMapping(path = "/me")
 		public @ResponseBody Optional<Account> me(@RequestBody JSONObject id) {
 			logger.info("USER_ME");
 			Long id_long = new Long(id.getAsString("id"));
@@ -46,9 +46,7 @@ public class AccountController {
 		
 		@PostMapping(path = "/add")
 		ResponseEntity<Account> add(@RequestBody Account newAccount) {
-			/*if(newAccount != null)
-				newAccount.setId(castUUID(newAccount.getId());
-			*/
+			newAccount.setBalance(0.0F);
 			logger.info("USER_ADD added user by ENTITY: " + newAccount.toString());
 			return ResponseEntity.ok(userDetailsService.save(newAccount));
 		}

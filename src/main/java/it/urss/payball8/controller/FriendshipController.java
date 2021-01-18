@@ -62,11 +62,12 @@ public class FriendshipController {
 		return list_account;
 	}
 	
-	@DeleteMapping(path ="/delete/{id_delete}")
+	@PostMapping(path ="/delete/{id_delete}")
 	void deleteFriendship(@PathVariable Long id_delete, @RequestBody JSONObject id) {
+		Long id_long = new Long(id.getAsString("id"));
 		logger.info(String.format("FRIENDSHIP_DELETE deleted friendship with id: %d", id_delete));
-		friendshipRepository.deleteByAccount1AndAccount2(id_delete, id);
-		friendshipRepository.deleteByAccount2AndAccount1(id_delete, id);
+		friendshipRepository.deleteByAccount1AndAccount2(id_delete, id_long);
+		friendshipRepository.deleteByAccount2AndAccount1(id_delete, id_long);
 	}
 	
 
