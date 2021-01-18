@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.urss.payball8.model.Account;
-import it.urss.payball8.model.Contribute;
 import it.urss.payball8.model.Friendship;
 import it.urss.payball8.repository.AccountRepository;
 import it.urss.payball8.repository.FriendshipRepository;
@@ -61,14 +59,13 @@ public class FriendshipController {
 		logger.info("LIST_FRIENDS:" + list_account);
 		return list_account;
 	}
-	
-	@PostMapping(path ="/delete/{id_delete}")
+
+	@PostMapping(path = "/delete/{id_delete}")
 	void deleteFriendship(@PathVariable Long id_delete, @RequestBody JSONObject id) {
 		Long id_long = new Long(id.getAsString("id"));
 		logger.info(String.format("FRIENDSHIP_DELETE deleted friendship with id: %d", id_delete));
 		friendshipRepository.deleteByAccount1AndAccount2(id_delete, id_long);
 		friendshipRepository.deleteByAccount2AndAccount1(id_delete, id_long);
 	}
-	
 
 }

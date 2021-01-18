@@ -1,6 +1,7 @@
 package it.urss.payball8.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,18 +43,22 @@ public class CardController {
 	}
 
 	@PostMapping(path = "/addCard")
-	ResponseEntity<Card> addCard(@RequestBody Card card) {
+	Card addCard(@RequestBody Card card) {
 		logger.info("ADD CARD TO ACCOUNT");
-		return ResponseEntity.ok(cardRepository.save(card));
+		Card current_card = cardRepository.findBypan(card.getPan());
+		if (current_card == null)
+			return cardRepository.save(card);
 
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+				String.format("The unable add Card with this pan:" + card.getPan() + ", is already present"));
 	}
 
 	@DeleteMapping(path = "/deleteCard/{id}")
 	void deleteBypan(@RequestBody String pan, @PathVariable Long id) {
 		logger.info(String.format("USER_DELETE deleted card with pan: %d", pan));
-		
+
 		Card current_card = cardRepository.findBypan(pan);
-		if(current_card.getAccount() == id)
+		if (current_card.getAccount() == id)
 			cardRepository.deleteBypan(pan);
 	}
 
