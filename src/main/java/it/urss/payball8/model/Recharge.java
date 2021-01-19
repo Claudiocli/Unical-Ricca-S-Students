@@ -84,7 +84,4 @@ public class Recharge implements java.io.Serializable {
 		return "Recharge [id=" + id + ", datetime=" + datetime + ", account=" + account + ", card=" + card + ", amount="
 				+ amount + "]";
 	}
-	
-	
-	
 }

@@ -1,5 +1,6 @@
 package it.urss.payball8.model;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -86,7 +87,6 @@ public class Card {
 		return "Card [pan=" + pan + ", holder=" + holder + ", expiration_date=" + expiration_date
 				+ ", cvv=" + cvv + ", datetime=" + datetime + ", account=" + account + "]";
 	}
-	
 	
 	
 }

@@ -16,6 +16,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -38,6 +39,7 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE public.account (
+
     id bigint NOT NULL,
     name character varying(255),
     surname character varying(255),

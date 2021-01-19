@@ -64,5 +64,4 @@ public class Friendship implements java.io.Serializable{
 	}
 	
 	
-	
 }

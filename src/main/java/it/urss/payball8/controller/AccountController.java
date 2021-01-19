@@ -46,7 +46,6 @@ public class AccountController {
 			logger.info("USER_ADD added user by ENTITY: " + newAccount.toString());
 			return ResponseEntity.ok(accountRepository.save(newAccount));
 		}
-
 		@PutMapping(path = "/update")
 		ResponseEntity<Account> update(@RequestBody Account newAccount) {
 			Account current_user = accountRepository.findById(newAccount.getId())
@@ -65,6 +64,4 @@ public class AccountController {
 			logger.info(String.format("USER_DELETE deleted user with id: %d", id));
 			accountRepository.deleteById(Long.parseLong(id));
 		}
-		
-	
 }

@@ -30,6 +30,7 @@
 			<button type="submit" id="login-button">Accedi</button>
 			<p>oppure</p>
 			<button type="button" id="toggle-signup">Registrati</button>
+
 			<p>oppure</p>
 			<div id="google-signin">
 				<div id="google-button" class="custom-google-button">

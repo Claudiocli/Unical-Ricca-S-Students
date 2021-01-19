@@ -77,6 +77,4 @@ public class CollettaController {
 		return list_colletta;
 	}
 
-	
-
 }
