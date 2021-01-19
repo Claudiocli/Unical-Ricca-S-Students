@@ -1,0 +1,69 @@
+.icons-navbar-color{
+    color: white;
+}
+.nav-link-color{
+    color: #fff;
+}
+.nav-link-color2{
+    color:black;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.navbar{
+    background-color:  blueviolet;
+}
+.esci-font{
+    background-color: blueviolet;
+    color: white;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.banner-color{
+    height: 41rem;
+    background-color: #CDA5F3;
+
+}
+.list-inline-item > a{
+    color: black;
+}
+.elenco-carte-font{
+    background-color: #c393f0;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    overflow-y: auto;
+}
+.font-form{
+    text-align: left;
+}
+.scadenza-width{
+    width: 5rem;
+}
+.submit-font{
+    background-color: #af6feb;
+}
+.margin-top-elenco-carte{
+    margin-top: 1rem;
+}
+.advertise-section{
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    background-color: blueviolet;
+}
+.text-bold{
+    color: white;
+    font-weight: 400;
+}
+footer{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background-color: blueviolet;
+}
+@media screen and (min-width: 768px){
+
+    .advertise-section{
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
