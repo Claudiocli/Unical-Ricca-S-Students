@@ -1,0 +1,82 @@
+.icons-navbar-color{
+    color: white;
+}
+.nav-link-color{
+    color: #fff;
+}
+.nav-link-color2{
+    color:black;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.navbar{
+    background-color:  #001463;
+}
+.esci-font{
+    background-color:#001463;
+    color: white;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.chiudi-gestioneAccount{
+    background-color:#001463;
+    color: white;
+}
+.banner-color{
+    height: 41rem;
+    background-color: #41b450;
+
+}
+.list-inline-item > a{
+    color: black;
+}
+.elenco-carte-font{
+    background-color: #69c974;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    overflow-y: auto;
+}
+.font-form{
+    text-align: left;
+}
+.scadenza-cvc-padding{
+    padding-left: 0rem;
+}
+.scadenza-width{
+    width: 5rem;
+}
+.cvc-padding{
+    padding-left: 3rem;
+}
+.cvc-width{
+    width: 3rem;
+}
+.submit-font{
+    background-color:  #41b450;
+}
+.margin-top-elenco-carte{
+    margin-top: 1rem;
+}
+.advertise-section{
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    background-color: #001463;
+}
+.text-bold{
+    color: white;
+    font-weight: 400;
+}
+footer{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background-color:#001463;
+}
+@media screen and (min-width: 768px){
+
+    .advertise-section{
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}

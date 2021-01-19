@@ -1,0 +1,120 @@
+.icons-navbar-color{
+    color: white;
+}
+.nav-link-color{
+    color: #fff;
+}
+.nav-link-color2{
+    color:black;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.navbar{
+    background-color:#001463;
+    
+}
+.chiudi-gestioneAccount{
+    background-color: #001463;
+    color: white;
+}
+.esci-font{
+    background-color: #001463;
+    color: white;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.banner-color{
+    height: 41rem;
+    background-color: #41b450;
+
+}
+.saldo-font{
+    font-size: 2rem;
+}
+.padding-richiedi{
+    padding-top: 2rem;
+}
+.padding-buongiorno{
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+}
+.card-options-font{
+    background-color: #4bbe58;
+    color: black;
+    border:1px double #96d99f !important;
+
+}
+.card-font-color{
+    background-color: #87d490;
+}
+.card-button-options-font{
+    height: 3 rem;
+    color: black;
+    background-color: #4bbe58;
+    border:1px double #96d99f !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.card-body-text-color{
+    color: black;
+}
+.grafico-padding{
+    padding-left: 3rem;
+}
+.dropdown-menu-font{
+    background-color: #69c974;
+}
+.colletta-dropdown-option:hover{
+    height: 2rem;
+    color: black;
+    background-color: #87d490;
+    border:1px double #87d490 !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+}
+.list-inline-item > a{
+    color: black;
+}
+.search-input-dim{
+    width: 70%;
+}
+.search-bar-font-1{
+    background-color: #87d490;
+    border: 1px solid  #b4e4ba;
+}
+.search-bar-font-2{
+    background-color: #b4e4ba;
+    outline: none !important;
+    box-shadow: none !important;
+}
+.details-list-right{
+    padding-top: 0.5rem;
+    height: 34rem;
+    overflow-y: auto;
+}
+.details-list-left{
+    padding-top: 6rem;
+    padding-left: 3rem;
+}
+.advertise-section{
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+    background-color:#001463;
+}
+.text-bold{
+    color: white;
+    font-weight: 400;
+}
+footer{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    background-color: #001463;
+}
+@media screen and (min-width: 768px){
+
+    .advertise-section{
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
