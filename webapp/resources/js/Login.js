@@ -1,3 +1,5 @@
+var debug=false;
+
 let toggleSignupButton=document.getElementById("toggle-signup");
 let loginButton=document.getElementById("login-button");
 let signupButton=document.getElementById("register-button");
@@ -59,9 +61,54 @@ loginButton.addEventListener('click', ()	=>	{
 	}
 });
 
-toggleSignupButton.addEventListener('click', ()	=>	{
-	document.getElementById("mail-login-input").innerHTML
+let toggleResetPasswordForm=document.getElementById("password-reset-button");
+toggleResetPasswordForm.addEventListener('click', () =>	{
+	document.getElementById("mail-login-input").required=false;
+	document.getElementById("password-login-input").required=false;
+	
+	document.getElementById("password-input").required=false;
+	document.getElementById("name-input").required=false;
+	document.getElementById("surname-input").required=false;
+	document.getElementById("mail-input").required=false;
+	document.getElementById("cf-input").required=false;
+	document.getElementById("address-input").required=false;
+	document.getElementById("dob-input").required=false;
+
 	document.getElementById("login-div").style.display="none";
+	document.getElementById("reset-password-div").style.display="block";
+	document.getElementById("signup-div").style.display="none";
+});
+
+let sendRecoveryButton=document.getElementById("send-recovery-mail");
+var auth = firebase.auth();
+var emailAddress = document.getElementById("recovery-email");
+let labelResponse=document.getElementById("recovery-response-text");
+
+sendRecoveryButton.addEventListener('click', () =>	{
+	auth.sendPasswordResetEmail(emailAddress).then(function() {
+		// Email sent.
+		// Let the label's borders became green and display a success message
+		labelResponse.style.border="3px solid #43c23c";
+		labelResponse.style.borderRadius="25px";
+		labelResponse.innerHTML="Il link di reset password è stato mandato alla tua mail";
+	}).catch(function(error) {
+		// An error happened.
+		// Let the label's borders became red and display an error message
+		labelResponse.style.border="3px solid #c23c3c";
+		labelResponse.style.borderRadius="25px";
+		labelResponse.innerHTML="Si è verificato un errore, riprova";
+		if (debug)	{
+			labelResponse.innerHTML+="\nError Code: "+error.errorCode+"\nError message: "+error.errorMessage;
+		}
+	});
+});
+
+toggleSignupButton.addEventListener('click', ()	=>	{
+	document.getElementById("mail-login-input").required=false;
+	document.getElementById("password-login-input").required=false;
+
+	document.getElementById("login-div").style.display="none";
+	document.getElementById("reset-password-div").style.display="none";
 	document.getElementById("signup-div").style.display="block";
 });
 
@@ -128,8 +175,19 @@ signupButton.addEventListener('click', ()	=>	{
 });
 
 function checkLoginInputs()	{
+	document.getElementById("password-input").required=false;
+	document.getElementById("name-input").required=false;
+	document.getElementById("surname-input").required=false;
+	document.getElementById("mail-input").required=false;
+	document.getElementById("cf-input").required=false;
+	document.getElementById("address-input").required=false;
+	document.getElementById("dob-input").required=false;
+
 	let passwordField=document.getElementById("password-login-input");
 	let mailField=document.getElementById("mail-login-input");
+
+	passwordField.required=true;
+	mailField.required=true;
 	
 	// TODO: check with database
 	if (false)	{
@@ -150,6 +208,14 @@ function checkRegisterInputs()	{
 	let cfField=document.getElementById("cf-input");
 	let addressField=document.getElementById("address-input");
 	let dobField=document.getElementById("dob-input");
+
+	passwordField.required=true;
+	nameField.required=true;
+	surnameField.required=true;
+	mailField.required=true;
+	cfField.required=true;
+	addressField.required=true;
+	dobField.required=true;
 
 	if (nameField.value.length==0)	{
 		nameField.style.borderColor="red";
