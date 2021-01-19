@@ -91,6 +91,7 @@ sendRecoveryButton.addEventListener('click', () =>	{
 		labelResponse.style.border="3px solid #43c23c";
 		labelResponse.style.borderRadius="25px";
 		labelResponse.innerHTML="Il link di reset password è stato mandato alla tua mail";
+		labelResponse.style.display="block";
 	}).catch(function(error) {
 		// An error happened.
 		// Let the label's borders became red and display an error message
@@ -100,6 +101,7 @@ sendRecoveryButton.addEventListener('click', () =>	{
 		if (debug)	{
 			labelResponse.innerHTML+="\nError Code: "+error.errorCode+"\nError message: "+error.errorMessage;
 		}
+		labelResponse.style.display="block";
 	});
 });
 
