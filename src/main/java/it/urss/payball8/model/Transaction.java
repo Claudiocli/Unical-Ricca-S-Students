@@ -103,5 +103,4 @@ public class Transaction implements java.io.Serializable{
 		}
 		
 		
-		
 }

@@ -194,7 +194,7 @@ function checkLoginInputs()	{
 	mailField.required=true;
 	
 	// TODO: check with database
-
+  
 	if (false)	{
 		return false;
 	}

@@ -94,5 +94,5 @@ public class Colletta implements java.io.Serializable {
 				+ ", amount_temp=" + amount_temp + ", beneficiary=" + beneficiary + "]";
 	}
 	
-	
+
 }

@@ -61,5 +61,4 @@ public class CardController {
 		if (current_card.getAccount() == id)
 			cardRepository.deleteBypan(pan);
 	}
-
 }
