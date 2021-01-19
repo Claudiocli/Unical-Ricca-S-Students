@@ -1,51 +1,20 @@
 package it.urss.payball8;
 
-import java.util.Arrays;
-
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
 
 @Configuration
 @EnableWebMvc
-@EnableWebSecurity
 @EnableJpaRepositories
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebMvcConfig extends WebSecurityConfigurerAdapter {
-
-	@Bean
+public class WebMvcConfig extends WebMvcConfigurerAdapter  {
+ 
 	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
-
-	@Override
-	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.cors().and().csrf().disable().authorizeRequests()
-				.antMatchers("/account/**/**", "/account/**", "/home/**", "/home/**/**", "/transaction/**",
-						"/transaction/**/**", "/card/**", "/friendship/**", "/friendship/**/**", "/recharge/**",
-						"/recharge/**/**", "/colletta/**", "/colletta/**/**", "/contribute/**", "/contribute/**/**")
-				.permitAll().anyRequest().authenticated();
-	}
-
-	@Bean
-	CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-		config.applyPermitDefaultValues();
-
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", config);
-		return source;
-	}
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("home", "forward:/Home");
+    }
 
 }
