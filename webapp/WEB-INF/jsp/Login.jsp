@@ -30,7 +30,6 @@
 			<button type="submit" id="login-button">Accedi</button>
 			<p>oppure</p>
 			<button type="button" id="toggle-signup">Registrati</button>
-
 			<p>oppure</p>
 			<div id="google-signin">
 				<div id="google-button" class="custom-google-button">
@@ -38,6 +37,20 @@
 					<span class="buttonText">Accedi con Google</span>
 				</div>
 			</div>
+			<br/>
+			<div class="password-reset">
+				<button type="button" id="password-reset-button">Hai dimenticato la password?</button>
+			</div>
+		</div>
+		<div id="reset-password-div">
+			<form>
+				<label for="recovery-email">Inserisci la mail dell'account di cui vuoi resettare la password</label>
+				<input type="email" id="recovery-email" placeholder="Email">
+				<div id="recovery-response">
+					<label id="recovery-response-text"></label>
+				</div>
+				<button type="submit" id="send-recovery-mail">Invia</button>
+			</form>
 		</div>
 		<div id="signup-div">
 			<form class="form-group" id="signup-form">
