@@ -1,21 +1,31 @@
 package it.urss.payball8.model;
 
+import java.time.Clock;
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "friendship")
-public class Friendship {
+@IdClass(Friendship.class)
+public class Friendship implements java.io.Serializable{
 
-	@Id
+	private static final long serialVersionUID = 1L;
+
 	private String datetime;
-
+	
+	@Id
 	private Long account1;
-
+	
+	@Id
 	private Long account2;
 	
 	public Friendship() {
+		Clock clock = Clock.systemDefaultZone();
+		datetime = LocalDateTime.now(clock).toString();
 	}
 
 	public Friendship(String datetime, Long account1, Long account2) {

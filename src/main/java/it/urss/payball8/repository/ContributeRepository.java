@@ -1,0 +1,17 @@
+package it.urss.payball8.repository;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import it.urss.payball8.model.Contribute;
+
+@Transactional
+public interface ContributeRepository  extends JpaRepository<Contribute, Long> {
+	List<Contribute> findAllBycolletta(Long id);
+	List<Contribute> findAllBycontributor(Long id);
+	Contribute findByContributorAndColletta(Long contributor, Long colletta);
+	void deleteByContributorAndColletta(Long contributor, Long colletta);
+}

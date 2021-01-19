@@ -16,13 +16,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: DATABASE postgres; Type: COMMENT; Schema: -; Owner: postgres
---
-
-COMMENT ON DATABASE postgres IS 'default administrative connection database';
-
-
---
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -45,14 +38,14 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE public.account (
-    tag_id "char"[] NOT NULL,
-    name "char"[],
-    surname "char"[],
-    email "char"[],
-    cf "char"[],
-    address "char"[],
-    dob "char"[],
-    balance "char"[]
+    id bigint NOT NULL,
+    name character varying(255),
+    surname character varying(255),
+    email character varying(255),
+    cf character varying(255),
+    address character varying(255),
+    dob character varying(255),
+    balance numeric
 );
 
 
@@ -63,12 +56,12 @@ ALTER TABLE public.account OWNER TO postgres;
 --
 
 CREATE TABLE public.card (
-    pan "char"[] NOT NULL,
-    holder "char"[],
-    expiration_date "char"[],
-    cvv "char"[],
-    datetime "char"[],
-    account "char"[]
+    pan character varying(255) NOT NULL,
+    holder character varying(255),
+    expiration_date character varying(255),
+    cvv character varying(255),
+    datetime character varying(255),
+    account bigint
 );
 
 
@@ -79,12 +72,12 @@ ALTER TABLE public.card OWNER TO postgres;
 --
 
 CREATE TABLE public.colletta (
-    id "char"[] NOT NULL,
-    datetime "char"[],
-    amount "char"[],
-    quote "char"[],
-    amount_temp "char"[],
-    beneficiary "char"[]
+    id serial NOT NULL,
+    datetime character varying(255),
+    quote numeric,
+    beneficiary bigint,
+    amount numeric,
+    amount_temp numeric
 );
 
 
@@ -95,8 +88,8 @@ ALTER TABLE public.colletta OWNER TO postgres;
 --
 
 CREATE TABLE public.contribute (
-    contributor "char"[] NOT NULL,
-    colletta "char"[] NOT NULL
+    contributor bigint NOT NULL,
+    colletta bigint NOT NULL
 );
 
 
@@ -107,9 +100,9 @@ ALTER TABLE public.contribute OWNER TO postgres;
 --
 
 CREATE TABLE public.friendship (
-    datetime "char"[],
-    account1 "char"[] NOT NULL,
-    account2 "char"[] NOT NULL
+    datetime character varying(255),
+    account1 bigint NOT NULL,
+    account2 bigint NOT NULL
 );
 
 
@@ -120,11 +113,11 @@ ALTER TABLE public.friendship OWNER TO postgres;
 --
 
 CREATE TABLE public.recharge (
-    id "char"[] NOT NULL,
-    amount "char"[],
-    datetime "char"[],
-    account "char"[],
-    card "char"[]
+    id serial NOT NULL,
+    datetime character varying(255),
+    account bigint,
+    card character varying(255),
+    amount numeric
 );
 
 
@@ -135,23 +128,79 @@ ALTER TABLE public.recharge OWNER TO postgres;
 --
 
 CREATE TABLE public.transaction (
-    id "char"[] NOT NULL,
-    amount "char"[],
-    datetime "char"[],
-    category "char"[],
-    sender "char"[],
-    recipient "char"[]
+    id serial NOT NULL,
+    datetime character varying(255),
+    category character varying(255),
+    sender bigint,
+    recipient bigint,
+    amount numeric
 );
 
 
 ALTER TABLE public.transaction OWNER TO postgres;
 
 --
+-- Data for Name: account; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.account (id, name, surname, email, cf, address, dob, balance) FROM stdin;
+\.
+
+
+--
+-- Data for Name: card; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.card (pan, holder, expiration_date, cvv, datetime, account) FROM stdin;
+\.
+
+
+--
+-- Data for Name: colletta; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.colletta (id, datetime, quote, beneficiary, amount, amount_temp) FROM stdin;
+\.
+
+
+--
+-- Data for Name: contribute; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.contribute (contributor, colletta) FROM stdin;
+\.
+
+
+--
+-- Data for Name: friendship; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.friendship (datetime, account1, account2) FROM stdin;
+\.
+
+
+--
+-- Data for Name: recharge; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.recharge (id, datetime, account, card, amount) FROM stdin;
+\.
+
+
+--
+-- Data for Name: transaction; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.transaction (id, datetime, category, sender, recipient, amount) FROM stdin;
+\.
+
+
+--
 -- Name: account account_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.account
-    ADD CONSTRAINT account_pkey PRIMARY KEY (tag_id);
+    ADD CONSTRAINT account_pkey PRIMARY KEY (id);
 
 
 --
@@ -207,7 +256,7 @@ ALTER TABLE ONLY public.transaction
 --
 
 ALTER TABLE ONLY public.card
-    ADD CONSTRAINT card_account_fkey FOREIGN KEY (account) REFERENCES public.account(tag_id) NOT VALID;
+    ADD CONSTRAINT card_account_fkey FOREIGN KEY (account) REFERENCES public.account(id) NOT VALID;
 
 
 --
@@ -215,7 +264,7 @@ ALTER TABLE ONLY public.card
 --
 
 ALTER TABLE ONLY public.colletta
-    ADD CONSTRAINT colletta_beneficiary_fkey FOREIGN KEY (beneficiary) REFERENCES public.account(tag_id) NOT VALID;
+    ADD CONSTRAINT colletta_beneficiary_fkey FOREIGN KEY (beneficiary) REFERENCES public.account(id) NOT VALID;
 
 
 --
@@ -231,7 +280,7 @@ ALTER TABLE ONLY public.contribute
 --
 
 ALTER TABLE ONLY public.contribute
-    ADD CONSTRAINT contribute_contributor_fkey FOREIGN KEY (contributor) REFERENCES public.account(tag_id) NOT VALID;
+    ADD CONSTRAINT contribute_contributor_fkey FOREIGN KEY (contributor) REFERENCES public.account(id) NOT VALID;
 
 
 --
@@ -239,7 +288,7 @@ ALTER TABLE ONLY public.contribute
 --
 
 ALTER TABLE ONLY public.friendship
-    ADD CONSTRAINT friendship_account1_fkey FOREIGN KEY (account1) REFERENCES public.account(tag_id) NOT VALID;
+    ADD CONSTRAINT friendship_account1_fkey FOREIGN KEY (account1) REFERENCES public.account(id) NOT VALID;
 
 
 --
@@ -247,7 +296,7 @@ ALTER TABLE ONLY public.friendship
 --
 
 ALTER TABLE ONLY public.friendship
-    ADD CONSTRAINT friendship_account2_fkey FOREIGN KEY (account2) REFERENCES public.account(tag_id) NOT VALID;
+    ADD CONSTRAINT friendship_account2_fkey FOREIGN KEY (account2) REFERENCES public.account(id) NOT VALID;
 
 
 --
@@ -255,7 +304,7 @@ ALTER TABLE ONLY public.friendship
 --
 
 ALTER TABLE ONLY public.recharge
-    ADD CONSTRAINT recharge_account_fkey FOREIGN KEY (account) REFERENCES public.account(tag_id) NOT VALID;
+    ADD CONSTRAINT recharge_account_fkey FOREIGN KEY (account) REFERENCES public.account(id) NOT VALID;
 
 
 --
@@ -271,7 +320,7 @@ ALTER TABLE ONLY public.recharge
 --
 
 ALTER TABLE ONLY public.transaction
-    ADD CONSTRAINT transaction_recipient_fkey FOREIGN KEY (recipient) REFERENCES public.account(tag_id) NOT VALID;
+    ADD CONSTRAINT transaction_recipient_fkey FOREIGN KEY (recipient) REFERENCES public.account(id) NOT VALID;
 
 
 --
@@ -279,7 +328,7 @@ ALTER TABLE ONLY public.transaction
 --
 
 ALTER TABLE ONLY public.transaction
-    ADD CONSTRAINT transaction_sender_fkey FOREIGN KEY (sender) REFERENCES public.account(tag_id) NOT VALID;
+    ADD CONSTRAINT transaction_sender_fkey FOREIGN KEY (sender) REFERENCES public.account(id) NOT VALID;
 
 
 --

@@ -37,7 +37,7 @@ public class AccountController {
 		@Autowired
 		private JwtUserDetailsService userDetailsService;
 
-		@GetMapping(path = "/me")
+		@PostMapping(path = "/me")
 		public @ResponseBody Optional<Account> me(@RequestBody JSONObject id) {
 			logger.info("USER_ME");
 			Long id_long = new Long(id.getAsString("id"));
@@ -46,9 +46,7 @@ public class AccountController {
 		
 		@PostMapping(path = "/add")
 		ResponseEntity<Account> add(@RequestBody Account newAccount) {
-			/*if(newAccount != null)
-				newAccount.setId(castUUID(newAccount.getId());
-			*/
+			newAccount.setBalance(0.0F);
 			logger.info("USER_ADD added user by ENTITY: " + newAccount.toString());
 			return ResponseEntity.ok(userDetailsService.save(newAccount));
 		}
@@ -59,8 +57,6 @@ public class AccountController {
 						.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
 			logger.info("USER_UPDATE updated user with id = " + newAccount.getId() + " by ENTITY " + newAccount.toString());
-			if (newAccount.getEmail() != null)
-				current_user.setEmail(newAccount.getEmail());
 			if (newAccount.getName() != null)
 				current_user.setName(newAccount.getName());
 			if (newAccount.getSurname() != null)
@@ -68,7 +64,7 @@ public class AccountController {
 			return ResponseEntity.ok(userDetailsService.save(current_user));
 		}
 
-		@DeleteMapping(path = "/delete/{id}") // controllati se l'id di quello loggato è quello che losta eliminado
+		@DeleteMapping(path = "/delete/{id}") 
 		void deleteById(@RequestParam String id) {
 			logger.info(String.format("USER_DELETE deleted user with id: %d", id));
 			accountRepository.deleteById(Long.parseLong(id));

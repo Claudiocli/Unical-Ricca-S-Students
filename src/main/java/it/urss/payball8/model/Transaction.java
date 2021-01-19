@@ -1,5 +1,8 @@
 package it.urss.payball8.model;
 
+import java.time.Clock;
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "transaction")
-public class Transaction {
+public class Transaction implements java.io.Serializable{
 		
 		private static final long serialVersionUID = 1L;
 		
@@ -28,6 +31,8 @@ public class Transaction {
 		
 		
 		public Transaction() {
+			Clock clock = Clock.systemDefaultZone();
+			datetime = LocalDateTime.now(clock).toString();
 		}
 
 		public Transaction(Long id, Float amount, String datetime, String category, Long sender, Long recipient) {
@@ -91,6 +96,10 @@ public class Transaction {
 		public String toString() {
 			return "Transaction [id=" + id + ", amount=" + amount + ", datetime=" + datetime + ", category=" + category
 					+ ", sender=" + sender + ", recipient=" + recipient + "]";
+		}
+
+		public static long getSerialversionuid() {
+			return serialVersionUID;
 		}
 		
 		
