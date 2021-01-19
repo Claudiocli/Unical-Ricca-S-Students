@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import it.urss.payball8.model.Account;
 import it.urss.payball8.repository.AccountRepository;
+import it.urss.payball8.service.JwtUserDetailsService;
 import net.minidev.json.JSONObject;
 
 
@@ -32,6 +34,8 @@ public class AccountController {
 		@Autowired
 		private AccountRepository accountRepository;
 
+		@Autowired
+		private JwtUserDetailsService userDetailsService;
 
 		@PostMapping(path = "/me")
 		public @ResponseBody Optional<Account> me(@RequestBody JSONObject id) {
@@ -44,7 +48,7 @@ public class AccountController {
 		ResponseEntity<Account> add(@RequestBody Account newAccount) {
 			newAccount.setBalance(0.0F);
 			logger.info("USER_ADD added user by ENTITY: " + newAccount.toString());
-			return ResponseEntity.ok(accountRepository.save(newAccount));
+			return ResponseEntity.ok(userDetailsService.save(newAccount));
 		}
 
 		@PutMapping(path = "/update")
@@ -57,7 +61,7 @@ public class AccountController {
 				current_user.setName(newAccount.getName());
 			if (newAccount.getSurname() != null)
 				current_user.setSurname(newAccount.getSurname());
-			return ResponseEntity.ok(accountRepository.save(current_user));
+			return ResponseEntity.ok(userDetailsService.save(current_user));
 		}
 
 		@DeleteMapping(path = "/delete/{id}") 
