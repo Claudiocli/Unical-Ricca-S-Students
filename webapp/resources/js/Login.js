@@ -6,32 +6,27 @@ let signupButton=document.getElementById("register-button");
 // Google sign up 
 var provider = new firebase.auth.GoogleAuthProvider();
 
-var googleUser = {};
-var auth2;
-var startApp = function() {
-	gapi.load('auth2', function(){
-		// Retrieve the singleton for the GoogleAuth library and set up the client.
-		auth2 = gapi.auth2.init({
-			client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
-			cookiepolicy: 'single_host_origin',
-			// Request scopes in addition to 'profile' and 'email'
-			//scope: 'additional_scope'
-		});
-		attachSignin(document.getElementById('customBtn'));
-	});
-};
+firebase.auth()
+  .signInWithPopup(provider)
+  .then((result) => {
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
 
-	function attachSignin(element) {
-		auth2.attachClickHandler(element, {},
-		function(googleUser) {
-			// Success
-			document.getElementById('name').innerText = "Signed in: " +
-			googleUser.getBasicProfile().getName();
-		}, function(error) {
-		// Error logging in
-		alert(JSON.stringify(error, undefined, 2));
-	});
-}
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
 // Login function
 loginButton.addEventListener('click', ()	=>	{
 	let email=document.getElementById("mail-login-input").value;
