@@ -24,7 +24,8 @@ main h1 {
   margin: 0px auto;
 }
 #login-div button,
-#signup-div button {
+#signup-div button,
+#send-recovery-mail {
   background: #5d8ffc;
   color: #fff;
   border: 1px solid #5d8ffc;
@@ -36,7 +37,8 @@ main h1 {
   -moz-transition: 0.3s;
 }
 #login-div button:hover,
-#signup-div button:hover {
+#signup-div button:hover,
+#send-recovery-mail:hover {
   background: #fff;
   color: #5d8ffc;
   border: 1px solid #5d8ffc;
@@ -66,15 +68,15 @@ main h1 {
 .custom-google-button:hover {
   cursor: pointer;
 }
-span.icon {
-  background: url("/identity/sign-in/g-normal.png") transparent 5px 50%
-    no-repeat;
+span .icon {
+  background: url("/URSS/src/main/resources/static/google_signin_buttons/web/vector/btn_google_dark_normal_ios.svg")
+    transparent 5px 50% no-repeat;
   display: inline-block;
   vertical-align: middle;
   width: 42px;
   height: 42px;
 }
-span.buttonText {
+span .buttonText {
   display: inline-block;
   vertical-align: middle;
   padding-left: 42px;
@@ -85,14 +87,30 @@ span.buttonText {
 }
 #reset-password-div {
   display: none;
+  text-align: center;
+  width: 100%;
 }
-#reset-password-div #recovery-response-text {
+#reset-password-div #email-div {
+  text-align: center;
+  width: 58.5%;
+  padding-left: 40%;
+}
+#reset-password-div .recovery-response-text {
   display: none;
 }
-#password-reset-button	{
-	color: black;
+#password-reset-button {
+  color: black;
 }
-#password-reset-button:hover	{
-	color: blue;
-	font-weight: bold;
+#password-reset-button:hover {
+  color: blue;
+  font-weight: bold;
+}
+#send-recovery-mail {
+  width: 30%;
+}
+#send-recovery-div {
+  padding-left: 40%;
+}
+.recovery-response-text {
+  font-size: larger;
 }

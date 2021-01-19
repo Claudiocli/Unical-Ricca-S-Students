@@ -3,30 +3,45 @@ var debug=false;
 let toggleSignupButton=document.getElementById("toggle-signup");
 let loginButton=document.getElementById("login-button");
 let signupButton=document.getElementById("register-button");
+// Firebase initialization
+var firebaseConfig = {
+	apiKey: "AIzaSyAlsmnuWM9U1etPRjMB3zEYhP9XXmyUn34",
+	authDomain: "payball8-1f27c.firebaseapp.com",
+	databaseURL: "https://payball8-1f27c-default-rtdb.europe-west1.firebasedatabase.app",
+	projectId: "payball8-1f27c",
+	storageBucket: "payball8-1f27c.appspot.com",
+	messagingSenderId: "39509751218",
+	appId: "1:39509751218:web:6fb7cc6cbb7960386e60ab",
+	measurementId: "G-PY99LWBLTW"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 // Google sign up 
 var provider = new firebase.auth.GoogleAuthProvider();
-
-firebase.auth()
+let googleButton = document.getElementById("google-button");
+googleButton.addEventListener('click', () =>	{
+	firebase.auth()
   .signInWithPopup(provider)
   .then((result) => {
-    /** @type {firebase.auth.OAuthCredential} */
-    var credential = result.credential;
+		var credential = result.credential;
 
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = credential.accessToken;
-    // The signed-in user info.
-    var user = result.user;
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
+		// This gives you a Google Access Token. You can use it to access the Google API.
+		var token = credential.accessToken;
+		// The signed-in user info.
+		var user = result.user;
+		// ...
+	}).catch((error) => {
+		// Handle Errors here.
+		var errorCode = error.code;
+		var errorMessage = error.message;
+		// The email of the user's account used.
+		var email = error.email;
+		// The firebase.auth.AuthCredential type that was used.
+		var credential = error.credential;
+		// ...
+	});
+})
 // Login function
 loginButton.addEventListener('click', ()	=>	{
 	let email=document.getElementById("mail-login-input").value;

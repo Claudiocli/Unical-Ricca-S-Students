@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8" lang="it">
+	<meta charset="utf-8" lang="it">
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<!-- Font -->
@@ -11,12 +11,24 @@
 	<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,600&display=swap" rel="stylesheet"> 
 
 	<title>PayBall8 Login</title>
-	<!-- Css & Js -->
-	<link href="<c:url value="/resources/css/Login.css" />" rel="stylesheet">
-	<script defer src="<c:url value="/resources/js/Login.js" />"></script>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+
+	<!-- Firebase products -->
+	<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+	
 	<!-- Google platform library -->
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 
+	<!-- Css & Js -->
+	<link href="<c:url value="/resources/css/Login.css" />" rel="stylesheet">
+	<script defer src="<c:url value="/resources/js/Login.js" />"></script>
+<%/**--
+	<!-- Google button -->
+	<meta name="google-signin-client_id" content="39509751218-l96smn1hqqc6glk1gsae4u7ucqpnefo8.apps.googleusercontent.com">
+	<script src="https://apis.google.com/js/platform.js" async defer>
+--**/%>
 </head>
 <body>
 	<main>
@@ -44,12 +56,17 @@
 		</div>
 		<div id="reset-password-div">
 			<form>
-				<label for="recovery-email">Inserisci la mail dell'account di cui vuoi resettare la password</label>
-				<input type="email" id="recovery-email" placeholder="Email">
-				<div id="recovery-response">
-					<label id="recovery-response-text"></label>
+				<label class="recovery-response-text" for="recovery-email">Inserisci la mail dell'account di cui vuoi resettare la password</label>
+				<br/>
+				<div id="email-div">
+					<input type="email" class="form-control" id="recovery-email" placeholder="Email">
 				</div>
-				<button type="submit" id="send-recovery-mail">Invia</button>
+				<div id="recovery-response">
+					<label class="recovery-response-text"></label>
+				</div>
+				<div id="send-recovery-div">
+					<button type="submit" id="send-recovery-mail">Invia</button>
+				</div>
 			</form>
 		</div>
 		<div id="signup-div">
@@ -75,11 +92,5 @@
 			<button type="submit" id="register-button">Registrati</button>
 		</div>
 	</main>
-  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-  <script src="/__/firebase/8.2.1/firebase-app.js"></script>
-  
-  <script src="/__/firebase/8.2.1/firebase-analytics.js"></script>
-  <script src="/__/firebase/8.2.1/firebase-auth.js"></script>
-
 </body>
 </html>
