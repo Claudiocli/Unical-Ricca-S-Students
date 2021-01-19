@@ -83,9 +83,16 @@ span.buttonText {
   font-weight: bold;
   font-family: "Roboto", sans-serif;
 }
-.reset-password-div {
+#reset-password-div {
   display: none;
 }
-.reset-password-div recovery-response-text {
+#reset-password-div #recovery-response-text {
   display: none;
+}
+#password-reset-button	{
+	color: black;
+}
+#password-reset-button:hover	{
+	color: blue;
+	font-weight: bold;
 }

@@ -40,21 +40,19 @@ public class FriendshipController {
 
 	@PostMapping(path = "/all")
 	List<Account> listFriendship(@RequestBody JSONObject id) {
-		Long id_long = new Long(id.getAsString("id"));
+		Long id_long = Long.parseLong(id.getAsString("id"));
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
 		List<Account> list_account = new ArrayList<Account>();
 		List<Friendship> list_friends1 = friendshipRepository.findAllByaccount1(id_long);
 		List<Friendship> list_friends2 = friendshipRepository.findAllByaccount2(id_long);
-		for (Friendship friend : list_friends1) {
+		for (Friendship friend : list_friends1)
 			list_account.add(accountRepository.findById(friend.getAccount2())
 					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user")));
-		}
-		for (Friendship friend : list_friends2) {
+		for (Friendship friend : list_friends2)
 			list_account.add(accountRepository.findById(friend.getAccount1())
 					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user")));
-		}
 
 		logger.info("LIST_FRIENDS:" + list_account);
 		return list_account;
@@ -62,7 +60,7 @@ public class FriendshipController {
 
 	@PostMapping(path = "/delete/{id_delete}")
 	void deleteFriendship(@PathVariable Long id_delete, @RequestBody JSONObject id) {
-		Long id_long = new Long(id.getAsString("id"));
+		Long id_long = Long.parseLong(id.getAsString("id"));
 		logger.info(String.format("FRIENDSHIP_DELETE deleted friendship with id: %d", id_delete));
 		friendshipRepository.deleteByAccount1AndAccount2(id_delete, id_long);
 		friendshipRepository.deleteByAccount2AndAccount1(id_delete, id_long);

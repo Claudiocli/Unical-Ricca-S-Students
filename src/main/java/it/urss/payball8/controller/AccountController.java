@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,21 +26,21 @@ import net.minidev.json.JSONObject;
 @RestController
 @RequestMapping(path = "/account")
 public class AccountController {
-	
+
 		Logger logger = LoggerFactory.getLogger(AccountController.class);
 
 		@Autowired
 		private AccountRepository accountRepository;
-		
-		
+
+
 
 		@PostMapping(path = "/me")
 		public @ResponseBody Optional<Account> me(@RequestBody JSONObject id) {
 			logger.info("USER_ME");
-			Long id_long = new Long(id.getAsString("id"));
+			Long id_long = Long.parseLong(id.getAsString("id"));
 			return accountRepository.findById(id_long);
 		}
-		
+
 		@PostMapping(path = "/add")
 		ResponseEntity<Account> add(@RequestBody Account newAccount) {
 			newAccount.setBalance(0.0F);
@@ -61,7 +60,7 @@ public class AccountController {
 			return ResponseEntity.ok(accountRepository.save(current_user));
 		}
 
-		@DeleteMapping(path = "/delete/{id}") 
+		@DeleteMapping(path = "/delete/{id}")
 		void deleteById(@RequestParam String id) {
 			logger.info(String.format("USER_DELETE deleted user with id: %d", id));
 			accountRepository.deleteById(Long.parseLong(id));

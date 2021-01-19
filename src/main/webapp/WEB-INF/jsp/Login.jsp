@@ -30,7 +30,7 @@
 			<button type="submit" id="login-button">Accedi</button>
 			<p>oppure</p>
 			<button type="button" id="toggle-signup">Registrati</button>
-			<p>oppure</p>
+			<br/>
 			<div id="google-signin">
 				<div id="google-button" class="custom-google-button">
 					<span class="icon"></span>
@@ -39,7 +39,7 @@
 			</div>
 			<br/>
 			<div class="password-reset">
-				<button type="button" id="password-reset-button">Hai dimenticato la password?</button>
+				<p id="password-reset-button">Hai dimenticato la password?</p>
 			</div>
 		</div>
 		<div id="reset-password-div">

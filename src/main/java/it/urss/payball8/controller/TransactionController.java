@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.urss.payball8.model.Account;
@@ -39,15 +38,15 @@ public class TransactionController {
 
 	@Autowired
 	private RechargeRepository rechargeRepository;
-	
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showStoricoPage() {
 		return "Storico";
 	}
-	
+
 	@PostMapping(path = "/size")
 	int getAll(@RequestBody JSONObject id) {
-		Long id_long = new Long(id.getAsString("id"));
+		Long id_long = Long.parseLong(id.getAsString("id"));
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
@@ -63,7 +62,7 @@ public class TransactionController {
 
 	@PostMapping(path = "/getColumn/{page}")
 	List<Transaction> getColumnTransaction(@RequestBody JSONObject id, @PathVariable Integer page) {
-		Long id_long = new Long(id.getAsString("id"));
+		Long id_long = Long.parseLong(id.getAsString("id"));
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
