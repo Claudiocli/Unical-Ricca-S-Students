@@ -22,8 +22,7 @@ import it.urss.payball8.repository.AccountRepository;
 import it.urss.payball8.repository.FriendshipRepository;
 import net.minidev.json.JSONObject;
 
-@RestController
-@RequestMapping(path = "/home")
+@Controller
 public class HomePageController {
 	Logger logger = LoggerFactory.getLogger(HomePageController.class);
 
@@ -33,8 +32,23 @@ public class HomePageController {
 	@Autowired
 	private FriendshipRepository friendshipRepository;
 
-	@GetMapping("/")
-	public String showLHomePage() {
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String showLoginPage() {
+		return "Login";
+	}
+	
+	@RequestMapping(value = "/aiuto", method = RequestMethod.GET)
+	public String showHelpPage() {
+		return "Aiuto";
+	}
+	
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String showIndexPage() {
+		return "index";
+	}
+	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String showHomePage() {
 		return "Home";
 	}
 

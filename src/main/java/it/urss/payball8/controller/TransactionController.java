@@ -8,10 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,8 +25,8 @@ import it.urss.payball8.repository.RechargeRepository;
 import it.urss.payball8.repository.TransactionRepository;
 import net.minidev.json.JSONObject;
 
-@RestController
-@RequestMapping(path = "/transaction")
+@Controller
+@RequestMapping(path = "/storico")
 public class TransactionController {
 
 	Logger logger = LoggerFactory.getLogger(TransactionController.class);
@@ -37,8 +39,13 @@ public class TransactionController {
 
 	@Autowired
 	private RechargeRepository rechargeRepository;
-
-	@PostMapping(path = "")
+	
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String showStoricoPage() {
+		return "Storico";
+	}
+	
+	@PostMapping(path = "/size")
 	int getAll(@RequestBody JSONObject id) {
 		Long id_long = new Long(id.getAsString("id"));
 		accountRepository.findById(id_long)

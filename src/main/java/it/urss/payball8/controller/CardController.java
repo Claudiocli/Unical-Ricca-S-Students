@@ -6,11 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -19,7 +21,7 @@ import it.urss.payball8.repository.AccountRepository;
 import it.urss.payball8.repository.CardRepository;
 import net.minidev.json.JSONObject;
 
-@RestController
+@Controller
 @RequestMapping(path = "/card")
 public class CardController {
 
@@ -31,6 +33,11 @@ public class CardController {
 	@Autowired
 	private AccountRepository accountRepository;
 
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String showLoginPage() {
+		return "Carte";
+	}
+	
 	@PostMapping(path = "/myCard")
 	List<Card> getAllMyCard(@RequestBody JSONObject id) {
 		logger.info("GET ALL MY CARD");
