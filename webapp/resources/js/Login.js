@@ -1,9 +1,9 @@
 var debug=false;
-
+// Util variables
 let toggleSignupButton=document.getElementById("toggle-signup");
 let loginButton=document.getElementById("login-button");
 let signupButton=document.getElementById("register-button");
-
+// Google sign up 
 var provider = new firebase.auth.GoogleAuthProvider();
 
 var googleUser = {};
@@ -32,15 +32,17 @@ var startApp = function() {
 		alert(JSON.stringify(error, undefined, 2));
 	});
 }
-
+// Login function
 loginButton.addEventListener('click', ()	=>	{
 	let email=document.getElementById("mail-login-input").value;
 	let password=document.getElementById("password-login-input").value;
-
+	// Check if inputs are valid
 	if (checkLoginInputs())	{
+		// Sign in with Firebase
 		firebase.auth().signInWithEmailAndPassword(email, password)
 		.then((user) => {
 			// Signed in
+			// Cookie handling
 			let c=getCookie('uid');
 			if (c)	{
 				// TODO: handle with existing cookie
@@ -60,7 +62,7 @@ loginButton.addEventListener('click', ()	=>	{
 		});
 	}
 });
-
+// Toggle div for reset password
 let toggleResetPasswordForm=document.getElementById("password-reset-button");
 toggleResetPasswordForm.addEventListener('click', () =>	{
 	document.getElementById("mail-login-input").required=false;
@@ -78,12 +80,12 @@ toggleResetPasswordForm.addEventListener('click', () =>	{
 	document.getElementById("reset-password-div").style.display="block";
 	document.getElementById("signup-div").style.display="none";
 });
-
+// Variables used for sendig a recovery password mail to the email inserted by user
 let sendRecoveryButton=document.getElementById("send-recovery-mail");
 var auth = firebase.auth();
 var emailAddress = document.getElementById("recovery-email");
 let labelResponse=document.getElementById("recovery-response-text");
-
+// Actually function to send email
 sendRecoveryButton.addEventListener('click', () =>	{
 	auth.sendPasswordResetEmail(emailAddress).then(function() {
 		// Email sent.
@@ -104,16 +106,17 @@ sendRecoveryButton.addEventListener('click', () =>	{
 		labelResponse.style.display="block";
 	});
 });
-
+// Toggle div for the creation of a new account
 toggleSignupButton.addEventListener('click', ()	=>	{
+	// Setting the required attribute for the login input to false
 	document.getElementById("mail-login-input").required=false;
 	document.getElementById("password-login-input").required=false;
-
+	// Changing wich div is displayed
 	document.getElementById("login-div").style.display="none";
 	document.getElementById("reset-password-div").style.display="none";
 	document.getElementById("signup-div").style.display="block";
 });
-
+// Signup button listener
 signupButton.addEventListener('click', ()	=>	{
 	let email=document.getElementById("mail-input");
 	let password=document.getElementById("password-input");
@@ -121,6 +124,7 @@ signupButton.addEventListener('click', ()	=>	{
 	// TODO: register new user in db;
 	
 	if (checkRegisterInputs())	{
+		// Function to create a new account with Firebase
 		firebase.auth().createUserWithEmailAndPassword(email,
 		 password).then((user) => {
 			// Signed in 
@@ -139,6 +143,7 @@ signupButton.addEventListener('click', ()	=>	{
 			      "dob": dob,
 			      "balance": "0"
 			}
+			// Sending data to db
 			$.ajax({
 				type: "POST",
 			      contentType: "application/json",
@@ -162,21 +167,23 @@ signupButton.addEventListener('click', ()	=>	{
 					$("#btn-search").prop("disabled", false);
 			        }
 			});
-			
+			// Cookie handling
 			// Set a cookie for the new user
 			setCookie('uid', user.uid, 7);
 			
 			// TODO: redirect to main page
 		})
 		.catch((error) => {
+			// Error handling
 			var errorCode = error.code;
 			var errorMessage = error.message;
 			window.alert("Error "+errorCode+"\n"+errorMessage);    
 		});
 	}
 });
-
+// Funcion to check inputs for login
 function checkLoginInputs()	{
+	// Setting the required attribute for each input that is not an input for the login to false
 	document.getElementById("password-input").required=false;
 	document.getElementById("name-input").required=false;
 	document.getElementById("surname-input").required=false;
@@ -187,20 +194,21 @@ function checkLoginInputs()	{
 
 	let passwordField=document.getElementById("password-login-input");
 	let mailField=document.getElementById("mail-login-input");
-
+	// Marking the login's fields as required
 	passwordField.required=true;
 	mailField.required=true;
 	
 	// TODO: check with database
+
 	if (false)	{
 		return false;
 	}
 	return true;
 }
-
+// Function to check inputs for registration
 function checkRegisterInputs()	{
 	let returnValue=true;
-	
+	// Util variables
 	let passwordField=document.getElementById("password-input");
 	let password=passwordField.value;
 
@@ -210,7 +218,7 @@ function checkRegisterInputs()	{
 	let cfField=document.getElementById("cf-input");
 	let addressField=document.getElementById("address-input");
 	let dobField=document.getElementById("dob-input");
-
+	// Setting the required attribute for the signup input to true
 	passwordField.required=true;
 	nameField.required=true;
 	surnameField.required=true;
@@ -218,7 +226,7 @@ function checkRegisterInputs()	{
 	cfField.required=true;
 	addressField.required=true;
 	dobField.required=true;
-
+	// Check
 	if (nameField.value.length==0)	{
 		nameField.style.borderColor="red";
 		returnValue=false;
@@ -251,7 +259,7 @@ function checkRegisterInputs()	{
 	}
 	return returnValue;
 }
-
+// A function to check if the inserted password is a valid one
 function passwordFormatCheck(password)	{
 	let patternMaius="[A-Z]+";
 
@@ -266,7 +274,7 @@ function passwordFormatCheck(password)	{
 	}
 	return result;
 }
-
+// A function to check if the inserted date of birth is a valid one
 function validDateOfBirth(dob)	{
 	let birth=new Date(dob);
 	let today=new Date();
@@ -281,7 +289,7 @@ function validDateOfBirth(dob)	{
 	}
 	return true;
 }
-// Non l'ho copiato da SO, giuro
+// Cookie handling functions
 function setCookie(name,value,days) {
     var expires = "";
     if (days) {
