@@ -48,7 +48,7 @@ public class CardController {
 		return cardRepository.findAllByaccount(id_long);
 	}
 
-	@PostMapping(path = "/addCard")
+	@PostMapping(path = "/add")
 	ResponseEntity<Card> addCard(@RequestBody Card card) {
 		accountRepository.findById(card.getAccount())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
