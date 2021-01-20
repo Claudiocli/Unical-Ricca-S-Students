@@ -8,6 +8,6 @@ import it.urss.payball8.model.Recharge;
 
 
 public interface RechargeRepository extends JpaRepository<Recharge, Long>  {
-	Recharge findByaccount(Long id);
-	List<Recharge> findAllByaccount(Long id);
+	Recharge findByaccount(String id);
+	List<Recharge> findAllByaccount(String id);
 }

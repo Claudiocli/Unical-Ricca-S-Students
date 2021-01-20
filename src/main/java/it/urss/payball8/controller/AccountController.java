@@ -32,12 +32,10 @@ public class AccountController {
 		@Autowired
 		private AccountRepository accountRepository;
 
-
-
 		@PostMapping(path = "/me")
 		public @ResponseBody Optional<Account> me(@RequestBody JSONObject id) {
 			logger.info("USER_ME");
-			Long id_long = Long.parseLong(id.getAsString("id"));
+			String id_long = id.getAsString("id");
 			return accountRepository.findById(id_long);
 		}
 
@@ -47,6 +45,7 @@ public class AccountController {
 			logger.info("USER_ADD added user by ENTITY: " + newAccount.toString());
 			return ResponseEntity.ok(accountRepository.save(newAccount));
 		}
+		
 		@PutMapping(path = "/update")
 		ResponseEntity<Account> update(@RequestBody Account newAccount) {
 			Account current_user = accountRepository.findById(newAccount.getId())
@@ -63,6 +62,6 @@ public class AccountController {
 		@DeleteMapping(path = "/delete/{id}")
 		void deleteById(@RequestParam String id) {
 			logger.info(String.format("USER_DELETE deleted user with id: %d", id));
-			accountRepository.deleteById(Long.parseLong(id));
+			accountRepository.deleteById(id);
 		}
 }

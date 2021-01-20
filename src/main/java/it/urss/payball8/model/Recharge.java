@@ -12,12 +12,12 @@ public class Recharge implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id; 
 	
 	private String datetime;
 	
-	private Long account;
+	private String account;
 	
 	private String card;
 	
@@ -27,7 +27,7 @@ public class Recharge implements java.io.Serializable {
 		
 	}
 	
-	public Recharge(Long id, String datetime, Long account, String card, Float amount) {
+	public Recharge(Long id, String datetime, String account, String card, Float amount) {
 		this.id = id;
 		this.datetime = datetime;
 		this.account = account;
@@ -51,11 +51,11 @@ public class Recharge implements java.io.Serializable {
 		this.datetime = datetime;
 	}
 
-	public Long getAccount() {
+	public String getAccount() {
 		return account;
 	}
 
-	public void setAccount(Long account) {
+	public void setAccount(String account) {
 		this.account = account;
 	}
 

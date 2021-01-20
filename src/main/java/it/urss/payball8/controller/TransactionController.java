@@ -46,7 +46,7 @@ public class TransactionController {
 
 	@PostMapping(path = "/size")
 	int getAll(@RequestBody JSONObject id) {
-		Long id_long = Long.parseLong(id.getAsString("id"));
+		String id_long = id.getAsString("id");
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
@@ -62,7 +62,7 @@ public class TransactionController {
 
 	@PostMapping(path = "/getColumn/{page}")
 	List<Transaction> getColumnTransaction(@RequestBody JSONObject id, @PathVariable Integer page) {
-		Long id_long = Long.parseLong(id.getAsString("id"));
+		String id_long = id.getAsString("id");
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 

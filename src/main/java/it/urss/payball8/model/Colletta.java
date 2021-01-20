@@ -25,13 +25,13 @@ public class Colletta implements java.io.Serializable {
 	
 	private Float amount_temp;
 	
-	private Long beneficiary;
+	private String beneficiary;
 	
 	public Colletta() {
 		amount_temp = 0.0F;
 	}
 
-	public Colletta(Long id, String datetime, Float amount, Float quote, Float amount_temp, Long beneficiary) {
+	public Colletta(Long id, String datetime, Float amount, Float quote, Float amount_temp, String beneficiary) {
 		this.id = id;
 		this.datetime = datetime;
 		this.amount = amount;
@@ -80,11 +80,11 @@ public class Colletta implements java.io.Serializable {
 		this.amount_temp = amount_temp;
 	}
 
-	public Long getBeneficiary() {
+	public String getBeneficiary() {
 		return beneficiary;
 	}
 
-	public void setBeneficiary(Long beneficiary) {
+	public void setBeneficiary(String beneficiary) {
 		this.beneficiary = beneficiary;
 	}
 

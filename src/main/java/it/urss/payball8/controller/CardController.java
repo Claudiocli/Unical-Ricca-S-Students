@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,29 +38,27 @@ public class CardController {
 	public String showLoginPage() {
 		return "Carte";
 	}
-	
+
 	@PostMapping(path = "/myCard")
 	List<Card> getAllMyCard(@RequestBody JSONObject id) {
 		logger.info("GET ALL MY CARD");
-		Long id_long = new Long(id.getAsString("id"));
+		String id_long = id.getAsString("id");
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 		return cardRepository.findAllByaccount(id_long);
 	}
 
 	@PostMapping(path = "/addCard")
-	Card addCard(@RequestBody Card card) {
+	ResponseEntity<Card> addCard(@RequestBody Card card) {
+		accountRepository.findById(card.getAccount())
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 		logger.info("ADD CARD TO ACCOUNT");
-		Card current_card = cardRepository.findBypan(card.getPan());
-		if (current_card == null)
-			return cardRepository.save(card);
+		return ResponseEntity.ok(cardRepository.save(card));
 
-		throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-				String.format("The unable add Card with this pan:" + card.getPan() + ", is already present"));
 	}
 
 	@DeleteMapping(path = "/deleteCard/{id}")
-	void deleteBypan(@RequestBody String pan, @PathVariable Long id) {
+	void deleteBypan(@RequestBody String pan, @PathVariable String id) {
 		logger.info(String.format("USER_DELETE deleted card with pan: %d", pan));
 
 		Card current_card = cardRepository.findBypan(pan);

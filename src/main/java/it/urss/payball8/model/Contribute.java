@@ -13,7 +13,7 @@ public class Contribute implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	private Long contributor;
+	private String contributor;
 	
 	@Id 
 	private Long colletta;
@@ -21,16 +21,16 @@ public class Contribute implements java.io.Serializable{
 	public Contribute() {
 	}
 	
-	public Contribute(Long contributor, Long colletta) {
+	public Contribute(String contributor, Long colletta) {
 		this.contributor = contributor;
 		this.colletta = colletta;
 	}
 
-	public Long getContributor() {
+	public String getContributor() {
 		return contributor;
 	}
 
-	public void setContributor(Long contributor) {
+	public void setContributor(String contributor) {
 		this.contributor = contributor;
 	}
 

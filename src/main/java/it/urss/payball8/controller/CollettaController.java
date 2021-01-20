@@ -50,7 +50,7 @@ public class CollettaController {
 		logger.info("CREATE NEW COLLETTA" + new_colletta);
 		ResponseEntity<Colletta> responseEntity = ResponseEntity.ok(collettaRepository.save(new_colletta));
 
-		for (Long id : ad.getList_id()) {
+		for (String id : ad.getList_id()) {
 			accountRepository.findById(id)
 					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 			Contribute contribute = new Contribute(id, responseEntity.getBody().getId());
@@ -63,7 +63,7 @@ public class CollettaController {
 	@PostMapping(path = "/my")
 	List<Colletta> getMyColletta(@RequestBody JSONObject id) {
 		logger.info("COLLETTA_ME");
-		Long id_long = Long.parseLong(id.getAsString("id"));
+		String id_long = id.getAsString("id");
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 

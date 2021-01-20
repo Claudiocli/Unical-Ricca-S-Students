@@ -11,6 +11,6 @@ import it.urss.payball8.model.Card;
 @Transactional
 public interface CardRepository extends JpaRepository<Card, Long> {
 	Card findBypan(String pan);
-	List<Card> findAllByaccount(Long id);
+	List<Card> findAllByaccount(String id);
 	void deleteBypan(String pan);
 }

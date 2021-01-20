@@ -10,8 +10,8 @@ import it.urss.payball8.model.Friendship;
 
 @Transactional
 public interface FriendshipRepository  extends JpaRepository<Friendship, Long> {
-	List<Friendship> findAllByaccount1(Long id);
-	List<Friendship> findAllByaccount2(Long id);
-	void deleteByAccount1AndAccount2(Long id_delete, Long id);
-	void deleteByAccount2AndAccount1(Long id_delete, Long id);
+	List<Friendship> findAllByaccount1(String id);
+	List<Friendship> findAllByaccount2(String id);
+	void deleteByAccount1AndAccount2(String id_delete, String id);
+	void deleteByAccount2AndAccount1(String id_delete, String id);
 }
