@@ -354,7 +354,7 @@ function eraseCookie(name) {
 }
 function hashIdToNumber(id)	{
 	let array="";
-	for (let i=0; l=id.length; i<l; i++)	{
+	for (let i=0, l=id.length; i<l; i++)	{
 		let decimal=Number(str.charAt(n)).toString();
 		switch (decimal.length())	{
 			case 1:
