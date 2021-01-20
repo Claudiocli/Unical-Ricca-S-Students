@@ -30,6 +30,38 @@ googleButton.addEventListener('click', () =>	{
 		var token = credential.accessToken;
 		// The signed-in user info.
 		var user = result.user;
+		// Sending relevant data to db
+		let json={
+			"id": user.user.uid,
+			"email": email,
+			"name": user.user.name,
+			"surname": user.user.surname,
+			"dob": dob
+		}
+		// Sending data to db
+		$.ajax({
+			type: "POST",
+			  contentType: "application/json",
+			  url: "/account/add",
+			  data: json,
+			  dataType: 'json',
+			  cache: false,
+			  timeout: 600000,
+			success: function (data) {
+				var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
+					+ JSON.stringify(data, null, 4) + "&lt;/pre&gt;";
+				$('#feedback').html(json);
+				console.log("SUCCESS : ", data);
+				$("#btn-search").prop("disabled", false);
+				},
+			  error: function (e) {
+				var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
+					+ e.responseText + "&lt;/pre&gt;";
+				$('#feedback').html(json);
+				console.log("ERROR : ", e);
+				$("#btn-search").prop("disabled", false);
+				}
+		});
 		// ...
 	}).catch((error) => {
 		// Handle Errors here.
@@ -61,7 +93,7 @@ loginButton.addEventListener('click', ()	=>	{
 			else	{
 				// TODO: handle with no cookie
 				// Setting a cookie for the user with expiration date by a week
-				setCookie('uid', user.uid, 7);
+				setCookie('uid', user.user.uid, 7);
 			}
 			// TODO: redirect to main page
 		})
@@ -128,10 +160,9 @@ toggleSignupButton.addEventListener('click', ()	=>	{
 });
 // Signup button listener
 signupButton.addEventListener('click', ()	=>	{
-	let email=document.getElementById("mail-input");
-	let password=document.getElementById("password-input");
-	
-	// TODO: register new user in db;
+	let email=document.getElementById("mail-input").value;
+	let password=document.getElementById("password-input").value;
+	alert(email);
 	
 	if (checkRegisterInputs())	{
 		// Function to create a new account with Firebase
@@ -144,16 +175,15 @@ signupButton.addEventListener('click', ()	=>	{
 			let address=document.getElementById("address-input").value;
 			let dob=document.getElementById("dob-input").value;
 			let json={
+				"id": user.user.uid,
 				"email": email,
-				"id": user.uid,
-			      "name": name,
-			      "surname": surname,
-			      "cf": cf,
-			      "address": address,
-			      "dob": dob,
-			      "balance": "0"
+				"name": name,
+				"surname": surname,
+				"cf": cf,
+				"address": address,
+				"dob": dob
 			}
-			// Sending data to db
+			// Sending data of the new account to db
 			$.ajax({
 				type: "POST",
 			      contentType: "application/json",
