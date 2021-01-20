@@ -87,7 +87,7 @@ public class TransactionController {
 		}
 
 		int startIndex = page * 10;
-		int endIndex = startIndex + 9;
+		int endIndex = startIndex + 10;
 		if (endIndex > list_transaction.size())
 			endIndex = list_transaction.size();
 
