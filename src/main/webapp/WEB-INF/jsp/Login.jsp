@@ -20,6 +20,8 @@
 	
 	<!-- Google platform library -->
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<!-- JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 	<!-- Css & Js -->
 	<link href="<c:url value="/resources/css/Login.css" />" rel="stylesheet">
