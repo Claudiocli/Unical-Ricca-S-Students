@@ -51,7 +51,7 @@ public class HomePageController {
 	}
 
 
-	@PostMapping("/me")
+	@PostMapping("home/me")
 	Account homePage(@RequestBody JSONObject id) {
 		Long id_long = Long.parseLong(id.getAsString("id"));
 		Account current_user = accountRepository.findById(id_long)
@@ -60,7 +60,7 @@ public class HomePageController {
 		return current_user;
 	}
 
-	@PostMapping("/friendship")
+	@PostMapping("home/friendship")
 	List<Account> listFriendship(@RequestBody JSONObject id) {
 		Long id_long = Long.parseLong(id.getAsString("id"));
 		accountRepository.findById(id_long)

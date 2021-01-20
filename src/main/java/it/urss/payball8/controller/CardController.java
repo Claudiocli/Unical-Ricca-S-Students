@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.urss.payball8.model.Card;
@@ -36,11 +37,11 @@ public class CardController {
 	public String showLoginPage() {
 		return "Carte";
 	}
-
+	
 	@PostMapping(path = "/myCard")
 	List<Card> getAllMyCard(@RequestBody JSONObject id) {
 		logger.info("GET ALL MY CARD");
-		Long id_long = Long.parseLong(id.getAsString("id"));
+		Long id_long = new Long(id.getAsString("id"));
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 		return cardRepository.findAllByaccount(id_long);
