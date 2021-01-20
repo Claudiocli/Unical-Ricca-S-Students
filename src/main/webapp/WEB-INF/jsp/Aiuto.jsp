@@ -1,5 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!doctype html>
 <html lang="en">
 
@@ -20,7 +19,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-        
+    
         <link href="<c:url value="/resources/css/Aiuto.css" />" rel="stylesheet">
 
     <title>Aiuto</title>
@@ -42,13 +41,15 @@
                                 </svg>
                             </li>
                             <li class="nav-item">
-                                <a id="riepilogo" class="nav-link nav-link-color" href="../Riepilogo/Home.html">Riepilogo</a>
+                                <a id="riepilogo" class="nav-link nav-link-color"
+                                    href="../Riepilogo/Home.html">Riepilogo</a>
                             </li>
                             <li class="nav-item">
                                 <a id="carte" class="nav-link nav-link-color" href="../Carte/carte.html">Carte</a>
                             </li>
                             <li class="nav-item">
-                                <a id="storico" class="nav-link nav-link-color" href="../Storico/Storico.html">Storico</a>
+                                <a id="storico" class="nav-link nav-link-color"
+                                    href="../Storico/Storico.html">Storico</a>
                             </li>
                             <li class="nav-item">
                                 <a id="aiuto" class="nav-link nav-link-color" href="../Aiuto/Aiuto.html">Aiuto</a>
@@ -60,13 +61,107 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                    class="bi bi-gear icons-navbar-color" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                        d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 0 1 4.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 0 1-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 0 1 1.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 0 1 2.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 0 1 2.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 0 1 1.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 0 1-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 0 1 8.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 0 0 1.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 0 0 .52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 0 0-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 0 0-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 0 0-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 0 0-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 0 0 .52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 0 0 1.255-.52l.094-.319z" />
-                                    <path fill-rule="evenodd"
-                                        d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z" />
-                                </svg>
+                                <button type="button" class="btn esci-font" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                        class="bi bi-gear icons-navbar-color" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 0 1 4.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 0 1-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 0 1 1.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 0 1 2.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 0 1 2.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 0 1 1.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 0 1-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 0 1 8.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 0 0 1.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 0 0 .52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 0 0-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 0 0-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 0 0-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 0 0-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 0 0 .52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 0 0 1.255-.52l.094-.319z" />
+                                        <path fill-rule="evenodd"
+                                            d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z" />
+                                    </svg>
+                                </button>
+                                <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Gestione Account</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class="table memberListColor table-striped table-hover">
+                                                    <tr>
+                                                        <td>Nome</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Cognome</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                                                            Password
+                                                        </td>
+                                                        <div class="modal fade" id="exampleModal3" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Password</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form>
+                                                                            <div class="mb-3">
+                                                                                <label for="exampleInputEmail1"
+                                                                                    class="form-label">Vecchia
+                                                                                    Password</label>
+                                                                                <input type="email" class="form-control"
+                                                                                    id="exampleInputEmail1"
+                                                                                    aria-describedby="emailHelp">
+                                                                                <div id="emailHelp" class="form-text">
+                                                                                    Noi non condividiamo i tuoi dati
+                                                                                    sensibili con nessuno.</div>
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <label for="exampleInputPassword1"
+                                                                                    class="form-label">Nuova
+                                                                                    Password</label>
+                                                                                <input type="password"
+                                                                                    class="form-control"
+                                                                                    id="exampleInputPassword1">
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <label for="exampleInputPassword1"
+                                                                                    class="form-label">Conferma
+                                                                                    Password</label>
+                                                                                <input type="password"
+                                                                                    class="form-control"
+                                                                                    id="exampleInputPassword1">
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Chiudi</button>
+                                                                        <button type="button"
+                                                                            class="btn chiudi-gestioneAccount">Applica</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>ID</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Luogo di Nascita</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Data di Nascita</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn chiudi-gestioneAccount"
+                                                    data-bs-dismiss="modal">Chiudi</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                             <li class="nav-item">
                                 <button type="button" class="btn esci-font" data-bs-toggle="modal"
@@ -162,7 +257,8 @@
                                 </a>
                             </h5>
                         </div>
-                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                            data-parent="#accordion">
                             <div class="card-body collapse-button-font collapse-body-font">
                                 Ecco alcuni dei motivi più comuni per cui un pagamento potrebbe essere temporaneamente
                                 non disponibile:
@@ -178,7 +274,8 @@
                                 perché qualcun altro ha usato illecitamente il suo conto PayPal per effettuare una
                                 transazione, non spedire nessun articolo.
 
-                                3)L'andamento delle vendite è cambiato. Ad esempio, potrebbe essersi verificato un aumento
+                                3)L'andamento delle vendite è cambiato. Ad esempio, potrebbe essersi verificato un
+                                aumento
                                 insolito delle transazioni, un cambiamento del prezzo medio di vendita, il ricorso a una
                                 nuova piattaforma commerciale.
 
