@@ -53,6 +53,7 @@ public class CardController {
 		accountRepository.findById(card.getAccount())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 		logger.info("ADD CARD TO ACCOUNT");
+		card.setHolder(card.getHolder().trim().toUpperCase());
 		return ResponseEntity.ok(cardRepository.save(card));
 
 	}
