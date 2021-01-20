@@ -32,7 +32,7 @@ googleButton.addEventListener('click', () =>	{
 		var user = result.user;
 		// Sending relevant data to db
 		let json={
-			"id": hashIdToNumber(user.user.uid),
+			"id": user.user.uid,
 			"email": email,
 			"name": user.user.name,
 			"surname": user.user.surname,
@@ -93,7 +93,7 @@ loginButton.addEventListener('click', ()	=>	{
 			else	{
 				// TODO: handle with no cookie
 				// Setting a cookie for the user with expiration date by a week
-				setCookie('uid', hashIdToNumber(user.user.uid), 7);
+				setCookie('uid', user.user.uid, 7);
 			}
 			// TODO: redirect to main page
 		})
@@ -174,8 +174,9 @@ signupButton.addEventListener('click', ()	=>	{
 			let cf=document.getElementById("cf-input").value;
 			let address=document.getElementById("address-input").value;
 			let dob=document.getElementById("dob-input").value;
+			
 			let json={
-				"id": hashIdToNumber(user.user.uid),
+				"id": user.user.uid,
 				"email": email,
 				"name": name,
 				"surname": surname,
@@ -188,7 +189,7 @@ signupButton.addEventListener('click', ()	=>	{
 				type: "POST",
 			      contentType: "application/json",
 			      url: "/account/add",
-			      data: json,
+			      data: JSON.stringify(json),
 			      dataType: 'json',
 			      cache: false,
 			      timeout: 600000,
@@ -209,7 +210,7 @@ signupButton.addEventListener('click', ()	=>	{
 			});
 			// Cookie handling
 			// Set a cookie for the new user
-			setCookie('uid', hashIdToNumber(user.user.uid), 7);
+			setCookie('uid', user.user.uid, 7);
 			
 			// TODO: redirect to main page
 		})
@@ -351,22 +352,4 @@ function getCookie(name) {
 }
 function eraseCookie(name) {   
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
-function hashIdToNumber(id)	{
-	let array="";
-	for (let i=0; l=id.length; i<l; i++)	{
-		let decimal=Number(str.charAt(n)).toString();
-		switch (decimal.length())	{
-			case 1:
-				decimal="00"+decimal;
-				break;
-			case 2:
-				decimal="0"+decimal;
-				break;
-			default:
-				break;
-		}
-		array=array+decimal;
-	}
-	return Number(array);
 }
