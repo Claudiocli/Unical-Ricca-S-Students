@@ -16,7 +16,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
-
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -39,8 +38,7 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE public.account (
-
-    id bigint NOT NULL,
+    id character varying(255) NOT NULL,
     name character varying(255),
     surname character varying(255),
     email character varying(255),
@@ -63,7 +61,7 @@ CREATE TABLE public.card (
     expiration_date character varying(255),
     cvv character varying(255),
     datetime character varying(255),
-    account bigint
+    account character varying(255)
 );
 
 
@@ -74,10 +72,10 @@ ALTER TABLE public.card OWNER TO postgres;
 --
 
 CREATE TABLE public.colletta (
-    id serial NOT NULL,
+    id integer NOT NULL,
     datetime character varying(255),
     quote numeric,
-    beneficiary bigint,
+    beneficiary character varying(255),
     amount numeric,
     amount_temp numeric
 );
@@ -86,11 +84,33 @@ CREATE TABLE public.colletta (
 ALTER TABLE public.colletta OWNER TO postgres;
 
 --
+-- Name: colletta_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.colletta_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.colletta_id_seq OWNER TO postgres;
+
+--
+-- Name: colletta_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.colletta_id_seq OWNED BY public.colletta.id;
+
+
+--
 -- Name: contribute; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.contribute (
-    contributor bigint NOT NULL,
+    contributor character varying(255) NOT NULL,
     colletta bigint NOT NULL
 );
 
@@ -103,21 +123,35 @@ ALTER TABLE public.contribute OWNER TO postgres;
 
 CREATE TABLE public.friendship (
     datetime character varying(255),
-    account1 bigint NOT NULL,
-    account2 bigint NOT NULL
+    account1 character varying(255) NOT NULL,
+    account2 character varying(255) NOT NULL
 );
 
 
 ALTER TABLE public.friendship OWNER TO postgres;
 
 --
+-- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.hibernate_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hibernate_sequence OWNER TO postgres;
+
+--
 -- Name: recharge; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.recharge (
-    id serial NOT NULL,
+    id integer NOT NULL,
     datetime character varying(255),
-    account bigint,
+    account character varying(255),
     card character varying(255),
     amount numeric
 );
@@ -126,20 +160,85 @@ CREATE TABLE public.recharge (
 ALTER TABLE public.recharge OWNER TO postgres;
 
 --
+-- Name: recharge_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.recharge_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.recharge_id_seq OWNER TO postgres;
+
+--
+-- Name: recharge_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.recharge_id_seq OWNED BY public.recharge.id;
+
+
+--
 -- Name: transaction; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.transaction (
-    id serial NOT NULL,
+    id integer NOT NULL,
     datetime character varying(255),
     category character varying(255),
-    sender bigint,
-    recipient bigint,
+    sender character varying(255),
+    recipient character varying(255),
     amount numeric
 );
 
 
 ALTER TABLE public.transaction OWNER TO postgres;
+
+--
+-- Name: transaction_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.transaction_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.transaction_id_seq OWNER TO postgres;
+
+--
+-- Name: transaction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.transaction_id_seq OWNED BY public.transaction.id;
+
+
+--
+-- Name: colletta id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.colletta ALTER COLUMN id SET DEFAULT nextval('public.colletta_id_seq'::regclass);
+
+
+--
+-- Name: recharge id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.recharge ALTER COLUMN id SET DEFAULT nextval('public.recharge_id_seq'::regclass);
+
+
+--
+-- Name: transaction id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.transaction ALTER COLUMN id SET DEFAULT nextval('public.transaction_id_seq'::regclass);
+
 
 --
 -- Data for Name: account; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -195,6 +294,34 @@ COPY public.recharge (id, datetime, account, card, amount) FROM stdin;
 
 COPY public.transaction (id, datetime, category, sender, recipient, amount) FROM stdin;
 \.
+
+
+--
+-- Name: colletta_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.colletta_id_seq', 1, false);
+
+
+--
+-- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.hibernate_sequence', 1, false);
+
+
+--
+-- Name: recharge_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.recharge_id_seq', 1, false);
+
+
+--
+-- Name: transaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.transaction_id_seq', 1, false);
 
 
 --
