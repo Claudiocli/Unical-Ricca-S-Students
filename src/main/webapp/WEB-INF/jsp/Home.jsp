@@ -317,7 +317,43 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    <button type="submit" class="btn submit-font">Submit</button>
+                                                    <button type="button" class="btn submit-font" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal5">Submit</button>
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal5" tabindex="-1"
+                                                        aria-labelledby="exampleModalLabel5" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header chiudi-gestioneAccount">
+                                                                    <h5 class="modal-title" id="exampleModalLabel5">
+                                                                        Aggiungi Contribuente</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text euro-label"
+                                                                            id="basic-addon1">#</span>
+                                                                        <input type="text" class="form-control"
+                                                                            placeholder="Tag" aria-label="Username"
+                                                                            aria-describedby="basic-addon1">
+                                                                    </div>
+                                                                    <div>
+                                                                        <button type="button" class="btn chiudi-gestioneAccount">
+                                                                            Aggiungi
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Annulla</button>
+                                                                    <button type="button"
+                                                                        class="btn chiudi-gestioneAccount">Crea</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </form>
                                             </li>
                                         </ul>
