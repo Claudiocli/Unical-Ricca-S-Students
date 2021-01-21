@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,22 +35,20 @@ public class RechargeController {
 	private CardRepository cardRepository;
 
 	@PostMapping(path = "/add")
-	ResponseEntity<Recharge> addRecharge(@RequestBody Recharge recharge) {
-
+	@ResponseBody ResponseEntity<Recharge> addRecharge(@RequestBody Recharge recharge) {
 		Account current_account = accountRepository.findById(recharge.getAccount()).orElseThrow(
 				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Unable to find user")));
 
 		Card current_card = cardRepository.findBypan(recharge.getCard());
 		if (current_card == null)
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Cannot find Card"));
-
+		
 		if (!current_card.getAccount().equals(current_account.getId()))
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
 					String.format("Cannot find Card.account.id & Account.id"));
 
 		current_account.setBalance(current_account.getBalance() + recharge.getAmount());
 		logger.info("ADD RECHARGE: " + recharge.getAmount());
-
 		ResponseEntity.ok(accountRepository.save(current_account));
 		return ResponseEntity.ok(rechargeRepository.save(recharge));
 	}
