@@ -48,18 +48,17 @@ googleButton.addEventListener('click', () =>	{
 			  cache: false,
 			  timeout: 600000,
 			success: function (data) {
-				var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-					+ JSON.stringify(data, null, 4) + "&lt;/pre&gt;";
-				$('#feedback').html(json);
-				console.log("SUCCESS : ", data);
-				$("#btn-search").prop("disabled", false);
+					alert("success");
+					// FIXME: TEST the redirect to homepage
+					// data is necesary?
+					window.location.href="/home";
 				},
 			  error: function (e) {
-				var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-					+ e.responseText + "&lt;/pre&gt;";
-				$('#feedback').html(json);
-				console.log("ERROR : ", e);
-				$("#btn-search").prop("disabled", false);
+					if (debug)	{
+						alert("Error Code: "+e.errorCode+"\nError Message: "+e.errorMessage);
+					}
+					// FIXME: Redirect to error page
+					window.location.href="/error";
 				}
 		});
 		// ...
@@ -78,31 +77,32 @@ googleButton.addEventListener('click', () =>	{
 loginButton.addEventListener('click', ()	=>	{
 	let email=document.getElementById("mail-login-input").value;
 	let password=document.getElementById("password-login-input").value;
-	// Check if inputs are valid
-	if (checkLoginInputs())	{
-		// Sign in with Firebase
-		firebase.auth().signInWithEmailAndPassword(email, password)
-		.then((user) => {
-			// Signed in
-			// Cookie handling
-			let c=getCookie('uid');
-			if (c)	{
-				// TODO: handle with existing cookie
-				// TODO: handle redirecting without the needs to do a login
-			}
-			else	{
-				// TODO: handle with no cookie
-				// Setting a cookie for the user with expiration date by a week
-				setCookie('uid', user.user.uid, 7);
-			}
-			// TODO: redirect to main page
-		})
-		.catch((error) => {
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			window.alert("Error "+errorCode+"\n"+errorMessage); 
-		});
-	}
+	// Adjusting input's attributes
+	AdjustLoginInputs();
+	// Sign in with Firebase
+	firebase.auth().signInWithEmailAndPassword(email, password)
+	.then((user) => {
+		// Signed in
+		// Cookie handling
+		let c=getCookie('uid');
+		if (c)	{
+			// TODO: handle with existing cookie
+			// TODO: handle redirecting without the needs to do a login
+		}
+		else	{
+			// TODO: handle with no cookie
+			// Setting a cookie for the user with expiration date by a week
+			setCookie('uid', user.user.uid, 7);
+		}
+		// FIXME: test redirect to main page
+		// Needs a GET ?
+		window.location.href="/home";
+	})
+	.catch((error) => {
+		var errorCode = error.code;
+		var errorMessage = error.message;
+		window.alert("Error "+errorCode+"\n"+errorMessage); 
+	});
 });
 // Toggle div for reset password
 let toggleResetPasswordForm=document.getElementById("password-reset-button");
@@ -121,6 +121,70 @@ toggleResetPasswordForm.addEventListener('click', () =>	{
 	document.getElementById("login-div").style.display="none";
 	document.getElementById("reset-password-div").style.display="block";
 	document.getElementById("signup-div").style.display="none";
+});
+// Signup function
+signupButton.addEventListener('click', ()	=>	{
+	let email=document.getElementById("mail-input").value;
+	let password=document.getElementById("password-input").value;
+	
+	if (debug)	{
+		alert(email);
+	}
+	
+	if (checkRegisterInputs())	{
+		// Function to create a new account with Firebase
+		firebase.auth().createUserWithEmailAndPassword(email,
+		 password).then((user) => {
+			// Signed in 
+			let name=document.getElementById("name-input").value;
+			let surname=document.getElementById("surname-input").value;
+			let cf=document.getElementById("cf-input").value;
+			let address=document.getElementById("address-input").value;
+			let dob=document.getElementById("dob-input").value;
+			
+			// TODO: Cookie handling
+			// Set a cookie for the new user
+			setCookie('uid', user.user.uid, 7);
+
+			let json={
+				"id": user.user.uid,
+				"email": email,
+				"name": name,
+				"surname": surname,
+				"cf": cf,
+				"address": address,
+				"dob": dob
+			}
+			// Sending data of the new account to db
+			$.ajax({
+				type: "POST",
+			      contentType: "application/json",
+			      url: "/account/add",
+			      data: JSON.stringify(json),
+			      dataType: 'json',
+			      cache: false,
+			      timeout: 600000,
+				success: function (data) {
+						// FIXME: TEST the redirect to homepage
+						// data is necesary?
+						window.location.href="/home";
+			        },
+			      error: function (e) {
+						if (debug)	{
+							alert("Error Code: "+e.errorCode+"\nError Message: "+e.errorMessage);
+						}
+						// FIXME: Redirect to error page
+						window.location.href="/error";
+			        }
+			});
+		})
+		.catch((error) => {
+			// Error handling
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			window.alert("Error "+errorCode+"\n"+errorMessage);    
+		});
+	}
 });
 // Variables used for sendig a recovery password mail to the email inserted by user
 let sendRecoveryButton=document.getElementById("send-recovery-mail");
@@ -158,72 +222,8 @@ toggleSignupButton.addEventListener('click', ()	=>	{
 	document.getElementById("reset-password-div").style.display="none";
 	document.getElementById("signup-div").style.display="block";
 });
-// Signup button listener
-signupButton.addEventListener('click', ()	=>	{
-	let email=document.getElementById("mail-input").value;
-	let password=document.getElementById("password-input").value;
-	alert(email);
-	
-	if (checkRegisterInputs())	{
-		// Function to create a new account with Firebase
-		firebase.auth().createUserWithEmailAndPassword(email,
-		 password).then((user) => {
-			// Signed in 
-			let name=document.getElementById("name-input").value;
-			let surname=document.getElementById("surname-input").value;
-			let cf=document.getElementById("cf-input").value;
-			let address=document.getElementById("address-input").value;
-			let dob=document.getElementById("dob-input").value;
-			
-			let json={
-				"id": user.user.uid,
-				"email": email,
-				"name": name,
-				"surname": surname,
-				"cf": cf,
-				"address": address,
-				"dob": dob
-			}
-			// Sending data of the new account to db
-			$.ajax({
-				type: "POST",
-			      contentType: "application/json",
-			      url: "/account/add",
-			      data: JSON.stringify(json),
-			      dataType: 'json',
-			      cache: false,
-			      timeout: 600000,
-				success: function (data) {
-					var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-						+ JSON.stringify(data, null, 4) + "&lt;/pre&gt;";
-					$('#feedback').html(json);
-					console.log("SUCCESS : ", data);
-					$("#btn-search").prop("disabled", false);
-			        },
-			      error: function (e) {
-					var json = "<h4>Ajax Response</h4>&lt;pre&gt;"
-						+ e.responseText + "&lt;/pre&gt;";
-					$('#feedback').html(json);
-					console.log("ERROR : ", e);
-					$("#btn-search").prop("disabled", false);
-			        }
-			});
-			// Cookie handling
-			// Set a cookie for the new user
-			setCookie('uid', user.user.uid, 7);
-			
-			// TODO: redirect to main page
-		})
-		.catch((error) => {
-			// Error handling
-			var errorCode = error.code;
-			var errorMessage = error.message;
-			window.alert("Error "+errorCode+"\n"+errorMessage);    
-		});
-	}
-});
 // Funcion to check inputs for login
-function checkLoginInputs()	{
+function AdjustLoginInputs()	{
 	// Setting the required attribute for each input that is not an input for the login to false
 	document.getElementById("password-input").required=false;
 	document.getElementById("name-input").required=false;
@@ -232,19 +232,9 @@ function checkLoginInputs()	{
 	document.getElementById("cf-input").required=false;
 	document.getElementById("address-input").required=false;
 	document.getElementById("dob-input").required=false;
-
-	let passwordField=document.getElementById("password-login-input");
-	let mailField=document.getElementById("mail-login-input");
 	// Marking the login's fields as required
-	passwordField.required=true;
-	mailField.required=true;
-	
-	// TODO: check with database
-
-	if (false)	{
-		return false;
-	}
-	return true;
+	document.getElementById("password-login-input").required=true;
+	document.getElementById("mail-login-input").required=true;
 }
 // Function to check inputs for registration
 function checkRegisterInputs()	{

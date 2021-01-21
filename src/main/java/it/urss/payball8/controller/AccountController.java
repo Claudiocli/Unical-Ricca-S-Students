@@ -42,6 +42,11 @@ public class AccountController {
 		@PostMapping(path = "/add")
 		ResponseEntity<Account> add(@RequestBody Account newAccount) {
 			newAccount.setBalance(0.0F);
+			newAccount.setName(newAccount.getName().trim().toUpperCase());
+			newAccount.setSurname(newAccount.getSurname().trim().toUpperCase());
+			newAccount.setEmail(newAccount.getEmail().trim().toUpperCase());
+			newAccount.setAddress(newAccount.getAddress().trim().toUpperCase());
+			newAccount.setCf(newAccount.getCf().trim().toUpperCase());
 			logger.info("USER_ADD added user by ENTITY: " + newAccount.toString());
 			return ResponseEntity.ok(accountRepository.save(newAccount));
 		}

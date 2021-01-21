@@ -1,6 +1,10 @@
+var paginaCorrente = 0
+var numPagine = 0
 $(document).ready(function () {
     initStorico()
+    document.getElementById("bottoneGestioneAccount").addEventListener("click", popolaGestioneAccount);
 });
+
 
 function initStorico() {
 
@@ -30,6 +34,7 @@ function initStorico() {
 
 function calcoloPagine(size) {
     var pagine = Math.floor(size / 10);
+    numPagine = pagine;
     var prec = $("#Prec")
     var pros = $("#Pros") 
     $("#pagination").html("");
@@ -68,4 +73,77 @@ function popolaStorico(page, data){
             console.log(err);
         }
     });   
+}
+
+function precedente(){
+    var idUser = 1 //getCookie("uid");
+    var data = {
+        id: idUser
+    }    
+    if(paginaCorrente > 0){
+        paginaCorrente-- 
+        popolaStorico(paginaCorrente, data);
+    }
+}
+
+function prossima(){
+    var idUser = 1 //getCookie("uid");
+    var data = {
+        id: idUser
+    }
+    if(paginaCorrente < numPagine)
+        paginaCorrente++
+        popolaStorico(paginaCorrente, data);
+}
+
+function popolaGestioneAccount(){
+    var idUser = 1//getCookie("uid");
+    console.log(idUser);
+    if (idUser) {
+        var data = {
+            id: idUser
+        }
+    $.ajax({
+        url: 'http://localhost:9090/account/me',
+        method: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (risposta) {
+            console.log(risposta)
+            var ciccia = ""
+            ciccia += "<tr>"
+            ciccia += "<td>" + "ID" + "</td>"
+            ciccia += "<td>" + risposta.id + "</td>"
+            ciccia += "</tr>"
+            ciccia += "<tr>"
+            ciccia += "<td>" + "Indirizzo" + "</td>"
+            ciccia += "<td>" + risposta.address + "</td>"
+            ciccia += "</tr>"
+            ciccia += "<tr>"
+            ciccia += "<td>" + "CodiceFiscale" + "</td>"
+            ciccia += "<td>" + risposta.cf + "</td>"
+            ciccia += "</tr>"
+            ciccia += "<tr>"
+            ciccia += "<td>" + "Data di Nascita" + "</td>"
+            ciccia += "<td>" + risposta.dob + "</td>"
+            ciccia += "</tr>"
+            ciccia += "<tr>"
+            ciccia += "<td>" + "E-mail" + "</td>"
+            ciccia += "<td>" + risposta.email + "</td>"
+            ciccia += "</tr>"
+            ciccia += "<tr>"
+            ciccia += "<td>" + "Nome" + "</td>"
+            ciccia += "<td>" + risposta.name + "</td>"
+            ciccia += "</tr>"
+            ciccia += "<tr>"
+            ciccia += "<td>" + "Cognome" + "</td>"
+            ciccia += "<td>" + risposta.surname + "</td>"
+            ciccia += "</tr>"
+            $("#corpoGestioneAccount").append(ciccia)
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });   
+    }
 }
