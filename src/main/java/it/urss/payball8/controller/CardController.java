@@ -37,7 +37,7 @@ public class CardController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showLoginPage() {
-		return "Carte";
+		return "carte";
 	}
 
 	@PostMapping(path = "/myCard")
