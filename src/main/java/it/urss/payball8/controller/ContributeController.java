@@ -59,7 +59,7 @@ public class ContributeController {
 		Transaction transaction = new Transaction();
 		transaction.setAmount(current_colletta.getQuote());
 		transaction.setCategory("Colletta inviata a:" + current_colletta.getBeneficiary());
-		transaction.setSender(contribute.getContributor());
+		transaction.setSender(current_account.getId());
 		transaction.setRecipient(current_colletta.getBeneficiary());
 		
 		ResponseEntity.ok(transactionRepository.save(transaction));
