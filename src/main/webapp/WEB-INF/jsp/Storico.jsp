@@ -212,10 +212,10 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center" id="pagination">
                             <li class="page-item" id="Prec">
-                                <a class="page-link nav-bar-pagination" href="#" tabindex="-1">Precedente</a>
+                                <a class="page-link nav-bar-pagination" href="javascript:precedente()" tabindex="-1">Precedente</a>
                             </li>
                             <li class="page-item" id="Pros">
-                                <a class="page-link nav-bar-pagination" href="#">Prossima</a>
+                                <a class="page-link nav-bar-pagination" href="javascript:prossima()">Prossima</a>
                             </li>
                         </ul>
                     </nav>

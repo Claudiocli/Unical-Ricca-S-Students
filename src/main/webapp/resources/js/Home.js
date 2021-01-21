@@ -4,7 +4,7 @@ $(document).ready(function () {
 
 function initSaldo() {
 
-    var idUser = getCookie("uid");
+    var idUser = 1//getCookie("uid");
     console.log(idUser);
 
     var saldo = 0;
@@ -30,23 +30,3 @@ function initSaldo() {
         //location.href = "/login"
     //}
 }
-
-function getCookie(name) {​​​​
-
-    var nameEQ = name + "=";
-
-    var ca = document.cookie.split(';');
-
-    for(var i=0;i < ca.length;i++) {​​​​
-
-        var c = ca[i];
-
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-
-    }​​​​
-
-    return null;
-
-}​​​​

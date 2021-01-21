@@ -1,6 +1,9 @@
+var paginaCorrente = 0
+var numPagine = 0
 $(document).ready(function () {
     initStorico()
 });
+
 
 function initStorico() {
 
@@ -30,6 +33,7 @@ function initStorico() {
 
 function calcoloPagine(size) {
     var pagine = Math.floor(size / 10);
+    numPagine = pagine;
     var prec = $("#Prec")
     var pros = $("#Pros") 
     $("#pagination").html("");
@@ -69,3 +73,25 @@ function popolaStorico(page, data){
         }
     });   
 }
+
+function precedente(){
+    var idUser = 1 //getCookie("uid");
+    var data = {
+        id: idUser
+    }    
+    if(paginaCorrente > 0){
+        paginaCorrente-- 
+        popolaStorico(paginaCorrente, data);
+    }
+}
+
+function prossima(){
+    var idUser = 1 //getCookie("uid");
+    var data = {
+        id: idUser
+    }
+    if(paginaCorrente < numPagine)
+        paginaCorrente++
+        popolaStorico(paginaCorrente, data);
+}
+
