@@ -1,9 +1,9 @@
 var paginaCorrente = 0
 var numPagine = 0
+
 $(document).ready(function () {
     initStorico()
 });
-
 
 function initStorico() {
 
