@@ -75,7 +75,12 @@ public class TransactionController {
 			transaction.setAmount(transaction.getAmount() * -1);
 			list_transaction.add(transaction);
 		}
-		list_transaction.addAll(transactionRepository.findAllByrecipient(id_long));
+		
+		for (Transaction transaction : transactionRepository.findAllByrecipient(id_long)) {
+			if(!transaction.getCategory().equals("Colletta inviata a: "+ id_long)) {
+				list_transaction.add(transaction);
+			}
+		}
 
 		for (Recharge recharge : rechargeRepository.findAllByaccount(id_long)) {
 			Transaction transaction = new Transaction();
