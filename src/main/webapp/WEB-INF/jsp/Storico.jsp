@@ -241,7 +241,7 @@
                                     d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z" />
                             </svg>
                             <h3>Veloce</h3>
-                            <p class="lead mb-0 text-bold"> Certificato come conto virtuale più rapido in Europa.</p>
+                            <p class="lead mb-0 text-bold"> Certificato come conto virtuale piu' rapido in Europa.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 ">
@@ -253,7 +253,7 @@
                                 <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
                             </svg>
                             <h3>Sicuro</h3>
-                            <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno può accedere ai
+                            <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno puo' accedere ai
                                 vostri
                                 dati sensibili ;-) .</p>
                         </div>

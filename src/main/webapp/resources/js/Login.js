@@ -1,5 +1,6 @@
 var debug=false;
 // Util variables
+let localHost="http://localHost:9090";
 let toggleSignupButton=document.getElementById("toggle-signup");
 let loginButton=document.getElementById("login-button");
 let signupButton=document.getElementById("register-button");
@@ -51,17 +52,18 @@ googleButton.addEventListener('click', () =>	{
 					alert("success");
 					// FIXME: TEST the redirect to homepage
 					// data is necesary?
-					window.location.href="/home";
+					window.location.replace(localHost+"/home");
 				},
 			  error: function (e) {
 					if (debug)	{
 						alert("Error Code: "+e.errorCode+"\nError Message: "+e.errorMessage);
 					}
 					// FIXME: Redirect to error page
-					window.location.href="/error";
+					window.location.replace(localHost+"/error");
 				}
 		});
-		// ...
+		// Redirecting to /home
+		window.location.replace(localHost+"/home");
 	}).catch((error) => {
 		// Handle Errors here.
 		var errorCode = error.code;
@@ -70,7 +72,6 @@ googleButton.addEventListener('click', () =>	{
 		var email = error.email;
 		// The firebase.auth.AuthCredential type that was used.
 		var credential = error.credential;
-		// ...
 	});
 })
 // Login function
@@ -96,7 +97,7 @@ loginButton.addEventListener('click', ()	=>	{
 		}
 		// FIXME: test redirect to main page
 		// Needs a GET ?
-		window.location.href="/home";
+		window.location.replace(localHost+"/home");
 	})
 	.catch((error) => {
 		var errorCode = error.code;
@@ -167,15 +168,17 @@ signupButton.addEventListener('click', ()	=>	{
 				success: function (data) {
 						// FIXME: TEST the redirect to homepage
 						// data is necesary?
-						window.location.href="/home";
-			        },
-			      error: function (e) {
-						if (debug)	{
-							alert("Error Code: "+e.errorCode+"\nError Message: "+e.errorMessage);
-						}
-						// FIXME: Redirect to error page
-						window.location.href="/error";
-			        }
+						window.location.replace(localHost+"/home");
+			    },
+			    error: function (e) {
+					if (debug)	{
+						alert("Error Code: "+e.errorCode+"\nError Message: "+e.errorMessage);
+					}
+					// FIXME: Redirect to error page
+					if (!debug)	{
+						window.location.replace(localHost+"/error");
+					}
+			    }
 			});
 		})
 		.catch((error) => {
@@ -275,7 +278,6 @@ function checkRegisterInputs()	{
 		passwordField.style.borderColor="red";
 		returnValue=false;
 	}
-	// TODO: cf validation
 	if (cfField.value.length==0) {
 		cfField.style.borderColor="red";
 		returnValue=false;
