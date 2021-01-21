@@ -1,4 +1,4 @@
-var debug=false;
+var debug=true;
 // Util variables
 let localHost="http://localHost:9090";
 let toggleSignupButton=document.getElementById("toggle-signup");
@@ -168,11 +168,11 @@ signupButton.addEventListener('click', ()	=>	{
 				success: function (data) {
 						// FIXME: TEST the redirect to homepage
 						// data is necesary?
-						window.location.replace(localHost+"/home");
+						//window.location.replace(localHost+"/home");
 			    },
 			    error: function (e) {
 					if (debug)	{
-						alert("Error Code: "+e.errorCode+"\nError Message: "+e.errorMessage);
+						alert("Error: "+e);
 					}
 					// FIXME: Redirect to error page
 					if (!debug)	{
