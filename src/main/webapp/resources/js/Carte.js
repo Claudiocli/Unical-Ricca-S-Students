@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    popolaTabellaCarte();
     aggiungiCarta();
     document.getElementById("bottoneGestioneAccount").addEventListener("click", popolaGestioneAccount);
   });
@@ -56,6 +57,37 @@ function popolaGestioneAccount(){
             ciccia += "<td>" + risposta.surname + "</td>"
             ciccia += "</tr>"
             $("#corpoGestioneAccount").append(ciccia)
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });   
+    }
+}
+
+
+function popolaTabellaCarte(){
+    var idUser = 1//getCookie("uid");
+    console.log(idUser);
+    if (idUser) {
+        var data = {
+            id: idUser
+        }
+    $.ajax({
+        url: 'http://localhost:9090/card/myCard',
+        method: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (risposta) {
+            $("#corpoTabellaCarte").html("");
+            for(var i=0 ;i<risposta.length; i++){
+                var ciccia = ""
+                ciccia += "<tr>"
+                ciccia += "<td>" + risposta[i].expiration_date + "</td>"
+                ciccia += "<td>" + risposta[i].pan + "</td>"
+                ciccia += "</tr>"
+                $("#corpoTabellaCarte").append(ciccia)
+            }
         },
         error: function (err) {
             console.log(err);

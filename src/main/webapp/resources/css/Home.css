@@ -16,6 +16,10 @@
   background-color: #001463;
   color: white;
 }
+.euro-label{
+  background-color: #4bbe58;
+  color: white;
+}
 .esci-font {
   background-color: #001463;
   color: white;
@@ -28,6 +32,12 @@
 }
 .saldo-font {
   font-size: 2rem;
+}
+.padding-invia{
+  padding-top: 2rem;
+}
+.font-invia-label{
+  width: 5rem !important;
 }
 .padding-richiedi {
   padding-top: 2rem;
