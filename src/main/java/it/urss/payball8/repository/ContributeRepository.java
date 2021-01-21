@@ -11,7 +11,7 @@ import it.urss.payball8.model.Contribute;
 @Transactional
 public interface ContributeRepository  extends JpaRepository<Contribute, Long> {
 	List<Contribute> findAllBycolletta(Long id);
-	List<Contribute> findAllBycontributor(Long id);
-	Contribute findByContributorAndColletta(Long contributor, Long colletta);
-	void deleteByContributorAndColletta(Long contributor, Long colletta);
+	List<Contribute> findAllBycontributor(String id);
+	Contribute findByContributorAndColletta(String contributor, Long colletta);
+	void deleteByContributorAndColletta(String contributor, Long colletta);
 }

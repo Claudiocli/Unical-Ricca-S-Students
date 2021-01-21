@@ -40,7 +40,7 @@ public class FriendshipController {
 
 	@PostMapping(path = "/all")
 	List<Account> listFriendship(@RequestBody JSONObject id) {
-		Long id_long = Long.parseLong(id.getAsString("id"));
+		String id_long = id.getAsString("id");
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
@@ -59,8 +59,8 @@ public class FriendshipController {
 	}
 
 	@PostMapping(path = "/delete/{id_delete}")
-	void deleteFriendship(@PathVariable Long id_delete, @RequestBody JSONObject id) {
-		Long id_long = Long.parseLong(id.getAsString("id"));
+	void deleteFriendship(@PathVariable String id_delete, @RequestBody JSONObject id) {
+		String id_long = id.getAsString("id");
 		logger.info(String.format("FRIENDSHIP_DELETE deleted friendship with id: %d", id_delete));
 		friendshipRepository.deleteByAccount1AndAccount2(id_delete, id_long);
 		friendshipRepository.deleteByAccount2AndAccount1(id_delete, id_long);

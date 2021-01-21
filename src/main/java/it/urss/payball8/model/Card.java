@@ -20,12 +20,12 @@ public class Card {
 	
 	private String datetime;
 	
-	private Long account;
+	private String account;
 	
 	public Card() {
 	}
 
-	public Card(String pan, String holder, String expiration_date, String cvv, String datetime, Long account) {
+	public Card(String pan, String holder, String expiration_date, String cvv, String datetime, String account) {
 		this.pan = pan;
 		this.holder = holder;
 		this.expiration_date = expiration_date;
@@ -74,11 +74,11 @@ public class Card {
 		this.datetime = datetime;
 	}
 
-	public Long getAccount() {
+	public String getAccount() {
 		return account;
 	}
 
-	public void setAccount(Long account) {
+	public void setAccount(String account) {
 		this.account = account;
 	}
 	

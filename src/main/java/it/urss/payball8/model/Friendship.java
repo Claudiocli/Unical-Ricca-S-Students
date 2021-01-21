@@ -18,17 +18,17 @@ public class Friendship implements java.io.Serializable{
 	private String datetime;
 	
 	@Id
-	private Long account1;
+	private String account1;
 	
 	@Id
-	private Long account2;
+	private String account2;
 	
 	public Friendship() {
 		Clock clock = Clock.systemDefaultZone();
 		datetime = LocalDateTime.now(clock).toString();
 	}
 
-	public Friendship(String datetime, Long account1, Long account2) {
+	public Friendship(String datetime, String account1, String account2) {
 		this.datetime = datetime;
 		this.account1 = account1;
 		this.account2 = account2;
@@ -42,19 +42,19 @@ public class Friendship implements java.io.Serializable{
 		this.datetime = datetime;
 	}
 
-	public Long getAccount1() {
+	public String getAccount1() {
 		return account1;
 	}
 
-	public void setAccount1(Long account1) {
+	public void setAccount1(String account1) {
 		this.account1 = account1;
 	}
 
-	public Long getAccount2() {
+	public String getAccount2() {
 		return account2;
 	}
 
-	public void setAccount2(Long account2) {
+	public void setAccount2(String account2) {
 		this.account2 = account2;
 	}
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.urss.payball8.model.Account;
@@ -45,8 +46,8 @@ public class TransactionController {
 	}
 
 	@PostMapping(path = "/size")
-	int getAll(@RequestBody JSONObject id) {
-		Long id_long = Long.parseLong(id.getAsString("id"));
+	@ResponseBody int getAll(@RequestBody JSONObject id) {
+		String id_long = id.getAsString("id");
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
@@ -61,8 +62,8 @@ public class TransactionController {
 	}
 
 	@PostMapping(path = "/getColumn/{page}")
-	List<Transaction> getColumnTransaction(@RequestBody JSONObject id, @PathVariable Integer page) {
-		Long id_long = Long.parseLong(id.getAsString("id"));
+	@ResponseBody List<Transaction> getColumnTransaction(@RequestBody JSONObject id, @PathVariable Integer page) {
+		String id_long = id.getAsString("id");
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
@@ -86,7 +87,7 @@ public class TransactionController {
 		}
 
 		int startIndex = page * 10;
-		int endIndex = startIndex + 9;
+		int endIndex = startIndex + 10;
 		if (endIndex > list_transaction.size())
 			endIndex = list_transaction.size();
 

@@ -16,7 +16,7 @@ public class Transaction implements java.io.Serializable{
 		private static final long serialVersionUID = 1L;
 		
 		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		@GeneratedValue(strategy = GenerationType.SEQUENCE)
 		private Long id;
 		
 		private Float amount;
@@ -25,9 +25,9 @@ public class Transaction implements java.io.Serializable{
 		
 		private String category;
 		
-		private Long sender;
+		private String sender;
 		
-		private Long recipient;
+		private String recipient;
 		
 		
 		public Transaction() {
@@ -35,7 +35,7 @@ public class Transaction implements java.io.Serializable{
 			datetime = LocalDateTime.now(clock).toString();
 		}
 
-		public Transaction(Long id, Float amount, String datetime, String category, Long sender, Long recipient) {
+		public Transaction(Long id, Float amount, String datetime, String category, String sender, String recipient) {
 			this.id = id;
 			this.amount = amount;
 			this.datetime = datetime;
@@ -76,19 +76,19 @@ public class Transaction implements java.io.Serializable{
 			this.category = category;
 		}
 
-		public Long getSender() {
+		public String getSender() {
 			return sender;
 		}
 
-		public void setSender(Long sender) {
+		public void setSender(String sender) {
 			this.sender = sender;
 		}
 
-		public Long getRecipient() {
+		public String getRecipient() {
 			return recipient;
 		}
 
-		public void setRecipient(Long recipient) {
+		public void setRecipient(String recipient) {
 			this.recipient = recipient;
 		}
 

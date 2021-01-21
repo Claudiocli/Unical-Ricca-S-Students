@@ -6,7 +6,7 @@ public class WrapperObject {
 	
 	Colletta colletta;
 	
-	List<Long> list_id;
+	List<String> list_id;
 	
 	public Colletta getColletta() {
 		return colletta;
@@ -14,10 +14,10 @@ public class WrapperObject {
 	public void setColletta(Colletta colletta) {
 		this.colletta = colletta;
 	}
-	public List<Long> getList_id() {
+	public List<String> getList_id() {
 		return list_id;
 	}
-	public void setList_id(List<Long> list_id) {
+	public void setList_id(List<String> list_id) {
 		this.list_id = list_id;
 	}
 	

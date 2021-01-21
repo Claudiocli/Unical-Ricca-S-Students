@@ -53,7 +53,7 @@ public class HomePageController {
 
 	@PostMapping("home/me")
 	Account homePage(@RequestBody JSONObject id) {
-		Long id_long = Long.parseLong(id.getAsString("id"));
+		String id_long = id.getAsString("id");
 		Account current_user = accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 		logger.info("HOMEPAGE_ACCOUNT: " + current_user.getEmail());
@@ -62,7 +62,7 @@ public class HomePageController {
 
 	@PostMapping("home/friendship")
 	List<Account> listFriendship(@RequestBody JSONObject id) {
-		Long id_long = Long.parseLong(id.getAsString("id"));
+		String id_long = id.getAsString("id");
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
