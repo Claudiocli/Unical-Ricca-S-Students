@@ -16,13 +16,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: DATABASE postgres; Type: COMMENT; Schema: -; Owner: postgres
---
 
-COMMENT ON DATABASE postgres IS 'default administrative connection database';
-
-
---
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -45,15 +39,15 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE public.account (
-    id serial NOT NULL,
+
+    id bigint NOT NULL,
     name character varying(255),
     surname character varying(255),
     email character varying(255),
     cf character varying(255),
     address character varying(255),
     dob character varying(255),
-    balance character varying(255), 
-    password character varying(255)
+    balance numeric
 );
 
 
@@ -64,12 +58,12 @@ ALTER TABLE public.account OWNER TO postgres;
 --
 
 CREATE TABLE public.card (
-    pan "char"[] NOT NULL,
-    holder "char"[],
-    expiration_date "char"[],
-    cvv "char"[],
-    datetime "char"[],
-    account serial
+    pan character varying(255) NOT NULL,
+    holder character varying(255),
+    expiration_date character varying(255),
+    cvv character varying(255),
+    datetime character varying(255),
+    account bigint
 );
 
 
@@ -81,11 +75,11 @@ ALTER TABLE public.card OWNER TO postgres;
 
 CREATE TABLE public.colletta (
     id serial NOT NULL,
-    datetime "char"[],
-    amount "char"[],
-    quote "char"[],
-    amount_temp "char"[],
-    beneficiary serial
+    datetime character varying(255),
+    quote numeric,
+    beneficiary bigint,
+    amount numeric,
+    amount_temp numeric
 );
 
 
@@ -96,8 +90,8 @@ ALTER TABLE public.colletta OWNER TO postgres;
 --
 
 CREATE TABLE public.contribute (
-    contributor serial NOT NULL,
-    colletta serial NOT NULL
+    contributor bigint NOT NULL,
+    colletta bigint NOT NULL
 );
 
 
@@ -108,9 +102,9 @@ ALTER TABLE public.contribute OWNER TO postgres;
 --
 
 CREATE TABLE public.friendship (
-    datetime "char"[],
-    account1 serial NOT NULL,
-    account2 serial NOT NULL
+    datetime character varying(255),
+    account1 bigint NOT NULL,
+    account2 bigint NOT NULL
 );
 
 
@@ -122,10 +116,10 @@ ALTER TABLE public.friendship OWNER TO postgres;
 
 CREATE TABLE public.recharge (
     id serial NOT NULL,
-    amount "char"[],
-    datetime "char"[],
-    account serial,
-    card "char"[]
+    datetime character varying(255),
+    account bigint,
+    card character varying(255),
+    amount numeric
 );
 
 
@@ -137,15 +131,71 @@ ALTER TABLE public.recharge OWNER TO postgres;
 
 CREATE TABLE public.transaction (
     id serial NOT NULL,
-    amount "char"[],
-    datetime "char"[],
-    category "char"[],
-    sender serial,
-    recipient serial
+    datetime character varying(255),
+    category character varying(255),
+    sender bigint,
+    recipient bigint,
+    amount numeric
 );
 
 
 ALTER TABLE public.transaction OWNER TO postgres;
+
+--
+-- Data for Name: account; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.account (id, name, surname, email, cf, address, dob, balance) FROM stdin;
+\.
+
+
+--
+-- Data for Name: card; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.card (pan, holder, expiration_date, cvv, datetime, account) FROM stdin;
+\.
+
+
+--
+-- Data for Name: colletta; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.colletta (id, datetime, quote, beneficiary, amount, amount_temp) FROM stdin;
+\.
+
+
+--
+-- Data for Name: contribute; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.contribute (contributor, colletta) FROM stdin;
+\.
+
+
+--
+-- Data for Name: friendship; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.friendship (datetime, account1, account2) FROM stdin;
+\.
+
+
+--
+-- Data for Name: recharge; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.recharge (id, datetime, account, card, amount) FROM stdin;
+\.
+
+
+--
+-- Data for Name: transaction; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.transaction (id, datetime, category, sender, recipient, amount) FROM stdin;
+\.
+
 
 --
 -- Name: account account_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres

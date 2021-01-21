@@ -1,0 +1,62 @@
+.icons-navbar-color {
+  color: white;
+}
+.nav-link-color {
+  color: #fff;
+}
+.nav-link-color2 {
+  color: black;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.navbar {
+  background-color: #001463;
+}
+.chiudi-gestioneAccount {
+  background-color: #001463;
+  color: white;
+}
+.esci-font {
+  background-color: #001463;
+  color: white;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.banner-color {
+  height: 41rem;
+  background-color: #69c974;
+}
+.faq-padding {
+  padding-top: 2rem;
+}
+.accordion-padding {
+  padding-top: 3rem;
+}
+.collapse-button-font:hover {
+  color: black;
+}
+.collapse-button-font {
+  color: black;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.collapse-font {
+  background-color: #41b450;
+}
+.collapse-body-font {
+  background-color: #69c974;
+}
+.advertise-section {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+  background-color: #001463;
+}
+.text-bold {
+  color: white;
+  font-weight: 400;
+}
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  background-color: #001463;
+}

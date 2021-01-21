@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class Account {
 
 	@Id
-	private Long id;
+	private String id;
 
 	private String email;
 
@@ -23,16 +23,14 @@ public class Account {
 
 	private String dob;
 
-	private String balance;
+	private Float balance;
 
 	public Account() {
-		balance = "1.0";
-		// 
+		balance = 0.0F;
 	}
   
-	public Account(Long id, String email, String name, String surname, String cf, String address,
-			String dob, String balance) {
-		super();
+	public Account(String id, String email, String name, String surname, String cf, String address,
+			String dob, Float balance) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
@@ -43,11 +41,11 @@ public class Account {
 		this.balance = balance;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -99,11 +97,11 @@ public class Account {
 		this.dob = dob;
 	}
 
-	public String getBalance() {
+	public Float getBalance() {
 		return balance;
 	}
 
-	public void setBalance(String balance) {
+	public void setBalance(Float balance) {
 		this.balance = balance;
 	}
 
