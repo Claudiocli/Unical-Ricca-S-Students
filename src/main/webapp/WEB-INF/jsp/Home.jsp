@@ -59,8 +59,8 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <button type="button" class="btn esci-font" id="bottoneGestioneAccount" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal2">
+                                    <button type="button" class="btn esci-font" id="bottoneGestioneAccount"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                             fill="currentColor" class="bi bi-gear icons-navbar-color"
                                             viewBox="0 0 16 16">
@@ -222,7 +222,7 @@
                                             <span class="ppvx_text--sm cw_tile-currency_primary">Disponibile</span>
                                         </div>
                                         <ul class="list-inline mb-2 list-font">
-                                            <li class="list-inline-item">
+                                            <li class="list-inline-item padding-invia">
                                                 <ul class="list-inline mb-2 list-font">
                                                     <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg"
                                                             width="25" height="25" fill="currentColor"
@@ -230,20 +230,47 @@
                                                             <path fill-rule="evenodd"
                                                                 d="M5.5 3.5a2.5 2.5 0 0 1 5 0V4h-5v-.5zm6 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zM6 9.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1H6z" />
                                                         </svg></li>
-                                                    <li class="list-inline-item"><button type="button"
-                                                            class="btn card-button-options-font">Invia</button></li>
-                                                </ul>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <ul class="list-inline mb-2 list-font padding-richiedi">
-                                                    <li class="list-inline-item"><svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="25" height="25" fill="currentColor"
-                                                            class="bi bi-bag-check-fill" viewBox="0 0 16 16">
-                                                            <path fill-rule="evenodd"
-                                                                d="M5.5 3.5a2.5 2.5 0 0 1 5 0V4h-5v-.5zm6 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
-                                                        </svg></li>
-                                                    <li class="list-inline-item"><button type="button"
-                                                            class="btn card-button-options-font">Richiedi</button></li>
+                                                    <li class="list-inline-item">
+                                                        <button type="button" class="btn card-button-options-font "
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal4">Invia</button>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="exampleModal4" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header chiudi-gestioneAccount">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Invia Denaro</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text euro-label">#</span>
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="Tag-Utente"
+                                                                                aria-label="Username"
+                                                                                aria-describedby="basic-addon1">
+                                                                        </div>
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control"
+                                                                                placeholder="0.00">
+                                                                            <span class="input-group-text euro-label">Euro</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Annulla</button>
+                                                                        <button type="button"
+                                                                            class="btn chiudi-gestioneAccount">Invia
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
                                                 </ul>
                                             </li>
                                         </ul>
