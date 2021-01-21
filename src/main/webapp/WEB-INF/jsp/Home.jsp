@@ -248,7 +248,8 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="input-group mb-3">
-                                                                            <span class="input-group-text euro-label">#</span>
+                                                                            <span
+                                                                                class="input-group-text euro-label">#</span>
                                                                             <input type="text" class="form-control"
                                                                                 placeholder="Tag-Utente"
                                                                                 aria-label="Username"
@@ -257,7 +258,8 @@
                                                                         <div class="input-group">
                                                                             <input type="text" class="form-control"
                                                                                 placeholder="0.00">
-                                                                            <span class="input-group-text euro-label">Euro</span>
+                                                                            <span
+                                                                                class="input-group-text euro-label">Euro</span>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
@@ -289,25 +291,36 @@
                                                     <button type="button" class="btn card-button-options-font">
                                                         Colletta
                                                     </button>
-                                                    <button type="button"
-                                                        class="btn card-button-options-font dropdown-toggle dropdown-toggle-split"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <span class="visually-hidden">Toggle Dropright</span>
-                                                    </button>
-                                                    <ul class="dropdown-menu dropdown-menu-font">
-                                                        <li><a class="dropdown-item colletta-dropdown-option"
-                                                                href="#">Colletta-1</a></li>
-                                                        <li><a class="dropdown-item colletta-dropdown-option"
-                                                                href="#">Colletta-2</a></li>
-                                                        <li><a class="dropdown-item colletta-dropdown-option"
-                                                                href="#">Colletta-3</a></li>
-                                                    </ul>
                                         </ul>
                                     </div>
                                     <div class="card-body card-body-text-color">
-                                        <path
-                                            d="M15.985 8.5H8.207l-5.5 5.5a8 8 0 0 0 13.277-5.5zM2 13.292A8 8 0 0 1 7.5.015v7.778l-5.5 5.5zM8.5.015V7.5h7.485A8.001 8.001 0 0 0 8.5.015z" />
-                                        </svg>
+                                        <ul class="list-inline mb-2 list-font">
+                                            <li id="form">
+                                                <form class="font-form">
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1"
+                                                            class="form-label">Beneficiario</label>
+                                                        <input type="text" class="form-control " id="exampleInputEmail1"
+                                                            placeholder="Mario Rossi" aria-describedby="emailHelp">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1"
+                                                            class="form-label">Quota</label>
+                                                        <ul class="list-inline mb-2">
+                                                            <li class="list-inline-item">
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="0.00">
+                                                                    <span
+                                                                        class="input-group-text euro-label">Euro</span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <button type="submit" class="btn submit-font">Submit</button>
+                                                </form>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -449,7 +462,7 @@
                                     d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z" />
                             </svg>
                             <h3>Veloce</h3>
-                            <p class="lead mb-0 text-bold"> Certificato come conto virtuale più rapido in Europa.</p>
+                            <p class="lead mb-0 text-bold"> Certificato come conto virtuale piu' rapido in Europa.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 ">
@@ -461,7 +474,7 @@
                                 <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
                             </svg>
                             <h3>Sicuro</h3>
-                            <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno può accedere ai
+                            <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno puo' accedere ai
                                 vostri
                                 dati sensibili ;-) .</p>
                         </div>

@@ -51,6 +51,9 @@
   color: black;
   border: 1px double #96d99f !important;
 }
+.submit-font{
+  background-color: #4bbe58;
+}
 .card-font-color {
   background-color: #87d490;
 }
