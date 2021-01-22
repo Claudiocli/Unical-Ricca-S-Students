@@ -252,14 +252,15 @@
                                                                         <div class="input-group mb-3">
                                                                             <span
                                                                                 class="input-group-text euro-label">#</span>
-                                                                            <input type="text" class="form-control"
+                                                                            <input id="TagInputLabel" type="text"
+                                                                                class="form-control"
                                                                                 placeholder="Tag-Utente"
                                                                                 aria-label="Username"
                                                                                 aria-describedby="basic-addon1">
                                                                         </div>
                                                                         <div class="input-group">
-                                                                            <input type="text" class="form-control"
-                                                                                placeholder="0.00">
+                                                                            <input id="ImportoInputLabel" type="text"
+                                                                                class="form-control" placeholder="0.00">
                                                                             <span
                                                                                 class="input-group-text euro-label">Euro</span>
                                                                         </div>
@@ -267,9 +268,14 @@
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">Annulla</button>
-                                                                        <button type="button"
-                                                                            class="btn chiudi-gestioneAccount">Invia
-                                                                        </button>
+                                                                        <a class="chiudi-gestioneAccount"
+                                                                            href="http://localhost:9090/home">
+                                                                            <button id="bottoneInviaTransizione"
+                                                                                type="button"
+                                                                                class="btn chiudi-gestioneAccount">
+                                                                                Invia
+                                                                            </button>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
