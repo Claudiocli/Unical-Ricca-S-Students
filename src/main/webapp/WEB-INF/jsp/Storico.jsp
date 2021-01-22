@@ -52,8 +52,8 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <button type="button" class="btn esci-font" id="bottoneGestioneAccount" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal2">
+                                    <button type="button" class="btn esci-font" id="bottoneGestioneAccount"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                             fill="currentColor" class="bi bi-gear icons-navbar-color"
                                             viewBox="0 0 16 16">
@@ -76,10 +76,6 @@
                                                     <table class="table memberListColor table-striped table-hover">
                                                         <tbody id="corpoGestioneAccount">
                                                             <tr>
-                                                                <td data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal3">
-                                                                    Password
-                                                                </td>
                                                                 <div class="modal fade" id="exampleModal3" tabindex="-1"
                                                                     aria-labelledby="exampleModalLabel"
                                                                     aria-hidden="true">
@@ -204,7 +200,8 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center" id="pagination">
                             <li class="page-item" id="Prec">
-                                <a class="page-link nav-bar-pagination" href="javascript:precedente()" tabindex="-1">Precedente</a>
+                                <a class="page-link nav-bar-pagination" href="javascript:precedente()"
+                                    tabindex="-1">Precedente</a>
                             </li>
                             <li class="page-item" id="Pros">
                                 <a class="page-link nav-bar-pagination" href="javascript:prossima()">Prossima</a>

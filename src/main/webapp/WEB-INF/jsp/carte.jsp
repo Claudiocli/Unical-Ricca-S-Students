@@ -78,10 +78,6 @@
                                                     <table class="table memberListColor table-striped table-hover">
                                                         <tbody id="corpoGestioneAccount">
                                                             <tr>
-                                                                <td data-bs-toggle="modal"
-                                                                    data-bs-target="#exampleModal3">
-                                                                    Password
-                                                                </td>
                                                                 <div class="modal fade" id="exampleModal3" tabindex="-1"
                                                                     aria-labelledby="exampleModalLabel"
                                                                     aria-hidden="true">

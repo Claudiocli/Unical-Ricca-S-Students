@@ -6,8 +6,6 @@ $(document).ready(function () {
     document.getElementById("bottoneAggiungiAmico").addEventListener("click", aggiungiAmico);
 });
 
-
-
 function initSaldo() {
 
     var idUser = 1//getCookie("uid");
