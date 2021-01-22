@@ -52,8 +52,6 @@ googleButton.addEventListener('click', () =>	{
 					if (debug)	{
 						alert("success");
 					}
-					// FIXME: TEST the redirect to homepage
-					// data is necesary?
 					window.location.replace(localHost+"/home");
 				},
 			  error: function (e) {
@@ -90,15 +88,12 @@ loginButton.addEventListener('click', ()	=>	{
 		let c=getCookie('uid');
 		if (c)	{
 			// TODO: handle with existing cookie
-			// TODO: handle redirecting without the needs to do a login
 		}
 		else	{
 			// TODO: handle with no cookie
 			// Setting a cookie for the user with expiration date by a week
 			setCookie('uid', user.user.uid, 7);
 		}
-		// FIXME: test redirect to main page
-		// Needs a GET ?
 		window.location.replace(localHost+"/home");
 	})
 	.catch((error) => {
@@ -145,7 +140,7 @@ signupButton.addEventListener('click', ()	=>	{
 			let address=document.getElementById("address-input").value;
 			let dob=document.getElementById("dob-input").value;
 			
-			// TODO: Cookie handling
+			// Cookie handling
 			// Set a cookie for the new user
 			setCookie('uid', user.user.uid, 7);
 
@@ -168,8 +163,6 @@ signupButton.addEventListener('click', ()	=>	{
 			      cache: false,
 			      timeout: 600000,
 				success: function (data) {
-						// FIXME: TEST the redirect to homepage
-						// data is necesary?
 						window.location.replace(localHost+"/home");
 			    },
 			    error: function (e) {
