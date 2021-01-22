@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.urss.payball8.model.Account;
@@ -61,7 +62,7 @@ public class HomePageController {
 	}
 
 	@PostMapping("home/friendship")
-	List<Account> listFriendship(@RequestBody JSONObject id) {
+	@ResponseBody List<Account> listFriendship(@RequestBody JSONObject id) {
 		String id_long = id.getAsString("id");
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
