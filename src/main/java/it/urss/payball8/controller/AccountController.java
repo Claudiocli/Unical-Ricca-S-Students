@@ -45,8 +45,8 @@ public class AccountController {
 		newAccount.setEmail(newAccount.getEmail().trim().toUpperCase());
 		newAccount.setAddress(newAccount.getAddress().trim().toUpperCase());
 		newAccount.setCf(newAccount.getCf().trim().toUpperCase());
-		accountRepository.findById(newAccount.getId())
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
+		// accountRepository.findById(newAccount.getId())
+		// 		.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 		logger.info("USER_ADD added user by ENTITY: " + newAccount.toString());
 		return ResponseEntity.ok(accountRepository.save(newAccount));
 	}

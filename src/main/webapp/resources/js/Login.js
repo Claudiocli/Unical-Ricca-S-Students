@@ -1,4 +1,4 @@
-var debug=true;
+var debug=false;
 // Util variables
 let localHost="http://localHost:9090";
 let toggleSignupButton=document.getElementById("toggle-signup");
@@ -49,7 +49,9 @@ googleButton.addEventListener('click', () =>	{
 			  cache: false,
 			  timeout: 600000,
 			success: function (data) {
-					alert("success");
+					if (debug)	{
+						alert("success");
+					}
 					// FIXME: TEST the redirect to homepage
 					// data is necesary?
 					window.location.replace(localHost+"/home");
@@ -168,7 +170,7 @@ signupButton.addEventListener('click', ()	=>	{
 				success: function (data) {
 						// FIXME: TEST the redirect to homepage
 						// data is necesary?
-						//window.location.replace(localHost+"/home");
+						window.location.replace(localHost+"/home");
 			    },
 			    error: function (e) {
 					if (debug)	{
