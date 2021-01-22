@@ -31,6 +31,11 @@ public class HomePageController {
 	@Autowired
 	private FriendshipRepository friendshipRepository;
 
+	@RequestMapping(value="", method = RequestMethod.GET)
+	public String redirectToLogin()	{
+		return "Login";
+	}
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String showLoginPage() {
 		return "Login";

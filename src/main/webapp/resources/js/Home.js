@@ -5,6 +5,7 @@ $(document).ready(function () {
     document.getElementById("bottoneCercaAmico").addEventListener("click", cercaAmico);
     document.getElementById("bottoneAggiungiAmico").addEventListener("click", aggiungiAmico);
     document.getElementById("bottoneInviaTransizione").addEventListener("click", inviaTransizione);
+    document.getElementById("btn-logout").addEventListener("click", logout);
 });
 
 function initSaldo() {
@@ -213,6 +214,10 @@ function cercaAmico() {
     }
 }
 
+function logout()   {
+    eraseCookie('uid');
+}
+
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -222,4 +227,7 @@ function getCookie(name) {
         if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
+}
+function eraseCookie(name) {   
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }

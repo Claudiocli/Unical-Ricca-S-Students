@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConf
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-@SpringBootApplication(exclude = {ErrorMvcAutoConfiguration.class})
+@SpringBootApplication
 public class Payball8Application extends SpringBootServletInitializer  {
 	
 	@Override

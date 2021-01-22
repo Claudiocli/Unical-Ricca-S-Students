@@ -176,7 +176,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Chiudi</button>
-                                                    <button type="button" class="btn esci-font">
+                                                    <button type="button" id="btn-logout" class="btn esci-font">
                                                         <a class="esci-font" href="http://localhost:9090/login">
                                                             Si
                                                         </a>

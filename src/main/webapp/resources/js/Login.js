@@ -1,4 +1,4 @@
-var debug=false;
+var debug=true;
 // Util variables
 let localHost="http://localHost:9090";
 let toggleSignupButton=document.getElementById("toggle-signup");
@@ -31,13 +31,24 @@ googleButton.addEventListener('click', () =>	{
 		var token = credential.accessToken;
 		// The signed-in user info.
 		var user = result.user;
+		if (!user)	{
+			user=firebase.auth().currentUser;
+		}
 		// Sending relevant data to db
+		let fullName=user.displayName.split(" ");
+		let firstName=fullName.shift();
+		let lastName=fullName.shift();
+		while (fullName.length>0)	{
+			lastName+" "+fullName.shift();
+		}
+		alert(user.uid);
 		let json={
-			"id": user.user.uid,
-			"email": email,
-			"name": user.user.name,
-			"surname": user.user.surname,
-			"dob": dob
+			"id": user.uid,
+			"email": user.email,
+			"name": firstName,
+			"surname": lastName,
+			"dob": new Date(1970, 01)
+			// Made up date, TODO: implement with Google People API - needs approval
 		}
 		// Sending data to db
 		$.ajax({
@@ -58,7 +69,6 @@ googleButton.addEventListener('click', () =>	{
 					if (debug)	{
 						alert("Error Code: "+e.errorCode+"\nError Message: "+e.errorMessage);
 					}
-					// FIXME: Redirect to error page
 					window.location.replace(localHost+"/error");
 				}
 		});
@@ -72,6 +82,9 @@ googleButton.addEventListener('click', () =>	{
 		var email = error.email;
 		// The firebase.auth.AuthCredential type that was used.
 		var credential = error.credential;
+		if (debug)	{
+			alert(errorCode+"\n"+errorMessage);
+		}
 	});
 })
 // Login function
