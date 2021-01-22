@@ -4,6 +4,7 @@ $(document).ready(function () {
     document.getElementById("bottoneGestioneAccount").addEventListener("click", popolaGestioneAccount);
     document.getElementById("bottoneCercaAmico").addEventListener("click", cercaAmico);
     document.getElementById("bottoneAggiungiAmico").addEventListener("click", aggiungiAmico);
+    document.getElementById("bottoneInviaTransizione").addEventListener("click", inviaTransizione);
 });
 
 function initSaldo() {
@@ -31,6 +32,35 @@ function initSaldo() {
             }
         });
     }
+}
+
+function inviaTransizione() {
+    var idUser = getCookie("uid");
+    var importo = document.getElementById("ImportoInputLabel").value
+    var tag = document.getElementById("TagInputLabel").value
+    console.log(idUser);
+    if (idUser) {
+        var data = {
+            amount: importo,
+            datetime: "12 - 12 - 2020" ,
+            category: "Normal",
+            sender: idUser,
+            recipient: tag
+        }
+    }
+    $.ajax({
+        url: 'http://localhost:9090/storico/send',
+        method: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (risposta) {
+            console.log(risposta)
+            initSaldo()
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
 }
 
 function popolaGestioneAccount() {
@@ -117,7 +147,7 @@ function popolaListaAmici() {
     }
 }
 
-function aggiungiAmico(){
+function aggiungiAmico() {
     var idUser = getCookie("uid");
     var x = document.getElementById("tagInputLabel").value
     console.log(idUser);
@@ -125,9 +155,9 @@ function aggiungiAmico(){
 
     if (idUser) {
         var data = {
-            datetime : "12-12-2020",
-            account1 : idUser,
-            account2 : x
+            datetime: "12-12-2020",
+            account1: idUser,
+            account2: x
         }
         $.ajax({
             url: 'http://localhost:9090/friendship/add',
@@ -144,7 +174,7 @@ function aggiungiAmico(){
     }
 }
 
-function cercaAmico(){
+function cercaAmico() {
     var idUser = getCookie("uid");
     var x = document.getElementById("tagInputLabel").value
     console.log(idUser);
@@ -160,8 +190,8 @@ function cercaAmico(){
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (risposta) {
-                for(var i=0; i<risposta.length; i++){
-                    if(x == risposta[i].id){
+                for (var i = 0; i < risposta.length; i++) {
+                    if (x == risposta[i].id) {
                         $("#corpoListaAmici").html("");
                         var ciccia = ""
                         ciccia += "<tr>"
@@ -170,11 +200,11 @@ function cercaAmico(){
                         ciccia += "</tr>"
                         $("#corpoListaAmici").append(ciccia)
                     }
-                    else if(x == ""){
+                    else if (x == "") {
                         popolaListaAmici()
                     }
                 }
-            
+
             },
             error: function (err) {
                 console.log(err);
@@ -186,10 +216,10 @@ function cercaAmico(){
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
+    for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
 }
