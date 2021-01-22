@@ -218,7 +218,7 @@
 
                                 1)Accedi alle tue "Carte" e clicca "Trasferisci denaro".
                                 2)Clicca "Ricarica il tuo saldo" e segui le istruzioni.
-                                3)Verrà generato un codice IBAN virtuale, che userai per effettuare il bonifico
+                                3)Verra' generato un codice IBAN virtuale, che userai per effettuare il bonifico
                                 bancario.
                                 Tale IBAN identifica in modo univoco il tuo trasferimento a PayBall8.
                             </div>
@@ -237,7 +237,7 @@
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="card-body collapse-button-font collapse-body-font">
                                 In caso di dubbi sul tuo acquisto, ti consigliamo innanzitutto di contattare
-                                direttamente il venditore. Spesso questo è il modo più semplice e rapido per chiarire un
+                                direttamente il venditore. Spesso questo e' il modo piu' semplice e rapido per chiarire un
                                 equivoco e risolvere un piccolo problema.
                             </div>
                         </div>
@@ -248,28 +248,28 @@
                                 <a href="#collapseThree" data-toggle="collapse" id="collapseThreeButton"
                                     class="btn btn-link collapsed collapse-button-font" aria-expanded="true"
                                     aria-controls="collapseThree">
-                                    Perché il mio pagamento è bloccato e quando sarà disponibile?
+                                    Perche' il mio pagamento e' bloccato e quando sara' disponibile?
                                 </a>
                             </h5>
                         </div>
                         <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                             data-parent="#accordion">
                             <div class="card-body collapse-button-font collapse-body-font">
-                                Ecco alcuni dei motivi più comuni per cui un pagamento potrebbe essere temporaneamente
+                                Ecco alcuni dei motivi piu' comuni per cui un pagamento potrebbe essere temporaneamente
                                 non disponibile:
-
-                                1)È necessario del tempo per creare una valida cronologia di transazioni.
-                                Non hai svolto attività di vendita di recente. I conti precedentemente inattivi possono
+                                
+                                1)E' necessario del tempo per creare una valida cronologia di transazioni.
+                                Non hai svolto attivita' di vendita di recente. I conti precedentemente inattivi possono
                                 essere soggetti a blocchi dei pagamenti mentre viene ricreata una cronologia di vendita
                                 positiva.
 
                                 2)Ricevi un numero elevato di rimborsi, contestazioni o chargeback. Ti consigliamo di
                                 comunicare spesso con i clienti e di collaborare con loro per risolvere eventuali
                                 problemi. Se il cliente ha presentato una contestazione o una richiesta di chargeback
-                                perché qualcun altro ha usato illecitamente il suo conto PayPal per effettuare una
+                                perche' qualcun altro ha usato illecitamente il suo conto PayPal per effettuare una
                                 transazione, non spedire nessun articolo.
 
-                                3)L'andamento delle vendite è cambiato. Ad esempio, potrebbe essersi verificato un
+                                3)L'andamento delle vendite e' cambiato. Ad esempio, potrebbe essersi verificato un
                                 aumento
                                 insolito delle transazioni, un cambiamento del prezzo medio di vendita, il ricorso a una
                                 nuova piattaforma commerciale.
@@ -291,7 +291,7 @@
                         </div>
                         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
                             <div class="card-body collapse-button-font collapse-body-font">
-                                Puoi annullare solo i pagamenti non riscossi accanto ai quali è presente il link
+                                Puoi annullare solo i pagamenti non riscossi accanto ai quali e' presente il link
                                 "Annulla".
 
                                 Per annullare un pagamento non riscosso dall'app PayBall8, tocca il pagamento che
