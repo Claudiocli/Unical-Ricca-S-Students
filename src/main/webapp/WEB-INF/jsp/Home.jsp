@@ -40,17 +40,19 @@
                                 </li>
                                 <li class="nav-item">
                                     <a id="riepilogo" class="nav-link nav-link-color"
-                                        href="../Riepilogo/Home.html">Riepilogo</a>
+                                        href="http://localhost:9090/home">Riepilogo</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="carte" class="nav-link nav-link-color" href="../Carte/carte.html">Carte</a>
+                                    <a id="carte" class="nav-link nav-link-color"
+                                        href="http://localhost:9090/card">Carte</a>
                                 </li>
                                 <li class="nav-item">
                                     <a id="storico" class="nav-link nav-link-color"
-                                        href="../Storico/Storico.html">Storico</a>
+                                        href="http://localhost:9090/storico">Storico</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="aiuto" class="nav-link nav-link-color" href="../Aiuto/Aiuto.html">Aiuto</a>
+                                    <a id="aiuto" class="nav-link nav-link-color"
+                                        href="http://localhost:9090/aiuto">Aiuto</a>
                                 </li>
                             </ul>
                         </div>
@@ -174,7 +176,11 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Chiudi</button>
-                                                    <button type="button" class="btn esci-font">Si</button>
+                                                    <button type="button" class="btn esci-font">
+                                                        <a class="esci-font" href="http://localhost:9090/login">
+                                                            Si
+                                                        </a>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -336,7 +342,8 @@
                                                                             aria-describedby="basic-addon1">
                                                                     </div>
                                                                     <div>
-                                                                        <button type="button" class="btn chiudi-gestioneAccount">
+                                                                        <button type="button"
+                                                                            class="btn chiudi-gestioneAccount">
                                                                             Aggiungi
                                                                         </button>
                                                                     </div>
@@ -373,37 +380,37 @@
                                             for="inlineFormInputGroupUsername">Username</label>
                                         <div class="input-group">
                                             <div class="input-group-text search-bar-font-1">#</div>
-                                            <input type="text" class="form-control search-bar-font-2"
-                                                id="tagInputLabel" placeholder="Tag/Username">
+                                            <input type="text" class="form-control search-bar-font-2" id="tagInputLabel"
+                                                placeholder="Tag">
                                         </div>
                                     </div>
                             </li>
                             <li class="list-inline-item"><a href="#">
-                                <button type="button" class="serch-button-font" id="bottoneCercaAmico">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                        class="bi bi-search" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-                                        <path fill-rule="evenodd"
-                                            d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                                    </svg>
-                                </button>
+                                    <button type="button" class="serch-button-font" id="bottoneCercaAmico">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                            <path fill-rule="evenodd"
+                                                d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                        </svg>
+                                    </button>
                                 </a></li>
                             <li class="list-inline-item"><a href="#">
-                                <button type="button" class="serch-button-font" id="bottoneAggiungiAmico">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                        class="bi bi-person-plus" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-                                    </svg>
-                                </button>
+                                    <button type="button" class="serch-button-font" id="bottoneAggiungiAmico">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                                        </svg>
+                                    </button>
                                 </a></li>
                         </ul>
                     </div>
                     <div class="row details-list-right">
                         <table class="table memberListColor table-striped table-hover">
                             <tbody id="corpoListaAmici">
-                                
+
                             </tbody>
                         </table>
                     </div>

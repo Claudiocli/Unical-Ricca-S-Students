@@ -33,17 +33,17 @@
                                 </li>
                                 <li class="nav-item">
                                     <a id="riepilogo" class="nav-link nav-link-color"
-                                        href="../Riepilogo/Home.html">Riepilogo</a>
+                                        href="http://localhost:9090/home">Riepilogo</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="carte" class="nav-link nav-link-color" href="../Carte/carte.html">Carte</a>
+                                    <a id="carte" class="nav-link nav-link-color" href="http://localhost:9090/card">Carte</a>
                                 </li>
                                 <li class="nav-item">
                                     <a id="storico" class="nav-link nav-link-color"
-                                        href="../Storico/Storico.html">Storico</a>
+                                        href="http://localhost:9090/storico">Storico</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="aiuto" class="nav-link nav-link-color" href="../Aiuto/Aiuto.html">Aiuto</a>
+                                    <a id="aiuto" class="nav-link nav-link-color" href="http://localhost:9090/aiuto">Aiuto</a>
                                 </li>
                             </ul>
                         </div>
