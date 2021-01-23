@@ -16,6 +16,10 @@
   background-color: #001463;
   color: white;
 }
+.euro-label{
+  background-color: #4bbe58;
+  color: white;
+}
 .esci-font {
   background-color: #001463;
   color: white;
@@ -29,6 +33,12 @@
 .saldo-font {
   font-size: 2rem;
 }
+.padding-invia{
+  padding-top: 2rem;
+}
+.font-invia-label{
+  width: 5rem !important;
+}
 .padding-richiedi {
   padding-top: 2rem;
 }
@@ -40,6 +50,9 @@
   background-color: #4bbe58;
   color: black;
   border: 1px double #96d99f !important;
+}
+.submit-font{
+  background-color: #4bbe58;
 }
 .card-font-color {
   background-color: #87d490;
@@ -72,8 +85,11 @@
 .list-inline-item > a {
   color: black;
 }
+.serch-button-font{
+  background-color: #41b450;
+}
 .search-input-dim {
-  width: 70%;
+  width: 60%;
 }
 .search-bar-font-1 {
   background-color: #87d490;

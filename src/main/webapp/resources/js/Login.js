@@ -1,5 +1,6 @@
 var debug=false;
 // Util variables
+let localHost="http://localHost:9090";
 let toggleSignupButton=document.getElementById("toggle-signup");
 let loginButton=document.getElementById("login-button");
 let signupButton=document.getElementById("register-button");
@@ -30,38 +31,65 @@ googleButton.addEventListener('click', () =>	{
 		var token = credential.accessToken;
 		// The signed-in user info.
 		var user = result.user;
+		if (!user)	{
+			user=firebase.auth().currentUser;
+		}
 		// Sending relevant data to db
+		let fullName=user.displayName.split(" ");
+		let firstName=fullName.shift();
+		let lastName=fullName.shift();
+		while (fullName.length>0)	{
+			lastName+" "+fullName.shift();
+		}
+		if (debug)	{
+			alert(user.uid);
+		}
+		// FIXME: error calling the server
 		let json={
-			"id": user.user.uid,
-			"email": email,
-			"name": user.user.name,
-			"surname": user.user.surname,
-			"dob": dob
+			"id": user.uid,
+			"email": user.email,
+			"name": firstName,
+			"surname": lastName,
+			"cf": "ciccio",
+			"address": "ciccia",
+			"dob": new Date(1970, 01, 01)
+			// Made up date, TODO: implement with Google People API - needs approval
 		}
 		// Sending data to db
 		$.ajax({
 			type: "POST",
 			  contentType: "application/json",
 			  url: "/account/add",
-			  data: json,
+			  data: JSON.stringify(json),
 			  dataType: 'json',
 			  cache: false,
 			  timeout: 600000,
 			success: function (data) {
-					alert("success");
-					// FIXME: TEST the redirect to homepage
-					// data is necesary?
-					window.location.href="/home";
+					if (debug)	{
+						alert("success");
+					}
+					// Cookie handling
+					let c=getCookie('uid');
+					if (c)	{
+						// Refresh existing cookie
+						eraseCookie('uid');
+						setCookie('uid', user.uid, 7);
+					}
+					else	{
+						// Setting a cookie for the user with expiration date by a week
+						setCookie('uid', user.uid, 7);
+					}
+					window.location.replace(localHost+"/home");
 				},
 			  error: function (e) {
 					if (debug)	{
 						alert("Error Code: "+e.errorCode+"\nError Message: "+e.errorMessage);
 					}
-					// FIXME: Redirect to error page
-					window.location.href="/error";
+					window.location.replace(localHost+"/error");
 				}
 		});
-		// ...
+		// Redirecting to /home
+		window.location.replace(localHost+"/home");
 	}).catch((error) => {
 		// Handle Errors here.
 		var errorCode = error.code;
@@ -70,7 +98,9 @@ googleButton.addEventListener('click', () =>	{
 		var email = error.email;
 		// The firebase.auth.AuthCredential type that was used.
 		var credential = error.credential;
-		// ...
+		if (debug)	{
+			alert(errorCode+"\n"+errorMessage);
+		}
 	});
 })
 // Login function
@@ -86,17 +116,15 @@ loginButton.addEventListener('click', ()	=>	{
 		// Cookie handling
 		let c=getCookie('uid');
 		if (c)	{
-			// TODO: handle with existing cookie
-			// TODO: handle redirecting without the needs to do a login
+			// Refresh existing cookie
+			eraseCookie('uid');
+			setCookie('uid', user.user.uid, 7);
 		}
 		else	{
-			// TODO: handle with no cookie
 			// Setting a cookie for the user with expiration date by a week
 			setCookie('uid', user.user.uid, 7);
 		}
-		// FIXME: test redirect to main page
-		// Needs a GET ?
-		window.location.href="/home";
+		window.location.replace(localHost+"/home");
 	})
 	.catch((error) => {
 		var errorCode = error.code;
@@ -142,9 +170,17 @@ signupButton.addEventListener('click', ()	=>	{
 			let address=document.getElementById("address-input").value;
 			let dob=document.getElementById("dob-input").value;
 			
-			// TODO: Cookie handling
-			// Set a cookie for the new user
-			setCookie('uid', user.user.uid, 7);
+			// Cookie handling
+			let c=getCookie('uid');
+			if (c)	{
+				// Refresh existing cookie
+				eraseCookie('uid');
+				setCookie('uid', user.user.uid, 7);
+			}
+			else	{
+				// Setting a cookie for the user with expiration date by a week
+				setCookie('uid', user.user.uid, 7);
+			}
 
 			let json={
 				"id": user.user.uid,
@@ -165,17 +201,17 @@ signupButton.addEventListener('click', ()	=>	{
 			      cache: false,
 			      timeout: 600000,
 				success: function (data) {
-						// FIXME: TEST the redirect to homepage
-						// data is necesary?
-						window.location.href="/home";
-			        },
-			      error: function (e) {
-						if (debug)	{
-							alert("Error Code: "+e.errorCode+"\nError Message: "+e.errorMessage);
-						}
-						// FIXME: Redirect to error page
-						window.location.href="/error";
-			        }
+						window.location.replace(localHost+"/home");
+			    },
+			    error: function (e) {
+					if (debug)	{
+						alert("Error: "+e);
+					}
+					// FIXME: Redirect to error page
+					if (!debug)	{
+						window.location.replace(localHost+"/error");
+					}
+			    }
 			});
 		})
 		.catch((error) => {
@@ -275,7 +311,6 @@ function checkRegisterInputs()	{
 		passwordField.style.borderColor="red";
 		returnValue=false;
 	}
-	// TODO: cf validation
 	if (cfField.value.length==0) {
 		cfField.style.borderColor="red";
 		returnValue=false;
@@ -342,4 +377,10 @@ function getCookie(name) {
 }
 function eraseCookie(name) {   
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+// Session controll
+let isLogged=getCookie("uid");
+if (isLogged)	{
+	window.location.replace(localHost+"/home");
 }

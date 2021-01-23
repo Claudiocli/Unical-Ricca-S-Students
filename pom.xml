@@ -17,6 +17,7 @@
 
 	<properties>
 		<java.version>15</java.version>
+		
 	</properties>
 
 	<dependencies>
@@ -72,8 +73,7 @@
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
-	    </dependency>
-	    
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -84,5 +84,6 @@
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
