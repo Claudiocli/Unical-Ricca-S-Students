@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden;
+}
 .icons-navbar-color {
   color: white;
 }
@@ -27,7 +30,7 @@
   color: black;
 }
 
-.table-font{
+.table-font {
   background-color: #5ac468;
 }
 

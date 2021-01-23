@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden;
+}
 .icons-navbar-color {
   color: white;
 }
