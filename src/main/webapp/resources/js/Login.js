@@ -47,7 +47,9 @@ googleButton.addEventListener('click', () =>	{
 			"email": user.email,
 			"name": firstName,
 			"surname": lastName,
-			"dob": new Date(1970, 01)
+			"cf": "ciccio",
+			"address": "ciccia",
+			"dob": new Date(1970, 01, 01)
 			// Made up date, TODO: implement with Google People API - needs approval
 		}
 		// Sending data to db

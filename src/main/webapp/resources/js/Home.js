@@ -216,6 +216,7 @@ function cercaAmico() {
 
 function logout()   {
     eraseCookie('uid');
+    window.location.replace("http://localhost:9090/login");
 }
 
 function getCookie(name) {
