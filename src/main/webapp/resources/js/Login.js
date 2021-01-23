@@ -56,6 +56,7 @@ googleButton.addEventListener('click', () =>	{
 			// Made up date, TODO: implement with Google People API - needs approval
 		}
 		// Sending data to db
+		alert("SONO PRIMA DELLA AJAX");
 		$.ajax({
 			type: "POST",
 			  contentType: "application/json",
@@ -73,23 +74,20 @@ googleButton.addEventListener('click', () =>	{
 					if (c)	{
 						// Refresh existing cookie
 						eraseCookie('uid');
-						setCookie('uid', user.uid, 7);
 					}
-					else	{
-						// Setting a cookie for the user with expiration date by a week
-						setCookie('uid', user.uid, 7);
-					}
+					setCookie('uid', user.uid, 7);
+					alert(getCookie("uid")+"\nuid:"+user.uid);
+					alert("SONO DOPO AL REDIRECT NELLA SUCCESS");
 					window.location.replace(localHost+"/home");
 				},
 			  error: function (e) {
+				alert("SONO NELL'ERROR");
 					if (debug)	{
 						alert("Error Code: "+e.errorCode+"\nError Message: "+e.errorMessage);
 					}
 					window.location.replace(localHost+"/error");
 				}
 		});
-		// Redirecting to /home
-		window.location.replace(localHost+"/home");
 	}).catch((error) => {
 		// Handle Errors here.
 		var errorCode = error.code;
@@ -101,6 +99,7 @@ googleButton.addEventListener('click', () =>	{
 		if (debug)	{
 			alert(errorCode+"\n"+errorMessage);
 		}
+		window.location.replace(localHost+"/error");
 	});
 })
 // Login function
@@ -162,7 +161,7 @@ signupButton.addEventListener('click', ()	=>	{
 	if (checkRegisterInputs())	{
 		// Function to create a new account with Firebase
 		firebase.auth().createUserWithEmailAndPassword(email,
-		 password).then((user) => {
+		 password).then((response) => {
 			// Signed in 
 			let name=document.getElementById("name-input").value;
 			let surname=document.getElementById("surname-input").value;
@@ -175,15 +174,12 @@ signupButton.addEventListener('click', ()	=>	{
 			if (c)	{
 				// Refresh existing cookie
 				eraseCookie('uid');
-				setCookie('uid', user.user.uid, 7);
 			}
-			else	{
-				// Setting a cookie for the user with expiration date by a week
-				setCookie('uid', user.user.uid, 7);
-			}
+			// Setting a cookie for the user with expiration date by a week
+			setCookie('uid', response.user.uid, 7);
 
 			let json={
-				"id": user.user.uid,
+				"id": repsonse.user.uid,
 				"email": email,
 				"name": name,
 				"surname": surname,
