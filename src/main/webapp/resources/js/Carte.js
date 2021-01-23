@@ -114,3 +114,53 @@ function getCookie(name) {
 function eraseCookie(name) {   
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
+
+// L.Russo - funzione per calcolare datatime
+function getDateTime(){
+    var data = new Date();
+    var anno, mese, giorno, ore, minuti, secondi;
+    anno = data.getFullYear();
+    mese = data.getMonth + 1;
+    giorno = data.getDate();
+    ore = data.getHours();
+    minuti = data.getMinutes();
+    secondi = data.getSeconds();
+
+    var finalDate = giorno + "-" + mese + "-" + anno + " " + ore + ":" + minuti + " " + secondi;
+    
+    return finalDate;
+}
+
+// L.Russo - funzione per aggiunta carta
+function insertCard(){
+    var idUser = getCookie("uid");
+    var pan = document.getElementById("exampleInputEmail1");
+    var holder = document.getElementById("exampleInputEmail1");
+    var expiration_date = document.getElementById("mese")+document.getElementById("anno");
+    var cvv = document.getElementById("cvc");
+    var datetime = getDateTime();
+
+    console.log(idUser);
+    if (idUser) {
+        var data = {
+            pan: pan,
+            holder: holder,
+            expiration_date: expiration_date,
+            cvv: cvv,
+            datetime: datetime,
+            account: idUser
+        }
+        $.ajax({
+            url: 'http://localhost:9090/card/add',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (risposta) {
+                console.log(risposta)
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+}
