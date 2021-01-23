@@ -305,3 +305,13 @@ function getDateTime(){
     
     return finalDate;
 }
+
+// Session controll
+let isLogged=getCookie("uid");
+if (isLogged)	{
+	window.location.replace(localHost+"/home");
+}
+else
+{
+	window.location.replace(localHost+"/login");
+}

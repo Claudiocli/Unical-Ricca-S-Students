@@ -110,6 +110,7 @@ public class TransactionController {
 			account_sender.setBalance(account_sender.getBalance() - transaction.getAmount());
 			account_recipient.setBalance(account_recipient.getBalance() + transaction.getAmount());
 			transaction.setCategory("Transazione");
+
 			logger.info("SALDO_AGGIORNATO");
 
 			ResponseEntity.ok(accountRepository.save(account_sender));

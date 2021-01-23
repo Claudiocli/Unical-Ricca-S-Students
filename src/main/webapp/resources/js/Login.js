@@ -51,8 +51,8 @@ googleButton.addEventListener('click', () =>	{
 			"surname": lastName,
 			"cf": " ",
 			"address": " ",
-			"dob": new Date(1970, 01, 01)
-			// Made up date, TODO: implement with Google People API - needs approval
+			"dob": new Date(1970, 01, 01)	// The Epoch
+			// Made up date, TODO: implement with Google People API - needs Google approval
 		}
 		// Sending data to db
 		alert("SONO PRIMA DELLA AJAX");
@@ -200,7 +200,6 @@ signupButton.addEventListener('click', ()	=>	{
 					if (debug)	{
 						alert("Error: "+e);
 					}
-					// FIXME: Redirect to error page
 					if (!debug)	{
 						window.location.replace(localHost+"/error");
 					}
@@ -349,15 +348,31 @@ function validDateOfBirth(dob)	{
 	return true;
 }
 // Cookie handling functions
-function setCookie(name,value,days) {
-    var expires = "";
-    if (days) {
+function setCookie(name, value, days, daysIsMillisecond) {
+	var expires = "";
+	if (daysIsMillisecond)	{
+		var date = new Date();
+		date.setTime(date.getTime()+(days));
+		expires= "; expires="+date.toUTCString();
+	}
+    else if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days*24*60*60*1000));
         expires = "; expires=" + date.toUTCString();
     }
     document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 }
+/*	Deprecated	@Claudiocli
+function setCookie(name,value,days, daysIsMillisecond) {
+	var expires = "";
+	if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+*/
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -377,3 +392,34 @@ let isLogged=getCookie("uid");
 if (isLogged)	{
 	window.location.replace(localHost+"/home");
 }
+else
+{
+	window.location.replace(localHost+"/login");
+}
+// Online - Offline status check
+const checkOnlineStatus = async () =>  {
+    try {
+        const online = await fetch("");	// FIXME: need to find something to ping to
+        return online.status >= 200 && online.status<300;   // Online
+    } catch (error) {
+        return false;   // Offline
+    }
+}
+// Handling dc during an operation
+window.addEventListener('offline', ()	=>	{
+	// Creating a JSON to store the current operation data in a cookie
+	let jsonDataOperation =	{
+		// TODO: actually create the json
+	};
+	setCookie('lastOperationData', jsonDataOperation, 1000*60, true);
+});
+window.addEventListener('online', ()	=>	{
+	// Resuming the last operation with the data stored in the cookie, if that exists
+	let resume=getCookie('lastOperationData');
+	if (resume)	{
+		let jsonDataOperation=getCookie('lastOperationData');
+		// TODO: actually resume operation
+	}
+	// Erasing that cookie
+	eraseCookie('lastOperationData');
+});

@@ -42,13 +42,14 @@ public class RechargeController {
 		Card current_card = cardRepository.findBypan(recharge.getCard());
 		if (current_card == null)
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Cannot find Card"));
-		
+
 		if (!current_card.getAccount().equals(current_account.getId()))
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
 					String.format("Cannot find Card.account.id & Account.id"));
 
 		current_account.setBalance(current_account.getBalance() + recharge.getAmount());
 		logger.info("ADD RECHARGE: " + recharge.getAmount());
+
 		ResponseEntity.ok(accountRepository.save(current_account));
 		return ResponseEntity.ok(rechargeRepository.save(recharge));
 	}
