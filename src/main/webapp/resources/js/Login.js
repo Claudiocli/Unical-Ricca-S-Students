@@ -55,6 +55,7 @@ googleButton.addEventListener('click', () =>	{
 			// Made up date, TODO: implement with Google People API - needs approval
 		}
 		// Sending data to db
+		alert("SONO PRIMA DELLA AJAX");
 		$.ajax({
 			type: "POST",
 			  contentType: "application/json",
@@ -77,6 +78,7 @@ googleButton.addEventListener('click', () =>	{
 					window.location.replace(localHost+"/home");
 				},
 			  error: function (e) {
+				alert("SONO NELL'ERROR");
 					if (debug)	{
 						alert("Error Code: "+e.errorCode+"\nError Message: "+e.errorMessage);
 					}
