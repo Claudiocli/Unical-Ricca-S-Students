@@ -169,7 +169,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Chiudi</button>
-                                                    <button type="button" class="btn esci-font">Si</button>
+                                                    <button type="button" id="btn-logout" class="btn esci-font">Si</button>
                                                 </div>
                                             </div>
                                         </div>
