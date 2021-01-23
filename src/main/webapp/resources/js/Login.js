@@ -44,14 +44,13 @@ googleButton.addEventListener('click', () =>	{
 		if (debug)	{
 			alert(user.uid);
 		}
-		// FIXME: error calling the server
 		let json={
 			"id": user.uid,
 			"email": user.email,
 			"name": firstName,
 			"surname": lastName,
-			"cf": "ciccio",
-			"address": "ciccia",
+			"cf": " ",
+			"address": " ",
 			"dob": new Date(1970, 01, 01)
 			// Made up date, TODO: implement with Google People API - needs approval
 		}
@@ -76,8 +75,6 @@ googleButton.addEventListener('click', () =>	{
 						eraseCookie('uid');
 					}
 					setCookie('uid', user.uid, 7);
-					alert(getCookie("uid")+"\nuid:"+user.uid);
-					alert("SONO DOPO AL REDIRECT NELLA SUCCESS");
 					window.location.replace(localHost+"/home");
 				},
 			  error: function (e) {
