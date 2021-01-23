@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,8 +35,7 @@ public class RechargeController {
 	private CardRepository cardRepository;
 
 	@PostMapping(path = "/add")
-	ResponseEntity<Recharge> addRecharge(@RequestBody Recharge recharge) {
-
+	@ResponseBody ResponseEntity<Recharge> addRecharge(@RequestBody Recharge recharge) {
 		Account current_account = accountRepository.findById(recharge.getAccount()).orElseThrow(
 				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Unable to find user")));
 

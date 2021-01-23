@@ -15,9 +15,11 @@ import org.springframework.web.server.ResponseStatusException;
 import it.urss.payball8.model.Account;
 import it.urss.payball8.model.Colletta;
 import it.urss.payball8.model.Contribute;
+import it.urss.payball8.model.Transaction;
 import it.urss.payball8.repository.AccountRepository;
 import it.urss.payball8.repository.CollettaRepository;
 import it.urss.payball8.repository.ContributeRepository;
+import it.urss.payball8.repository.TransactionRepository;
 
 @RestController
 @RequestMapping(path = "/contribute")
@@ -32,6 +34,9 @@ public class ContributeController {
 
 	@Autowired
 	private ContributeRepository contributeRepository;
+
+	@Autowired
+	private TransactionRepository  transactionRepository;
 
 	@PostMapping(path = "/pay")
 	ResponseEntity<Colletta> payColletta(@RequestBody Contribute contribute) {
@@ -48,8 +53,16 @@ public class ContributeController {
 			current_account.setBalance(current_account.getBalance() - current_colletta.getQuote());
 			current_colletta.setAmount_temp(current_colletta.getAmount_temp() + current_colletta.getQuote());
 		}
-		if (current_colletta.getAmount() >= current_colletta.getAmount_temp())
+		if (current_colletta.getAmount_temp() >= current_colletta.getAmount())
 			sendCollettaTobeneficiary(current_colletta);
+		
+		Transaction transaction = new Transaction();
+		transaction.setAmount(current_colletta.getQuote());
+		transaction.setCategory("Colletta inviata a:" + current_colletta.getBeneficiary());
+		transaction.setSender(current_account.getId());
+		transaction.setRecipient(current_colletta.getBeneficiary());
+		
+		ResponseEntity.ok(transactionRepository.save(transaction));
 
 		ResponseEntity.ok(accountRepository.save(current_account));
 		return ResponseEntity.ok(collettaRepository.save(current_colletta));
@@ -69,7 +82,7 @@ public class ContributeController {
 
 		current_colletta.setAmount(current_colletta.getAmount() - current_colletta.getQuote());
 
-		if (current_colletta.getAmount() >= current_colletta.getAmount_temp())
+		if (current_colletta.getAmount_temp() >= current_colletta.getAmount())
 			sendCollettaTobeneficiary(current_colletta);
 
 		contributeRepository.deleteByContributorAndColletta(contribute.getContributor(), contribute.getColletta());
@@ -78,7 +91,22 @@ public class ContributeController {
 	private void sendCollettaTobeneficiary(Colletta colletta) {
 		Account beneficiary = accountRepository.findById(colletta.getBeneficiary()).orElseThrow(
 				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user_beneficiaty"));
+
 		beneficiary.setBalance(beneficiary.getBalance() + colletta.getAmount_temp());
+		
+		String list_colletta = "";
+		for(Contribute contribute: contributeRepository.findAllBycolletta(colletta.getId())) {
+			list_colletta += "id: " + contribute.getContributor() + " , "; 
+		}
+		
+		Transaction transaction = new Transaction();
+		transaction.setAmount(colletta.getAmount_temp());
+		transaction.setCategory("Colletta ricevuta da: " + list_colletta);
+		transaction.setRecipient(colletta.getBeneficiary());
+		transaction.setDatetime(colletta.getDatetime());
+	
+		ResponseEntity.ok(transactionRepository.save(transaction));
+
 		ResponseEntity.ok(accountRepository.save(beneficiary));
 	}
 

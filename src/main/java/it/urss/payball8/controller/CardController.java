@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.urss.payball8.model.Card;
@@ -36,26 +36,27 @@ public class CardController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showLoginPage() {
-		return "Carte";
+		return "carte";
 	}
 
 	@PostMapping(path = "/myCard")
-	List<Card> getAllMyCard(@RequestBody JSONObject id) {
-		logger.info("GET ALL MY CARD");
+	@ResponseBody List<Card> getAllMyCard(@RequestBody JSONObject id) {
 		String id_long = id.getAsString("id");
+		
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
-		return cardRepository.findAllByaccount(id_long);
+		logger.info("GET ALL MY CARD"+ id_long);
+		
+		return cardRepository.findAllByAccount(id_long);
 	}
 
 	@PostMapping(path = "/add")
-	ResponseEntity<Card> addCard(@RequestBody Card card) {
+	@ResponseBody ResponseEntity<Card> addCard(@RequestBody Card card) {
 		accountRepository.findById(card.getAccount())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 		logger.info("ADD CARD TO ACCOUNT");
 		card.setHolder(card.getHolder().trim().toUpperCase());
 		return ResponseEntity.ok(cardRepository.save(card));
-
 	}
 
 	@DeleteMapping(path = "/deleteCard/{id}")

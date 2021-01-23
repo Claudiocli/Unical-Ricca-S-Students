@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <!doctype html>
-    <html lang="en">
+    <html lang="it">
 
     <head>
         <!-- Required meta tags -->
@@ -33,17 +33,17 @@
                                 </li>
                                 <li class="nav-item">
                                     <a id="riepilogo" class="nav-link nav-link-color"
-                                        href="../Riepilogo/Home.html">Riepilogo</a>
+                                        href="http://localhost:9090/home">Riepilogo</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="carte" class="nav-link nav-link-color" href="../Carte/carte.html">Carte</a>
+                                    <a id="carte" class="nav-link nav-link-color" href="http://localhost:9090/card">Carte</a>
                                 </li>
                                 <li class="nav-item">
                                     <a id="storico" class="nav-link nav-link-color"
-                                        href="../Storico/Storico.html">Storico</a>
+                                        href="http://localhost:9090/storico">Storico</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="aiuto" class="nav-link nav-link-color" href="../Aiuto/Aiuto.html">Aiuto</a>
+                                    <a id="aiuto" class="nav-link nav-link-color" href="http://localhost:9090/aiuto">Aiuto</a>
                                 </li>
                             </ul>
                         </div>
@@ -52,8 +52,8 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <button type="button" class="btn esci-font" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal2">
+                                    <button type="button" class="btn esci-font" id="bottoneGestioneAccount"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                                             fill="currentColor" class="bi bi-gear icons-navbar-color"
                                             viewBox="0 0 16 16">
@@ -74,81 +74,69 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <table class="table memberListColor table-striped table-hover">
-                                                        <tr>
-                                                            <td>Nome</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Cognome</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td data-bs-toggle="modal" data-bs-target="#exampleModal3">
-                                                                Password
-                                                            </td>
-                                                            <div class="modal fade" id="exampleModal3" tabindex="-1"
-                                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="exampleModalLabel">
-                                                                                Password</h5>
-                                                                            <button type="button" class="btn-close"
-                                                                                data-bs-dismiss="modal"
-                                                                                aria-label="Close"></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <form>
-                                                                                <div class="mb-3">
-                                                                                    <label for="exampleInputEmail1"
-                                                                                        class="form-label">Vecchia
-                                                                                        Password</label>
-                                                                                    <input type="email"
-                                                                                        class="form-control"
-                                                                                        id="exampleInputEmail1"
-                                                                                        aria-describedby="emailHelp">
-                                                                                    <div id="emailHelp"
-                                                                                        class="form-text">
-                                                                                        Noi non condividiamo i tuoi dati
-                                                                                        sensibili con nessuno.</div>
-                                                                                </div>
-                                                                                <div class="mb-3">
-                                                                                    <label for="exampleInputPassword1"
-                                                                                        class="form-label">Nuova
-                                                                                        Password</label>
-                                                                                    <input type="password"
-                                                                                        class="form-control"
-                                                                                        id="exampleInputPassword1">
-                                                                                </div>
-                                                                                <div class="mb-3">
-                                                                                    <label for="exampleInputPassword1"
-                                                                                        class="form-label">Conferma
-                                                                                        Password</label>
-                                                                                    <input type="password"
-                                                                                        class="form-control"
-                                                                                        id="exampleInputPassword1">
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-bs-dismiss="modal">Chiudi</button>
-                                                                            <button type="button"
-                                                                                class="btn chiudi-gestioneAccount">Applica</button>
+                                                        <tbody id="corpoGestioneAccount">
+                                                            <tr>
+                                                                <div class="modal fade" id="exampleModal3" tabindex="-1"
+                                                                    aria-labelledby="exampleModalLabel"
+                                                                    aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title"
+                                                                                    id="exampleModalLabel">
+                                                                                    Password</h5>
+                                                                                <button type="button" class="btn-close"
+                                                                                    data-bs-dismiss="modal"
+                                                                                    aria-label="Close"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form>
+                                                                                    <div class="mb-3">
+                                                                                        <label for="exampleInputEmail1"
+                                                                                            class="form-label">Vecchia
+                                                                                            Password</label>
+                                                                                        <input type="email"
+                                                                                            class="form-control"
+                                                                                            id="exampleInputEmail1"
+                                                                                            aria-describedby="emailHelp">
+                                                                                        <div id="emailHelp"
+                                                                                            class="form-text">
+                                                                                            Noi non condividiamo i tuoi
+                                                                                            dati sensibili con nessuno.
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label
+                                                                                            for="exampleInputPassword1"
+                                                                                            class="form-label">Nuova
+                                                                                            Password</label>
+                                                                                        <input type="password"
+                                                                                            class="form-control"
+                                                                                            id="exampleInputPassword1">
+                                                                                    </div>
+                                                                                    <div class="mb-3">
+                                                                                        <label
+                                                                                            for="exampleInputPassword1"
+                                                                                            class="form-label">Conferma
+                                                                                            Password</label>
+                                                                                        <input type="password"
+                                                                                            class="form-control"
+                                                                                            id="exampleInputPassword1">
+                                                                                    </div>
+                                                                                </form>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button"
+                                                                                    class="btn btn-secondary"
+                                                                                    data-bs-dismiss="modal">Chiudi</button>
+                                                                                <button type="button"
+                                                                                    class="btn chiudi-gestioneAccount">Applica</button>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>ID</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Luogo di Nascita</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Data di Nascita</td>
-                                                        </tr>
+                                                            </tr>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                                 <div class="modal-footer">
@@ -212,7 +200,8 @@
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center" id="pagination">
                             <li class="page-item" id="Prec">
-                                <a class="page-link nav-bar-pagination" href="javascript:precedente()" tabindex="-1">Precedente</a>
+                                <a class="page-link nav-bar-pagination" href="javascript:precedente()"
+                                    tabindex="-1">Precedente</a>
                             </li>
                             <li class="page-item" id="Pros">
                                 <a class="page-link nav-bar-pagination" href="javascript:prossima()">Prossima</a>
@@ -249,7 +238,7 @@
                                     d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z" />
                             </svg>
                             <h3>Veloce</h3>
-                            <p class="lead mb-0 text-bold"> Certificato come conto virtuale più rapido in Europa.</p>
+                            <p class="lead mb-0 text-bold"> Certificato come conto virtuale piu' rapido in Europa.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 ">
@@ -261,7 +250,7 @@
                                 <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
                             </svg>
                             <h3>Sicuro</h3>
-                            <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno può accedere ai
+                            <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno puo' accedere ai
                                 vostri
                                 dati sensibili ;-) .</p>
                         </div>
