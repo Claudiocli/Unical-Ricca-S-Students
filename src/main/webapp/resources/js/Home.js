@@ -232,3 +232,76 @@ function getCookie(name) {
 function eraseCookie(name) {   
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
+
+//L.Russo - funzione per settare Cookie con scadenza variabile
+function setCookie(cname,cvalue,exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+// L.Russo - funzione per creare colletta -- datetime dovrebbe essere la data di scadenza della colletta e non la data di creazione --> chiedere info
+function createColletta(){
+    var idUser = getCookie("uid");
+    var datetime = getDateTime();
+    var quote = document.getElementById("ImportoInputLabel");
+    var beneficiary = document.getElementById("TagInputLabel");
+    // recupero la lista dei partecipanti alla colletta dal cookie
+    var list_id = JSON.parse(getCookie("list_id"));
+    // aggiungiamo l'utente che crea la colletta nella lista dei partecipanti
+    list_id.push(idUser);
+    console.log(idUser);
+
+    if (idUser) {
+        var data = {
+            datetime: datetime,
+            quote: quote,
+            beneficiary: beneficiary,
+            list_id: list_id
+        }
+        $.ajax({
+            url: 'http://localhost:9090/colletta/new',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (risposta) {
+                console.log(risposta)
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+        eraseCookie("list_id");
+    }
+}
+
+// L.Russo - funzione che ad ogni mungiuta del bottone Aggiungi nella modale della colletta aggiunge l'id nel cookie
+function addContributor(){
+    var list = JSON.parse(getCookie("list_id"));
+    if(list != null){
+        list.push(document.getElementById(/*id dell'input del tag_id??*/));
+        setCookie("list_id", JSON.stringify(list),1);
+    }
+    else {
+        var list = [];
+        list.push(document.getElementById(/*id dell'input del tag_id??*/));
+        setCookie("list_id", JSON.stringify(list),1);
+    }
+}
+
+// L.Russo - funzione per calcolare datatime
+function getDateTime(){
+    var data = new Date();
+    var anno, mese, giorno, ore, minuti, secondi;
+    anno = data.getFullYear();
+    mese = data.getMonth + 1;
+    giorno = data.getDate();
+    ore = data.getHours();
+    minuti = data.getMinutes();
+    secondi = data.getSeconds();
+
+    var finalDate = giorno + "-" + mese + "-" + anno + " " + ore + ":" + minuti + " " + secondi;
+    
+    return finalDate;
+}
