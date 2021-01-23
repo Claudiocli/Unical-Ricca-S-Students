@@ -74,3 +74,13 @@ function getCookie(name) {
 function eraseCookie(name) {   
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
+
+// Session controll
+let isLogged=getCookie("uid");
+if (isLogged)	{
+	window.location.replace(localHost+"/home");
+}
+else
+{
+	window.location.replace(localHost+"/login");
+}
