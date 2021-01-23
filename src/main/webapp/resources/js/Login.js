@@ -1,4 +1,4 @@
-var debug=true;
+var debug=false;
 // Util variables
 let localHost="http://localHost:9090";
 let toggleSignupButton=document.getElementById("toggle-signup");
@@ -41,7 +41,10 @@ googleButton.addEventListener('click', () =>	{
 		while (fullName.length>0)	{
 			lastName+" "+fullName.shift();
 		}
-		alert(user.uid);
+		if (debug)	{
+			alert(user.uid);
+		}
+		// FIXME: error calling the server
 		let json={
 			"id": user.uid,
 			"email": user.email,
@@ -57,13 +60,24 @@ googleButton.addEventListener('click', () =>	{
 			type: "POST",
 			  contentType: "application/json",
 			  url: "/account/add",
-			  data: json,
+			  data: JSON.stringify(json),
 			  dataType: 'json',
 			  cache: false,
 			  timeout: 600000,
 			success: function (data) {
 					if (debug)	{
 						alert("success");
+					}
+					// Cookie handling
+					let c=getCookie('uid');
+					if (c)	{
+						// Refresh existing cookie
+						eraseCookie('uid');
+						setCookie('uid', user.uid, 7);
+					}
+					else	{
+						// Setting a cookie for the user with expiration date by a week
+						setCookie('uid', user.uid, 7);
 					}
 					window.location.replace(localHost+"/home");
 				},
@@ -102,10 +116,11 @@ loginButton.addEventListener('click', ()	=>	{
 		// Cookie handling
 		let c=getCookie('uid');
 		if (c)	{
-			// TODO: handle with existing cookie
+			// Refresh existing cookie
+			eraseCookie('uid');
+			setCookie('uid', user.user.uid, 7);
 		}
 		else	{
-			// TODO: handle with no cookie
 			// Setting a cookie for the user with expiration date by a week
 			setCookie('uid', user.user.uid, 7);
 		}
@@ -156,8 +171,16 @@ signupButton.addEventListener('click', ()	=>	{
 			let dob=document.getElementById("dob-input").value;
 			
 			// Cookie handling
-			// Set a cookie for the new user
-			setCookie('uid', user.user.uid, 7);
+			let c=getCookie('uid');
+			if (c)	{
+				// Refresh existing cookie
+				eraseCookie('uid');
+				setCookie('uid', user.user.uid, 7);
+			}
+			else	{
+				// Setting a cookie for the user with expiration date by a week
+				setCookie('uid', user.user.uid, 7);
+			}
 
 			let json={
 				"id": user.user.uid,
