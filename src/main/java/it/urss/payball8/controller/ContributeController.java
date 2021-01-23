@@ -34,7 +34,7 @@ public class ContributeController {
 
 	@Autowired
 	private ContributeRepository contributeRepository;
-	
+
 	@Autowired
 	private TransactionRepository  transactionRepository;
 
@@ -63,7 +63,7 @@ public class ContributeController {
 		transaction.setRecipient(current_colletta.getBeneficiary());
 		
 		ResponseEntity.ok(transactionRepository.save(transaction));
-		
+
 		ResponseEntity.ok(accountRepository.save(current_account));
 		return ResponseEntity.ok(collettaRepository.save(current_colletta));
 	}
@@ -81,7 +81,7 @@ public class ContributeController {
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
 		current_colletta.setAmount(current_colletta.getAmount() - current_colletta.getQuote());
-		
+
 		if (current_colletta.getAmount_temp() >= current_colletta.getAmount())
 			sendCollettaTobeneficiary(current_colletta);
 
@@ -91,7 +91,7 @@ public class ContributeController {
 	private void sendCollettaTobeneficiary(Colletta colletta) {
 		Account beneficiary = accountRepository.findById(colletta.getBeneficiary()).orElseThrow(
 				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user_beneficiaty"));
-		
+
 		beneficiary.setBalance(beneficiary.getBalance() + colletta.getAmount_temp());
 		
 		String list_colletta = "";
@@ -106,6 +106,7 @@ public class ContributeController {
 		transaction.setDatetime(colletta.getDatetime());
 	
 		ResponseEntity.ok(transactionRepository.save(transaction));
+
 		ResponseEntity.ok(accountRepository.save(beneficiary));
 	}
 

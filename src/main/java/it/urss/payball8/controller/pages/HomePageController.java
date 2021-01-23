@@ -35,7 +35,7 @@ public class HomePageController {
 	public String redirectToLogin()	{
 		return "Login";
 	}
-
+  
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String showLoginPage() {
 		return "Login";
