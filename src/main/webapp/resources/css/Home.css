@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden;
+}
 .icons-navbar-color {
   color: white;
 }
@@ -16,7 +19,7 @@
   background-color: #001463;
   color: white;
 }
-.euro-label{
+.euro-label {
   background-color: #4bbe58;
   color: white;
 }
@@ -33,10 +36,10 @@
 .saldo-font {
   font-size: 2rem;
 }
-.padding-invia{
+.padding-invia {
   padding-top: 2rem;
 }
-.font-invia-label{
+.font-invia-label {
   width: 5rem !important;
 }
 .padding-richiedi {
@@ -51,7 +54,7 @@
   color: black;
   border: 1px double #96d99f !important;
 }
-.submit-font{
+.submit-font {
   background-color: #4bbe58;
 }
 .card-font-color {
@@ -85,7 +88,7 @@
 .list-inline-item > a {
   color: black;
 }
-.serch-button-font{
+.serch-button-font {
   background-color: #41b450;
 }
 .search-input-dim {
