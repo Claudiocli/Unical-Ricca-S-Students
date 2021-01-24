@@ -28,7 +28,7 @@ function initSaldo() {
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (risposta) {
-                saldo = risposta.balance
+                saldo = risposta.balance;
                 $("#saldo").text(saldo.toFixed(2) + " Euro");
             },
             error: function (err) {
