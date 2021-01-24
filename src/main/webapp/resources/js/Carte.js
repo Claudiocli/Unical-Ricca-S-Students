@@ -120,13 +120,13 @@ function getDateTime(){
     var data = new Date();
     var anno, mese, giorno, ore, minuti, secondi;
     anno = data.getFullYear();
-    mese = data.getMonth + 1;
+    mese = data.getMonth() + 1;
     giorno = data.getDate();
     ore = data.getHours();
     minuti = data.getMinutes();
     secondi = data.getSeconds();
 
-    var finalDate = giorno + "-" + mese + "-" + anno + " " + ore + ":" + minuti + " " + secondi;
+    var finalDate = giorno + "-" + mese + "-" + anno + " " + ore + ":" + minuti + ":" + secondi;
     
     return finalDate;
 }
@@ -167,10 +167,8 @@ function insertCard(){
 
 // Session controll
 let isLogged=getCookie("uid");
-if (isLogged)	{
-	window.location.replace(localHost+"/home");
-}
-else
-{
+let localHost="http://localHost:9090";
+
+if (!isLogged)	{
 	window.location.replace(localHost+"/login");
 }

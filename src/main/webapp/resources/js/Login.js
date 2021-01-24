@@ -396,6 +396,12 @@ function eraseCookie(name) {
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
+// Session controll
+let isLogged=getCookie("uid");
+if (isLogged)	{
+	window.location.replace(localHost+"/home");
+}
+
 // Online - Offline status check
 /*	WIP - @Claudiocli
 const checkOnlineStatus = async () =>  {
@@ -411,10 +417,7 @@ const checkOnlineStatus = async () =>  {
 */
 // Handling dc during an operation
 window.addEventListener('offline', ()	=>	{
-	// Creating a JSON to store the current operation data in a cookie
-	let jsonDataOperation =	{
-		// TODO: actually create the json
-	};
+	// A JSON will be created to store the current operation data in a cookie
 	setCookie('lastOperationData', jsonDataOperation, 1000*60, true);
 	// TODO: redirect to dc error page?
 });
