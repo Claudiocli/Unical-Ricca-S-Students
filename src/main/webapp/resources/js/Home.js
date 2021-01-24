@@ -14,7 +14,6 @@ $(document).ready(function () {
 function initSaldo() {
 
     var idUser = getCookie("uid");
-    console.log(idUser);
 
     var saldo = 0;
 
@@ -153,7 +152,6 @@ function getIdAccount(){
 
 function popolaListaAmici() {
     var idUser = getCookie("uid");
-    console.log(idUser);
     if (idUser) {
         var data = {
             id: idUser
@@ -164,13 +162,12 @@ function popolaListaAmici() {
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (risposta) {
-                console.log(risposta)
                 $("#corpoListaAmici").html("");
                 for (var i = 0; i < risposta.length; i++) {
                     var ciccia = ""
-                    ciccia += "<tr>"
-                    ciccia += "<td>" + risposta[i].id + "</td>"
-                    ciccia += "<td>" + risposta[i].name + " " + risposta[i].surname + "</td>"
+                    ciccia += "<tr class=\"row-amico\">"
+                    ciccia += "<td class=\"row-info-amico\">" + risposta[i].id + "</td>"
+                    ciccia += "<td class=\"row-info-amico\">" + risposta[i].name + " " + risposta[i].surname + "</td>"
                     ciccia += "</tr>"
                     $("#corpoListaAmici").append(ciccia)
                 }

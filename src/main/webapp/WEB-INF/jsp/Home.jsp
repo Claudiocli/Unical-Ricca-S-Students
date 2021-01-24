@@ -175,7 +175,7 @@
 	</nav>
 
 	<!-- Center section -->
-	<div class="banner banner-color">
+	<div class="container-fluid banner banner-color">
 		<div class="row h-100">
 			<div class="col-lg-2 col-md-2 h-100">
 				<div class="row details-list-left"></div>
@@ -366,7 +366,7 @@
 					<div class="col-lg-1 col-md-1 h-100"></div>
 				</div>
 			</div>
-			<div class="col-lg-2 col-md-2 h-100">
+			<div id="sezione-lista-amici" class="col-lg-2 col-md-2 h-100">
 				<div class="row">
 					<ul class="list-inline mb-2 list-font">
 						<li class="list-item">
@@ -384,7 +384,8 @@
 									</div>
 								</div>
 						</li>
-						<li class="list-inline-item"><a href="#">
+                        <li class="list-inline-item">
+                            <a href="#">
 								<button type="button" class="serch-button-font"
 									id="bottoneCercaAmico">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -395,8 +396,10 @@
 											d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
                                         </svg>
 								</button>
-						</a></li>
-						<li class="list-inline-item"><a href="#">
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
 								<button type="button" class="serch-button-font"
 									id="bottoneAggiungiAmico">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -406,10 +409,11 @@
 											d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
                                         </svg>
 								</button>
-						</a></li>
+                            </a>
+                        </li>
 					</ul>
 				</div>
-				<div class="row details-list-right">
+				<div id="amici-in-lista" class="row details-list-right">
 					<table class="table memberListColor table-striped table-hover">
 						<tbody id="corpoListaAmici">
 

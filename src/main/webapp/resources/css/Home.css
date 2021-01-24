@@ -132,3 +132,12 @@ footer {
     padding-bottom: 4rem;
   }
 }
+#sezione-lista-amici {
+  padding-right: 2.5%;
+}
+#amici-in-lista {
+  border: 5px solid #87d490;
+}
+.row-amico {
+  font-size: 11px !important;
+}
