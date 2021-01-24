@@ -289,9 +289,11 @@ function createColletta(){
 
     if (idUser) {
         var data = {
-            datetime: datetime,
-            quote: quote,
-            beneficiary: beneficiary,
+            colletta:{
+                datetime: datetime,
+                quote: quote,
+                beneficiary: beneficiary
+            },
             list_id: list_id
         }
         $.ajax({
