@@ -182,7 +182,18 @@
 			</div>
 			<div class="col-lg-8 col-md-8 h-100">
 				<div class="row padding-buongiorno">
-					<h3 class="card-title text-lg-left">Buongiorno.</h3>
+					<h3 class="card-title text-lg-left">
+						<script>
+							if (new Date().getHours() <= 16)
+								document.write("BUONGIORNO "
+										+ sessionStorage.getItem("nomeUtonto")
+										+ ".");
+							else
+								document.write("BUONASERA "
+										+ sessionStorage.getItem("nomeUtonto")
+										+ ".");
+						</script>
+					</h3>
 				</div>
 				<div class="row">
 					<div class="col-lg-5 col-md-5 h-100">
@@ -279,54 +290,46 @@
 																</div>
 															</div>
 														</div>
-                                                    </div>
-                                                    <button type="button" class="btn card-button-options-font "
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#exampleModal11">Ricarica</button>
-                                                        <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal11" tabindex="-1"
-                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header chiudi-gestioneAccount">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">
-                                                                            Ricarica Saldo</h5>
-                                                                        <button type="button" class="btn-close"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="input-group mb-3">
-                                                                            <span
-                                                                                class="input-group-text euro-label">#</span>
-                                                                            <input id="panInputLabel" type="text"
-                                                                                class="form-control"
-                                                                                placeholder="Pan-Carta"
-                                                                                aria-label="Username"
-                                                                                aria-describedby="basic-addon1">
-                                                                        </div>
-                                                                        <div class="input-group">
-                                                                            <input id="ImportoInputLabel2" type="text"
-                                                                                class="form-control" placeholder="0.00">
-                                                                            <span
-                                                                                class="input-group-text euro-label">Euro</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">Annulla</button>
-                                                                        <a class="chiudi-gestioneAccount"
-                                                                            href="http://localhost:9090/home">
-                                                                            <button id="bottoneRicaricaSaldo"
-                                                                                type="button"
-                                                                                class="btn chiudi-gestioneAccount">
-                                                                                Ricarica
-                                                                            </button>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                    </div>
+													</div>
+													<button type="button" class="btn card-button-options-font "
+														data-bs-toggle="modal" data-bs-target="#exampleModal11">Ricarica</button>
+													<!-- Modal -->
+													<div class="modal fade" id="exampleModal11" tabindex="-1"
+														aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<div class="modal-header chiudi-gestioneAccount">
+																	<h5 class="modal-title" id="exampleModalLabel">
+																		Ricarica Saldo</h5>
+																	<button type="button" class="btn-close"
+																		data-bs-dismiss="modal" aria-label="Close"></button>
+																</div>
+																<div class="modal-body">
+																	<div class="input-group mb-3">
+																		<span class="input-group-text euro-label">#</span> <input
+																			id="panInputLabel" type="text" class="form-control"
+																			placeholder="Pan-Carta" aria-label="Username"
+																			aria-describedby="basic-addon1">
+																	</div>
+																	<div class="input-group">
+																		<input id="ImportoInputLabel2" type="text"
+																			class="form-control" placeholder="0.00"> <span
+																			class="input-group-text euro-label">Euro</span>
+																	</div>
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn btn-secondary"
+																		data-bs-dismiss="modal">Annulla</button>
+																	<a class="chiudi-gestioneAccount"
+																		href="http://localhost:9090/home">
+																		<button id="bottoneRicaricaSaldo" type="button"
+																			class="btn chiudi-gestioneAccount">Ricarica
+																		</button>
+																	</a>
+																</div>
+															</div>
+														</div>
+													</div>
 
 												</li>
 											</ul>
@@ -399,7 +402,8 @@
 															<div class="modal-footer">
 																<button type="button" class="btn btn-secondary"
 																	data-bs-dismiss="modal">Annulla</button>
-																<button type="button" id="bottoneCreaColletta" class="btn chiudi-gestioneAccount">Crea</button>
+																<button type="button" id="bottoneCreaColletta"
+																	class="btn chiudi-gestioneAccount">Crea</button>
 															</div>
 														</div>
 													</div>
@@ -432,8 +436,7 @@
 									</div>
 								</div>
 						</li>
-                        <li class="list-inline-item">
-                            <a href="#">
+						<li class="list-inline-item"><a href="#">
 								<button type="button" class="serch-button-font"
 									id="bottoneCercaAmico">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -444,10 +447,8 @@
 											d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
                                         </svg>
 								</button>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
+						</a></li>
+						<li class="list-inline-item"><a href="#">
 								<button type="button" class="serch-button-font"
 									id="bottoneAggiungiAmico">
 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -457,8 +458,7 @@
 											d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
                                         </svg>
 								</button>
-                            </a>
-                        </li>
+						</a></li>
 					</ul>
 				</div>
 				<div id="amici-in-lista" class="row details-list-right">
