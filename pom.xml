@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>15</java.version>
-		
+
 	</properties>
 
 	<dependencies>
@@ -78,6 +78,12 @@
 		<!-- Need this to compile JSP, tomcat-embed-jasper version is not working, 
 			no idea why -->
 		<dependency>
+			<groupId>net.glxn</groupId>
+			<artifactId>qrgen</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.eclipse.jdt.core.compiler</groupId>
 			<artifactId>ecj</artifactId>
 			<version>4.6.1</version>
@@ -91,8 +97,8 @@
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
-	    </dependency>
-	    
+		</dependency>
+
 	</dependencies>
 
 	<build>

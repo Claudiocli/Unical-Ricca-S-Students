@@ -277,6 +277,32 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <button type="button" id ="bottoneGestioneId_Account" class="btn card-button-options-font "
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal10">Ricevi</button>
+                                                            <div class="modal fade" id="exampleModal10" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Ricevi</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <table class="table memberListColor table-striped table-hover">
+                                                                            <tbody id="corpoGestioneId_Account">
+                                                                                
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn chiudi-gestioneAccount"
+                                                                            data-bs-dismiss="modal">Chiudi</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>   
                                                     </li>
                                                 </ul>
                                             </li>
