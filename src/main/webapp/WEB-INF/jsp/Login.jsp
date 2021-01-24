@@ -36,6 +36,9 @@
 	<main>
 		<h1>Accedi o Registrati a PayBall8</h1>
 		<div id="login-div">
+			<div id="login-hint">
+				<small>Email o Password errati</small>
+			</div>
 			<form class="form-group" id="login-form">
 				<input class="form-control" type="email" id="mail-login-input" placeholder="Email" required>
 				<br/>
@@ -94,5 +97,13 @@
 			<button type="submit" id="register-button">Registrati</button>
 		</div>
 	</main>
+	<div id="cookie-pop-up">
+		<div id="pop-up-content">
+			<h2>Il nostro sito usa alcuni cookie essenziali per fornirti una corretta e sicura esperienza.</h2>
+			<p>Nota che non potrai proseguire nell'uso del sito non accettandoli. Per favore, accettane l'utilizzo</p>
+			<button type="submit" id="accept-cookies">Accetta</button>
+			<button type="button" id="refuse-cookies">Rifiuta</button>
+		</div>
+	</div>
 </body>
 </html>

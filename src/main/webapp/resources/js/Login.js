@@ -5,12 +5,25 @@ let toggleSignupButton=document.getElementById("toggle-signup");
 let loginButton=document.getElementById("login-button");
 let signupButton=document.getElementById("register-button");
 // Cookie policy consent
+document.getElementById("accept-cookies").addEventListener('click', ()	=>	{
+	// Accepting the policy the user will be able to continue in the site
+	setCookie('cookie_policy', true);
+	// Hiding the popup
+	hidePopUp();
+});
+function showPopUp()	{
+	let popup=document.getElementById("cookie-pop-up");
+	popup.style.display="block";
+}
+function hidePopUp()	{
+	let popup=document.getElementById("cookie-pop-up");
+	popup.style.display="none";
+}
 window.onload=()	=>	{
+	// If the policy was not accepted
 	if (!getCookie('cookie_policy'))	{
-		const consent=confirm('This site use essential cookies to provide you a greater experience, would you accept our policy?');
-		if (consent)	{
-			setCookie('coockie_policy', true);
-		}
+		// Display cookiePopUp
+		showPopUp();
 	}
 };
 // Firebase initialization
@@ -64,7 +77,6 @@ googleButton.addEventListener('click', () =>	{
 			// Made up date, TODO: implement with Google People API - needs Google approval
 		}
 		// Sending data to db
-		alert("SONO PRIMA DELLA AJAX");
 		$.ajax({
 			type: "POST",
 			  contentType: "application/json",
@@ -87,7 +99,6 @@ googleButton.addEventListener('click', () =>	{
 					window.location.replace(localHost+"/home");
 				},
 			  error: function (e) {
-				alert("SONO NELL'ERROR");
 					if (debug)	{
 						alert("Error Code: "+e.errorCode+"\nError Message: "+e.errorMessage);
 					}
@@ -134,7 +145,16 @@ loginButton.addEventListener('click', ()	=>	{
 	.catch((error) => {
 		var errorCode = error.code;
 		var errorMessage = error.message;
-		window.alert("Error "+errorCode+"\n"+errorMessage); 
+		if (debug)	{
+			window.alert("Error "+errorCode+"\n"+errorMessage); 
+		}
+		let mailField=document.getElementById("mail-login-input");
+		let passwordField=document.getElementById("password-login-input");
+
+		mailField.style.borderColor="red";
+		passwordField.style.borderColor="red";
+
+		document.getElementById("login-hint").style.display="block";
 	});
 });
 // Toggle div for reset password
