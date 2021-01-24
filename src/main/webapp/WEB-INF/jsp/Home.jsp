@@ -182,18 +182,7 @@
 			</div>
 			<div class="col-lg-8 col-md-8 h-100">
 				<div class="row padding-buongiorno">
-					<h3 class="card-title text-lg-left">
-						<script>
-							if (new Date().getHours() <= 16)
-								document.write("BUONGIORNO "
-										+ sessionStorage.getItem("nomeUtonto")
-										+ ".");
-							else
-								document.write("BUONASERA "
-										+ sessionStorage.getItem("nomeUtonto")
-										+ ".");
-						</script>
-					</h3>
+					<h3 id="buongiornissimo" class="card-title text-lg-left" />
 				</div>
 				<div class="row">
 					<div class="col-lg-5 col-md-5 h-100">

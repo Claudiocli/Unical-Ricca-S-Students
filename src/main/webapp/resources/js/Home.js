@@ -29,7 +29,11 @@ function initSaldo() {
             contentType: "application/json",
             success: function (risposta) {
                 saldo = risposta.balance;
-                sessionStorage.setItem("nomeUtonto", risposta.name);
+                if (new Date().getHours() <= 16)    {
+                    document.getElementById("buongiornissimo").innerHTML="BUONGIORNO "+risposta.name;
+                }   else    {
+                    document.getElementById("buongiornissimo").innerHTML="BUONASERA "+risposta.name;
+                }
                 $("#saldo").text(saldo.toFixed(2) + " Euro");
             },
             error: function (err) {
