@@ -2,6 +2,7 @@ $(document).ready(function () {
     initSaldo()
     popolaListaAmici()
     document.getElementById("bottoneGestioneAccount").addEventListener("click", popolaGestioneAccount);
+    document.getElementById("bottoneGestioneId_Account").addEventListener("click", getIdAccount);
     document.getElementById("bottoneCercaAmico").addEventListener("click", cercaAmico);
     document.getElementById("bottoneAggiungiAmico").addEventListener("click", aggiungiAmico);
     document.getElementById("bottoneInviaTransizione").addEventListener("click", inviaTransizione);
@@ -110,6 +111,36 @@ function popolaGestioneAccount() {
                 ciccia += "<td>" + risposta.surname + "</td>"
                 ciccia += "</tr>"
                 $("#corpoGestioneAccount").append(ciccia)
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+}
+
+function getIdAccount(){
+    var idUser = getCookie("uid");
+    console.log(idUser);
+    if (idUser) {
+        var data = {
+            id: idUser
+        }
+        $.ajax({
+            url: 'http://localhost:9090/account/me',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (risposta) {
+                $("#corpoGestioneId_Account").html("");
+                console.log(risposta)
+                var ciccia = ""
+                ciccia += "<tr>"
+                ciccia += "<td>" + "ID" + "</td>"
+                ciccia += "<td>" + idUser + "</td>"
+                ciccia += "</tr>"
+              
+                $("#corpoGestioneId_Account").append(ciccia)
             },
             error: function (err) {
                 console.log(err);
