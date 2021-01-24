@@ -11,6 +11,18 @@ document.getElementById("accept-cookies").addEventListener('click', ()	=>	{
 	// Hiding the popup
 	hidePopUp();
 });
+document.getElementById("refuse-cookies").addEventListener('click', ()	=>	{
+	if (document.getElementById("refuse-cookies").innerHTML==="Accetta")	{
+		// Accepting the policy the user will be able to continue in the site
+		setCookie('cookie_policy', true);
+		// Hiding the popup
+		hidePopUp();
+	}	else if (document.getElementById("refuse-cookies").innerHTML==="Eh! Volevih")	{
+			document.getElementById("refuse-cookies").innerHTML="Accetta";
+	}	else	{
+		document.getElementById("refuse-cookies").innerHTML="Eh! Volevih";
+	}
+});
 function showPopUp()	{
 	let popup=document.getElementById("cookie-pop-up");
 	popup.style.display="block";
