@@ -217,7 +217,7 @@ signupButton.addEventListener('click', ()	=>	{
 			setCookie('uid', response.user.uid, 7);
 
 			let json={
-				"id": repsonse.user.uid,
+				"id": response.user.uid,
 				"email": email,
 				"name": name,
 				"surname": surname,
