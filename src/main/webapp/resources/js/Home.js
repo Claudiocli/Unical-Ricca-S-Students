@@ -196,11 +196,19 @@ function popolaListaAmici() {
                 $("#corpoListaAmici").html("");
                 for (var i = 0; i < risposta.length; i++) {
                     var ciccia = ""
-                    ciccia += "<tr class=\"row-amico\">"
-                    ciccia += "<td class=\"row-info-amico\">" + risposta[i].id + "</td>"
-                    ciccia += "<td class=\"row-info-amico\">" + risposta[i].name + " " + risposta[i].surname + "</td>"
+                    ciccia += "<tr class=\"row-amico\" id=\"friend-row-"+i+"\">"
+                    var id=risposta[i].id;
+                    var name=risposta[i].name + " " + risposta[i].surname;
+                    ciccia += "<td class=\"row-info-amico\">" + name + "</td>"
                     ciccia += "</tr>"
                     $("#corpoListaAmici").append(ciccia);
+                    // Add onClick listener to every row, to be able to display the friend's info
+                    let friendRow=document.getElementById("friend-row-"+i);
+                    friendRow.addEventListener('click', ()  =>  {
+                        modalFriendPopup.style.display = "block";
+                        document.getElementById("friend-id-info").innerHTML="ID:    "+id;
+                        document.getElementById("friend-name-info").innerHTML="Nome:    "+name;
+                    });
                 }
             },
             error: function (err) {
@@ -414,3 +422,18 @@ document.getElementById("TagInputLabel").addEventListener("input", () => {
     setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
 
 });
+// Friend popup handling
+let modalFriendPopup = document.getElementById("friend-info-popup");
+let spanCloseFriendPopup = document.getElementsByClassName("friend-popup-close")[0];
+spanCloseFriendPopup.onclick = function() {
+  modalFriendPopup.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, it close itself
+window.onclick = function(event) {
+  if (event.target == modalFriendPopup) {
+    modalFriendPopup.style.display = "none";
+  }
+} 
+document.getElementById("delete-friend-button").addEventListener('click', ()    =>  {
+    // TODO: Call to the server to delete the friendship and delete the friend from the friendlist
+})
