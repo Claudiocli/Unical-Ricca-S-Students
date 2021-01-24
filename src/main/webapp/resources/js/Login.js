@@ -449,12 +449,15 @@ const checkOnlineStatus = async () =>  {
 */
 // Handling dc during an operation
 window.addEventListener('offline', ()	=>	{
+	// Setting last page visited into the cookie lastPage
+	setCookie('lastPage', "/login", 1000*60, true);
 	window.location.replace(localHost+"/error");
 });
 window.addEventListener('online', ()	=>	{
 	// Resuming the last operation with the data stored in the cookie, if that exists
 	let resume=getCookie('lastOperationData');
 	if (resume)	{
+		window.replace(localHost+getCookie("lastPage"));
 		let jsonDataOperation=JSON.parse(getCookie('lastOperationData'));
 		// Cycling through every pair key-value in the json (IDElement-ValueStored)
 		for (let key in jsonDataOperation)	{
