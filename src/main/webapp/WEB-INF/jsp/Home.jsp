@@ -202,7 +202,7 @@
 								<div class="card-header">
 									<ul class="nav nav-tabs card-header-tabs">
 										<li class="nav-item">
-											<button type="button" class="btn card-button-options-font">Saldo</button>
+											<button type="button" class="btn card-button-options-font" disabled>Saldo</button>
 										</li>
 									</ul>
 								</div>
@@ -347,7 +347,7 @@
 									<ul class="nav nav-tabs card-header-tabs">
 										<li class="nav-item">
 											<div class="btn-group dropend">
-												<button type="button" class="btn card-button-options-font">Colletta</button>
+												<button type="button" class="btn card-button-options-font" disabled>Colletta</button>
 									</ul>
 								</div>
 								<div class="card-body card-body-text-color">
@@ -403,7 +403,7 @@
 																<button type="button" class="btn btn-secondary"
 																	data-bs-dismiss="modal">Annulla</button>
 																<button type="button" id="bottoneCreaColletta"
-																	class="btn chiudi-gestioneAccount">Crea</button>
+																	class="btn chiudi-gestioneAccount" data-bs-dismiss="modal">Crea</button>
 															</div>
 														</div>
 													</div>

@@ -2,7 +2,7 @@ $(document).ready(function(){
     popolaTabellaCarte();
     aggiungiCarta();
     document.getElementById("bottoneGestioneAccount").addEventListener("click", popolaGestioneAccount);
-    document.getElementById("bottoneAggiungiCarta").addEventListener("click", insertCard);
+    document.getElementById("bottoneAggiungiCarta").addEventListener("click", checkData);
     document.getElementById("btn-logout").addEventListener("click", logout);
   });
 
@@ -181,6 +181,20 @@ function insertCard(){
     }
 }
 
+function checkData(){
+    var pan = document.getElementById("idNumeroCarta").value;
+    var holder = document.getElementById("idIntestatario").value;
+    var expiration_date = document.getElementById("mese").value + document.getElementById("anno").value;
+    var cvv = document.getElementById("cvc").value;
+    var terminiduso = document.getElementById("exampleCheck1").checked;
+    var anno = document.getElementById("anno").value;
+    if(pan == "" || holder == "" || expiration_date == "" || cvv == "" || !terminiduso || cvv.length != 3 || pan.length != 16 || anno != 4){
+        console.log("Campi richiesti");
+    }
+    else{
+        insertCard();
+    }
+}
 // Session controll
 let isLogged=getCookie("uid");
 let localHost="http://localHost:9090";
@@ -224,3 +238,31 @@ document.getElementById("cvc").addEventListener("input", () => {
     setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
 
 });
+
+function onKeyNumeric(e) {
+    // Accetto solo numeri e backspace <-
+    if ( ((e.keyCode >= 48) && (e.keyCode <= 57)) || (e.keyCode == 8) ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function checkMese(){
+    let mese = document.getElementById("mese").value;
+    if(mese > 12){
+        document.getElementById("mese").value = "12";
+    }
+}
+
+function checkAnno(){
+    let anno = document.getElementById("anno").value;
+    if(anno.length > 3){
+        if(anno > (new Date().getFullYear()+50)){
+            document.getElementById("anno").value = "2050";
+        }
+        else if(anno < (new Date().getFullYear())){
+            document.getElementById("anno").value = new Date().getFullYear();
+        }
+    }
+}

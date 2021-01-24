@@ -215,9 +215,9 @@
 										</div>
 										<div class="mb-3">
 											<label for="exampleInputEmail1" class="form-label">Numero
-												Carta</label> <input type="text" class="form-control "
+												Carta</label> <input type="text" onkeydown="return onKeyNumeric(event);" minlength="16" maxlength = "16" class="form-control "
 												id="idNumeroCarta"
-												placeholder="XXXXX-XXXXX-XXXXX-XXXXX"
+												placeholder="XXXX-XXXX-XXXX-XXXX"
 												aria-describedby="emailHelp" required>
 											<div id="emailHelp" class="form-text">Noi non
 												condividiamo con nessuno la tua mail...</div>
@@ -228,11 +228,11 @@
 													<label for="exampleInputPassword1" class="form-label">Scadenza</label>
 													<ul class="list-inline mb-2">
 														<li class="list-inline-item scadenza-width"><input
-															type="number" class="form-control" placeholder="mm"
-															id="mese" required></li>
+															type="texte" class="form-control" placeholder="mm"
+															id="mese" maxlength = "2" oninput="checkMese()" onkeydown="return onKeyNumeric(event);" required></li>
 														<li class="list-inline-item scadenza-width"><input
-															type="number" class="form-control" placeholder="aa"
-															id="anno" required></li>
+															type="text" class="form-control" placeholder="aa"
+															id="anno" minlength="4" maxlength = "4" oninput="checkAnno()" onkeydown="return onKeyNumeric(event);" required></li>
 													</ul>
 												</div>
 											</li>
@@ -242,7 +242,7 @@
 													<ul class="list-inline mb-2">
 														<li class="list-inline-item cvc-width"><input
 															type="password" class="form-control" placeholder="***"
-															id="cvc" required></li>
+															id="cvc" onkeydown="return onKeyNumeric(event);" minlength="3" maxlength = "3" required></li>
 													</ul>
 												</div>
 											</li>
