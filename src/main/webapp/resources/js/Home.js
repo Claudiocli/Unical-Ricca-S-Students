@@ -29,7 +29,7 @@ function initSaldo() {
             contentType: "application/json",
             success: function (risposta) {
                 saldo = risposta.balance;
-                if (new Date().getHours() <= 16)    {
+                if (new Date().getHours() <= 16 && new Date().getHours() >= 4)    {
                     document.getElementById("buongiornissimo").innerHTML="BUONGIORNO "+risposta.name;
                 }   else    {
                     document.getElementById("buongiornissimo").innerHTML="BUONASERA "+risposta.name;
