@@ -64,6 +64,7 @@ googleButton.addEventListener('click', () =>	{
 			// Made up date, TODO: implement with Google People API - needs Google approval
 		}
 		// Sending data to db
+		alert("SONO PRIMA DELLA AJAX");
 		$.ajax({
 			type: "POST",
 			  contentType: "application/json",
