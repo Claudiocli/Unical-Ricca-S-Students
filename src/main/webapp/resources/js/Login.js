@@ -4,6 +4,15 @@ let localHost="http://localHost:9090";
 let toggleSignupButton=document.getElementById("toggle-signup");
 let loginButton=document.getElementById("login-button");
 let signupButton=document.getElementById("register-button");
+// Cookie policy consent
+window.onload=()	=>	{
+	if (!getCookie('cookie_policy'))	{
+		const consent=confirm('This site use essential cookies to provide you a greater experience, would you accept our policy?');
+		if (consent)	{
+			setCookie('coockie_policy', true);
+		}
+	}
+};
 // Firebase initialization
 var firebaseConfig = {
 	apiKey: "AIzaSyAlsmnuWM9U1etPRjMB3zEYhP9XXmyUn34",
@@ -386,24 +395,19 @@ function eraseCookie(name) {
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-// Session controll
-let isLogged=getCookie("uid");
-if (isLogged)	{
-	window.location.replace(localHost+"/home");
-}
-else
-{
-	window.location.replace(localHost+"/login");
-}
 // Online - Offline status check
+/*	WIP - @Claudiocli
 const checkOnlineStatus = async () =>  {
+	// As there are incompatibilities between browsers, it's needed a custom check for internet availability
+	// Can achieve that by "pinging" a trusted site (e.g. google.com) and valuating its status
     try {
-        const online = await fetch("");	// FIXME: need to find something to ping to
+        const online = await fetch("https://www.google.com");	// FIXME: need to find something to ping to
         return online.status >= 200 && online.status<300;   // Online
     } catch (error) {
         return false;   // Offline
     }
 }
+*/
 // Handling dc during an operation
 window.addEventListener('offline', ()	=>	{
 	// Creating a JSON to store the current operation data in a cookie
@@ -411,6 +415,7 @@ window.addEventListener('offline', ()	=>	{
 		// TODO: actually create the json
 	};
 	setCookie('lastOperationData', jsonDataOperation, 1000*60, true);
+	// TODO: redirect to dc error page?
 });
 window.addEventListener('online', ()	=>	{
 	// Resuming the last operation with the data stored in the cookie, if that exists
