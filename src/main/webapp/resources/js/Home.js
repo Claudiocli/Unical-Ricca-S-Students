@@ -7,6 +7,7 @@ $(document).ready(function () {
     document.getElementById("bottoneAggiungiAmico").addEventListener("click", aggiungiAmico);
     document.getElementById("bottoneInviaTransizione").addEventListener("click", inviaTransizione);
     document.getElementById("bottoneAggiungiContribuente").addEventListener("click", addContributor);
+    document.getElementById("bottoneRicaricaSaldo").addEventListener("click", ricaricaSaldo);
     document.getElementById("bottoneCreaColletta").addEventListener("click", createColletta);
     document.getElementById("btn-logout").addEventListener("click", logout);
 });
@@ -58,13 +59,42 @@ function inviaTransizione() {
         data: JSON.stringify(data),
         contentType: "application/json",
         success: function (risposta) {
-            console.log(risposta)
-            initSaldo()
+            console.log(risposta);
+            initSaldo();
         },
         error: function (err) {
             console.log(err);
         }
     });
+}
+function ricaricaSaldo(){
+    var idUser = getCookie("uid");
+    var importo = document.getElementById("ImportoInputLabel2").value;
+    var pan = document.getElementById("panInputLabel").value;
+    var datetime = getDateTime();
+
+    console.log(idUser+ importo + pan );
+    if (idUser) {
+        var data = {
+            datetime : datetime,
+            card : pan,
+            account : idUser,
+            amount: importo 
+        }
+        $.ajax({
+            url: 'http://localhost:9090/recharge/add',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (risposta) {
+                console.log(risposta);
+                initSaldo();
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
 }
 
 function popolaGestioneAccount() {
@@ -81,7 +111,7 @@ function popolaGestioneAccount() {
             contentType: "application/json",
             success: function (risposta) {
                 $("#corpoGestioneAccount").html("");
-                console.log(risposta)
+                console.log(risposta);
                 var ciccia = ""
                 ciccia += "<tr>"
                 ciccia += "<td>" + "ID" + "</td>"
@@ -111,7 +141,7 @@ function popolaGestioneAccount() {
                 ciccia += "<td>" + "Cognome" + "</td>"
                 ciccia += "<td>" + risposta.surname + "</td>"
                 ciccia += "</tr>"
-                $("#corpoGestioneAccount").append(ciccia)
+                $("#corpoGestioneAccount").append(ciccia);
             },
             error: function (err) {
                 console.log(err);
@@ -134,14 +164,14 @@ function getIdAccount(){
             contentType: "application/json",
             success: function (risposta) {
                 $("#corpoGestioneId_Account").html("");
-                console.log(risposta)
-                var ciccia = ""
-                ciccia += "<tr>"
-                ciccia += "<td>" + "ID" + "</td>"
-                ciccia += "<td>" + idUser + "</td>"
-                ciccia += "</tr>"
+                console.log(risposta);
+                var ciccia = "";
+                ciccia += "<tr>";
+                ciccia += "<td>" + "ID" + "</td>";
+                ciccia += "<td>" + idUser + "</td>";
+                ciccia += "</tr>";
               
-                $("#corpoGestioneId_Account").append(ciccia)
+                $("#corpoGestioneId_Account").append(ciccia);
             },
             error: function (err) {
                 console.log(err);
@@ -169,7 +199,7 @@ function popolaListaAmici() {
                     ciccia += "<td class=\"row-info-amico\">" + risposta[i].id + "</td>"
                     ciccia += "<td class=\"row-info-amico\">" + risposta[i].name + " " + risposta[i].surname + "</td>"
                     ciccia += "</tr>"
-                    $("#corpoListaAmici").append(ciccia)
+                    $("#corpoListaAmici").append(ciccia);
                 }
             },
             error: function (err) {
@@ -233,7 +263,7 @@ function cercaAmico() {
                         $("#corpoListaAmici").append(ciccia)
                     }
                     else if (x == "") {
-                        popolaListaAmici()
+                        popolaListaAmici();
                     }
                 }
 
@@ -286,9 +316,11 @@ function createColletta(){
 
     if (idUser) {
         var data = {
-            datetime: datetime,
-            quote: quote,
-            beneficiary: beneficiary,
+            colletta:{
+                datetime: datetime,
+                quote: quote,
+                beneficiary: beneficiary
+            },
             list_id: list_id
         }
         $.ajax({
@@ -350,13 +382,6 @@ if (!isLogged)	{
 document.getElementById("idBeneficiario").addEventListener("input", () => {
     let operationTracked = JSON.parse(getCookie("lastOperationData"));
     operationTracked["idBeneficiario"] = document.getElementById("idBeneficiario").value;
-    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-
-});
-
-document.getElementById("idQuota").addEventListener("input", () => {
-    let operationTracked = JSON.parse(getCookie("lastOperationData"));
-    operationTracked["idQuota"] = document.getElementById("idQuota").value;
     setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
 
 });
