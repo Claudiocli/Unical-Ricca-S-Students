@@ -428,7 +428,7 @@ const checkOnlineStatus = async () =>  {
 	// As there are incompatibilities between browsers, it's needed a custom check for internet availability
 	// Can achieve that by "pinging" a trusted site (e.g. google.com) and valuating its status
     try {
-        const online = await fetch("https://www.google.com");	// FIXME: need to find something to ping to
+        const online = await fetch("https://www.google.com");	// FIXME : need to find something to ping to
         return online.status >= 200 && online.status<300;   // Online
     } catch (error) {
         return false;   // Offline
@@ -437,16 +437,21 @@ const checkOnlineStatus = async () =>  {
 */
 // Handling dc during an operation
 window.addEventListener('offline', ()	=>	{
-	// A JSON will be created to store the current operation data in a cookie
-	setCookie('lastOperationData', jsonDataOperation, 1000*60, true);
-	// TODO: redirect to dc error page?
+	window.location.replace(localHost+"/error");
 });
 window.addEventListener('online', ()	=>	{
 	// Resuming the last operation with the data stored in the cookie, if that exists
 	let resume=getCookie('lastOperationData');
 	if (resume)	{
-		let jsonDataOperation=getCookie('lastOperationData');
-		// TODO: actually resume operation
+		let jsonDataOperation=JSON.parse(getCookie('lastOperationData'));
+		// Cycling through every pair key-value in the json (IDElement-ValueStored)
+		for (let key in jsonDataOperation)	{
+			// If key is an actually key of jsonDataOperation
+			if (jsonDataOperation.hasOwnProperty(key))	{
+				// Resetting the value of the element of id key to the value contained in jsonDataOperation[key]
+				document.getElementById(key).value=jsonDataOperation[key];
+			}
+		}
 	}
 	// Erasing that cookie
 	eraseCookie('lastOperationData');
