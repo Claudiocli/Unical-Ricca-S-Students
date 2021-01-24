@@ -279,7 +279,55 @@
 																</div>
 															</div>
 														</div>
-													</div>
+                                                    </div>
+                                                    <button type="button" class="btn card-button-options-font "
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#exampleModal11">Ricarica</button>
+                                                        <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal11" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header chiudi-gestioneAccount">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Ricarica Saldo</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="input-group mb-3">
+                                                                            <span
+                                                                                class="input-group-text euro-label">#</span>
+                                                                            <input id="panInputLabel" type="text"
+                                                                                class="form-control"
+                                                                                placeholder="Pan-Carta"
+                                                                                aria-label="Username"
+                                                                                aria-describedby="basic-addon1">
+                                                                        </div>
+                                                                        <div class="input-group">
+                                                                            <input id="ImportoInputLabel2" type="text"
+                                                                                class="form-control" placeholder="0.00">
+                                                                            <span
+                                                                                class="input-group-text euro-label">Euro</span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Annulla</button>
+                                                                        <a class="chiudi-gestioneAccount"
+                                                                            href="http://localhost:9090/home">
+                                                                            <button id="bottoneRicaricaSaldo"
+                                                                                type="button"
+                                                                                class="btn chiudi-gestioneAccount">
+                                                                                Ricarica
+                                                                            </button>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+
 												</li>
 											</ul>
 										</li>
