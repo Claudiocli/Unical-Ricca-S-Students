@@ -6,6 +6,8 @@ $(document).ready(function () {
     document.getElementById("bottoneCercaAmico").addEventListener("click", cercaAmico);
     document.getElementById("bottoneAggiungiAmico").addEventListener("click", aggiungiAmico);
     document.getElementById("bottoneInviaTransizione").addEventListener("click", inviaTransizione);
+    document.getElementById("bottoneAggiungiContribuente").addEventListener("click", addContributor);
+    document.getElementById("bottoneCreaColletta").addEventListener("click", createColletta);
     document.getElementById("btn-logout").addEventListener("click", logout);
 });
 
@@ -277,8 +279,8 @@ function setCookie(cname,cvalue,exdays) {
 function createColletta(){
     var idUser = getCookie("uid");
     var datetime = getDateTime();
-    var quote = document.getElementById("ImportoInputLabel");
-    var beneficiary = document.getElementById("TagInputLabel");
+    var quote = document.getElementById("idQuota").value;
+    var beneficiary = document.getElementById("idBeneficiario").value;
     // recupero la lista dei partecipanti alla colletta dal cookie
     var list_id = JSON.parse(getCookie("list_id"));
     // aggiungiamo l'utente che crea la colletta nella lista dei partecipanti
@@ -312,14 +314,15 @@ function createColletta(){
 function addContributor(){
     var list = JSON.parse(getCookie("list_id"));
     if(list != null){
-        list.push(document.getElementById(/*id dell'input del tag_id??*/));
+        list.push(document.getElementById("idContribuente").value);
         setCookie("list_id", JSON.stringify(list),1);
     }
     else {
         var list = [];
-        list.push(document.getElementById(/*id dell'input del tag_id??*/));
+        list.push(document.getElementById("idContribuente").value);
         setCookie("list_id", JSON.stringify(list),1);
     }
+    document.getElementById("idContribuente").value = "";
 }
 
 // L.Russo - funzione per calcolare datatime
@@ -345,3 +348,46 @@ let localHost="http://localHost:9090";
 if (!isLogged)	{
 	window.location.replace(localHost+"/login");
 }
+
+// L.Russo - listeners creazione JSON per tracciare le operazioni
+document.getElementById("idBeneficiario").addEventListener("input", () => {
+    let operationTracked = JSON.parse(getCookie("lastOperationData"));
+    operationTracked["idBeneficiario"] = document.getElementById("idBeneficiario").value;
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+
+});
+
+document.getElementById("idQuota").addEventListener("input", () => {
+    let operationTracked = JSON.parse(getCookie("lastOperationData"));
+    operationTracked["idQuota"] = document.getElementById("idQuota").value;
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+
+});
+
+document.getElementById("idQuota").addEventListener("input", () => {
+    let operationTracked = JSON.parse(getCookie("lastOperationData"));
+    operationTracked["idQuota"] = document.getElementById("idQuota").value;
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+
+});
+
+document.getElementById("idContribuente").addEventListener("input", () => {
+    let operationTracked = JSON.parse(getCookie("lastOperationData"));
+    operationTracked["idContribuente"] = document.getElementById("idContribuente").value;
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+
+});
+
+document.getElementById("ImportoInputLabel").addEventListener("input", () => {
+    let operationTracked = JSON.parse(getCookie("lastOperationData"));
+    operationTracked["ImportoInputLabel"] = document.getElementById("ImportoInputLabel").value;
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+
+});
+
+document.getElementById("TagInputLabel").addEventListener("input", () => {
+    let operationTracked = JSON.parse(getCookie("lastOperationData"));
+    operationTracked["TagInputLabel"] = document.getElementById("TagInputLabel").value;
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+
+});

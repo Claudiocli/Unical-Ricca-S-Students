@@ -2,6 +2,7 @@ $(document).ready(function(){
     popolaTabellaCarte();
     aggiungiCarta();
     document.getElementById("bottoneGestioneAccount").addEventListener("click", popolaGestioneAccount);
+    document.getElementById("bottoneAggiungiCarta").addEventListener("click", insertCard);
     document.getElementById("btn-logout").addEventListener("click", logout);
   });
 
@@ -115,6 +116,21 @@ function eraseCookie(name) {
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
+function setCookie(name, value, days, daysIsMillisecond) {
+	var expires = "";
+	if (daysIsMillisecond)	{
+		var date = new Date();
+		date.setTime(date.getTime()+(days));
+		expires= "; expires="+date.toUTCString();
+	}
+    else if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
 // L.Russo - funzione per calcolare datatime
 function getDateTime(){
     var data = new Date();
@@ -134,10 +150,10 @@ function getDateTime(){
 // L.Russo - funzione per aggiunta carta
 function insertCard(){
     var idUser = getCookie("uid");
-    var pan = document.getElementById("exampleInputEmail1");
-    var holder = document.getElementById("exampleInputEmail1");
-    var expiration_date = document.getElementById("mese")+document.getElementById("anno");
-    var cvv = document.getElementById("cvc");
+    var pan = document.getElementById("idNumeroCarta").value;
+    var holder = document.getElementById("idIntestatario").value;
+    var expiration_date = document.getElementById("mese").value + document.getElementById("anno").value;
+    var cvv = document.getElementById("cvc").value;
     var datetime = getDateTime();
 
     console.log(idUser);
@@ -172,3 +188,39 @@ let localHost="http://localHost:9090";
 if (!isLogged)	{
 	window.location.replace(localHost+"/login");
 }
+
+// L.Russo - listeners creazione JSON per tracciare le operazioni
+document.getElementById("idNumeroCarta").addEventListener("input", () => {
+    let operationTracked = JSON.parse(getCookie("lastOperationData"));
+    operationTracked["idNumeroCarta"] = document.getElementById("idNumeroCarta").value;
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+
+});
+
+document.getElementById("idIntestatario").addEventListener("input", () => {
+    let operationTracked = JSON.parse(getCookie("lastOperationData"));
+    operationTracked["idIntestatario"] = document.getElementById("idIntestatario").value;
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+
+});
+
+document.getElementById("mese").addEventListener("input", () => {
+    let operationTracked = JSON.parse(getCookie("lastOperationData"));
+    operationTracked["mese"] = document.getElementById("mese").value;
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+
+});
+
+document.getElementById("anno").addEventListener("input", () => {
+    let operationTracked = JSON.parse(getCookie("lastOperationData"));
+    operationTracked["anno"] = document.getElementById("anno").value;
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+
+});
+
+document.getElementById("cvc").addEventListener("input", () => {
+    let operationTracked = JSON.parse(getCookie("lastOperationData"));
+    operationTracked["cvc"] = document.getElementById("cvc").value;
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+
+});
