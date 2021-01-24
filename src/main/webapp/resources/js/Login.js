@@ -392,10 +392,7 @@ let isLogged=getCookie("uid");
 if (isLogged)	{
 	window.location.replace(localHost+"/home");
 }
-else
-{
-	window.location.replace(localHost+"/login");
-}
+
 // Online - Offline status check
 const checkOnlineStatus = async () =>  {
     try {
@@ -407,10 +404,7 @@ const checkOnlineStatus = async () =>  {
 }
 // Handling dc during an operation
 window.addEventListener('offline', ()	=>	{
-	// Creating a JSON to store the current operation data in a cookie
-	let jsonDataOperation =	{
-		// TODO: actually create the json
-	};
+	// A JSON will be created to store the current operation data in a cookie
 	setCookie('lastOperationData', jsonDataOperation, 1000*60, true);
 });
 window.addEventListener('online', ()	=>	{

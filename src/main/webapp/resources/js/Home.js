@@ -37,13 +37,14 @@ function initSaldo() {
 
 function inviaTransizione() {
     var idUser = getCookie("uid");
-    var importo = document.getElementById("ImportoInputLabel").value
-    var tag = document.getElementById("TagInputLabel").value
+    var importo = document.getElementById("ImportoInputLabel").value;
+    var tag = document.getElementById("TagInputLabel").value;
+    var datetime = getDateTime();
     console.log(idUser);
     if (idUser) {
         var data = {
             amount: importo,
-            datetime: "12 - 12 - 2020" ,
+            datetime: datetime,
             category: "Normal",
             sender: idUser,
             recipient: tag
@@ -295,23 +296,21 @@ function getDateTime(){
     var data = new Date();
     var anno, mese, giorno, ore, minuti, secondi;
     anno = data.getFullYear();
-    mese = data.getMonth + 1;
+    mese = data.getMonth() + 1;
     giorno = data.getDate();
     ore = data.getHours();
     minuti = data.getMinutes();
     secondi = data.getSeconds();
 
-    var finalDate = giorno + "-" + mese + "-" + anno + " " + ore + ":" + minuti + " " + secondi;
+    var finalDate = giorno + "-" + mese + "-" + anno + " " + ore + ":" + minuti + ":" + secondi;
     
     return finalDate;
 }
 
 // Session controll
 let isLogged=getCookie("uid");
-if (isLogged)	{
-	window.location.replace(localHost+"/home");
-}
-else
-{
+let localHost="http://localHost:9090";
+
+if (!isLogged)	{
 	window.location.replace(localHost+"/login");
 }

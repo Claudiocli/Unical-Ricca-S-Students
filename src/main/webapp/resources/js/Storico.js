@@ -169,10 +169,8 @@ function eraseCookie(name) {
 
 // Session controll
 let isLogged=getCookie("uid");
-if (isLogged)	{
-	window.location.replace(localHost+"/home");
-}
-else
-{
+let localHost="http://localHost:9090";
+
+if (!isLogged)	{
 	window.location.replace(localHost+"/login");
 }

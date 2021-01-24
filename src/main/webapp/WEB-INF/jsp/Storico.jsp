@@ -270,7 +270,7 @@
                             <li class="list-inline-item"><a class="text-white" href="#">Term of Use</a></li>
                             <li class="list-inline-item"><a class="text-white" href="#">Privacy Policy</a></li>
                         </ul>
-                        <p class="text-white small mb-4 mb-lg-0">@ Your Website 2020. All Rights Reserved.</p>
+                        <p class="text-white small mb-4 mb-lg-0">@ Your Website <script> document.write(new Date().getFullYear()); </script>. All Rights Reserved.</p>
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-right">
                         <ul class="list-inline mb-0">
