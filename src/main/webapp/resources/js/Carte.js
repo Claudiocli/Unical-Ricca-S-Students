@@ -189,6 +189,7 @@ function createEventListenerBtn(risposta){
             });   
             }
         }, false);
+        
     }
 }
 
