@@ -61,6 +61,11 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item">
+								<input type="image" class="btn" id="notifications"
+									src="https://friconix.com/png/fi-xnluxx-bell.png" style="width: 56px; height: 44px; background-color: lightgreen;">
+								</input>
+							</li>
+							<li class="nav-item">
 								<button type="button" class="btn esci-font"
 									id="bottoneGestioneAccount" data-bs-toggle="modal"
 									data-bs-target="#exampleModal2">
@@ -589,10 +594,20 @@
 	-->
 	<div id="friend-info-popup" class="friendModal">
 		<div class="friend-modal-content">
-			<span class="friend-popup-close">&times;</span> </br> <label
-				class="form-label" id="friend-id-info">ID: </label> <label
-				class="form-label" id="friend-name-info">Nome: </label>
+			<span class="friend-popup-close">&times;</span> </br>
+			<label class="form-label model-label-info" id="friend-id-info">ID: </label>
+			<label class="form-label model-label-info" id="friend-name-info">Nome: </label>
 			<button class="btn" id="delete-friend-button" type="button">Elimina</button>
+		</div>
+	</div>
+	<div id="notification-popup" class="notificationModal">
+		<div class="notification-modal-content">
+			<span class="notification-popup-close">&times;</span> </br>
+			<label class="form-label model-label-info" id="colletta-label-info">Colletta ID: </label>
+			<label class="form-label model-label-info" id="colletta-beneficiay-name">Nome Beneficiario: </label>
+			<label class="form-label model-label-info" id="colletta-quote">Quota: </label>
+			<button class="btn" id="refuse-colletta-button" type="button">Rifiuta</button>
+			<button class="btn" id="contribuite-to-colletta" type="button">Contribuisci</button>
 		</div>
 	</div>
 </body>

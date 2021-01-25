@@ -655,4 +655,73 @@ document.getElementById("delete-friend-button").addEventListener('click', ()    
             }
         });
     }
-})
+});
+document.getElementById("notifications").addEventListener('click', ()   =>  {
+    document.getElementById("notification-popup").style.display="block";
+});
+document.getElementsByClassName("notification-popup-close")[0].onclick = function() {
+  document.getElementById("notification-popup").style.display = "none";
+};
+window.onclick = function(event) {
+  if (event.target == document.getElementById("notification-popup")) {
+    document.getElementById("notification-popup").style.display = "none";
+  }
+} 
+document.getElementById("contribuite-to-colletta").addEventListener('click', () =>  {
+    // /contribute/pay expect a String id_payer and a Long id_colletta
+    let id_payer = getCookie('uid');
+    let id_colletta = document.getElementById("colletta-label-info").value;
+
+    let data = {
+        contributor: id_payer,
+        colletta: id_colletta,
+    };
+
+    if(id_payer && id_colletta) {
+        $.ajax({
+            url: localHost+"/contribute/pay",
+            method: "POST",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function(response) {
+                window.alert("Contributo versato correttamente");
+                // Button set to "no notification" color
+                document.getElementById("notifications").style.backgroundColor="lightgreen";
+            },
+            error: function(error)  {
+                window.alert("Si è verificato un errore");
+            }
+        });
+    }
+});
+document.getElementById("refuse-colletta-button").addEventListener('click', ()  =>  {
+    // /contribute/decline expect a String id_payer and a Long id_colletta
+    let id_payer = getCookie('uid');
+    let id_colletta = document.getElementById("colletta-label-info").value;
+
+    let data = {
+        contributor: id_payer,
+        colletta: id_colletta,
+    };
+
+    if(id_payer && id_colletta) {
+        $.ajax({
+            url: localHost+"/contribute/decline",
+            method: "POST",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function(response) {
+                window.alert("L'invito alla colletta è stato declinato");
+                // Button set to "no notification" color
+                document.getElementById("notifications").style.backgroundColor="lightgreen";
+            },
+            error: function(error)  {
+                window.alert("Si è verificato un errore");
+            }
+        });
+    }
+});
+document.getElementById("colletta-label-info").addEventListener('change', ()    =>  {
+    // Button set to "you have notifications" color
+    document.getElementById("notifications").style.backgroundColor="green";
+});
