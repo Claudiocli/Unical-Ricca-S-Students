@@ -97,13 +97,15 @@ public class HomePageController {
 	}
 
 	@PostMapping("/QrCode")
-	public void getQRCodeImageById(@RequestBody JSONObject id) throws Exception {
+	@ResponseBody
+	public byte[] getQRCodeImageById(@RequestBody JSONObject id) throws Exception {
 		String id_long = id.getAsString("id");
 		logger.info("GET QR_CODE" +id_long);
 		ByteArrayOutputStream stream = QRCode.from(id_long).stream();
 		byte[] data = stream.toByteArray();
 		ByteArrayInputStream QrCode = new ByteArrayInputStream(data);
 	    BufferedImage QrCodeImage = ImageIO.read(QrCode);
-	    ImageIO.write(QrCodeImage, "jpg", new File("src/main/webapp/resources/img/output.jpg"));
+		ImageIO.write(QrCodeImage, "jpg", new File("src/main/webapp/resources/img/output.jpg"));
+		return data;
 	}    
 }

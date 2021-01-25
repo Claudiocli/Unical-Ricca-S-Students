@@ -248,13 +248,18 @@ function popolaGestioneAccount() {
 
 function getIdAccount(){
     var idUser = getCookie("uid");
-    console.log(idUser);
+    var img = document.createElement("img");
+    img.src = "resources/img/output.jpg";
+    img.width = 100;
+    img.height = 100;
+    img.alt = "QrCode";
+
     if (idUser) {
         var data = {
             id: idUser
         }
         $.ajax({
-            url: 'http://localhost:9090/account/me',
+            url: 'http://localhost:9090/QrCode',
             method: 'POST',
             data: JSON.stringify(data),
             contentType: "application/json",
@@ -266,8 +271,16 @@ function getIdAccount(){
                 ciccia += "<td>" + "ID" + "</td>";
                 ciccia += "<td>" + idUser + "</td>";
                 ciccia += "</tr>";
+                ciccia += "<tr>";
+                ciccia += "<td>" + "QrCode" + "</td>";
+                ciccia += "<td>";
               
                 $("#corpoGestioneId_Account").append(ciccia);
+                // This next line will just add it to the <body> tag
+                $("#corpoGestioneId_Account").append(img);
+                ciccia = "";
+                ciccia += "</td>";
+                ciccia += "</tr>";
             },
             error: function (err) {
                 console.log(err);
@@ -345,10 +358,10 @@ function aggiungiAmico() {
                 let oldPlaceholder=idInputLabel.placeholder;
                 idInputLabel.value="";
                 idInputLabel.placeholder="ID invalido";
-            setTimeout(()   =>  {
-                idInputLabel.style.border=oldBorder;
-                idInputLabel.placeholder=oldPlaceholder;
-            }, 2500)
+                setTimeout(()   =>  {
+                    idInputLabel.style.border=oldBorder;
+                    idInputLabel.placeholder=oldPlaceholder;
+                }, 2500);
             }
         });
     }
@@ -356,10 +369,8 @@ function aggiungiAmico() {
 
 function cercaAmico() {
     var idUser = getCookie("uid");
-    var x = document.getElementById("tagInputLabelFriendlist").value;
-    x = x.toUpperCase();
-    console.log(idUser);
-    console.log(x);
+    var idInputLabel = document.getElementById("tagInputLabelFriendlist");
+    idInputLabel = idInputLabel.toUpperCase();
 
     if (idUser) {
         var data = {
@@ -372,22 +383,32 @@ function cercaAmico() {
             contentType: "application/json",
             success: function (risposta) {
                 for (var i = 0; i < risposta.length; i++) {
-                    if (x == risposta[i].name) {
+                    if (idInputLabel.value == risposta[i].name) {
                         $("#corpoListaAmici").html("");
                         var ciccia = "";
-                        ciccia += "<tr>";
-                        ciccia += "<td>" + risposta[i].name + " " + risposta[i].surname + "</td>";
+                        ciccia += "<tr class=\"row-amico\" id=\"friend-row-"+i+"\">";
+                        let name=risposta[i].name + " " + risposta[i].surname;
+                        ciccia += "<td class=\"row-info-amico\">" + name + "</td>";
                         ciccia += "</tr>";
                         $("#corpoListaAmici").append(ciccia);
                     }
-                    else if (x == "") {
+                    else if (idInputLabel.value == "") {
+                        let oldBorder=idInputLabel.style.border;
+                        idInputLabel.style.border="2px solid red";
+                        let oldPlaceholder=idInputLabel.placeholder;
+                        idInputLabel.value="";
+                        idInputLabel.placeholder="ID/Nome mancante";
+                        setTimeout(()   =>  {
+                            idInputLabel.style.border=oldBorder;
+                            idInputLabel.placeholder=oldPlaceholder;
+                        }, 2500);
                         popolaListaAmici();
                     }
                 }
 
             },
             error: function (err) {
-                console.log(err);
+                window.alert("Abbiamo riscontrato un errore, riprova");
             }
         });
     }
