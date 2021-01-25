@@ -11,6 +11,9 @@ main h1 {
   text-align: center;
   margin: 0px auto;
 }
+#password-login-input {
+  margin-bottom: 10%;
+}
 #login-form {
   text-align: center;
 }
@@ -19,6 +22,8 @@ main h1 {
 }
 #login-div p {
   width: 100%;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 #login-div,
 #signup-div {
@@ -111,6 +116,7 @@ span .buttonText {
 #password-reset-button:hover {
   color: blue;
   font-weight: bold;
+  cursor: pointer;
 }
 #send-recovery-mail {
   width: 30%;

@@ -43,10 +43,10 @@
 				<input class="form-control" type="email" id="mail-login-input" placeholder="Email" required>
 				<br/>
 				<input class="form-control" type="password" id="password-login-input" placeholder="Password" required>
+				<button type="submit" id="login-button">Accedi</button>
+				<p>oppure</p>
+				<button type="button" id="toggle-signup">Registrati</button>
 			</form>
-			<button type="submit" id="login-button">Accedi</button>
-			<p>oppure</p>
-			<button type="button" id="toggle-signup">Registrati</button>
 			<br/>
 			<div id="google-signin">
 				<div id="google-button" class="custom-google-button">
