@@ -73,7 +73,6 @@ function aggiungiCarta(){
     $("#aggiungiCarta").click(show);
 }
 
-
 function show(){
     $("#form").attr("hidden",false);
 };
@@ -91,6 +90,7 @@ function popolaGestioneAccount(){
         data: JSON.stringify(data),
         contentType: "application/json",
         success: function (risposta) {
+            $("#corpoGestioneAccount").html("");
             console.log(risposta);
             var ciccia = "";
             ciccia += "<tr>";
