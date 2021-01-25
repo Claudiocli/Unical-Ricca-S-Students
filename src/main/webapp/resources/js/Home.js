@@ -125,7 +125,7 @@ function initSaldo() {
                 $("#saldo").text(saldo.toFixed(2) + " Euro");
             },
             error: function (err) {
-                console.log(err);
+                window.alert("Abbiamo riscontrato un problema, riporva");
             }
         });
     }
@@ -136,7 +136,6 @@ function inviaTransizione() {
     var importo = document.getElementById("ImportoInputLabel").value;
     var tag = document.getElementById("TagInputLabelTransaction").value;
     var datetime = getDateTime();
-    console.log(idUser);
     if (idUser) {
         var data = {
             amount: importo,
@@ -152,11 +151,10 @@ function inviaTransizione() {
         data: JSON.stringify(data),
         contentType: "application/json",
         success: function (risposta) {
-            console.log(risposta);
             initSaldo();
         },
         error: function (err) {
-            console.log(err);
+            window.alert("Abbiamo riscontrato un problema, riporva");
         }
     });
     eraseCookie("lastOperationData");
@@ -168,13 +166,12 @@ function ricaricaSaldo(){
     var pan = document.getElementById("panInputLabel").value;
     var datetime = getDateTime();
 
-    console.log(idUser+ importo + pan );
     if (idUser) {
         var data = {
             datetime : datetime,
             card : pan,
             account : idUser,
-            amount: importo 
+            amount: importo,
         }
         $.ajax({
             url: 'http://localhost:9090/recharge/add',
@@ -182,11 +179,10 @@ function ricaricaSaldo(){
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (risposta) {
-                console.log(risposta);
                 initSaldo();
             },
             error: function (err) {
-                console.log(err);
+                window.alert("Abbiamo riscontrato un problema, riporva");
             }
         });
     }
@@ -195,7 +191,6 @@ function ricaricaSaldo(){
 
 function popolaGestioneAccount() {
     var idUser = getCookie("uid");
-    console.log(idUser);
     if (idUser) {
         var data = {
             id: idUser
@@ -207,7 +202,6 @@ function popolaGestioneAccount() {
             contentType: "application/json",
             success: function (risposta) {
                 $("#corpoGestioneAccount").html("");
-                console.log(risposta);
                 var ciccia = "";
                 ciccia += "<tr>";
                 ciccia += "<td>" + "ID" + "</td>";
@@ -240,7 +234,7 @@ function popolaGestioneAccount() {
                 $("#corpoGestioneAccount").append(ciccia);
             },
             error: function (err) {
-                console.log(err);
+                window.alert("Abbiamo riscontrato un problema, riporva");
             }
         });
     }
@@ -265,7 +259,6 @@ function getIdAccount(){
             contentType: "application/json",
             success: function (risposta) {
                 $("#corpoGestioneId_Account").html("");
-                console.log(risposta);
                 var ciccia = "";
                 ciccia += "<tr>";
                 ciccia += "<td>" + "ID" + "</td>";
@@ -283,7 +276,7 @@ function getIdAccount(){
                 ciccia += "</tr>";
             },
             error: function (err) {
-                console.log(err);
+                window.alert("Abbiamo riscontrato un problema, riporva");
             }
         });
     }
@@ -315,7 +308,7 @@ function popolaListaAmici() {
                 addListenerToFriendListsRows(risposta);
             },
             error: function (err) {
-                console.log(err);
+                window.alert("Abbiamo riscontrato un problema, riporva");
             }
         });
     }
@@ -352,7 +345,6 @@ function aggiungiAmico() {
                 popolaListaAmici()
             },
             error: function (err) {
-                //console.log(err);
                 let oldBorder=idInputLabel.style.border;
                 idInputLabel.style.border="2px solid red";
                 let oldPlaceholder=idInputLabel.placeholder;
@@ -459,7 +451,6 @@ function createColletta(){
     var list_id = JSON.parse(getCookie("list_id"));
     // aggiungiamo l'utente che crea la colletta nella lista dei partecipanti
     list_id.push(idUser);
-    console.log(idUser);
 
     if (idUser) {
         var data = {
@@ -476,10 +467,11 @@ function createColletta(){
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (risposta) {
-                console.log(risposta)
+                // TODO: success message
             },
             error: function (err) {
-                console.log(err);
+                // TODO: error message
+                window.alert("Abbiamo riscontrato un problema, riporva");
             }
         });
         eraseCookie("list_id");
