@@ -344,6 +344,7 @@ function aggiungiAmico() {
 function cercaAmico() {
     var idUser = getCookie("uid");
     var x = document.getElementById("tagInputLabelFriendlist").value;
+    x = x.toUpperCase();
     console.log(idUser);
     console.log(x);
 
@@ -358,11 +359,10 @@ function cercaAmico() {
             contentType: "application/json",
             success: function (risposta) {
                 for (var i = 0; i < risposta.length; i++) {
-                    if (x == risposta[i].id) {
+                    if (x == risposta[i].name) {
                         $("#corpoListaAmici").html("");
                         var ciccia = "";
                         ciccia += "<tr>";
-                        ciccia += "<td>" + risposta[i].id + "</td>";
                         ciccia += "<td>" + risposta[i].name + " " + risposta[i].surname + "</td>";
                         ciccia += "</tr>";
                         $("#corpoListaAmici").append(ciccia);
@@ -458,12 +458,12 @@ function addContributor(){
     var list = JSON.parse(getCookie("list_id"));
     if(list != null){
         list.push(document.getElementById("idContribuente").value);
-        setCookie("list_id", JSON.stringify(list),1);
+        setCookie("list_id", JSON.stringify(list), 1, false);
     }
     else {
         var list = [];
         list.push(document.getElementById("idContribuente").value);
-        setCookie("list_id", JSON.stringify(list),1);
+        setCookie("list_id", JSON.stringify(list), 1, false);
     }
     document.getElementById("idContribuente").value = "";
 }
