@@ -134,7 +134,7 @@ function initSaldo() {
 function inviaTransizione() {
     var idUser = getCookie("uid");
     var importo = document.getElementById("ImportoInputLabel").value;
-    var tag = document.getElementById("TagInputLabel").value;
+    var tag = document.getElementById("TagInputLabelTransaction").value;
     var datetime = getDateTime();
     console.log(idUser);
     if (idUser) {
@@ -316,7 +316,7 @@ function popolaListaAmici() {
 
 function aggiungiAmico() {
     var idUser = getCookie("uid");
-    var x = document.getElementById("tagInputLabel").value
+    var x = document.getElementById("tagInputLabelFriendlist").value
     console.log(idUser);
     console.log(x);
 
@@ -343,7 +343,7 @@ function aggiungiAmico() {
 
 function cercaAmico() {
     var idUser = getCookie("uid");
-    var x = document.getElementById("tagInputLabel").value;
+    var x = document.getElementById("tagInputLabelFriendlist").value;
     console.log(idUser);
     console.log(x);
 
