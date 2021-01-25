@@ -249,19 +249,12 @@ function popolaGestioneAccount() {
 function getIdAccount(){
     var idUser = getCookie("uid");
     console.log(idUser);
-    var img = document.createElement("img");
-    img.src = "resources/img/output.jpg";
-    img.width = 100;
-    img.height = 100;
-    img.alt = "QrCode";
-
-    // This next line will just add it to the <body> tag
     if (idUser) {
         var data = {
             id: idUser
         }
         $.ajax({
-            url: 'http://localhost:9090/QrCode',
+            url: 'http://localhost:9090/account/me',
             method: 'POST',
             data: JSON.stringify(data),
             contentType: "application/json",
@@ -273,16 +266,7 @@ function getIdAccount(){
                 ciccia += "<td>" + "ID" + "</td>";
                 ciccia += "<td>" + idUser + "</td>";
                 ciccia += "</tr>";
-                ciccia += "<tr>";
-                ciccia += "<td>" + "QrCode" + "</td>";
-                ciccia += "<td>";
               
-                $("#corpoGestioneId_Account").append(ciccia);
-                $("#corpoGestioneId_Account").append(img);
-                ciccia = "";
-                ciccia += "</td>";
-                ciccia += "</tr>";
-                
                 $("#corpoGestioneId_Account").append(ciccia);
             },
             error: function (err) {
@@ -309,19 +293,13 @@ function popolaListaAmici() {
                 for (var i = 0; i < risposta.length; i++) {
                     var ciccia = "";
                     ciccia += "<tr class=\"row-amico\" id=\"friend-row-"+i+"\">";
-                    var id=risposta[i].id;
-                    var name=risposta[i].name + " " + risposta[i].surname;
+                    let name=risposta[i].name + " " + risposta[i].surname;
                     ciccia += "<td class=\"row-info-amico\">" + name + "</td>";
                     ciccia += "</tr>";
                     $("#corpoListaAmici").append(ciccia);
-                    // Add onClick listener to every row, to be able to display the friend's info
-                    let friendRow=document.getElementById("friend-row-"+i);
-                    friendRow.addEventListener('click', ()  =>  {
-                        modalFriendPopup.style.display = "block";
-                        document.getElementById("friend-id-info").innerHTML="ID: "+id;
-                        document.getElementById("friend-name-info").innerHTML="Nome: "+name;
-                    });
                 }
+                // Add onClick listener to every row, to be able to display the friend's info
+                addListenerToFriendListsRows(risposta);
             },
             error: function (err) {
                 console.log(err);
@@ -330,17 +308,26 @@ function popolaListaAmici() {
     }
 }
 
+function addListenerToFriendListsRows(response){
+    for(let i = 0; i < response.length; i++){
+        document.getElementById("friend-row-"+i).addEventListener("click",  ()  =>  {
+            let name=response[i].name+" "+response[i].surname;
+            modalFriendPopup.style.display = "block";
+            document.getElementById("friend-id-info").innerHTML="ID: "+response[i].id;
+            document.getElementById("friend-name-info").innerHTML="Nome: "+name;
+        });
+    }
+}
+
 function aggiungiAmico() {
     var idUser = getCookie("uid");
-    var x = document.getElementById("tagInputLabelFriendlist").value
-    console.log(idUser);
-    console.log(x);
+    var idInputLabel = document.getElementById("tagInputLabelFriendlist");
 
     if (idUser) {
         var data = {
             datetime: "12-12-2020",
             account1: idUser,
-            account2: x
+            account2: idInputLabel.value,
         }
         $.ajax({
             url: 'http://localhost:9090/friendship/add',
@@ -348,10 +335,20 @@ function aggiungiAmico() {
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (risposta) {
+                idInputLabel.value="";
                 popolaListaAmici()
             },
             error: function (err) {
-                console.log(err);
+                //console.log(err);
+                let oldBorder=idInputLabel.style.border;
+                idInputLabel.style.border="2px solid red";
+                let oldPlaceholder=idInputLabel.placeholder;
+                idInputLabel.value="";
+                idInputLabel.placeholder="ID invalido";
+            setTimeout(()   =>  {
+                idInputLabel.style.border=oldBorder;
+                idInputLabel.placeholder=oldPlaceholder;
+            }, 2500)
             }
         });
     }
@@ -360,6 +357,7 @@ function aggiungiAmico() {
 function cercaAmico() {
     var idUser = getCookie("uid");
     var x = document.getElementById("tagInputLabelFriendlist").value;
+    x = x.toUpperCase();
     console.log(idUser);
     console.log(x);
 
@@ -374,11 +372,10 @@ function cercaAmico() {
             contentType: "application/json",
             success: function (risposta) {
                 for (var i = 0; i < risposta.length; i++) {
-                    if (x == risposta[i].id) {
+                    if (x == risposta[i].name) {
                         $("#corpoListaAmici").html("");
                         var ciccia = "";
                         ciccia += "<tr>";
-                        ciccia += "<td>" + risposta[i].id + "</td>";
                         ciccia += "<td>" + risposta[i].name + " " + risposta[i].surname + "</td>";
                         ciccia += "</tr>";
                         $("#corpoListaAmici").append(ciccia);
@@ -474,12 +471,12 @@ function addContributor(){
     var list = JSON.parse(getCookie("list_id"));
     if(list != null){
         list.push(document.getElementById("idContribuente").value);
-        setCookie("list_id", JSON.stringify(list),1);
+        setCookie("list_id", JSON.stringify(list), 1, false);
     }
     else {
         var list = [];
         list.push(document.getElementById("idContribuente").value);
-        setCookie("list_id", JSON.stringify(list),1);
+        setCookie("list_id", JSON.stringify(list), 1, false);
     }
     document.getElementById("idContribuente").value = "";
 }
@@ -536,7 +533,7 @@ document.getElementById("delete-friend-button").addEventListener('click', ()    
             success: function(response){
                 window.alert("Amico eliminato correttamente");
                 modalFriendPopup.style.display = "none";
-                window.location.replace(localHost+"/home");
+                popolaListaAmici();
             },
             error: function(error){
                 window.alert("Abbiamo riscontrato un errore, riprova");
