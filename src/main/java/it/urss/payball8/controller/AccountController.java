@@ -1,5 +1,6 @@
 package it.urss.payball8.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -12,13 +13,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.urss.payball8.model.Account;
+import it.urss.payball8.model.Card;
+import it.urss.payball8.model.Colletta;
+import it.urss.payball8.model.Contribute;
+import it.urss.payball8.model.Friendship;
+import it.urss.payball8.model.Recharge;
+import it.urss.payball8.model.Transaction;
 import it.urss.payball8.repository.AccountRepository;
+import it.urss.payball8.repository.CardRepository;
+import it.urss.payball8.repository.CollettaRepository;
+import it.urss.payball8.repository.ContributeRepository;
+import it.urss.payball8.repository.FriendshipRepository;
+import it.urss.payball8.repository.RechargeRepository;
+import it.urss.payball8.repository.TransactionRepository;
 import net.minidev.json.JSONObject;
 
 @RestController
@@ -29,6 +41,24 @@ public class AccountController {
 
 	@Autowired
 	private AccountRepository accountRepository;
+
+	@Autowired
+	private CardRepository cardRepository;
+
+	@Autowired
+	private RechargeRepository rechargeRepository;
+
+	@Autowired
+	private CollettaRepository collettaRepository;
+
+	@Autowired
+	private ContributeRepository contributeRepository;
+
+	@Autowired
+	private FriendshipRepository friendshipRepository;
+
+	@Autowired
+	private TransactionRepository transactionRepository;
 
 	@PostMapping(path = "/me")
 	public @ResponseBody Optional<Account> me(@RequestBody JSONObject id) {
@@ -46,7 +76,8 @@ public class AccountController {
 		newAccount.setAddress(newAccount.getAddress().trim().toUpperCase());
 		newAccount.setCf(newAccount.getCf().trim().toUpperCase());
 		// accountRepository.findById(newAccount.getId())
-		// 		.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
+		// .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable
+		// to find user"));
 		logger.info("USER_ADD added user by ENTITY: " + newAccount.toString());
 		return ResponseEntity.ok(accountRepository.save(newAccount));
 	}
@@ -63,9 +94,36 @@ public class AccountController {
 		return ResponseEntity.ok(accountRepository.save(current_user));
 	}
 
-	@DeleteMapping(path = "/delete/{id}")
-	void deleteById(@RequestParam String id) {
-		logger.info(String.format("USER_DELETE deleted user with id: %d", id));
-		accountRepository.deleteById(id);
+	@DeleteMapping(path = "/delete")
+	void deleteById(@RequestBody JSONObject id_delete) {
+		String id = id_delete.getAsString("id");
+		logger.info("USER_DELETE deleted user with id: " + id);
+		Account current_user = accountRepository.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
+
+		List<Transaction> transaction_sender_list = transactionRepository.findAllBysender(id);
+		transactionRepository.deleteAll(transaction_sender_list);
+		List<Transaction> transaction_recipient_list = transactionRepository.findAllByrecipient(id);
+		transactionRepository.deleteAll(transaction_recipient_list);
+
+		List<Friendship> friendships_account1_list = friendshipRepository.findAllByaccount1(id);
+		friendshipRepository.deleteAll(friendships_account1_list);
+		List<Friendship> friendships_account2_list = friendshipRepository.findAllByaccount2(id);
+		friendshipRepository.deleteAll(friendships_account2_list);
+
+		List<Contribute> contribute_list = contributeRepository.findAllBycontributor(id);
+		contributeRepository.deleteAll(contribute_list);
+
+		List<Colletta> colletta_list = collettaRepository.findAllBybeneficiary(id);
+		collettaRepository.deleteAll(colletta_list);
+
+		List<Card> current_card_list = cardRepository.findAllByAccount(id);
+		for (Card card : current_card_list) {
+			List<Recharge> list_recharge = rechargeRepository.findAllBycard(card.getPan());
+			rechargeRepository.deleteAll(list_recharge);
+		}
+		cardRepository.deleteAll(current_card_list);
+
+		accountRepository.delete(current_user);
 	}
 }

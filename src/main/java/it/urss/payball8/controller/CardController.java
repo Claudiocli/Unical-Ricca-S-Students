@@ -35,7 +35,7 @@ public class CardController {
 
 	@Autowired
 	private AccountRepository accountRepository;
-	
+
 	@Autowired
 	private RechargeRepository rechargeRepository;
 
@@ -45,18 +45,20 @@ public class CardController {
 	}
 
 	@PostMapping(path = "/myCard")
-	@ResponseBody List<Card> getAllMyCard(@RequestBody JSONObject id) {
+	@ResponseBody
+	List<Card> getAllMyCard(@RequestBody JSONObject id) {
 		String id_long = id.getAsString("id");
-		
+
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
-		logger.info("GET ALL MY CARD"+ id_long);
-		
+		logger.info("GET ALL MY CARD" + id_long);
+
 		return cardRepository.findAllByAccount(id_long);
 	}
 
 	@PostMapping(path = "/add")
-	@ResponseBody ResponseEntity<Card> addCard(@RequestBody Card card) {
+	@ResponseBody
+	ResponseEntity<Card> addCard(@RequestBody Card card) {
 		accountRepository.findById(card.getAccount())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 		logger.info("ADD CARD TO ACCOUNT");
@@ -65,7 +67,7 @@ public class CardController {
 	}
 
 	@DeleteMapping(path = "/deleteCard/{id}")
-	void deleteBypan(@RequestBody JSONObject pan , @PathVariable String id) {
+	void deleteBypan(@RequestBody JSONObject pan, @PathVariable String id) {
 		String pan_Json = pan.getAsString("pan");
 		Card current_card = cardRepository.findBypan(pan_Json);
 		List<Recharge> list_recharge = rechargeRepository.findAllBycard(pan_Json);

@@ -12,10 +12,7 @@ import javax.imageio.ImageIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -100,12 +97,12 @@ public class HomePageController {
 	@ResponseBody
 	public byte[] getQRCodeImageById(@RequestBody JSONObject id) throws Exception {
 		String id_long = id.getAsString("id");
-		logger.info("GET QR_CODE" +id_long);
+		logger.info("GET QR_CODE" + id_long);
 		ByteArrayOutputStream stream = QRCode.from(id_long).stream();
 		byte[] data = stream.toByteArray();
 		ByteArrayInputStream QrCode = new ByteArrayInputStream(data);
-	    BufferedImage QrCodeImage = ImageIO.read(QrCode);
+		BufferedImage QrCodeImage = ImageIO.read(QrCode);
 		ImageIO.write(QrCodeImage, "jpg", new File("src/main/webapp/resources/img/output.jpg"));
 		return data;
-	}    
+	}
 }
