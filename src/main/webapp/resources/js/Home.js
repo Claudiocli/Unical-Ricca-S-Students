@@ -514,12 +514,13 @@ document.getElementById("delete-friend-button").addEventListener('click', ()    
         };
         $.ajax({
             url: "http://localhost:9090/friendship/delete",
-            method: 'POST',
+            method: 'DELETE',
             data: JSON.stringify(data),
             contentType: 'application/json',
             success: function(response){
                 window.alert("Amico eliminato correttamente");
                 modalFriendPopup.style.display = "none";
+                window.location.replace(localHost+"/home");
             },
             error: function(error){
                 window.alert("Abbiamo riscontrato un errore, riprova");
