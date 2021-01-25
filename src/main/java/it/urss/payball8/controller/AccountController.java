@@ -57,10 +57,9 @@ public class AccountController {
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
 		logger.info("USER_UPDATE updated user with id = " + newAccount.getId() + " by ENTITY " + newAccount.toString());
-		if (newAccount.getName() != null)
-			current_user.setName(newAccount.getName());
-		if (newAccount.getSurname() != null)
-			current_user.setSurname(newAccount.getSurname());
+		if (newAccount.getEmail() != null)
+			current_user.setEmail(newAccount.getEmail());
+
 		return ResponseEntity.ok(accountRepository.save(current_user));
 	}
 

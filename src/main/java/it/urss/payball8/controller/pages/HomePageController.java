@@ -1,8 +1,13 @@
 package it.urss.payball8.controller.pages;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,15 +97,13 @@ public class HomePageController {
 	}
 
 	@PostMapping("/QrCode")
-	public ResponseEntity<byte[]> getQRCodeImageById(@RequestBody JSONObject id) {
+	public void getQRCodeImageById(@RequestBody JSONObject id) throws Exception {
 		String id_long = id.getAsString("id");
 		logger.info("GET QR_CODE" +id_long);
 		ByteArrayOutputStream stream = QRCode.from(id_long).stream();
 		byte[] data = stream.toByteArray();
-
-		final HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_PNG);
-		return new ResponseEntity<byte[]>(data, headers, HttpStatus.CREATED);
-	}
-
+		ByteArrayInputStream QrCode = new ByteArrayInputStream(data);
+	    BufferedImage QrCodeImage = ImageIO.read(QrCode);
+	    ImageIO.write(QrCodeImage, "jpg", new File("src/main/webapp/resources/img/output.jpg"));
+	}    
 }
