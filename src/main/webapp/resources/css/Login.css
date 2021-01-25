@@ -64,7 +64,8 @@ main h1 {
 }
 .custom-google-button {
   display: inline-block;
-  background: white;
+  width: auto !important;
+  background: #5d8ffc;
   color: #444;
   width: 190px;
   border-radius: 5px;
@@ -73,21 +74,27 @@ main h1 {
   white-space: nowrap;
 }
 .custom-google-button:hover {
+  background: #fff;
+  color: #5d8ffc;
+  border: 1px solid #5d8ffc;
   cursor: pointer;
 }
 span .icon {
-  background: url("/URSS/src/main/resources/static/google_signin_buttons/web/vector/btn_google_dark_normal_ios.svg")
-    transparent 5px 50% no-repeat;
+  background: transparent 5px 50% no-repeat;
   display: inline-block;
   vertical-align: middle;
   width: 42px;
   height: 42px;
 }
+span .icon img {
+  padding-left: 0%;
+  padding-right: 0%;
+}
 span .buttonText {
   display: inline-block;
   vertical-align: middle;
-  padding-left: 42px;
-  padding-right: 42px;
+  padding-left: 0%;
+  padding-right: 0%;
   font-size: 14px;
   font-weight: bold;
   font-family: "Roboto", sans-serif;

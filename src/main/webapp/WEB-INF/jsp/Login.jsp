@@ -50,7 +50,9 @@
 			<br/>
 			<div id="google-signin">
 				<div id="google-button" class="custom-google-button">
-					<span class="icon"></span>
+					<span class="icon">
+						<img src="http://localhost:9090/google_signin_buttons/web/vector/btn_google_dark_normal_ios.svg"  />
+					</span>
 					<span class="buttonText">Accedi con Google</span>
 				</div>
 			</div>
