@@ -10,6 +10,94 @@ $(document).ready(function () {
     document.getElementById("bottoneRicaricaSaldo").addEventListener("click", ricaricaSaldo);
     document.getElementById("bottoneCreaColletta").addEventListener("click", createColletta);
     document.getElementById("btn-logout").addEventListener("click", logout);
+    // L.Russo - listeners creazione JSON per tracciare le operazioni
+    var operationTracked = {};
+    operationTracked["operation"] = "Home";
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+
+    document.getElementById("idBeneficiario").addEventListener("input", () => {
+        var operationTracked = JSON.parse(getCookie("lastOperationData"));
+        if(operationTracked != null){
+            operationTracked["idBeneficiario"] = document.getElementById("idBeneficiario").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } else {
+            var operationTracked = {};
+            operationTracked["idBeneficiario"] = document.getElementById("idBeneficiario").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } 
+    });
+    
+    document.getElementById("idQuota").addEventListener("input", () => {
+        var operationTracked = JSON.parse(getCookie("lastOperationData"));
+        if(operationTracked != null){
+            operationTracked["idQuota"] = document.getElementById("idQuota").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } else {
+            var operationTracked = {};
+            operationTracked["idQuota"] = document.getElementById("idQuota").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } 
+    });
+    
+    document.getElementById("idContribuente").addEventListener("input", () => {
+        var operationTracked = JSON.parse(getCookie("lastOperationData"));
+        if(operationTracked != null){
+            operationTracked["idContribuente"] = document.getElementById("idContribuente").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } else {
+            var operationTracked = {};
+            operationTracked["idContribuente"] = document.getElementById("idContribuente").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } 
+    });
+    
+    document.getElementById("ImportoInputLabel").addEventListener("input", () => {
+        var operationTracked = JSON.parse(getCookie("lastOperationData"));
+        if(operationTracked != null){
+            operationTracked["ImportoInputLabel"] = document.getElementById("ImportoInputLabel").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } else {
+            var operationTracked = {};
+            operationTracked["ImportoInputLabel"] = document.getElementById("ImportoInputLabel").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } 
+    });
+    
+    document.getElementById("TagInputLabelTransaction").addEventListener("input", () => {
+        var operationTracked = JSON.parse(getCookie("lastOperationData"));
+        if(operationTracked != null){
+            operationTracked["TagInputLabelTransaction"] = document.getElementById("TagInputLabelTransaction").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } else {
+            var operationTracked = {};
+            operationTracked["TagInputLabelTransaction"] = document.getElementById("TagInputLabelTransaction").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } 
+    });
+
+    document.getElementById("ImportoInputLabel2").addEventListener("input", () => {
+        var operationTracked = JSON.parse(getCookie("lastOperationData"));
+        if(operationTracked != null){
+            operationTracked["ImportoInputLabel2"] = document.getElementById("ImportoInputLabel2").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } else {
+            var operationTracked = {};
+            operationTracked["ImportoInputLabel2"] = document.getElementById("ImportoInputLabel2").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } 
+    });
+
+    document.getElementById("panInputLabel").addEventListener("input", () => {
+        var operationTracked = JSON.parse(getCookie("lastOperationData"));
+        if(operationTracked != null){
+            operationTracked["panInputLabel"] = document.getElementById("panInputLabel").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } else {
+            var operationTracked = {};
+            operationTracked["panInputLabel"] = document.getElementById("panInputLabel").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } 
+    });
 });
 
 function initSaldo() {
@@ -71,7 +159,9 @@ function inviaTransizione() {
             console.log(err);
         }
     });
+    eraseCookie("lastOperationData");
 }
+
 function ricaricaSaldo(){
     var idUser = getCookie("uid");
     var importo = document.getElementById("ImportoInputLabel2").value;
@@ -100,6 +190,7 @@ function ricaricaSaldo(){
             }
         });
     }
+    eraseCookie("lastOperationData");
 }
 
 function popolaGestioneAccount() {
@@ -117,35 +208,35 @@ function popolaGestioneAccount() {
             success: function (risposta) {
                 $("#corpoGestioneAccount").html("");
                 console.log(risposta);
-                var ciccia = ""
-                ciccia += "<tr>"
-                ciccia += "<td>" + "ID" + "</td>"
-                ciccia += "<td>" + risposta.id + "</td>"
-                ciccia += "</tr>"
-                ciccia += "<tr>"
-                ciccia += "<td>" + "Indirizzo" + "</td>"
-                ciccia += "<td>" + risposta.address + "</td>"
-                ciccia += "</tr>"
-                ciccia += "<tr>"
-                ciccia += "<td>" + "CodiceFiscale" + "</td>"
-                ciccia += "<td>" + risposta.cf + "</td>"
-                ciccia += "</tr>"
-                ciccia += "<tr>"
-                ciccia += "<td>" + "Data di Nascita" + "</td>"
-                ciccia += "<td>" + risposta.dob + "</td>"
-                ciccia += "</tr>"
-                ciccia += "<tr>"
-                ciccia += "<td>" + "E-mail" + "</td>"
-                ciccia += "<td>" + risposta.email + "</td>"
-                ciccia += "</tr>"
-                ciccia += "<tr>"
-                ciccia += "<td>" + "Nome" + "</td>"
-                ciccia += "<td>" + risposta.name + "</td>"
-                ciccia += "</tr>"
-                ciccia += "<tr>"
-                ciccia += "<td>" + "Cognome" + "</td>"
-                ciccia += "<td>" + risposta.surname + "</td>"
-                ciccia += "</tr>"
+                var ciccia = "";
+                ciccia += "<tr>";
+                ciccia += "<td>" + "ID" + "</td>";
+                ciccia += "<td>" + risposta.id + "</td>";
+                ciccia += "</tr>";
+                ciccia += "<tr>";
+                ciccia += "<td>" + "Indirizzo" + "</td>";
+                ciccia += "<td>" + risposta.address + "</td>";
+                ciccia += "</tr>";
+                ciccia += "<tr>";
+                ciccia += "<td>" + "CodiceFiscale" + "</td>";
+                ciccia += "<td>" + risposta.cf + "</td>";
+                ciccia += "</tr>";
+                ciccia += "<tr>";
+                ciccia += "<td>" + "Data di Nascita" + "</td>";
+                ciccia += "<td>" + risposta.dob + "</td>";
+                ciccia += "</tr>";
+                ciccia += "<tr>";
+                ciccia += "<td>" + "E-mail" + "</td>";
+                ciccia += "<td>" + risposta.email + "</td>";
+                ciccia += "</tr>";
+                ciccia += "<tr>";
+                ciccia += "<td>" + "Nome" + "</td>";
+                ciccia += "<td>" + risposta.name + "</td>";
+                ciccia += "</tr>";
+                ciccia += "<tr>";
+                ciccia += "<td>" + "Cognome" + "</td>";
+                ciccia += "<td>" + risposta.surname + "</td>";
+                ciccia += "</tr>";
                 $("#corpoGestioneAccount").append(ciccia);
             },
             error: function (err) {
@@ -197,14 +288,15 @@ function popolaListaAmici() {
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (risposta) {
+                setCookie("friendList", JSON.stringify(risposta),1,false);
                 $("#corpoListaAmici").html("");
                 for (var i = 0; i < risposta.length; i++) {
-                    var ciccia = ""
-                    ciccia += "<tr class=\"row-amico\" id=\"friend-row-"+i+"\">"
+                    var ciccia = "";
+                    ciccia += "<tr class=\"row-amico\" id=\"friend-row-"+i+"\">";
                     var id=risposta[i].id;
                     var name=risposta[i].name + " " + risposta[i].surname;
-                    ciccia += "<td class=\"row-info-amico\">" + name + "</td>"
-                    ciccia += "</tr>"
+                    ciccia += "<td class=\"row-info-amico\">" + name + "</td>";
+                    ciccia += "</tr>";
                     $("#corpoListaAmici").append(ciccia);
                     // Add onClick listener to every row, to be able to display the friend's info
                     let friendRow=document.getElementById("friend-row-"+i);
@@ -251,7 +343,7 @@ function aggiungiAmico() {
 
 function cercaAmico() {
     var idUser = getCookie("uid");
-    var x = document.getElementById("tagInputLabel").value
+    var x = document.getElementById("tagInputLabel").value;
     console.log(idUser);
     console.log(x);
 
@@ -268,12 +360,12 @@ function cercaAmico() {
                 for (var i = 0; i < risposta.length; i++) {
                     if (x == risposta[i].id) {
                         $("#corpoListaAmici").html("");
-                        var ciccia = ""
-                        ciccia += "<tr>"
-                        ciccia += "<td>" + risposta[i].id + "</td>"
-                        ciccia += "<td>" + risposta[i].name + " " + risposta[i].surname + "</td>"
-                        ciccia += "</tr>"
-                        $("#corpoListaAmici").append(ciccia)
+                        var ciccia = "";
+                        ciccia += "<tr>";
+                        ciccia += "<td>" + risposta[i].id + "</td>";
+                        ciccia += "<td>" + risposta[i].name + " " + risposta[i].surname + "</td>";
+                        ciccia += "</tr>";
+                        $("#corpoListaAmici").append(ciccia);
                     }
                     else if (x == "") {
                         popolaListaAmici();
@@ -290,6 +382,7 @@ function cercaAmico() {
 
 function logout()   {
     eraseCookie('uid');
+    eraseCookie('friendList');
     window.location.replace("http://localhost:9090/login");
 }
 
@@ -307,12 +400,19 @@ function eraseCookie(name) {
     document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-//L.Russo - funzione per settare Cookie con scadenza variabile
-function setCookie(cname,cvalue,exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires=" + d.toGMTString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+function setCookie(name, value, days, daysIsMillisecond) {
+	var expires = "";
+	if (daysIsMillisecond)	{
+		var date = new Date();
+		date.setTime(date.getTime()+(days));
+		expires= "; expires="+date.toUTCString();
+	}
+    else if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 }
 
 // L.Russo - funzione per creare colletta -- datetime dovrebbe essere la data di scadenza della colletta e non la data di creazione --> chiedere info
@@ -350,6 +450,7 @@ function createColletta(){
         });
         eraseCookie("list_id");
     }
+    eraseCookie("lastOperationData");
 }
 
 // L.Russo - funzione che ad ogni mungiuta del bottone Aggiungi nella modale della colletta aggiunge l'id nel cookie
@@ -391,41 +492,6 @@ if (!isLogged)	{
 	window.location.replace(localHost+"/login");
 }
 
-// L.Russo - listeners creazione JSON per tracciare le operazioni
-document.getElementById("idBeneficiario").addEventListener("input", () => {
-    let operationTracked = JSON.parse(getCookie("lastOperationData"));
-    operationTracked["idBeneficiario"] = document.getElementById("idBeneficiario").value;
-    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-
-});
-
-document.getElementById("idQuota").addEventListener("input", () => {
-    let operationTracked = JSON.parse(getCookie("lastOperationData"));
-    operationTracked["idQuota"] = document.getElementById("idQuota").value;
-    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-
-});
-
-document.getElementById("idContribuente").addEventListener("input", () => {
-    let operationTracked = JSON.parse(getCookie("lastOperationData"));
-    operationTracked["idContribuente"] = document.getElementById("idContribuente").value;
-    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-
-});
-
-document.getElementById("ImportoInputLabel").addEventListener("input", () => {
-    let operationTracked = JSON.parse(getCookie("lastOperationData"));
-    operationTracked["ImportoInputLabel"] = document.getElementById("ImportoInputLabel").value;
-    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-
-});
-
-document.getElementById("TagInputLabel").addEventListener("input", () => {
-    let operationTracked = JSON.parse(getCookie("lastOperationData"));
-    operationTracked["TagInputLabel"] = document.getElementById("TagInputLabel").value;
-    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-
-});
 // Friend popup handling
 let modalFriendPopup = document.getElementById("friend-info-popup");
 let spanCloseFriendPopup = document.getElementsByClassName("friend-popup-close")[0];

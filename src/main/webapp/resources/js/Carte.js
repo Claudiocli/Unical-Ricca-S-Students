@@ -4,11 +4,75 @@ $(document).ready(function(){
     document.getElementById("bottoneGestioneAccount").addEventListener("click", popolaGestioneAccount);
     document.getElementById("bottoneAggiungiCarta").addEventListener("click", checkData);
     document.getElementById("btn-logout").addEventListener("click", logout);
-  });
+    // L.Russo - listeners creazione JSON per tracciare le operazioni
+    var operationTracked = {};
+    operationTracked["operation"] = "AddCard";
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
 
+    document.getElementById("idNumeroCarta").addEventListener("input", () =>{
+        var operationTracked = JSON.parse(getCookie("lastOperationData"));
+        if(operationTracked != null){
+            operationTracked["idNumeroCarta"] = document.getElementById("idNumeroCarta").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } else {
+            var operationTracked = {};
+            operationTracked["idNumeroCarta"] = document.getElementById("idNumeroCarta").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } 
+    });
+    
+    document.getElementById("idIntestatario").addEventListener("input", () => {
+        var operationTracked = JSON.parse(getCookie("lastOperationData"));
+        if(operationTracked != null){
+            operationTracked["idIntestatario"] = document.getElementById("idIntestatario").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } else {
+            var operationTracked = {};
+            operationTracked["idIntestatario"] = document.getElementById("idIntestatario").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } 
+    });
+    
+    document.getElementById("mese").addEventListener("input", () => {
+        var operationTracked = JSON.parse(getCookie("lastOperationData"));
+        if(operationTracked != null){
+            operationTracked["mese"] = document.getElementById("mese").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } else {
+            var operationTracked = {};
+            operationTracked["mese"] = document.getElementById("mese").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } 
+    });
+    
+    document.getElementById("anno").addEventListener("input", () => {
+        var operationTracked = JSON.parse(getCookie("lastOperationData"));
+        if(operationTracked != null){
+            operationTracked["anno"] = document.getElementById("anno").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } else {
+            var operationTracked = {};
+            operationTracked["anno"] = document.getElementById("anno").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } 
+    });
+    
+    document.getElementById("cvc").addEventListener("input", () => {
+        var operationTracked = JSON.parse(getCookie("lastOperationData"));
+        if(operationTracked != null){
+            operationTracked["cvc"] = document.getElementById("cvc").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } else {
+            var operationTracked = {};
+            operationTracked["cvc"] = document.getElementById("cvc").value;
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+        } 
+    });
+});
 function aggiungiCarta(){
     $("#aggiungiCarta").click(show);
 }
+
 
 function show(){
     $("#form").attr("hidden",false);
@@ -27,37 +91,37 @@ function popolaGestioneAccount(){
         data: JSON.stringify(data),
         contentType: "application/json",
         success: function (risposta) {
-            console.log(risposta)
-            var ciccia = ""
-            ciccia += "<tr>"
-            ciccia += "<td>" + "ID" + "</td>"
-            ciccia += "<td>" + risposta.id + "</td>"
-            ciccia += "</tr>"
-            ciccia += "<tr>"
-            ciccia += "<td>" + "Indirizzo" + "</td>"
-            ciccia += "<td>" + risposta.address + "</td>"
-            ciccia += "</tr>"
-            ciccia += "<tr>"
-            ciccia += "<td>" + "CodiceFiscale" + "</td>"
-            ciccia += "<td>" + risposta.cf + "</td>"
-            ciccia += "</tr>"
-            ciccia += "<tr>"
-            ciccia += "<td>" + "Data di Nascita" + "</td>"
-            ciccia += "<td>" + risposta.dob + "</td>"
-            ciccia += "</tr>"
-            ciccia += "<tr>"
-            ciccia += "<td>" + "E-mail" + "</td>"
-            ciccia += "<td>" + risposta.email + "</td>"
-            ciccia += "</tr>"
-            ciccia += "<tr>"
-            ciccia += "<td>" + "Nome" + "</td>"
-            ciccia += "<td>" + risposta.name + "</td>"
-            ciccia += "</tr>"
-            ciccia += "<tr>"
-            ciccia += "<td>" + "Cognome" + "</td>"
-            ciccia += "<td>" + risposta.surname + "</td>"
-            ciccia += "</tr>"
-            $("#corpoGestioneAccount").append(ciccia)
+            console.log(risposta);
+            var ciccia = "";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "ID" + "</td>";
+            ciccia += "<td>" + risposta.id + "</td>";
+            ciccia += "</tr>";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "Indirizzo" + "</td>";
+            ciccia += "<td>" + risposta.address + "</td>";
+            ciccia += "</tr>";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "CodiceFiscale" + "</td>";
+            ciccia += "<td>" + risposta.cf + "</td>";
+            ciccia += "</tr>";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "Data di Nascita" + "</td>";
+            ciccia += "<td>" + risposta.dob + "</td>";
+            ciccia += "</tr>";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "E-mail" + "</td>";
+            ciccia += "<td>" + risposta.email + "</td>";
+            ciccia += "</tr>";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "Nome" + "</td>";
+            ciccia += "<td>" + risposta.name + "</td>";
+            ciccia += "</tr>";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "Cognome" + "</td>";
+            ciccia += "<td>" + risposta.surname + "</td>";
+            ciccia += "</tr>";
+            $("#corpoGestioneAccount").append(ciccia);
         },
         error: function (err) {
             console.log(err);
@@ -79,15 +143,19 @@ function popolaTabellaCarte(){
         data: JSON.stringify(data),
         contentType: "application/json",
         success: function (risposta) {
+            var size = 0;
             $("#corpoTabellaCarte").html("");
             for(var i=0 ;i<risposta.length; i++){
-                var ciccia = ""
-                ciccia += "<tr>"
-                ciccia += "<td>" + risposta[i].expiration_date + "</td>"
-                ciccia += "<td>" + risposta[i].pan + "</td>"
-                ciccia += "</tr>"
-                $("#corpoTabellaCarte").append(ciccia)
+                size+=1;
+                var ciccia = "";
+                ciccia += "<tr>";
+                ciccia += "<td>" + risposta[i].expiration_date + "</td>";
+                ciccia += "<td>" + risposta[i].pan + "</td>";
+                ciccia += "<td> <button type='button' class='serch-button-font' style='background-color:#69c974;' id='deleteBtn"+i+"'>X</button></td>";
+                ciccia += "</tr>";
+                $("#corpoTabellaCarte").append(ciccia);
             }
+            createEventListenerBtn(risposta);
         },
         error: function (err) {
             console.log(err);
@@ -96,8 +164,38 @@ function popolaTabellaCarte(){
     }
 }
 
+// L.Russo - eliminazione carte - NON FUNZIONA IL SERVIZIO
+function createEventListenerBtn(risposta){
+    for(let i = 0; i < risposta.length; i++){
+        document.getElementById("deleteBtn"+i).addEventListener("click", function(e) {
+            var idUser = getCookie("uid");
+            var pan = risposta[i].pan;
+            console.log(idUser);
+            if (idUser) {
+                var data = {
+                    pan: pan
+                }
+            $.ajax({
+                url: 'http://localhost:9090/card/deleteCard/'+idUser,
+                method: 'DELETE',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (risposta) {
+                    popolaTabellaCarte();
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });   
+            }
+        }, false);
+        
+    }
+}
+
 function logout()   {
     eraseCookie('uid');
+    eraseCookie('friendList');
     window.location.replace("http://localhost:9090/login");
 }
 
@@ -179,6 +277,7 @@ function insertCard(){
             }
         });
     }
+    eraseCookie("lastOperationData");
 }
 
 function checkData(){
@@ -188,8 +287,9 @@ function checkData(){
     var cvv = document.getElementById("cvc").value;
     var terminiduso = document.getElementById("exampleCheck1").checked;
     var anno = document.getElementById("anno").value;
-    if(pan == "" || holder == "" || expiration_date == "" || cvv == "" || !terminiduso || cvv.length != 3 || pan.length != 16 || anno != 4){
+    if(pan == "" || holder == "" || expiration_date == "" || cvv == "" || !terminiduso || cvv.length != 3 || pan.length != 16 || anno.length != 4){
         console.log("Campi richiesti");
+        alert("NONONO")
     }
     else{
         insertCard();
@@ -203,41 +303,6 @@ if (!isLogged)	{
 	window.location.replace(localHost+"/login");
 }
 
-// L.Russo - listeners creazione JSON per tracciare le operazioni
-document.getElementById("idNumeroCarta").addEventListener("input", () => {
-    let operationTracked = JSON.parse(getCookie("lastOperationData"));
-    operationTracked["idNumeroCarta"] = document.getElementById("idNumeroCarta").value;
-    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-
-});
-
-document.getElementById("idIntestatario").addEventListener("input", () => {
-    let operationTracked = JSON.parse(getCookie("lastOperationData"));
-    operationTracked["idIntestatario"] = document.getElementById("idIntestatario").value;
-    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-
-});
-
-document.getElementById("mese").addEventListener("input", () => {
-    let operationTracked = JSON.parse(getCookie("lastOperationData"));
-    operationTracked["mese"] = document.getElementById("mese").value;
-    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-
-});
-
-document.getElementById("anno").addEventListener("input", () => {
-    let operationTracked = JSON.parse(getCookie("lastOperationData"));
-    operationTracked["anno"] = document.getElementById("anno").value;
-    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-
-});
-
-document.getElementById("cvc").addEventListener("input", () => {
-    let operationTracked = JSON.parse(getCookie("lastOperationData"));
-    operationTracked["cvc"] = document.getElementById("cvc").value;
-    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-
-});
 
 function onKeyNumeric(e) {
     // Accetto solo numeri e backspace <-

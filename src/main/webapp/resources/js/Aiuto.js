@@ -57,6 +57,7 @@ function popolaGestioneAccount() {
 
 function logout()   {
     eraseCookie('uid');
+    eraseCookie('friendList');
     window.location.replace("http://localhost:9090/login");
 }
 

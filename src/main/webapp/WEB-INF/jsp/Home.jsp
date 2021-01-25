@@ -161,7 +161,7 @@
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
 													data-bs-dismiss="modal">Chiudi</button>
-												<button type="button" id="btn-logout" class="btn esci-font">Si</button>
+												<button type="button" id="btn-logout" class="btn esci-font">S&igrave;</button>
 											</div>
 										</div>
 									</div>
@@ -191,7 +191,8 @@
 								<div class="card-header">
 									<ul class="nav nav-tabs card-header-tabs">
 										<li class="nav-item">
-											<button type="button" class="btn card-button-options-font" disabled>Saldo</button>
+											<button type="button" class="btn card-button-options-font"
+												disabled>Saldo</button>
 										</li>
 									</ul>
 								</div>
@@ -230,9 +231,9 @@
 																<div class="modal-body">
 																	<div class="input-group mb-3">
 																		<span class="input-group-text euro-label">#</span> <input
-																			id="TagInputLabel" type="text" class="form-control"
-																			placeholder="Tag-Utente" aria-label="Username"
-																			aria-describedby="basic-addon1">
+																			id="TagInputLabelTransaction" type="text"
+																			class="form-control" placeholder="Tag-Utente"
+																			aria-label="Username" aria-describedby="basic-addon1">
 																	</div>
 																	<div class="input-group">
 																		<input id="ImportoInputLabel" type="text"
@@ -295,7 +296,7 @@
 																</div>
 																<div class="modal-body">
 																	<div class="input-group mb-3">
-																		<span class="input-group-text euro-label">#</span> <input
+																		<span class="input-group-text euro-label"></span> <input
 																			id="panInputLabel" type="text" class="form-control"
 																			placeholder="Pan-Carta" aria-label="Username"
 																			aria-describedby="basic-addon1">
@@ -336,18 +337,25 @@
 									<ul class="nav nav-tabs card-header-tabs">
 										<li class="nav-item">
 											<div class="btn-group dropend">
-												<button type="button" class="btn card-button-options-font" disabled>Colletta</button>
+												<button type="button" class="btn card-button-options-font"
+													disabled>Colletta</button>
 									</ul>
 								</div>
 								<div class="card-body card-body-text-color">
 									<ul class="list-inline mb-2 list-font">
 										<li id="form">
 											<form class="font-form">
-												<div class="mb-3">
-													<label class="form-label">Beneficiario</label>
-													<input type="text" class="form-control "
-														id="idBeneficiario" placeholder="#Tag"
-														aria-describedby="emailHelp" required>
+												<!-- <div class="mb-3">
+													<label class="form-label">Beneficiario</label> <input
+														type="text" class="form-control " id="idBeneficiario"
+														placeholder="#Tag" aria-describedby="emailHelp" required>
+												</div>-->
+												<label class="form-label">Beneficiario</label>
+												<div class="input-group mb-3">
+													<span class="input-group-text euro-label">#</span> <input
+														id="idBeneficiario" type="text" class="form-control"
+														placeholder="Tag" aria-label="Username"
+														aria-describedby="basic-addon1">
 												</div>
 												<div class="mb-3">
 													<label class="form-label">Quota</label>
@@ -392,7 +400,8 @@
 																<button type="button" class="btn btn-secondary"
 																	data-bs-dismiss="modal">Annulla</button>
 																<button type="button" id="bottoneCreaColletta"
-																	class="btn chiudi-gestioneAccount" data-bs-dismiss="modal">Crea</button>
+																	class="btn chiudi-gestioneAccount"
+																	data-bs-dismiss="modal">Crea</button>
 															</div>
 														</div>
 													</div>
@@ -421,7 +430,7 @@
 									<div class="input-group">
 										<div class="input-group-text search-bar-font-1">#</div>
 										<input type="text" class="form-control search-bar-font-2"
-											id="tagInputLabel" placeholder="Tag">
+											id="tagInputLabelFriendlist" placeholder="Tag">
 									</div>
 								</div>
 						</li>
@@ -488,7 +497,7 @@
                             </svg>
 						<h3>Veloce</h3>
 						<p class="lead mb-0 text-bold">Certificato come conto virtuale
-							piu' rapido in Europa.</p>
+							pi&ugrave; rapido in Europa.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 ">
@@ -502,7 +511,7 @@
                             </svg>
 						<h3>Sicuro</h3>
 						<p class="lead mb-0 text-bold">Eccetto noi della PayBall8
-							S.P.A. nessuno puo' accedere ai vostri dati sensibili ;-) .</p>
+							S.P.A. nessuno pu&ograve; accedere ai vostri dati sensibili ;-) .</p>
 					</div>
 				</div>
 			</div>
@@ -580,13 +589,12 @@
 	-->
 	<div id="friend-info-popup" class="friendModal">
 		<div class="friend-modal-content">
-			<span class="friend-popup-close">&times;</span>
-			</br>
-			<label class="form-label" id="friend-id-info">ID: </label>
-			<label class="form-label" id="friend-name-info">Nome: </label>
+			<span class="friend-popup-close">&times;</span> </br> <label
+				class="form-label" id="friend-id-info">ID: </label> <label
+				class="form-label" id="friend-name-info">Nome: </label>
 			<button class="btn" id="delete-friend-button" type="button">Elimina</button>
 		</div>
-	</div> 
+	</div>
 </body>
 
 </html>

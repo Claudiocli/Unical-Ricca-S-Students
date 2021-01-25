@@ -156,7 +156,7 @@
 											<div class="modal-footer">
 												<button type="button" class="btn btn-secondary"
 													data-bs-dismiss="modal">Chiudi</button>
-												<button type="button" id="btn-logout" class="btn esci-font">Si</button>
+												<button type="button" id="btn-logout" class="btn esci-font">S&igrave;</button>
 											</div>
 										</div>
 									</div>
@@ -264,7 +264,7 @@
 									<div class="fiChoice-container">
 										<hr class="vx_hr-alt fiDetails-hr">
 										<div class="vx_text-6 fiChoice-info">
-											Il saldo disponibile verra' usato quando fai acquisti online
+											Il saldo disponibile verr&agrave; usato quando fai acquisti online
 											o invii denaro.
 											<div>Se non hai denaro sufficiente sul tuo saldo, ti
 												chiederemo di scegliere un altro metodo di pagamento al
@@ -307,7 +307,7 @@
                             </svg>
 						<h3>Veloce</h3>
 						<p class="lead mb-0 text-bold">Certificato come conto virtuale
-							piu' rapido in Europa.</p>
+							pi&ugrave; rapido in Europa.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 ">
@@ -321,7 +321,7 @@
                             </svg>
 						<h3>Sicuro</h3>
 						<p class="lead mb-0 text-bold">Eccetto noi della PayBall8
-							S.P.A. nessuno puo' accedere ai vostri dati sensibili ;-) .</p>
+							S.P.A. nessuno pu&ograve; accedere ai vostri dati sensibili ;-) .</p>
 					</div>
 				</div>
 			</div>
