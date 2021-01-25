@@ -302,8 +302,8 @@ function popolaListaAmici() {
                     let friendRow=document.getElementById("friend-row-"+i);
                     friendRow.addEventListener('click', ()  =>  {
                         modalFriendPopup.style.display = "block";
-                        document.getElementById("friend-id-info").innerHTML="ID:    "+id;
-                        document.getElementById("friend-name-info").innerHTML="Nome:    "+name;
+                        document.getElementById("friend-id-info").innerHTML="ID: "+id;
+                        document.getElementById("friend-name-info").innerHTML="Nome: "+name;
                     });
                 }
             },
@@ -505,5 +505,25 @@ window.onclick = function(event) {
   }
 } 
 document.getElementById("delete-friend-button").addEventListener('click', ()    =>  {
-    // TODO: Call to the server to delete the friendship and delete the friend from the friendlist
+    if (confirm("Sei sicuro di voler eliminare il tuo amico?")) {
+        let idFriend=document.getElementById('friend-id-info').innerHTML;
+        idFriend=idFriend.substring(4);
+        let data =   {
+            account1: getCookie('uid'),
+            account2: idFriend,
+        };
+        $.ajax({
+            url: "http://localhost:9090/friendship/delete",
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function(response){
+                window.alert("Amico eliminato correttamente");
+                modalFriendPopup.style.display = "none";
+            },
+            error: function(error){
+                window.alert("Abbiamo riscontrato un errore, riprova");
+            }
+        });
+    }
 })
