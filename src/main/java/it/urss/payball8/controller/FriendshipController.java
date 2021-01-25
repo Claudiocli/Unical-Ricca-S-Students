@@ -60,14 +60,16 @@ public class FriendshipController {
 
 	@DeleteMapping("/delete")
 	void deleteFriendship(@RequestBody Friendship friendship) {
-		logger.info("FRIENDSHIP_DELETE deleted friendship with id: %d");
 		Friendship friendship1_2 = friendshipRepository.findByAccount1AndAccount2(friendship.getAccount1(), friendship.getAccount2());
 		Friendship friendship2_1 = friendshipRepository.findByAccount2AndAccount1(friendship.getAccount1(), friendship.getAccount2());
-		if(friendship1_2 != null)
+		if(friendship1_2 != null) {
 			friendshipRepository.delete(friendship1_2);
-		if(friendship2_1 != null)
+			logger.info("FRIENDSHIP_DELETE deleted friendship");
+		}
+		if(friendship2_1 != null) {
 			friendshipRepository.delete(friendship2_1);
-		
+			logger.info("FRIENDSHIP_DELETE deleted friendship");
+		}
 	}
 
 }

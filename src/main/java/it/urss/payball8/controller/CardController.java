@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.urss.payball8.model.Card;
+import it.urss.payball8.model.Recharge;
 import it.urss.payball8.repository.AccountRepository;
 import it.urss.payball8.repository.CardRepository;
+import it.urss.payball8.repository.RechargeRepository;
 import net.minidev.json.JSONObject;
 
 @Controller
@@ -33,6 +35,9 @@ public class CardController {
 
 	@Autowired
 	private AccountRepository accountRepository;
+	
+	@Autowired
+	private RechargeRepository rechargeRepository;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showLoginPage() {
@@ -60,11 +65,14 @@ public class CardController {
 	}
 
 	@DeleteMapping(path = "/deleteCard/{id}")
-	void deleteBypan(@RequestBody String pan, @PathVariable String id) {
-		logger.info(String.format("USER_DELETE deleted card with pan: %d", pan));
-
-		Card current_card = cardRepository.findBypan(pan);
-		if (current_card.getAccount() == id)
-			cardRepository.deleteBypan(pan);
+	void deleteBypan(@RequestBody JSONObject pan , @PathVariable String id) {
+		String pan_Json = pan.getAsString("pan");
+		Card current_card = cardRepository.findBypan(pan_Json);
+		List<Recharge> list_recharge = rechargeRepository.findAllBycard(pan_Json);
+		if (current_card != null && current_card.getAccount().equals(id)) {
+			rechargeRepository.deleteAll(list_recharge);
+			cardRepository.delete(current_card);
+			logger.info("Cart_DELETE deleted card with pan: " + pan);
+		}
 	}
 }
