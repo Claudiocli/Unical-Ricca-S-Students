@@ -271,9 +271,11 @@ function insertCard(){
             contentType: "application/json",
             success: function (risposta) {
                 console.log(risposta)
+                window.alert("Carta inserita con successo!");
             },
             error: function (err) {
                 console.log(err);
+                window.alert("ERRORE: Carta non inserita. Riprovare.")
             }
         });
     }
