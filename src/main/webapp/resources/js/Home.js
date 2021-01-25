@@ -133,40 +133,76 @@ function initSaldo() {
 
 function inviaTransizione() {
     var idUser = getCookie("uid");
-    var importo = document.getElementById("ImportoInputLabel").value;
-    var tag = document.getElementById("TagInputLabelTransaction").value;
+    var importo = document.getElementById("ImportoInputLabel");
+    var tag = document.getElementById("TagInputLabelTransaction");
+    //importo.required=true;    non riesco a farlo funzionare @RinoPolacchini cerca di aggiustare questi bottoni
+    // NON devono poter chiudere la modale se non c'è nessun input
+    //tag.required=true;
     var datetime = getDateTime();
-    if (idUser) {
+    if (idUser && checkInputSendTransaction()) {
         var data = {
-            amount: importo,
+            amount: importo.value,
             datetime: datetime,
             category: "Normal",
             sender: idUser,
-            recipient: tag
+            recipient: tag.value
         }
+        $.ajax({
+            url: 'http://localhost:9090/storico/send',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (risposta) {
+                initSaldo();
+            },
+            error: function (err) {
+                window.alert("Abbiamo riscontrato un problema, riporva");
+            }
+        });
     }
-    $.ajax({
-        url: 'http://localhost:9090/storico/send',
-        method: 'POST',
-        data: JSON.stringify(data),
-        contentType: "application/json",
-        success: function (risposta) {
-            initSaldo();
-        },
-        error: function (err) {
-            window.alert("Abbiamo riscontrato un problema, riporva");
-        }
-    });
+    
     eraseCookie("lastOperationData");
+    //importo.required=false;
+    //tag.required=false;
+}
+function checkInputSendTransaction()    {
+    let returnValue=true;
+
+    let amount=document.getElementById("ImportoInputLabel");
+    let tagReciever=document.getElementById("TagInputLabelTransaction");
+
+    if (amount.value<=0 || amount.value==null)  {
+        amount.value="";
+        let oldBorder=amount.style.border;
+        amount.style.border="2px solid red";
+        amount.placeholder="Importo non valido";
+        setTimeout(()   =>  {
+            amount.style.border=oldBorder;
+            amount.placeholder="0.00";
+        }, 2500);
+        returnValue=false;
+    }
+    if (tagReciever="")   {
+        let oldBorder=tagReciever.style.border;
+        tagReciever.style.border="2px solid red";
+        tagReciever.placeholder="Nessun tag inserito";
+        setTimeout(()   =>  {
+            tagReciever.style.border=oldBorder;
+            tagReciever.placeholder="";
+        }, 2500);
+        returnValue=false;
+    }
+    return returnValue;
 }
 
 function ricaricaSaldo(){
     var idUser = getCookie("uid");
     var importo = document.getElementById("ImportoInputLabel2").value;
     var pan = document.getElementById("panInputLabel").value;
+    //  @RinoPolacchini stessa cosa qui, come per l'invia denaro
     var datetime = getDateTime();
 
-    if (idUser) {
+    if (idUser && checkInputRecharge()) {
         var data = {
             datetime : datetime,
             card : pan,
@@ -187,6 +223,36 @@ function ricaricaSaldo(){
         });
     }
     eraseCookie("lastOperationData");
+}
+function checkInputRecharge()    {
+    let returnValue=true;
+
+    let amount = document.getElementById("ImportoInputLabel2");
+    let pan = document.getElementById("panInputLabel");
+
+    if (amount.value<=0 || amount.value==null)  {
+        amount.value="";
+        let oldBorder=amount.style.border;
+        amount.style.border="2px solid red";
+        amount.placeholder="Importo non valido";
+        setTimeout(()   =>  {
+            amount.style.border=oldBorder;
+            amount.placeholder="0.00";
+        }, 2500);
+        returnValue=false;
+    }
+    if (pan="")   {
+        let oldBorder=pan.style.border;
+        let oldPlaceholder=pan.style.placeholder;
+        pan.style.border="2px solid red";
+        pan.placeholder="Nessun PAN inserito";
+        setTimeout(()   =>  {
+            pan.style.border=oldBorder;
+            pan.placeholder=oldPlaceholder;
+        }, 2500);
+        returnValue=false;
+    }
+    return returnValue;
 }
 
 function popolaGestioneAccount() {
@@ -305,6 +371,8 @@ function popolaListaAmici() {
                     $("#corpoListaAmici").append(ciccia);
                 }
                 // Add onClick listener to every row, to be able to display the friend's info
+                // Couldn't set'em in the for, because the elements weren't fully loaded into the DOM.
+                // Info @Claudiocli
                 addListenerToFriendListsRows(risposta);
             },
             error: function (err) {
@@ -313,7 +381,6 @@ function popolaListaAmici() {
         });
     }
 }
-
 function addListenerToFriendListsRows(response){
     for(let i = 0; i < response.length; i++){
         document.getElementById("friend-row-"+i).addEventListener("click",  ()  =>  {
@@ -345,11 +412,16 @@ function aggiungiAmico() {
                 popolaListaAmici()
             },
             error: function (err) {
+                // Same method used in various functions. Info @Claudiocli
+                // Keep old border settings
                 let oldBorder=idInputLabel.style.border;
+                // Setting the border settings to resemble an error
                 idInputLabel.style.border="2px solid red";
+                // Same thing with the placeholder, to give to the user an error message
                 let oldPlaceholder=idInputLabel.placeholder;
                 idInputLabel.value="";
                 idInputLabel.placeholder="ID invalido";
+                // After some time (2500ms =>2,5s) return the border and placeholder settings to their originals
                 setTimeout(()   =>  {
                     idInputLabel.style.border=oldBorder;
                     idInputLabel.placeholder=oldPlaceholder;
@@ -452,7 +524,7 @@ function createColletta(){
     // aggiungiamo l'utente che crea la colletta nella lista dei partecipanti
     list_id.push(idUser);
 
-    if (idUser) {
+    if (idUser && checkInputColletta()) {
         var data = {
             colletta:{
                 datetime: datetime,
@@ -477,6 +549,36 @@ function createColletta(){
         eraseCookie("list_id");
     }
     eraseCookie("lastOperationData");
+}
+function checkInputColletta()   {
+    let returnValue=true;
+
+    let quote = document.getElementById("idQuota");
+    let beneficiary = document.getElementById("idBeneficiario");
+
+    if (quote.value<=0 || quote.value==null)  {
+        quote.value="";
+        let oldBorder=quote.style.border;
+        quote.style.border="2px solid red";
+        quote.placeholder="Importo non valido";
+        setTimeout(()   =>  {
+            quote.style.border=oldBorder;
+            quote.placeholder="0.00";
+        }, 2500);
+        returnValue=false;
+    }
+    if (beneficiary="")   {
+        let oldBorder=beneficiary.style.border;
+        let oldPlaceholder=beneficiary.style.placeholder;
+        beneficiary.style.border="2px solid red";
+        beneficiary.placeholder="Nessun PAN inserito";
+        setTimeout(()   =>  {
+            beneficiary.style.border=oldBorder;
+            beneficiary.placeholder=oldPlaceholder;
+        }, 2500);
+        returnValue=false;
+    }
+    return returnValue;
 }
 
 // L.Russo - funzione che ad ogni mungiuta del bottone Aggiungi nella modale della colletta aggiunge l'id nel cookie
