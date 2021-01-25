@@ -65,7 +65,7 @@ public class CardController {
 	}
 
 	@DeleteMapping(path = "/deleteCard/{id}")
-	void deleteBypan(@RequestBody JSONObject pan , @PathVariable String id) {
+	ResponseStatusException deleteBypan(@RequestBody JSONObject pan , @PathVariable String id) {
 		String pan_Json = pan.getAsString("pan");
 		Card current_card = cardRepository.findBypan(pan_Json);
 		List<Recharge> list_recharge = rechargeRepository.findAllBycard(pan_Json);
@@ -73,6 +73,8 @@ public class CardController {
 			rechargeRepository.deleteAll(list_recharge);
 			cardRepository.delete(current_card);
 			logger.info("Cart_DELETE deleted card with pan: " + pan);
+			return new ResponseStatusException(HttpStatus.OK, "DELETE_CARD");
 		}
+		return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unable to find user");
 	}
 }

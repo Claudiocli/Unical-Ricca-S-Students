@@ -59,17 +59,20 @@ public class FriendshipController {
 	}
 
 	@DeleteMapping("/delete")
-	void deleteFriendship(@RequestBody Friendship friendship) {
+	ResponseStatusException deleteFriendship(@RequestBody Friendship friendship) {
 		Friendship friendship1_2 = friendshipRepository.findByAccount1AndAccount2(friendship.getAccount1(), friendship.getAccount2());
 		Friendship friendship2_1 = friendshipRepository.findByAccount2AndAccount1(friendship.getAccount1(), friendship.getAccount2());
 		if(friendship1_2 != null) {
 			friendshipRepository.delete(friendship1_2);
 			logger.info("FRIENDSHIP_DELETE deleted friendship");
+			return new ResponseStatusException(HttpStatus.OK, "DELETE_CARD");
 		}
 		if(friendship2_1 != null) {
 			friendshipRepository.delete(friendship2_1);
 			logger.info("FRIENDSHIP_DELETE deleted friendship");
+			return new ResponseStatusException(HttpStatus.OK, "DELETE_CARD");
 		}
+		return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unable to find user");
 	}
 
 }
