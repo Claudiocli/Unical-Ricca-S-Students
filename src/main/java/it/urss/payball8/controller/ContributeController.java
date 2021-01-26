@@ -63,11 +63,10 @@ public class ContributeController {
 
 	@PostMapping(path = "/pay")
 	@ResponseBody
-	ResponseEntity<Colletta> payColletta(@RequestBody Contribute contribute) {
-		logger.info("COLLETTA_PAY_ID: " + contribute.getColletta());
-		Contribute current_contribute = contributeRepository.findByContributorAndColletta(contribute.getContributor(),
-				contribute.getColletta());
-		current_contribute.setStato("pagata");
+	ResponseEntity<Colletta> payColletta(@RequestBody JSONObject id) {
+		Long id_long = Long.parseLong(id.getAsString("id"));
+		Contribute current_contribute = contributeRepository.findById(id_long)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find contribute"));
 
 		Account current_account = accountRepository.findById(current_contribute.getContributor())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
@@ -77,35 +76,40 @@ public class ContributeController {
 		if (current_account.getBalance() >= current_colletta.getQuote()) {
 			current_account.setBalance(current_account.getBalance() - current_colletta.getQuote());
 			current_colletta.setAmount_temp(current_colletta.getAmount_temp() + current_colletta.getQuote());
+
+			Transaction transaction = new Transaction();
+			transaction.setAmount(current_colletta.getQuote());
+			transaction.setCategory("Colletta inviata a:" + current_colletta.getBeneficiary());
+			transaction.setSender(current_account.getId());
+			transaction.setRecipient(current_colletta.getBeneficiary());
+
+			current_contribute.setStato("pagata");
+
+			ResponseEntity.ok(contributeRepository.save(current_contribute));
+			ResponseEntity.ok(transactionRepository.save(transaction));
+			ResponseEntity.ok(accountRepository.save(current_account));
+		} else {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "");
 		}
-		if (current_colletta.getAmount_temp() >= current_colletta.getAmount())
+		if (current_colletta.getAmount_temp() >= current_colletta.getAmount()) {
 			sendCollettaTobeneficiary(current_colletta);
-
-		Transaction transaction = new Transaction();
-		transaction.setAmount(current_colletta.getQuote());
-		transaction.setCategory("Colletta inviata a:" + current_colletta.getBeneficiary());
-		transaction.setSender(current_account.getId());
-		transaction.setRecipient(current_colletta.getBeneficiary());
-
-		ResponseEntity.ok(contributeRepository.save(current_contribute));
-		ResponseEntity.ok(transactionRepository.save(transaction));
-		ResponseEntity.ok(accountRepository.save(current_account));
+		}
 		return ResponseEntity.ok(collettaRepository.save(current_colletta));
 	}
 
 	@PostMapping(path = "/decline")
 	@ResponseBody
-	ResponseEntity<Contribute> declineContribute(@RequestBody Contribute contribute) {
-		logger.info(
-				"COLLETTA_DECLINE_ID: " + contribute.getColletta() + " CONTRIBUTOR_ID: " + contribute.getContributor());
-		Contribute current_contribute = contributeRepository.findByContributorAndColletta(contribute.getContributor(),
-				contribute.getColletta());
+	ResponseEntity<Contribute> declineContribute(@RequestBody JSONObject id) {
+		Long id_long = Long.parseLong(id.getAsString("id"));
+		logger.info("COLLETTA_DECLINE_ID:" + id);
+		Contribute current_contribute = contributeRepository.findById(id_long)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find Contribute"));
 		current_contribute.setStato("rifiutata");
 
 		Colletta current_colletta = collettaRepository.findById(current_contribute.getColletta())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find colletta"));
 
-		accountRepository.findById(contribute.getContributor())
+		accountRepository.findById(current_contribute.getContributor())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 
 		current_colletta.setAmount(current_colletta.getAmount() - current_colletta.getQuote());
@@ -113,6 +117,7 @@ public class ContributeController {
 		if (current_colletta.getAmount_temp() >= current_colletta.getAmount())
 			sendCollettaTobeneficiary(current_colletta);
 
+		ResponseEntity.ok(collettaRepository.save(current_colletta));
 		return ResponseEntity.ok(contributeRepository.save(current_contribute));
 	}
 

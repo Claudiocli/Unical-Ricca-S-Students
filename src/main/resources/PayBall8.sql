@@ -111,6 +111,7 @@ ALTER SEQUENCE public.colletta_id_seq OWNED BY public.colletta.id;
 --
 
 CREATE TABLE public.contribute (
+	id integer NOT NULL,
     contributor character varying(255) NOT NULL,
     colletta bigint NOT NULL,
    	stato character varying(255)
@@ -270,7 +271,7 @@ COPY public.colletta (id, datetime, quote, beneficiary, amount, amount_temp) FRO
 -- Data for Name: contribute; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.contribute (contributor, colletta) FROM stdin;
+COPY public.contribute (id, contributor, colletta, stato) FROM stdin;
 \.
 
 
@@ -355,7 +356,7 @@ ALTER TABLE ONLY public.colletta
 --
 
 ALTER TABLE ONLY public.contribute
-    ADD CONSTRAINT contribute_pkey PRIMARY KEY (contributor, colletta);
+    ADD CONSTRAINT contribute_pkey PRIMARY KEY (id);
 
 
 --

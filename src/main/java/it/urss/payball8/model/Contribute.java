@@ -1,32 +1,45 @@
 package it.urss.payball8.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "contribute")
-@IdClass(Contribute.class)
 public class Contribute implements java.io.Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Long id;
+
 	private String contributor;
 
-	@Id
 	private Long colletta;
 
 	private String stato;
 
 	public Contribute() {
+		stato = "default";
 	}
 
-	public Contribute(String contributor, Long colletta, String stato) {
+	public Contribute(Long id, String contributor, Long colletta, String stato) {
+		super();
+		this.id = id;
 		this.contributor = contributor;
 		this.colletta = colletta;
 		this.stato = stato;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getContributor() {
@@ -45,10 +58,6 @@ public class Contribute implements java.io.Serializable {
 		this.colletta = colletta;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	public String getStato() {
 		return stato;
 	}
@@ -57,9 +66,16 @@ public class Contribute implements java.io.Serializable {
 		this.stato = stato;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
-		return "Contribute [contributor=" + contributor + ", colletta=" + colletta + ", stato=" + stato + "]";
+		return "Contribute [id=" + id + ", contributor=" + contributor + ", colletta=" + colletta + ", stato=" + stato
+				+ "]";
 	}
+
+	
 
 }

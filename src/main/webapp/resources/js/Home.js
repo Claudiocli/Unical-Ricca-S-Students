@@ -902,14 +902,14 @@ function createEventListenerCollettaPopup(risposta) {
     for(let i = 0; i < risposta.length; i++){
         document.getElementById("contribuite-to-colletta"+i).addEventListener('click', function(e) {   
             let id_payer = getCookie('uid');
-            let id_colletta = risposta[i].colletta.id;
+            let id_contribute = risposta[i].contribute.id;
             console.log(id_payer)
-            console.log(id_colletta)
+            console.log(id_contribute)
             let data = {
-                contributor: id_payer,
-                colletta: id_colletta,
+                //contributor: id_payer,
+                colletta: id_contribute,
             };
-            if (id_payer && id_colletta) {
+            if (id_payer && id_contribute) {
                 $.ajax({
                     url: localHost + "/contribute/pay",
                     method: "POST",
@@ -929,14 +929,13 @@ function createEventListenerCollettaPopup(risposta) {
         });
         document.getElementById("refuse-colletta-button"+i).addEventListener('click', function(e) {
             let id_payer = getCookie('uid');
-            let id_colletta = risposta[i].colletta;
+            let id_contribute = risposta[i].contribuente.id;
             console.log(id_payer)
-            console.log(id_colletta)
+            console.log(id_contribute)
             let data = {
-                contributor: id_payer,
-                colletta: id_colletta,
+                colletta: id_contribute,
             };
-            if (id_payer && id_colletta) {
+            if (id_payer && id_contribute) {
                 $.ajax({
                     url: localHost + "/contribute/decline",
                     method: "POST",
