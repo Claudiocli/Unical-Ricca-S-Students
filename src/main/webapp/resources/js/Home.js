@@ -9,6 +9,7 @@ $(document).ready(function () {
     document.getElementById("bottoneAggiungiContribuente").addEventListener("click", addContributor);
     document.getElementById("bottoneRicaricaSaldo").addEventListener("click", ricaricaSaldo);
     document.getElementById("bottoneCreaColletta").addEventListener("click", createColletta);
+    document.getElementById("bottoneAnnullaColletta").addEventListener("click", clearDropBox);
     document.getElementById("btn-logout").addEventListener("click", logout);
     // L.Russo - listeners creazione JSON per tracciare le operazioni
     var operationTracked = {};
@@ -452,17 +453,17 @@ function cercaAmico() {
     if (idUser) {
 
         if (idInputLabel.value == "") {
-            let oldBorder=idInputLabel.style.border;
-            idInputLabel.style.border="2px solid red";
-            let oldPlaceholder=idInputLabel.placeholder;
-            idInputLabel.value="";
-            idInputLabel.placeholder="ID/Nome mancante";
-            setTimeout(()   =>  {
-                idInputLabel.style.border=oldBorder;
-                idInputLabel.placeholder=oldPlaceholder;
+            let oldBorder = idInputLabel.style.border;
+            idInputLabel.style.border = "2px solid red";
+            let oldPlaceholder = idInputLabel.placeholder;
+            idInputLabel.value = "";
+            idInputLabel.placeholder = "ID/Nome mancante";
+            setTimeout(() => {
+                idInputLabel.style.border = oldBorder;
+                idInputLabel.placeholder = oldPlaceholder;
             }, 2500);
             popolaListaAmici();
-        } else { 
+        } else {
             var data = {
                 id: idUser
             }
@@ -476,8 +477,8 @@ function cercaAmico() {
                         if (idInputLabel.value == risposta[i].name) {
                             $("#corpoListaAmici").html("");
                             var ciccia = "";
-                            ciccia += "<tr class=\"row-amico\" id=\"friend-row-"+i+"\">";
-                            let name=risposta[i].name + " " + risposta[i].surname;
+                            ciccia += "<tr class=\"row-amico\" id=\"friend-row-" + i + "\">";
+                            let name = risposta[i].name + " " + risposta[i].surname;
                             ciccia += "<td class=\"row-info-amico\">" + name + "</td>";
                             ciccia += "</tr>";
                             $("#corpoListaAmici").append(ciccia);
@@ -491,7 +492,7 @@ function cercaAmico() {
         }
     }
 
-    
+
 }
 
 function logout() {
@@ -621,10 +622,33 @@ function addContributor() {
     document.getElementById("idContribuente").value = "";
 }
 
+function clearDropBox() {
+    $("#dropDownPartecipanti").html("");
+}
+
 function addToDropbox(contribuente) {
-    var tizio = "";
-    tizio += "<li><a class=\"dropdown-item\" >" + contribuente + "</a></li>";
-    $("#dropDownPartecipanti").append(tizio);
+    var idUser = contribuente;
+    if (idUser) {
+        var data = {
+            id: idUser
+        }
+        $.ajax({
+            url: 'http://localhost:9090/account/me',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (risposta) {
+                var ciccio = risposta.name + "-" + risposta.surname;
+                var tizio = "";
+                tizio += "<li><a class=\"dropdown-item\" >" + ciccio + "</a></li>";
+                console.log(ciccio);
+                $("#dropDownPartecipanti").append(tizio);
+            },
+            error: function (err) {
+                window.alert("Abbiamo riscontrato un problema, riporva");
+            }
+        });
+    }
 }
 
 // L.Russo - funzione per calcolare datatime
@@ -735,7 +759,7 @@ document.getElementById("refuse-colletta-button").addEventListener('click', () =
 
     if (id_payer && id_colletta) {
         $.ajax({
-            url: localHost+"/contribute/decline",
+            url: localHost + "/contribute/decline",
             method: "DELETE",
             data: JSON.stringify(data),
             contentType: "application/json",

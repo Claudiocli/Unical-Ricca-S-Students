@@ -31,12 +31,9 @@
 					<div class="col-lg-11 col-md-11">
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-								<li class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-										fill="currentColor" class="bi bi-wallet2 icons-navbar-color"
-										viewBox="0 0 16 16">
-										<path fill-rule="evenodd"
-											d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z" />
-									</svg></li>
+								<li class="nav-item">
+									<img class="logo-font" src="../../resources/img/LOGOPAY8BALLL.png" alt="logo">
+								</li>
 								<li class="nav-item"><a id="riepilogo" class="nav-link nav-link-color"
 										href="http://localhost:9090/home">Riepilogo</a></li>
 								<li class="nav-item"><a id="carte" class="nav-link nav-link-color"
@@ -442,7 +439,7 @@
 																	</ul>
 																</div>
 																<div class="modal-footer">
-																	<button type="button" class="btn btn-secondary"
+																	<button id="bottoneAnnullaColletta" type="button" class="btn btn-secondary"
 																		data-bs-dismiss="modal">Annulla</button>
 																	<button type="button" id="bottoneCreaColletta"
 																		class="btn chiudi-gestioneAccount"
