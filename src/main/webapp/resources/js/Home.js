@@ -10,6 +10,7 @@ $(document).ready(function () {
     document.getElementById("bottoneRicaricaSaldo").addEventListener("click", ricaricaSaldo);
     document.getElementById("bottoneCreaColletta").addEventListener("click", createColletta);
     document.getElementById("bottoneAnnullaColletta").addEventListener("click", clearDropBox);
+    document.getElementById("submitColletta").addEventListener("click", checkBeneficiarioNellaFriendList);
     document.getElementById("btn-logout").addEventListener("click", logout);
     // L.Russo - listeners creazione JSON per tracciare le operazioni
     var operationTracked = {};
@@ -572,6 +573,36 @@ function createColletta() {
         window.alert("L'operazione non \u00E8 andata a buon fine verifica di aver compilato correttamente i campi.")
     }
     eraseCookie("lastOperationData");
+}
+
+function checkBeneficiarioNellaFriendList(){
+    var idUser = getCookie("uid");
+    var beneficiario = document.getElementById("idBeneficiario").value;
+    var verifica = false;
+    if (idUser) {
+        var data = {
+            id: idUser
+        }
+        $.ajax({
+            url: 'http://localhost:9090/home/friendship',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (risposta) {
+                for (var i = 0; i < risposta.length; i++) {
+                    if(risposta[i].id == beneficiario)
+                        verifica = true
+                }
+                
+                if(verifica == false)
+                    window.alert("Impossibile creare la colletta se non si ha l'amicizia con il beneficiario.");
+
+            },
+            error: function (err) {
+                window.alert("");
+            }
+        });
+    }
 }
 
 function checkInputColletta() {
