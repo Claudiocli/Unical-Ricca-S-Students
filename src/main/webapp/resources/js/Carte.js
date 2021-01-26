@@ -189,25 +189,25 @@ function createEventListenerBtn(risposta){
                 var data = {
                     pan: pan
                 }
-            if(confirm("Vuoi eliminare la carta definiitivamente?")){
-                $.ajax({
-                    url: 'http://localhost:9090/card/deleteCard/'+idUser,
-                    method: 'DELETE',
-                    data: JSON.stringify(data),
-                    contentType: "application/json",
-                    success: function (risposta) {
-                        alert("Carta eliminata con successo");
-                        popolaTabellaCarte();
-                    },
-                    error: function (err) {
-                        alert("ERRORE: Eliminazione non riuscita! Riprovare.");
-                        console.log(err);
-                    }
-                });  
-            } 
-        }
-    });
-}
+                if(confirm("Vuoi eliminare la carta definiitivamente?")){
+                    $.ajax({
+                        url: 'http://localhost:9090/card/deleteCard/'+idUser,
+                        method: 'DELETE',
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        success: function (risposta) {
+                            alert("Carta eliminata con successo");
+                            popolaTabellaCarte();
+                        },
+                        error: function (err) {
+                            alert("ERRORE: Eliminazione non riuscita! Riprovare.");
+                            console.log(err);
+                        }
+                    });  
+                } 
+            }
+        });
+    }
 }
 
 function logout()   {

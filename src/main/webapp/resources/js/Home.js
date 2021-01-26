@@ -13,8 +13,9 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 $(document).ready(function () {
-    initSaldo()
-    popolaListaAmici()
+    initSaldo();
+    popolaListaAmici();
+    popolaListaCollette();
     document.getElementById("bottoneGestioneAccount").addEventListener("click", popolaGestioneAccount);
     document.getElementById("bottoneGestioneId_Account").addEventListener("click", getIdAccount);
     document.getElementById("bottoneCercaAmico").addEventListener("click", cercaAmico);
@@ -796,6 +797,8 @@ document.getElementById("notifications").addEventListener('click', () => {
 document.getElementsByClassName("notification-popup-close")[0].onclick = function () {
     document.getElementById("notification-popup").style.display = "none";
 };
+
+/*
 document.getElementById("contribuite-to-colletta").addEventListener('click', () => {
     // /contribute/pay expect a String id_payer and a Long id_colletta
     let id_payer = getCookie('uid');
@@ -850,10 +853,115 @@ document.getElementById("refuse-colletta-button").addEventListener('click', () =
         });
     }
 });
-document.getElementById("colletta-label-info").addEventListener('change', () => {
+*/
+
+function popolaListaCollette(){
+    var idUser = getCookie("uid");
+    console.log(idUser);
+    if (idUser) {
+        var data = {
+            id: idUser
+        }
+    $.ajax({
+        url: 'http://localhost:9090/contribute/all',
+        method: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (risposta) {
+            var size = 0;
+            $("#corpoTabellaCollette").html("");
+            for(var i=0 ;i<risposta.length; i++){
+                size+=1;
+                var ciccia = "";
+                ciccia += "<tr>";
+                ciccia += "<td>" + risposta[i].colletta.id + "</td>";
+                ciccia += "<td>" + risposta[i].colletta.beneficiary + "</td>";
+                ciccia += "<td>" + risposta[i].colletta.quote + "</td>";
+                if(risposta[i].contribute.stato == "default"){
+                    ciccia += "<td><button class='btn' id='refuse-colletta-button" + i + "' type='button' style='border: revert;'>Rifiuta</button></td>";
+                    ciccia += "<td><button class='btn' id='contribuite-to-colletta" + i + "' type='button' style='border: revert;'>Contribuisci</button></td>";
+                } else if(risposta[i].contribute.stato == "pagata"){
+                    ciccia += "<td>" + ACCETTATA + "</td>";
+                }
+                else { 
+                    ciccia += "<td>" + RIFIUTATA + "</td>";
+                }
+                ciccia += "</tr>";
+                $("#corpoTabellaCollette").append(ciccia);
+            }
+            createEventListenerCollettaPopup(risposta);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });   
+    }
+}
+
+function createEventListenerCollettaPopup(risposta) {
+    for(let i = 0; i < risposta.length; i++){
+        document.getElementById("contribuite-to-colletta"+i).addEventListener('click', function(e) {   
+            let id_payer = getCookie('uid');
+            let id_colletta = risposta[i].colletta.id;
+            console.log(id_payer)
+            console.log(id_colletta)
+            let data = {
+                contributor: id_payer,
+                colletta: id_colletta,
+            };
+            if (id_payer && id_colletta) {
+                $.ajax({
+                    url: localHost + "/contribute/pay",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
+                    success: function (response) {
+                        window.alert("Contributo versato correttamente");
+                        popolaListaCollette();
+                        // Button set to "no notification" color
+                        document.getElementById("notifications").style.backgroundColor = "lightgreen";
+                    },
+                    error: function (error) {
+                        window.alert("Si è verificato un errore");
+                    }
+                });
+            }
+        });
+        document.getElementById("refuse-colletta-button"+i).addEventListener('click', function(e) {
+            let id_payer = getCookie('uid');
+            let id_colletta = risposta[i].colletta;
+            console.log(id_payer)
+            console.log(id_colletta)
+            let data = {
+                contributor: id_payer,
+                colletta: id_colletta,
+            };
+            if (id_payer && id_colletta) {
+                $.ajax({
+                    url: localHost + "/contribute/decline",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
+                    success: function (response) {
+                        window.alert("L'invito alla colletta è stato declinato");
+                        popolaListaCollette();
+                        // Button set to "no notification" color
+                        document.getElementById("notifications").style.backgroundColor = "lightgreen";
+                    },
+                    error: function (error) {
+                        window.alert("Si è verificato un errore");
+                    }
+                });
+            }
+        });
+    }
+}
+
+// da aggiustare con cambiamenti
+/*document.getElementById("colletta-label-info").addEventListener('change', () => {
     // Button set to "you have notifications" color
     document.getElementById("notifications").style.backgroundColor = "green";
-});
+});*/
 
 function onKeyNumeric(e) {
     // Accetto solo numeri e backspace <- tranne per un e uno solo . 

@@ -49,11 +49,11 @@ public class Contribute implements java.io.Serializable {
 		return serialVersionUID;
 	}
 
-	public String getPagato() {
+	public String getStato() {
 		return stato;
 	}
 
-	public void setPagato(String stato) {
+	public void setStato(String stato) {
 		this.stato = stato;
 	}
 

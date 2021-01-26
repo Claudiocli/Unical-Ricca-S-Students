@@ -67,7 +67,7 @@ public class ContributeController {
 		logger.info("COLLETTA_PAY_ID: " + contribute.getColletta());
 		Contribute current_contribute = contributeRepository.findByContributorAndColletta(contribute.getContributor(),
 				contribute.getColletta());
-		current_contribute.setPagato("pagata");
+		current_contribute.setStato("pagata");
 
 		Account current_account = accountRepository.findById(current_contribute.getContributor())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
@@ -100,7 +100,7 @@ public class ContributeController {
 				"COLLETTA_DECLINE_ID: " + contribute.getColletta() + " CONTRIBUTOR_ID: " + contribute.getContributor());
 		Contribute current_contribute = contributeRepository.findByContributorAndColletta(contribute.getContributor(),
 				contribute.getColletta());
-		current_contribute.setPagato("rifiutata");
+		current_contribute.setStato("rifiutata");
 
 		Colletta current_colletta = collettaRepository.findById(current_contribute.getColletta())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find colletta"));
