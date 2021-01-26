@@ -623,17 +623,17 @@
 		<div id="friend-info-popup" class="friendModal">
 			<div class="friend-modal-content">
 				<span class="friend-popup-close">&times;</span> </br>
-				<label class="form-label model-label-info" id="friend-id-info">ID: </label>
-				<label class="form-label model-label-info" id="friend-name-info">Nome: </label>
+				<label class="form-label modal-label-info" id="friend-id-info">ID: </label>
+				<label class="form-label modal-label-info" id="friend-name-info">Nome: </label>
 				<button class="btn" id="delete-friend-button" type="button">Elimina</button>
 			</div>
 		</div>
 		<div id="notification-popup" class="notificationModal">
 			<div class="notification-modal-content">
 				<span class="notification-popup-close">&times;</span> </br>
-				<label class="form-label model-label-info" id="colletta-label-info">Colletta ID: </label>
-				<label class="form-label model-label-info" id="colletta-beneficiay-name">Nome Beneficiario: </label>
-				<label class="form-label model-label-info" id="colletta-quote">Quota: </label>
+				<label class="form-label modal-label-info" id="colletta-label-info">Colletta ID: </label>
+				<label class="form-label modal-label-info" id="colletta-beneficiay-name">Nome Beneficiario: </label>
+				<label class="form-label modal-label-info" id="colletta-quote">Quota: </label>
 				<button class="btn" id="refuse-colletta-button" type="button">Rifiuta</button>
 				<button class="btn" id="contribuite-to-colletta" type="button">Contribuisci</button>
 			</div>

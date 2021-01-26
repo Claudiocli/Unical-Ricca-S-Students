@@ -662,6 +662,9 @@ window.onclick = function (event) {
     if (event.target == modalFriendPopup) {
         modalFriendPopup.style.display = "none";
     }
+    if (event.target == document.getElementById("notification-popup")) {
+        document.getElementById("notification-popup").style.display = "none";
+    }
 }
 document.getElementById("delete-friend-button").addEventListener('click', () => {
     if (confirm("Sei sicuro di voler eliminare il tuo amico?")) {
@@ -693,11 +696,6 @@ document.getElementById("notifications").addEventListener('click', () => {
 document.getElementsByClassName("notification-popup-close")[0].onclick = function () {
     document.getElementById("notification-popup").style.display = "none";
 };
-window.onclick = function (event) {
-    if (event.target == document.getElementById("notification-popup")) {
-        document.getElementById("notification-popup").style.display = "none";
-    }
-}
 document.getElementById("contribuite-to-colletta").addEventListener('click', () => {
     // /contribute/pay expect a String id_payer and a Long id_colletta
     let id_payer = getCookie('uid');
