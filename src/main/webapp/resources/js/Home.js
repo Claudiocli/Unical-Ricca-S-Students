@@ -707,7 +707,7 @@ document.getElementById("refuse-colletta-button").addEventListener('click', ()  
     if(id_payer && id_colletta) {
         $.ajax({
             url: localHost+"/contribute/decline",
-            method: "POST",
+            method: "DELETE",
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function(response) {
