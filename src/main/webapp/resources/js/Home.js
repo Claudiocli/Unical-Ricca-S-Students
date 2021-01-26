@@ -706,7 +706,7 @@ document.getElementById("contribuite-to-colletta").addEventListener('click', () 
     if (id_payer && id_colletta) {
         $.ajax({
             url: localHost + "/contribute/pay",
-            method: "POST",
+            method: "DELETE",
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (response) {
@@ -732,8 +732,13 @@ document.getElementById("refuse-colletta-button").addEventListener('click', () =
 
     if (id_payer && id_colletta) {
         $.ajax({
+<<<<<<< HEAD
             url: localHost + "/contribute/decline",
             method: "POST",
+=======
+            url: localHost+"/contribute/decline",
+            method: "DELETE",
+>>>>>>> 7bd48fdb54906c912be4e8464a4984fba6f91b5c
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (response) {
