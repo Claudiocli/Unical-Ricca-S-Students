@@ -41,15 +41,15 @@ public class ContributeController {
 
 	@Autowired
 	private TransactionRepository transactionRepository;
-	
+
 	@PostMapping(path = "/all")
 	@ResponseBody
-	List<Contribute> getAll(@RequestBody JSONObject id){
+	List<Contribute> getAll(@RequestBody JSONObject id) {
 		String id_long = id.getAsString("id");
 		logger.info("GET ALL CONTRIBUTE with id:" + id_long);
 		return contributeRepository.findAllBycontributor(id_long);
 	}
-	
+
 	@PostMapping(path = "/pay")
 	ResponseEntity<Colletta> payColletta(@RequestBody Contribute contribute) {
 		logger.info("COLLETTA_PAY_ID: " + contribute.getColletta());
