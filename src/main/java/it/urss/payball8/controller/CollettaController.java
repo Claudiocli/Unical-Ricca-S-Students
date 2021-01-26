@@ -53,7 +53,7 @@ public class CollettaController {
 		for (String id : ad.getList_id()) {
 			accountRepository.findById(id)
 					.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
-			Contribute contribute = new Contribute(id, responseEntity.getBody().getId());
+			Contribute contribute = new Contribute(id, responseEntity.getBody().getId(), "default");
 			ResponseEntity.ok(contributeRepository.save(contribute));
 		}
 		return responseEntity;

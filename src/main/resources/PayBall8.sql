@@ -112,7 +112,8 @@ ALTER SEQUENCE public.colletta_id_seq OWNED BY public.colletta.id;
 
 CREATE TABLE public.contribute (
     contributor character varying(255) NOT NULL,
-    colletta bigint NOT NULL
+    colletta bigint NOT NULL,
+   	stato character varying(255)
 );
 
 
