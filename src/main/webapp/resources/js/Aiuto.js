@@ -1,3 +1,17 @@
+var firebaseConfig = {
+	apiKey: "AIzaSyAlsmnuWM9U1etPRjMB3zEYhP9XXmyUn34",
+	authDomain: "payball8-1f27c.firebaseapp.com",
+	databaseURL: "https://payball8-1f27c-default-rtdb.europe-west1.firebasedatabase.app",
+	projectId: "payball8-1f27c",
+	storageBucket: "payball8-1f27c.appspot.com",
+	messagingSenderId: "39509751218",
+	appId: "1:39509751218:web:6fb7cc6cbb7960386e60ab",
+	measurementId: "G-PY99LWBLTW"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
 $(document).ready(function () {
     document.getElementById("bottoneGestioneAccount").addEventListener("click", popolaGestioneAccount);
     document.getElementById("btn-logout").addEventListener("click", logout);

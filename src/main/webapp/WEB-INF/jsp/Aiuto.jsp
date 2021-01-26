@@ -3,6 +3,13 @@
     <html lang="it">
 
     <head>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+
+        <!-- Firebase products -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+        
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,11 +43,8 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                        class="bi bi-wallet2 icons-navbar-color" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z" />
-                                    </svg>
+                                    <img class="logo-font" src="../../resources/img/LOGO PAY8BALL_LOGO ORIZZONTALE.png"
+										alt="logo">
                                 </li>
                                 <li class="nav-item">
                                     <a id="riepilogo" class="nav-link nav-link-color"
@@ -223,7 +227,8 @@
 
                                     1) Accedi alle tue "Carte" e clicca "Trasferisci denaro".<br>
                                     2) Clicca "Ricarica il tuo saldo" e segui le istruzioni.<br>
-                                    3) Verr&agrave; generato un codice IBAN virtuale, che userai per effettuare il bonifico
+                                    3) Verr&agrave; generato un codice IBAN virtuale, che userai per effettuare il
+                                    bonifico
                                     bancario.
                                     Tale IBAN identifica in modo univoco il tuo trasferimento a PayBall8.
                                 </div>
@@ -243,7 +248,8 @@
                                 data-parent="#accordion">
                                 <div class="card-body collapse-button-font collapse-body-font">
                                     In caso di dubbi sul tuo acquisto, ti consigliamo innanzitutto di contattare
-                                    direttamente il venditore. Spesso questo &eacute; il modo pi&ugrave; semplice e rapido per
+                                    direttamente il venditore. Spesso questo &eacute; il modo pi&ugrave; semplice e
+                                    rapido per
                                     chiarire un
                                     equivoco e risolvere un piccolo problema.
                                 </div>
@@ -255,7 +261,8 @@
                                     <a href="#collapseThree" data-toggle="collapse" id="collapseThreeButton"
                                         class="btn btn-link collapsed collapse-button-font" aria-expanded="true"
                                         aria-controls="collapseThree">
-                                        Perch&eacute; il mio pagamento &egrave; bloccato e quando sar&agrave; disponibile?
+                                        Perch&eacute; il mio pagamento &egrave; bloccato e quando sar&agrave;
+                                        disponibile?
                                     </a>
                                 </h5>
                             </div>
@@ -267,7 +274,8 @@
                                     non disponibile:<br>
 
                                     1) &Eacute; necessario del tempo per creare una valida cronologia di transazioni.
-                                    Non hai svolto attivit&agrave; di vendita di recente. I conti precedentemente inattivi
+                                    Non hai svolto attivit&agrave; di vendita di recente. I conti precedentemente
+                                    inattivi
                                     possono
                                     essere soggetti a blocchi dei pagamenti mentre viene ricreata una cronologia di
                                     vendita
@@ -278,10 +286,12 @@
                                     comunicare spesso con i clienti e di collaborare con loro per risolvere eventuali
                                     problemi. Se il cliente ha presentato una contestazione o una richiesta di
                                     chargeback
-                                    perch&eacute; qualcun altro ha usato illecitamente il suo conto PayBall8 per effettuare una
+                                    perch&eacute; qualcun altro ha usato illecitamente il suo conto PayBall8 per
+                                    effettuare una
                                     transazione, non spedire nessun articolo.<br>
 
-                                    3) L'andamento delle vendite &eacute; cambiato. Ad esempio, potrebbe essersi verificato un
+                                    3) L'andamento delle vendite &eacute; cambiato. Ad esempio, potrebbe essersi
+                                    verificato un
                                     aumento
                                     insolito delle transazioni, un cambiamento del prezzo medio di vendita, il ricorso a
                                     una
@@ -306,7 +316,8 @@
                             <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
                                 data-parent="#accordion">
                                 <div class="card-body collapse-button-font collapse-body-font">
-                                    Puoi annullare solo i pagamenti non riscossi accanto ai quali &eacute; presente il link
+                                    Puoi annullare solo i pagamenti non riscossi accanto ai quali &eacute; presente il
+                                    link
                                     "Annulla".<br>
 
                                     Per annullare un pagamento non riscosso dall'app PayBall8, tocca il pagamento che
@@ -314,7 +325,7 @@
                                     annullare e seleziona "Annulla pagamento".<br>
 
                                     Per annullare un pagamento non riscosso dal computer:
-									<br>
+                                    <br>
                                     1) Vai nello Storico e individua il pagamento.<br>
                                     2) Clicca "Annulla" accanto alla transazione.<br>
                                     3) Conferma la richiesta.
@@ -365,7 +376,8 @@
                                 <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
                             </svg>
                             <h3>Sicuro</h3>
-                            <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno pu&ograve; accedere
+                            <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno pu&ograve;
+                                accedere
                                 ai vostri
                                 dati sensibili ;-) .</p>
                         </div>
@@ -385,7 +397,9 @@
                             <li class="list-inline-item"><a class="text-white" href="#">Term of Use</a></li>
                             <li class="list-inline-item"><a class="text-white" href="#">Privacy Policy</a></li>
                         </ul>
-                        <p class="text-white small mb-4 mb-lg-0">@ Your Website <script> document.write(new Date().getFullYear()); </script>. All Rights Reserved.</p>
+                        <p class="text-white small mb-4 mb-lg-0">@ Your Website
+                            <script> document.write(new Date().getFullYear()); </script>. All Rights Reserved.
+                        </p>
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-right">
                         <ul class="list-inline mb-0">

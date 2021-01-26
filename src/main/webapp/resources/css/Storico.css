@@ -1,6 +1,10 @@
 body {
   overflow-x: hidden;
 }
+.logo-font{
+  width: 4rem;
+  height: 3rem;
+}
 .icons-navbar-color {
   color: white;
 }

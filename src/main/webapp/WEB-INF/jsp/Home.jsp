@@ -3,6 +3,12 @@
 	<html lang="it">
 
 	<head>
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+
+		<!-- Firebase products -->
+		<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
 
 		<!-- Required meta tags -->
 		<meta charset="utf-8">
@@ -32,7 +38,8 @@
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item">
-									<img class="logo-font" src="../../resources/img/LOGOPAY8BALLL.png" alt="logo">
+									<img class="logo-font" src="../../resources/img/LOGO PAY8BALL_LOGO ORIZZONTALE.png"
+										alt="logo">
 								</li>
 								<li class="nav-item"><a id="riepilogo" class="nav-link nav-link-color"
 										href="http://localhost:9090/home">Riepilogo</a></li>
@@ -78,66 +85,75 @@
 												</div>
 												<div class="modal-body">
 													<table class="table memberListColor table-striped table-hover">
-														<tbody id="corpoGestioneAccount">
+														<thead>
 															<tr>
-																<div class="modal fade" id="exampleModal3" tabindex="-1"
-																	aria-labelledby="exampleModalLabel"
-																	aria-hidden="true">
-																	<div class="modal-dialog">
-																		<div class="modal-content">
-																			<div class="modal-header">
-																				<h5 class="modal-title"
-																					id="exampleModalLabel">
-																					Password</h5>
-																				<button type="button" class="btn-close"
-																					data-bs-dismiss="modal"
-																					aria-label="Close"></button>
-																			</div>
-																			<div class="modal-body">
-																				<form>
-																					<div class="mb-3">
-																						<label for="exampleInputEmail1"
-																							class="form-label">Vecchia
-																							Password</label> <input
-																							type="email"
-																							class="form-control"
-																							id="exampleInputEmail1"
-																							aria-describedby="emailHelp">
-																						<div id="emailHelp"
-																							class="form-text">Noi non
-																							condividiamo i tuoi dati
-																							sensibili con nessuno.</div>
-																					</div>
-																					<div class="mb-3">
-																						<label
-																							for="exampleInputPassword0"
-																							class="form-label">Nuova
-																							Password</label> <input
-																							type="password"
-																							class="form-control"
-																							id="exampleInputPassword0">
-																					</div>
-																					<div class="mb-3">
-																						<label
-																							for="exampleInputPassword1"
-																							class="form-label">Conferma
-																							Password</label> <input
-																							type="password"
-																							class="form-control"
-																							id="exampleInputPassword1">
-																					</div>
-																				</form>
-																			</div>
-																			<div class="modal-footer">
-																				<button type="button"
-																					class="btn btn-secondary"
-																					data-bs-dismiss="modal">Chiudi</button>
-																				<button type="button"
-																					class="btn chiudi-gestioneAccount">Applica</button>
-																			</div>
+																<td>Password</td>
+																<td>********</td>
+																<td>
+																	<button id="rigaPassword" data-bs-toggle="modal"
+																	data-bs-target="#exampleModal33" type="button"
+																		class="btn chiudi-gestioneAccount">Modifica</button>
+																</td>
+															</tr>
+															<div class="modal fade" id="exampleModal33" tabindex="-1"
+																aria-labelledby="exampleModalLabel" aria-hidden="true">
+																<div class="modal-dialog">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title"
+																				id="exampleModalLabel">
+																				Cambia Password</h5>
+																			<button type="button" class="btn-close"
+																				data-bs-dismiss="modal"
+																				aria-label="Close"></button>
+																		</div>
+																		<div class="modal-body">
+																			<form>
+																				<div class="mb-3">
+																					<label for="exampleInputEmail1"
+																						class="form-label">Vecchia
+																						Password</label> <input
+																						type="email"
+																						class="form-control"
+																						id="exampleInputEmail1"
+																						aria-describedby="emailHelp">
+																					<div id="emailHelp"
+																						class="form-text">Noi non
+																						condividiamo i tuoi dati
+																						sensibili con nessuno.</div>
+																				</div>
+																				<div class="mb-3">
+																					<label for="exampleInputPassword0"
+																						class="form-label">Nuova
+																						Password</label> <input
+																						type="password"
+																						class="form-control"
+																						id="exampleInputPassword0">
+																				</div>
+																				<div class="mb-3">
+																					<label for="exampleInputPassword1"
+																						class="form-label">Conferma
+																						Password</label> <input
+																						type="password"
+																						class="form-control"
+																						id="exampleInputPassword1">
+																				</div>
+																			</form>
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button"
+																				class="btn btn-secondary"
+																				data-bs-dismiss="modal">Chiudi</button>
+																			<button type="button"
+																				class="btn chiudi-gestioneAccount">Applica</button>
 																		</div>
 																	</div>
 																</div>
+															</div>
+														</thead>
+														<tbody id="corpoGestioneAccount">
+															<tr>
+
 															</tr>
 														</tbody>
 													</table>

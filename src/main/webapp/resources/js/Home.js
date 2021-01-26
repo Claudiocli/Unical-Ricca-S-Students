@@ -1,3 +1,17 @@
+var firebaseConfig = {
+    apiKey: "AIzaSyAlsmnuWM9U1etPRjMB3zEYhP9XXmyUn34",
+    authDomain: "payball8-1f27c.firebaseapp.com",
+    databaseURL: "https://payball8-1f27c-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "payball8-1f27c",
+    storageBucket: "payball8-1f27c.appspot.com",
+    messagingSenderId: "39509751218",
+    appId: "1:39509751218:web:6fb7cc6cbb7960386e60ab",
+    measurementId: "G-PY99LWBLTW"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
 $(document).ready(function () {
     initSaldo()
     popolaListaAmici()
@@ -268,6 +282,18 @@ function checkInputRecharge() {
     }
 
     return returnValue;
+}
+
+function updatePassword() {
+    var user = firebase.auth().currentUser;
+    
+    var newPassword = getASecureRandomPassword();
+
+    user.updatePassword(newPassword).then(function () {
+        // Update successful.
+    }).catch(function (error) {
+        // An error happened.
+    });
 }
 
 function popolaGestioneAccount() {
@@ -576,7 +602,7 @@ function createColletta() {
     eraseCookie("lastOperationData");
 }
 
-function checkBeneficiarioNellaFriendList(){
+function checkBeneficiarioNellaFriendList() {
     var idUser = getCookie("uid");
     var beneficiario = document.getElementById("idBeneficiario").value;
     var verifica = false;
@@ -591,11 +617,11 @@ function checkBeneficiarioNellaFriendList(){
             contentType: "application/json",
             success: function (risposta) {
                 for (var i = 0; i < risposta.length; i++) {
-                    if(risposta[i].id == beneficiario)
+                    if (risposta[i].id == beneficiario)
                         verifica = true
                 }
-                
-                if(verifica == false)
+
+                if (verifica == false)
                     window.alert("Impossibile creare la colletta se non si ha l'amicizia con il beneficiario.");
 
             },
@@ -683,14 +709,14 @@ function addToDropbox(contribuente) {
     }
 }
 
-function eliminaAccount(){
-    var idUser = getCookie("uid") 
+function eliminaAccount() {
+    var idUser = getCookie("uid")
     if (idUser) {
         var data = {
             id: idUser
         }
         $.ajax({
-            url: 'http://localhost:9090/account/delete' ,
+            url: 'http://localhost:9090/account/delete',
             method: 'DELETE',
             data: JSON.stringify(data),
             contentType: "application/json",
@@ -701,7 +727,7 @@ function eliminaAccount(){
             error: function (err) {
                 alert("ERRORE: Eliminazione non riuscita! Riprovare.");
             }
-        }); 
+        });
     }
 }
 
