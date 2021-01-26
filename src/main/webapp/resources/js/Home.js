@@ -263,9 +263,7 @@ function checkInputRecharge() {
             amount.placeholder = "0.00";
         }, 2500);
         returnValue = false;
-    } else {
-        window.alert("L'operazione non è andata a buon fine verifica di aver compilato correttamente i campi.")
-    }
+    } 
 
     if (pan = "") {
         let oldBorder = pan.style.border;
@@ -277,9 +275,7 @@ function checkInputRecharge() {
             pan.placeholder = oldPlaceholder;
         }, 2500);
         returnValue = false;
-    } else {
-        window.alert("L'operazione non è andata a buon fine verifica di aver compilato correttamente i campi.")
-    }
+    } 
 
     return returnValue;
 }
