@@ -164,7 +164,7 @@ function popolaTabellaCarte(){
     }
 }
 
-// L.Russo - eliminazione carte - NON FUNZIONA IL SERVIZIO
+// L.Russo - eliminazione carte - 
 function createEventListenerBtn(risposta){
     for(let i = 0; i < risposta.length; i++){
         document.getElementById("deleteBtn"+i).addEventListener("click", function(e) {
@@ -175,21 +175,25 @@ function createEventListenerBtn(risposta){
                 var data = {
                     pan: pan
                 }
-            $.ajax({
-                url: 'http://localhost:9090/card/deleteCard/'+idUser,
-                method: 'DELETE',
-                data: JSON.stringify(data),
-                contentType: "application/json",
-                success: function (risposta) {
-                    popolaTabellaCarte();
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });   
-            }
-        }, false);
-    }
+            if(confirm("Vuoi eliminare la carta definiitivamente?")){
+                $.ajax({
+                    url: 'http://localhost:9090/card/deleteCard/'+idUser,
+                    method: 'DELETE',
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
+                    success: function (risposta) {
+                        alert("Carta eliminata con successo");
+                        popolaTabellaCarte();
+                    },
+                    error: function (err) {
+                        alert("ERRORE: Eliminazione non riuscita! Riprovare.");
+                        console.log(err);
+                    }
+                });  
+            } 
+        }
+    });
+}
 }
 
 function logout()   {
@@ -249,7 +253,7 @@ function insertCard(){
     var idUser = getCookie("uid");
     var pan = document.getElementById("idNumeroCarta").value;
     var holder = document.getElementById("idIntestatario").value;
-    var expiration_date = document.getElementById("mese").value + document.getElementById("anno").value;
+    var expiration_date = document.getElementById("mese").value + "-" + document.getElementById("anno").value;
     var cvv = document.getElementById("cvc").value;
     var datetime = getDateTime();
 
@@ -325,7 +329,7 @@ function checkAnno(){
     let anno = document.getElementById("anno").value;
     if(anno.length > 3){
         if(anno > (new Date().getFullYear()+50)){
-            document.getElementById("anno").value = "2050";
+            document.getElementById("anno").value = (new Date().getFullYear())+50;
         }
         else if(anno < (new Date().getFullYear())){
             document.getElementById("anno").value = new Date().getFullYear();
