@@ -11,6 +11,7 @@ $(document).ready(function () {
     document.getElementById("bottoneCreaColletta").addEventListener("click", createColletta);
     document.getElementById("bottoneAnnullaColletta").addEventListener("click", clearDropBox);
     document.getElementById("submitColletta").addEventListener("click", checkBeneficiarioNellaFriendList);
+    document.getElementById("bottoneEliminaAccount").addEventListener("click", eliminaAccount);
     document.getElementById("btn-logout").addEventListener("click", logout);
     // L.Russo - listeners creazione JSON per tracciare le operazioni
     var operationTracked = {};
@@ -679,6 +680,28 @@ function addToDropbox(contribuente) {
                 window.alert("Abbiamo riscontrato un problema, riporva");
             }
         });
+    }
+}
+
+function eliminaAccount(){
+    var idUser = getCookie("uid") 
+    if (idUser) {
+        var data = {
+            id: idUser
+        }
+        $.ajax({
+            url: 'http://localhost:9090/account/delete' ,
+            method: 'DELETE',
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (risposta) {
+                alert("Account eliminato con successo.");
+                logout();
+            },
+            error: function (err) {
+                alert("ERRORE: Eliminazione non riuscita! Riprovare.");
+            }
+        }); 
     }
 }
 

@@ -143,8 +143,17 @@
 													</table>
 												</div>
 												<div class="modal-footer">
-													<button type="button" class="btn chiudi-gestioneAccount"
-														data-bs-dismiss="modal">Chiudi</button>
+													<ul class="list-inline mb-2 list-font">
+														<li class="list-inline-item">
+															<button type="button" class="btn chiudi-gestioneAccount"
+																data-bs-dismiss="modal">Chiudi</button>
+														</li>
+														<li class="list-inline-item">
+															<button id="bottoneEliminaAccount" type="button"
+																class="btn chiudi-gestioneAccount">Elimina
+																Account</button>
+														</li>
+													</ul>
 												</div>
 											</div>
 										</div>
@@ -248,7 +257,8 @@
 																		</div>
 																		<div class="input-group">
 																			<input id="ImportoInputLabel" type="text"
-																				class="form-control" placeholder="0.00" onkeydown="return onKeyNumeric(event);">
+																				class="form-control" placeholder="0.00"
+																				onkeydown="return onKeyNumeric(event);">
 																			<span
 																				class="input-group-text euro-label">Euro</span>
 																		</div>
@@ -385,13 +395,16 @@
 															<li class="list-inline-item">
 																<div class="input-group">
 																	<input type="text" class="form-control"
-																		placeholder="0.00" id="idQuota" onkeydown="return onKeyNumeric(event);" required> <span
+																		placeholder="0.00" id="idQuota"
+																		onkeydown="return onKeyNumeric(event);"
+																		required> <span
 																		class="input-group-text euro-label">Euro</span>
 																</div>
 															</li>
 														</ul>
 													</div>
-													<button id="submitColletta" type="button" class="btn submit-font" data-bs-toggle="modal"
+													<button id="submitColletta" type="button" class="btn submit-font"
+														data-bs-toggle="modal"
 														data-bs-target="#exampleModal5">Submit</button>
 													<!-- Modal -->
 													<div class="modal fade" id="exampleModal5" tabindex="-1"
@@ -432,14 +445,15 @@
 																				<ul class="dropdown-menu"
 																					aria-labelledby="bottonePartecipanti"
 																					id="dropDownPartecipanti">
-																					
+
 																				</ul>
 																			</div>
 																		</li>
 																	</ul>
 																</div>
 																<div class="modal-footer">
-																	<button id="bottoneAnnullaColletta" type="button" class="btn btn-secondary"
+																	<button id="bottoneAnnullaColletta" type="button"
+																		class="btn btn-secondary"
 																		data-bs-dismiss="modal">Annulla</button>
 																	<button type="button" id="bottoneCreaColletta"
 																		class="btn chiudi-gestioneAccount"
