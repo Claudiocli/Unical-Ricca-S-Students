@@ -13,90 +13,90 @@ $(document).ready(function () {
     // L.Russo - listeners creazione JSON per tracciare le operazioni
     var operationTracked = {};
     operationTracked["operation"] = "Home";
-    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+    setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
 
     document.getElementById("idBeneficiario").addEventListener("input", () => {
         var operationTracked = JSON.parse(getCookie("lastOperationData"));
-        if(operationTracked != null){
+        if (operationTracked != null) {
             operationTracked["idBeneficiario"] = document.getElementById("idBeneficiario").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
         } else {
             var operationTracked = {};
             operationTracked["idBeneficiario"] = document.getElementById("idBeneficiario").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-        } 
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
+        }
     });
-    
+
     document.getElementById("idQuota").addEventListener("input", () => {
         var operationTracked = JSON.parse(getCookie("lastOperationData"));
-        if(operationTracked != null){
+        if (operationTracked != null) {
             operationTracked["idQuota"] = document.getElementById("idQuota").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
         } else {
             var operationTracked = {};
             operationTracked["idQuota"] = document.getElementById("idQuota").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-        } 
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
+        }
     });
-    
+
     document.getElementById("idContribuente").addEventListener("input", () => {
         var operationTracked = JSON.parse(getCookie("lastOperationData"));
-        if(operationTracked != null){
+        if (operationTracked != null) {
             operationTracked["idContribuente"] = document.getElementById("idContribuente").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
         } else {
             var operationTracked = {};
             operationTracked["idContribuente"] = document.getElementById("idContribuente").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-        } 
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
+        }
     });
-    
+
     document.getElementById("ImportoInputLabel").addEventListener("input", () => {
         var operationTracked = JSON.parse(getCookie("lastOperationData"));
-        if(operationTracked != null){
+        if (operationTracked != null) {
             operationTracked["ImportoInputLabel"] = document.getElementById("ImportoInputLabel").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
         } else {
             var operationTracked = {};
             operationTracked["ImportoInputLabel"] = document.getElementById("ImportoInputLabel").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-        } 
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
+        }
     });
-    
+
     document.getElementById("TagInputLabelTransaction").addEventListener("input", () => {
         var operationTracked = JSON.parse(getCookie("lastOperationData"));
-        if(operationTracked != null){
+        if (operationTracked != null) {
             operationTracked["TagInputLabelTransaction"] = document.getElementById("TagInputLabelTransaction").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
         } else {
             var operationTracked = {};
             operationTracked["TagInputLabelTransaction"] = document.getElementById("TagInputLabelTransaction").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-        } 
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
+        }
     });
 
     document.getElementById("ImportoInputLabel2").addEventListener("input", () => {
         var operationTracked = JSON.parse(getCookie("lastOperationData"));
-        if(operationTracked != null){
+        if (operationTracked != null) {
             operationTracked["ImportoInputLabel2"] = document.getElementById("ImportoInputLabel2").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
         } else {
             var operationTracked = {};
             operationTracked["ImportoInputLabel2"] = document.getElementById("ImportoInputLabel2").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-        } 
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
+        }
     });
 
     document.getElementById("panInputLabel").addEventListener("input", () => {
         var operationTracked = JSON.parse(getCookie("lastOperationData"));
-        if(operationTracked != null){
+        if (operationTracked != null) {
             operationTracked["panInputLabel"] = document.getElementById("panInputLabel").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
         } else {
             var operationTracked = {};
             operationTracked["panInputLabel"] = document.getElementById("panInputLabel").value;
-            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000*60, true);
-        } 
+            setCookie("lastOperationData", JSON.stringify(operationTracked), 1000 * 60, true);
+        }
     });
 });
 
@@ -117,10 +117,10 @@ function initSaldo() {
             contentType: "application/json",
             success: function (risposta) {
                 saldo = risposta.balance;
-                if (new Date().getHours() <= 16 && new Date().getHours() >= 4)    {
-                    document.getElementById("buongiornissimo").innerHTML="BUONGIORNO "+risposta.name;
-                }   else    {
-                    document.getElementById("buongiornissimo").innerHTML="BUONASERA "+risposta.name;
+                if (new Date().getHours() <= 16 && new Date().getHours() >= 4) {
+                    document.getElementById("buongiornissimo").innerHTML = "BUONGIORNO " + risposta.name;
+                } else {
+                    document.getElementById("buongiornissimo").innerHTML = "BUONASERA " + risposta.name;
                 }
                 $("#saldo").text(saldo.toFixed(2) + " Euro");
             },
@@ -159,43 +159,46 @@ function inviaTransizione() {
                 window.alert("Abbiamo riscontrato un problema, riporva");
             }
         });
+    } else {
+        window.alert("L'operazione non \u00E8 andata a buon fine verifica di aver compilato correttamente i campi.")
     }
-    
+
     eraseCookie("lastOperationData");
     //importo.required=false;
     //tag.required=false;
 }
-function checkInputSendTransaction()    {
-    let returnValue=true;
 
-    let amount=document.getElementById("ImportoInputLabel");
-    let tagReciever=document.getElementById("TagInputLabelTransaction");
+function checkInputSendTransaction() {
+    let returnValue = true;
 
-    if (amount.value<=0 || amount.value==null)  {
-        amount.value="";
-        let oldBorder=amount.style.border;
-        amount.style.border="2px solid red";
-        amount.placeholder="Importo non valido";
-        setTimeout(()   =>  {
-            amount.style.border=oldBorder;
-            amount.placeholder="0.00";
+    let amount = document.getElementById("ImportoInputLabel");
+    let tagReciever = document.getElementById("TagInputLabelTransaction");
+
+    if (amount.value <= 0 || amount.value == null) {
+        amount.value = "";
+        let oldBorder = amount.style.border;
+        amount.style.border = "2px solid red";
+        amount.placeholder = "Importo non valido";
+        setTimeout(() => {
+            amount.style.border = oldBorder;
+            amount.placeholder = "0.00";
         }, 2500);
-        returnValue=false;
+        returnValue = false;
     }
-    if (tagReciever="")   {
-        let oldBorder=tagReciever.style.border;
-        tagReciever.style.border="2px solid red";
-        tagReciever.placeholder="Nessun tag inserito";
-        setTimeout(()   =>  {
-            tagReciever.style.border=oldBorder;
-            tagReciever.placeholder="";
+    if (tagReciever = "") {
+        let oldBorder = tagReciever.style.border;
+        tagReciever.style.border = "2px solid red";
+        tagReciever.placeholder = "Nessun tag inserito";
+        setTimeout(() => {
+            tagReciever.style.border = oldBorder;
+            tagReciever.placeholder = "";
         }, 2500);
-        returnValue=false;
+        returnValue = false;
     }
     return returnValue;
 }
 
-function ricaricaSaldo(){
+function ricaricaSaldo() {
     var idUser = getCookie("uid");
     var importo = document.getElementById("ImportoInputLabel2").value;
     var pan = document.getElementById("panInputLabel").value;
@@ -204,9 +207,9 @@ function ricaricaSaldo(){
 
     if (idUser && checkInputRecharge()) {
         var data = {
-            datetime : datetime,
-            card : pan,
-            account : idUser,
+            datetime: datetime,
+            card: pan,
+            account: idUser,
             amount: importo,
         }
         $.ajax({
@@ -221,37 +224,46 @@ function ricaricaSaldo(){
                 window.alert("Abbiamo riscontrato un problema, riporva");
             }
         });
+    } else {
+        window.alert("L'operazione non \u00E8 andata a buon fine verifica di aver compilato correttamente i campi.")
     }
     eraseCookie("lastOperationData");
 }
-function checkInputRecharge()    {
-    let returnValue=true;
+
+function checkInputRecharge() {
+    let returnValue = true;
 
     let amount = document.getElementById("ImportoInputLabel2");
     let pan = document.getElementById("panInputLabel");
 
-    if (amount.value<=0 || amount.value==null)  {
-        amount.value="";
-        let oldBorder=amount.style.border;
-        amount.style.border="2px solid red";
-        amount.placeholder="Importo non valido";
-        setTimeout(()   =>  {
-            amount.style.border=oldBorder;
-            amount.placeholder="0.00";
+    if (amount.value <= 0 || amount.value == null) {
+        amount.value = "";
+        let oldBorder = amount.style.border;
+        amount.style.border = "2px solid red";
+        amount.placeholder = "Importo non valido";
+        setTimeout(() => {
+            amount.style.border = oldBorder;
+            amount.placeholder = "0.00";
         }, 2500);
-        returnValue=false;
+        returnValue = false;
+    } else {
+        window.alert("L'operazione non è andata a buon fine verifica di aver compilato correttamente i campi.")
     }
-    if (pan="")   {
-        let oldBorder=pan.style.border;
-        let oldPlaceholder=pan.style.placeholder;
-        pan.style.border="2px solid red";
-        pan.placeholder="Nessun PAN inserito";
-        setTimeout(()   =>  {
-            pan.style.border=oldBorder;
-            pan.placeholder=oldPlaceholder;
+
+    if (pan = "") {
+        let oldBorder = pan.style.border;
+        let oldPlaceholder = pan.style.placeholder;
+        pan.style.border = "2px solid red";
+        pan.placeholder = "Nessun PAN inserito";
+        setTimeout(() => {
+            pan.style.border = oldBorder;
+            pan.placeholder = oldPlaceholder;
         }, 2500);
-        returnValue=false;
+        returnValue = false;
+    } else {
+        window.alert("L'operazione non è andata a buon fine verifica di aver compilato correttamente i campi.")
     }
+
     return returnValue;
 }
 
@@ -306,7 +318,7 @@ function popolaGestioneAccount() {
     }
 }
 
-function getIdAccount(){
+function getIdAccount() {
     var idUser = getCookie("uid");
     var img = document.createElement("img");
     img.src = "resources/img/output.jpg";
@@ -333,7 +345,7 @@ function getIdAccount(){
                 ciccia += "<tr>";
                 ciccia += "<td>" + "QrCode" + "</td>";
                 ciccia += "<td>";
-              
+
                 $("#corpoGestioneId_Account").append(ciccia);
                 // This next line will just add it to the <body> tag
                 $("#corpoGestioneId_Account").append(img);
@@ -360,12 +372,12 @@ function popolaListaAmici() {
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (risposta) {
-                setCookie("friendList", JSON.stringify(risposta),1,false);
+                setCookie("friendList", JSON.stringify(risposta), 1, false);
                 $("#corpoListaAmici").html("");
                 for (var i = 0; i < risposta.length; i++) {
                     var ciccia = "";
-                    ciccia += "<tr class=\"row-amico\" id=\"friend-row-"+i+"\">";
-                    let name=risposta[i].name + " " + risposta[i].surname;
+                    ciccia += "<tr class=\"row-amico\" id=\"friend-row-" + i + "\">";
+                    let name = risposta[i].name + " " + risposta[i].surname;
                     ciccia += "<td class=\"row-info-amico\">" + name + "</td>";
                     ciccia += "</tr>";
                     $("#corpoListaAmici").append(ciccia);
@@ -376,18 +388,19 @@ function popolaListaAmici() {
                 addListenerToFriendListsRows(risposta);
             },
             error: function (err) {
-                window.alert("Abbiamo riscontrato un problema, riporva");
+                window.alert("Abbiamo riscontrato un problema nel caricare la lista degli amici, riporva");
             }
         });
     }
 }
-function addListenerToFriendListsRows(response){
-    for(let i = 0; i < response.length; i++){
-        document.getElementById("friend-row-"+i).addEventListener("click",  ()  =>  {
-            let name=response[i].name+" "+response[i].surname;
+
+function addListenerToFriendListsRows(response) {
+    for (let i = 0; i < response.length; i++) {
+        document.getElementById("friend-row-" + i).addEventListener("click", () => {
+            let name = response[i].name + " " + response[i].surname;
             modalFriendPopup.style.display = "block";
-            document.getElementById("friend-id-info").innerHTML="ID: "+response[i].id;
-            document.getElementById("friend-name-info").innerHTML="Nome: "+name;
+            document.getElementById("friend-id-info").innerHTML = "ID: " + response[i].id;
+            document.getElementById("friend-name-info").innerHTML = "Nome: " + name;
         });
     }
 }
@@ -408,23 +421,23 @@ function aggiungiAmico() {
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (risposta) {
-                idInputLabel.value="";
+                idInputLabel.value = "";
                 popolaListaAmici()
             },
             error: function (err) {
                 // Same method used in various functions. Info @Claudiocli
                 // Keep old border settings
-                let oldBorder=idInputLabel.style.border;
+                let oldBorder = idInputLabel.style.border;
                 // Setting the border settings to resemble an error
-                idInputLabel.style.border="2px solid red";
+                idInputLabel.style.border = "2px solid red";
                 // Same thing with the placeholder, to give to the user an error message
-                let oldPlaceholder=idInputLabel.placeholder;
-                idInputLabel.value="";
-                idInputLabel.placeholder="ID invalido";
+                let oldPlaceholder = idInputLabel.placeholder;
+                idInputLabel.value = "";
+                idInputLabel.placeholder = "ID invalido";
                 // After some time (2500ms =>2,5s) return the border and placeholder settings to their originals
-                setTimeout(()   =>  {
-                    idInputLabel.style.border=oldBorder;
-                    idInputLabel.placeholder=oldPlaceholder;
+                setTimeout(() => {
+                    idInputLabel.style.border = oldBorder;
+                    idInputLabel.placeholder = oldPlaceholder;
                 }, 2500);
             }
         });
@@ -481,7 +494,7 @@ function cercaAmico() {
     
 }
 
-function logout()   {
+function logout() {
     eraseCookie('uid');
     eraseCookie('friendList');
     window.location.replace("http://localhost:9090/login");
@@ -497,27 +510,28 @@ function getCookie(name) {
     }
     return null;
 }
-function eraseCookie(name) {   
-    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+function eraseCookie(name) {
+    document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
 function setCookie(name, value, days, daysIsMillisecond) {
-	var expires = "";
-	if (daysIsMillisecond)	{
-		var date = new Date();
-		date.setTime(date.getTime()+(days));
-		expires= "; expires="+date.toUTCString();
-	}
-    else if (days) {
+    var expires = "";
+    if (daysIsMillisecond) {
         var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
+        date.setTime(date.getTime() + (days));
         expires = "; expires=" + date.toUTCString();
     }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    else if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
 // L.Russo - funzione per creare colletta -- datetime dovrebbe essere la data di scadenza della colletta e non la data di creazione --> chiedere info
-function createColletta(){
+function createColletta() {
     var idUser = getCookie("uid");
     var datetime = getDateTime();
     var quote = document.getElementById("idQuota").value;
@@ -529,7 +543,7 @@ function createColletta(){
 
     if (idUser && checkInputColletta()) {
         var data = {
-            colletta:{
+            colletta: {
                 datetime: datetime,
                 quote: quote,
                 beneficiary: beneficiary
@@ -542,6 +556,9 @@ function createColletta(){
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (risposta) {
+                //Svuota la dropbox dei partecipanti
+                $("#dropDownPartecipanti").html("");
+
                 // TODO: success message
             },
             error: function (err) {
@@ -550,57 +567,68 @@ function createColletta(){
             }
         });
         eraseCookie("list_id");
+    } else {
+        window.alert("L'operazione non \u00E8 andata a buon fine verifica di aver compilato correttamente i campi.")
     }
     eraseCookie("lastOperationData");
 }
-function checkInputColletta()   {
-    let returnValue=true;
+
+function checkInputColletta() {
+    let returnValue = true;
 
     let quote = document.getElementById("idQuota");
     let beneficiary = document.getElementById("idBeneficiario");
 
-    if (quote.value<=0 || quote.value==null)  {
-        quote.value="";
-        let oldBorder=quote.style.border;
-        quote.style.border="2px solid red";
-        quote.placeholder="Importo non valido";
-        setTimeout(()   =>  {
-            quote.style.border=oldBorder;
-            quote.placeholder="0.00";
+    if (quote.value <= 0 || quote.value == null) {
+        quote.value = "";
+        let oldBorder = quote.style.border;
+        quote.style.border = "2px solid red";
+        quote.placeholder = "Importo non valido";
+        setTimeout(() => {
+            quote.style.border = oldBorder;
+            quote.placeholder = "0.00";
         }, 2500);
-        returnValue=false;
+        returnValue = false;
     }
-    if (beneficiary="")   {
-        let oldBorder=beneficiary.style.border;
-        let oldPlaceholder=beneficiary.style.placeholder;
-        beneficiary.style.border="2px solid red";
-        beneficiary.placeholder="Nessun PAN inserito";
-        setTimeout(()   =>  {
-            beneficiary.style.border=oldBorder;
-            beneficiary.placeholder=oldPlaceholder;
+    if (beneficiary = "") {
+        let oldBorder = beneficiary.style.border;
+        let oldPlaceholder = beneficiary.style.placeholder;
+        beneficiary.style.border = "2px solid red";
+        beneficiary.placeholder = "Nessun PAN inserito";
+        setTimeout(() => {
+            beneficiary.style.border = oldBorder;
+            beneficiary.placeholder = oldPlaceholder;
         }, 2500);
-        returnValue=false;
+        returnValue = false;
     }
     return returnValue;
 }
 
 // L.Russo - funzione che ad ogni mungiuta del bottone Aggiungi nella modale della colletta aggiunge l'id nel cookie
-function addContributor(){
+function addContributor() {
     var list = JSON.parse(getCookie("list_id"));
-    if(list != null){
+    if (list != null) {
         list.push(document.getElementById("idContribuente").value);
+        addToDropbox(document.getElementById("idContribuente").value);
         setCookie("list_id", JSON.stringify(list), 1, false);
     }
     else {
         var list = [];
         list.push(document.getElementById("idContribuente").value);
+        addToDropbox(document.getElementById("idContribuente").value);
         setCookie("list_id", JSON.stringify(list), 1, false);
     }
     document.getElementById("idContribuente").value = "";
 }
 
+function addToDropbox(contribuente) {
+    var tizio = "";
+    tizio += "<li><a class=\"dropdown-item\" >" + contribuente + "</a></li>";
+    $("#dropDownPartecipanti").append(tizio);
+}
+
 // L.Russo - funzione per calcolare datatime
-function getDateTime(){
+function getDateTime() {
     var data = new Date();
     var anno, mese, giorno, ore, minuti, secondi;
     anno = data.getFullYear();
@@ -611,35 +639,35 @@ function getDateTime(){
     secondi = data.getSeconds();
 
     var finalDate = giorno + "-" + mese + "-" + anno + " " + ore + ":" + minuti + ":" + secondi;
-    
+
     return finalDate;
 }
 
 // Session controll
-let isLogged=getCookie("uid");
-let localHost="http://localHost:9090";
+let isLogged = getCookie("uid");
+let localHost = "http://localHost:9090";
 
-if (!isLogged)	{
-	window.location.replace(localHost+"/login");
+if (!isLogged) {
+    window.location.replace(localHost + "/login");
 }
 
 // Friend popup handling
 let modalFriendPopup = document.getElementById("friend-info-popup");
 let spanCloseFriendPopup = document.getElementsByClassName("friend-popup-close")[0];
-spanCloseFriendPopup.onclick = function() {
-  modalFriendPopup.style.display = "none";
+spanCloseFriendPopup.onclick = function () {
+    modalFriendPopup.style.display = "none";
 }
 // When the user clicks anywhere outside of the modal, it close itself
-window.onclick = function(event) {
-  if (event.target == modalFriendPopup) {
-    modalFriendPopup.style.display = "none";
-  }
-} 
-document.getElementById("delete-friend-button").addEventListener('click', ()    =>  {
+window.onclick = function (event) {
+    if (event.target == modalFriendPopup) {
+        modalFriendPopup.style.display = "none";
+    }
+}
+document.getElementById("delete-friend-button").addEventListener('click', () => {
     if (confirm("Sei sicuro di voler eliminare il tuo amico?")) {
-        let idFriend=document.getElementById('friend-id-info').innerHTML;
-        idFriend=idFriend.substring(4);
-        let data =   {
+        let idFriend = document.getElementById('friend-id-info').innerHTML;
+        idFriend = idFriend.substring(4);
+        let data = {
             account1: getCookie('uid'),
             account2: idFriend,
         };
@@ -648,29 +676,29 @@ document.getElementById("delete-friend-button").addEventListener('click', ()    
             method: 'DELETE',
             data: JSON.stringify(data),
             contentType: 'application/json',
-            success: function(response){
+            success: function (response) {
                 window.alert("Amico eliminato correttamente");
                 modalFriendPopup.style.display = "none";
                 popolaListaAmici();
             },
-            error: function(error){
+            error: function (error) {
                 window.alert("Abbiamo riscontrato un errore, riprova");
             }
         });
     }
 });
-document.getElementById("notifications").addEventListener('click', ()   =>  {
-    document.getElementById("notification-popup").style.display="block";
+document.getElementById("notifications").addEventListener('click', () => {
+    document.getElementById("notification-popup").style.display = "block";
 });
-document.getElementsByClassName("notification-popup-close")[0].onclick = function() {
-  document.getElementById("notification-popup").style.display = "none";
-};
-window.onclick = function(event) {
-  if (event.target == document.getElementById("notification-popup")) {
+document.getElementsByClassName("notification-popup-close")[0].onclick = function () {
     document.getElementById("notification-popup").style.display = "none";
-  }
-} 
-document.getElementById("contribuite-to-colletta").addEventListener('click', () =>  {
+};
+window.onclick = function (event) {
+    if (event.target == document.getElementById("notification-popup")) {
+        document.getElementById("notification-popup").style.display = "none";
+    }
+}
+document.getElementById("contribuite-to-colletta").addEventListener('click', () => {
     // /contribute/pay expect a String id_payer and a Long id_colletta
     let id_payer = getCookie('uid');
     let id_colletta = document.getElementById("colletta-label-info").value;
@@ -680,24 +708,24 @@ document.getElementById("contribuite-to-colletta").addEventListener('click', () 
         colletta: id_colletta,
     };
 
-    if(id_payer && id_colletta) {
+    if (id_payer && id_colletta) {
         $.ajax({
-            url: localHost+"/contribute/pay",
-            method: "POST",
+            url: localHost + "/contribute/pay",
+            method: "DELETE",
             data: JSON.stringify(data),
             contentType: "application/json",
-            success: function(response) {
+            success: function (response) {
                 window.alert("Contributo versato correttamente");
                 // Button set to "no notification" color
-                document.getElementById("notifications").style.backgroundColor="lightgreen";
+                document.getElementById("notifications").style.backgroundColor = "lightgreen";
             },
-            error: function(error)  {
+            error: function (error) {
                 window.alert("Si è verificato un errore");
             }
         });
     }
 });
-document.getElementById("refuse-colletta-button").addEventListener('click', ()  =>  {
+document.getElementById("refuse-colletta-button").addEventListener('click', () => {
     // /contribute/decline expect a String id_payer and a Long id_colletta
     let id_payer = getCookie('uid');
     let id_colletta = document.getElementById("colletta-label-info").value;
@@ -707,24 +735,33 @@ document.getElementById("refuse-colletta-button").addEventListener('click', ()  
         colletta: id_colletta,
     };
 
-    if(id_payer && id_colletta) {
+    if (id_payer && id_colletta) {
         $.ajax({
             url: localHost+"/contribute/decline",
-            method: "POST",
+            method: "DELETE",
             data: JSON.stringify(data),
             contentType: "application/json",
-            success: function(response) {
+            success: function (response) {
                 window.alert("L'invito alla colletta è stato declinato");
                 // Button set to "no notification" color
-                document.getElementById("notifications").style.backgroundColor="lightgreen";
+                document.getElementById("notifications").style.backgroundColor = "lightgreen";
             },
-            error: function(error)  {
+            error: function (error) {
                 window.alert("Si è verificato un errore");
             }
         });
     }
 });
-document.getElementById("colletta-label-info").addEventListener('change', ()    =>  {
+document.getElementById("colletta-label-info").addEventListener('change', () => {
     // Button set to "you have notifications" color
-    document.getElementById("notifications").style.backgroundColor="green";
+    document.getElementById("notifications").style.backgroundColor = "green";
 });
+
+function onKeyNumeric(e) {
+    // Accetto solo numeri e backspace <- tranne per un e uno solo . 
+    if (((e.keyCode >= 48) && (e.keyCode <= 57)) || (e.keyCode == 8)) {
+        return true;
+    } else {
+        return false;
+    }
+}
