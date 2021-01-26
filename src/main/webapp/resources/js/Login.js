@@ -433,7 +433,6 @@ let isLogged=getCookie("uid");
 if (isLogged)	{
 	window.location.replace(localHost+"/home");
 }
-
 // Online - Offline status check
 /*	WIP - @Claudiocli
 const checkOnlineStatus = async () =>  {
