@@ -398,7 +398,7 @@ function aggiungiAmico() {
 
     if (idUser) {
         var data = {
-            datetime: "12-12-2020",
+            datetime: getDateTime(),
             account1: idUser,
             account2: idInputLabel.value,
         }
@@ -434,48 +434,51 @@ function aggiungiAmico() {
 function cercaAmico() {
     var idUser = getCookie("uid");
     var idInputLabel = document.getElementById("tagInputLabelFriendlist");
-    idInputLabel = idInputLabel.toUpperCase();
+    idInputLabel.value = idInputLabel.value.toUpperCase();
 
     if (idUser) {
-        var data = {
-            id: idUser
-        }
-        $.ajax({
-            url: 'http://localhost:9090/home/friendship',
-            method: 'POST',
-            data: JSON.stringify(data),
-            contentType: "application/json",
-            success: function (risposta) {
-                for (var i = 0; i < risposta.length; i++) {
-                    if (idInputLabel.value == risposta[i].name) {
-                        $("#corpoListaAmici").html("");
-                        var ciccia = "";
-                        ciccia += "<tr class=\"row-amico\" id=\"friend-row-"+i+"\">";
-                        let name=risposta[i].name + " " + risposta[i].surname;
-                        ciccia += "<td class=\"row-info-amico\">" + name + "</td>";
-                        ciccia += "</tr>";
-                        $("#corpoListaAmici").append(ciccia);
-                    }
-                    else if (idInputLabel.value == "") {
-                        let oldBorder=idInputLabel.style.border;
-                        idInputLabel.style.border="2px solid red";
-                        let oldPlaceholder=idInputLabel.placeholder;
-                        idInputLabel.value="";
-                        idInputLabel.placeholder="ID/Nome mancante";
-                        setTimeout(()   =>  {
-                            idInputLabel.style.border=oldBorder;
-                            idInputLabel.placeholder=oldPlaceholder;
-                        }, 2500);
-                        popolaListaAmici();
-                    }
-                }
 
-            },
-            error: function (err) {
-                window.alert("Abbiamo riscontrato un errore, riprova");
+        if (idInputLabel.value == "") {
+            let oldBorder=idInputLabel.style.border;
+            idInputLabel.style.border="2px solid red";
+            let oldPlaceholder=idInputLabel.placeholder;
+            idInputLabel.value="";
+            idInputLabel.placeholder="ID/Nome mancante";
+            setTimeout(()   =>  {
+                idInputLabel.style.border=oldBorder;
+                idInputLabel.placeholder=oldPlaceholder;
+            }, 2500);
+            popolaListaAmici();
+        } else { 
+            var data = {
+                id: idUser
             }
-        });
+            $.ajax({
+                url: 'http://localhost:9090/home/friendship',
+                method: 'POST',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (risposta) {
+                    for (var i = 0; i < risposta.length; i++) {
+                        if (idInputLabel.value == risposta[i].name) {
+                            $("#corpoListaAmici").html("");
+                            var ciccia = "";
+                            ciccia += "<tr class=\"row-amico\" id=\"friend-row-"+i+"\">";
+                            let name=risposta[i].name + " " + risposta[i].surname;
+                            ciccia += "<td class=\"row-info-amico\">" + name + "</td>";
+                            ciccia += "</tr>";
+                            $("#corpoListaAmici").append(ciccia);
+                        }
+                    }
+                },
+                error: function (err) {
+                    window.alert("Abbiamo riscontrato un errore, riprova");
+                }
+            });
+        }
     }
+
+    
 }
 
 function logout()   {
