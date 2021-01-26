@@ -1,5 +1,7 @@
 package it.urss.payball8.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -20,6 +23,7 @@ import it.urss.payball8.repository.AccountRepository;
 import it.urss.payball8.repository.CollettaRepository;
 import it.urss.payball8.repository.ContributeRepository;
 import it.urss.payball8.repository.TransactionRepository;
+import net.minidev.json.JSONObject;
 
 @RestController
 @RequestMapping(path = "/contribute")
@@ -37,7 +41,15 @@ public class ContributeController {
 
 	@Autowired
 	private TransactionRepository transactionRepository;
-
+	
+	@PostMapping(path = "/all")
+	@ResponseBody
+	List<Contribute> getAll(@RequestBody JSONObject id){
+		String id_long = id.getAsString("id");
+		logger.info("GET ALL CONTRIBUTE with id:" + id_long);
+		return contributeRepository.findAllBycontributor(id_long);
+	}
+	
 	@PostMapping(path = "/pay")
 	ResponseEntity<Colletta> payColletta(@RequestBody Contribute contribute) {
 		logger.info("COLLETTA_PAY_ID: " + contribute.getColletta());
