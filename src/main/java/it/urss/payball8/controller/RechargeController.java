@@ -35,7 +35,8 @@ public class RechargeController {
 	private CardRepository cardRepository;
 
 	@PostMapping(path = "/add")
-	@ResponseBody ResponseEntity<Recharge> addRecharge(@RequestBody Recharge recharge) {
+	@ResponseBody
+	ResponseEntity<Recharge> addRecharge(@RequestBody Recharge recharge) {
 		Account current_account = accountRepository.findById(recharge.getAccount()).orElseThrow(
 				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Unable to find user")));
 

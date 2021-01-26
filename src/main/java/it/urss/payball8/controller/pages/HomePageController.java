@@ -1,7 +1,13 @@
 package it.urss.payball8.controller.pages;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +25,7 @@ import it.urss.payball8.model.Account;
 import it.urss.payball8.model.Friendship;
 import it.urss.payball8.repository.AccountRepository;
 import it.urss.payball8.repository.FriendshipRepository;
+import net.glxn.qrgen.QRCode;
 import net.minidev.json.JSONObject;
 
 @Controller
@@ -31,11 +38,11 @@ public class HomePageController {
 	@Autowired
 	private FriendshipRepository friendshipRepository;
 
-	@RequestMapping(value="", method = RequestMethod.GET)
-	public String redirectToLogin()	{
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String redirectToLogin() {
 		return "Login";
 	}
-  
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String showLoginPage() {
 		return "Login";
@@ -56,7 +63,6 @@ public class HomePageController {
 		return "Home";
 	}
 
-
 	@PostMapping("home/me")
 	Account homePage(@RequestBody JSONObject id) {
 		String id_long = id.getAsString("id");
@@ -67,7 +73,8 @@ public class HomePageController {
 	}
 
 	@PostMapping("home/friendship")
-	@ResponseBody List<Account> listFriendship(@RequestBody JSONObject id) {
+	@ResponseBody
+	List<Account> listFriendship(@RequestBody JSONObject id) {
 		String id_long = id.getAsString("id");
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
@@ -86,4 +93,16 @@ public class HomePageController {
 		return list_account;
 	}
 
+	@PostMapping("/QrCode")
+	@ResponseBody
+	public byte[] getQRCodeImageById(@RequestBody JSONObject id) throws Exception {
+		String id_long = id.getAsString("id");
+		logger.info("GET QR_CODE" + id_long);
+		ByteArrayOutputStream stream = QRCode.from(id_long).stream();
+		byte[] data = stream.toByteArray();
+		ByteArrayInputStream QrCode = new ByteArrayInputStream(data);
+		BufferedImage QrCodeImage = ImageIO.read(QrCode);
+		ImageIO.write(QrCodeImage, "jpg", new File("src/main/webapp/resources/img/output.jpg"));
+		return data;
+	}
 }

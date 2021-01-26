@@ -3,6 +3,13 @@
     <html lang="it">
 
     <head>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+
+        <!-- Firebase products -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+        
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,25 +32,24 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                        class="bi bi-wallet2 icons-navbar-color" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z" />
-                                    </svg>
+                                    <img class="logo-font" src="../../resources/img/LOGO PAY8BALL_LOGO ORIZZONTALE.png"
+										alt="logo">
                                 </li>
                                 <li class="nav-item">
                                     <a id="riepilogo" class="nav-link nav-link-color"
                                         href="http://localhost:9090/home">Riepilogo</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="carte" class="nav-link nav-link-color" href="http://localhost:9090/card">Carte</a>
+                                    <a id="carte" class="nav-link nav-link-color"
+                                        href="http://localhost:9090/card">Carte</a>
                                 </li>
                                 <li class="nav-item">
                                     <a id="storico" class="nav-link nav-link-color"
                                         href="http://localhost:9090/storico">Storico</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a id="aiuto" class="nav-link nav-link-color" href="http://localhost:9090/aiuto">Aiuto</a>
+                                    <a id="aiuto" class="nav-link nav-link-color"
+                                        href="http://localhost:9090/aiuto">Aiuto</a>
                                 </li>
                             </ul>
                         </div>
@@ -167,7 +173,8 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Chiudi</button>
-                                                    <button type="button" class="btn esci-font">Si</button>
+                                                    <button type="button" class="btn esci-font"
+                                                        id="btn-logout">S&igrave;</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -181,7 +188,7 @@
         </nav>
 
         <!--Center Section-->
-        <div class="banner banner-color">
+        <div class="container-fluid banner banner-color">
             <div class="row h-100">
                 <div class="col-lg-2 col-md-2 col-sm-2 h-100"></div>
                 <div class="col-lg-8 col-md-8 col-sm-8 h-100">
@@ -238,7 +245,8 @@
                                     d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z" />
                             </svg>
                             <h3>Veloce</h3>
-                            <p class="lead mb-0 text-bold"> Certificato come conto virtuale piu' rapido in Europa.</p>
+                            <p class="lead mb-0 text-bold"> Certificato come conto virtuale pi&ugrave; rapido in Europa.
+                            </p>
                         </div>
                     </div>
                     <div class="col-lg-4 ">
@@ -250,7 +258,8 @@
                                 <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
                             </svg>
                             <h3>Sicuro</h3>
-                            <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno puo' accedere ai
+                            <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno pu&ograve;
+                                accedere ai
                                 vostri
                                 dati sensibili ;-) .</p>
                         </div>
@@ -270,7 +279,9 @@
                             <li class="list-inline-item"><a class="text-white" href="#">Term of Use</a></li>
                             <li class="list-inline-item"><a class="text-white" href="#">Privacy Policy</a></li>
                         </ul>
-                        <p class="text-white small mb-4 mb-lg-0">@ Your Website 2020. All Rights Reserved.</p>
+                        <p class="text-white small mb-4 mb-lg-0">@ Your Website
+                            <script> document.write(new Date().getFullYear()); </script>. All Rights Reserved.
+                        </p>
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-right">
                         <ul class="list-inline mb-0">

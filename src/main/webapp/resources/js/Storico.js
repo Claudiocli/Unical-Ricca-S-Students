@@ -1,8 +1,9 @@
-var paginaCorrente = 0
-var numPagine = 0
+var paginaCorrente = 0;
+var numPagine = 0;
 $(document).ready(function () {
-    initStorico()
+    initStorico();
     document.getElementById("bottoneGestioneAccount").addEventListener("click", popolaGestioneAccount);
+    document.getElementById("btn-logout").addEventListener("click", logout);
 });
 
 function initStorico() {
@@ -20,8 +21,8 @@ function initStorico() {
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (risposta) {
-                calcoloPagine(risposta)
-                console.log(risposta)
+                calcoloPagine(risposta);
+                console.log(risposta);
             },
             error: function (err) {
                 console.log(err);
@@ -31,21 +32,36 @@ function initStorico() {
     }
 }
 
+var firebaseConfig = {
+	apiKey: "AIzaSyAlsmnuWM9U1etPRjMB3zEYhP9XXmyUn34",
+	authDomain: "payball8-1f27c.firebaseapp.com",
+	databaseURL: "https://payball8-1f27c-default-rtdb.europe-west1.firebasedatabase.app",
+	projectId: "payball8-1f27c",
+	storageBucket: "payball8-1f27c.appspot.com",
+	messagingSenderId: "39509751218",
+	appId: "1:39509751218:web:6fb7cc6cbb7960386e60ab",
+	measurementId: "G-PY99LWBLTW"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
 function calcoloPagine(size) {
     var pagine = Math.floor(size / 10);
     numPagine = pagine;
-    var prec = $("#Prec")
-    var pros = $("#Pros") 
+    var prec = $("#Prec");
+    var pros = $("#Pros") ;
     $("#pagination").html("");
-    $("#pagination").append(prec)
+    $("#pagination").append(prec);
     for(var i=0 ; i<=pagine; i++){
         var pagina = i+1;
-        $("#pagination").append('<li class="page-item "><a class="page-link nav-bar-pages" href="#">'+ pagina +'</a></li>')
+        $("#pagination").append('<li class="page-item "><a class="page-link nav-bar-pages" href="#">'+ pagina +'</a></li>');
     }
-    $("#pagination").append(pros)     
+    $("#pagination").append(pros);     
 }
 
 function popolaStorico(page, data){
+    let listaAmici = JSON.parse(getCookie("friendList"));
     $.ajax({
         url: 'http://localhost:9090/storico/getColumn/' + page,
         method: 'POST',
@@ -55,17 +71,32 @@ function popolaStorico(page, data){
             console.log(risposta)
             $("#corpoTabella").html("");
             for(var i=0 ;i<risposta.length; i++){
-                var ciccia = ""
-                var verifica = "Ricevi"
+                var ciccia = "";
+                var verifica = "Ricevi";
+                var destinatario = "";
                 if(risposta[i].amount < 0)
-                    verifica = "Invia"
-                ciccia += "<tr>"
-                ciccia += "<td>" + risposta[i].datetime + "</td>"
-                ciccia += "<td>" + risposta[i].amount + "</td>"
-                ciccia += "<td>" + risposta[i].recipient + "</td>"
-                ciccia += "<td>" + verifica + "</td>"
-                ciccia += "</tr>"
-                $("#corpoTabella").append(ciccia)
+                    verifica = "Invia";
+                    
+                if(risposta[i].category == "RECHARGE"){
+                    verifica = "Ricarica";
+                } else {
+                    destinatario = risposta[i].recipient;
+                }
+                
+                // se la transazione è avvenuta con un amico sarà presente il suo nominativo altrimenti verrà visualizzato l'id
+                for(var j=0; j<listaAmici.length; j++){
+                    if(risposta[i].recipient == listaAmici[j].id){
+                        destinatario = listaAmici[j].name + " " + listaAmici[j].surname;
+                    }
+                }
+
+                ciccia += "<tr>";
+                ciccia += "<td>" + risposta[i].datetime + "</td>";
+                ciccia += "<td>" + risposta[i].amount + "</td>";
+                ciccia += "<td>" + destinatario + "</td>";
+                ciccia += "<td>" + verifica + "</td>";
+                ciccia += "</tr>";
+                $("#corpoTabella").append(ciccia);
             }
         },
         error: function (err) {
@@ -80,7 +111,7 @@ function precedente(){
         id: idUser
     }    
     if(paginaCorrente > 0){
-        paginaCorrente-- 
+        paginaCorrente--; 
         popolaStorico(paginaCorrente, data);
     }
 }
@@ -91,7 +122,7 @@ function prossima(){
         id: idUser
     }
     if(paginaCorrente < numPagine)
-        paginaCorrente++
+        paginaCorrente++;
         popolaStorico(paginaCorrente, data);
 }
 
@@ -108,37 +139,38 @@ function popolaGestioneAccount(){
         data: JSON.stringify(data),
         contentType: "application/json",
         success: function (risposta) {
-            console.log(risposta)
-            var ciccia = ""
-            ciccia += "<tr>"
-            ciccia += "<td>" + "ID" + "</td>"
-            ciccia += "<td>" + risposta.id + "</td>"
-            ciccia += "</tr>"
-            ciccia += "<tr>"
-            ciccia += "<td>" + "Indirizzo" + "</td>"
-            ciccia += "<td>" + risposta.address + "</td>"
-            ciccia += "</tr>"
-            ciccia += "<tr>"
-            ciccia += "<td>" + "CodiceFiscale" + "</td>"
-            ciccia += "<td>" + risposta.cf + "</td>"
-            ciccia += "</tr>"
-            ciccia += "<tr>"
-            ciccia += "<td>" + "Data di Nascita" + "</td>"
-            ciccia += "<td>" + risposta.dob + "</td>"
-            ciccia += "</tr>"
-            ciccia += "<tr>"
-            ciccia += "<td>" + "E-mail" + "</td>"
-            ciccia += "<td>" + risposta.email + "</td>"
-            ciccia += "</tr>"
-            ciccia += "<tr>"
-            ciccia += "<td>" + "Nome" + "</td>"
-            ciccia += "<td>" + risposta.name + "</td>"
-            ciccia += "</tr>"
-            ciccia += "<tr>"
-            ciccia += "<td>" + "Cognome" + "</td>"
-            ciccia += "<td>" + risposta.surname + "</td>"
-            ciccia += "</tr>"
-            $("#corpoGestioneAccount").append(ciccia)
+            $("#corpoGestioneAccount").html("");
+            console.log(risposta);
+            var ciccia = "";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "ID" + "</td>";
+            ciccia += "<td>" + risposta.id + "</td>";
+            ciccia += "</tr>";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "Indirizzo" + "</td>";
+            ciccia += "<td>" + risposta.address + "</td>";
+            ciccia += "</tr>";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "CodiceFiscale" + "</td>";
+            ciccia += "<td>" + risposta.cf + "</td>";
+            ciccia += "</tr>";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "Data di Nascita" + "</td>";
+            ciccia += "<td>" + risposta.dob + "</td>";
+            ciccia += "</tr>";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "E-mail" + "</td>";
+            ciccia += "<td>" + risposta.email + "</td>";
+            ciccia += "</tr>";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "Nome" + "</td>";
+            ciccia += "<td>" + risposta.name + "</td>";
+            ciccia += "</tr>";
+            ciccia += "<tr>";
+            ciccia += "<td>" + "Cognome" + "</td>";
+            ciccia += "<td>" + risposta.surname + "</td>";
+            ciccia += "</tr>";
+            $("#corpoGestioneAccount").append(ciccia);
         },
         error: function (err) {
             console.log(err);
@@ -149,6 +181,7 @@ function popolaGestioneAccount(){
 
 function logout()   {
     eraseCookie('uid');
+    eraseCookie('friendList');
     window.location.replace("http://localhost:9090/login");
 }
 
@@ -169,10 +202,8 @@ function eraseCookie(name) {
 
 // Session controll
 let isLogged=getCookie("uid");
-if (isLogged)	{
-	window.location.replace(localHost+"/home");
-}
-else
-{
+let localHost="http://localHost:9090";
+
+if (!isLogged)	{
 	window.location.replace(localHost+"/login");
 }
