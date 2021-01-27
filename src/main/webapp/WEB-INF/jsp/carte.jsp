@@ -184,7 +184,7 @@
 				<div class="col-lg-2 col-md-2 h-100"></div>
 				<div class="col-lg-8 col-md-8 h-100">
 					<div class="row h-100">
-						<div class="col-lg-4 col-md-4 h-100">
+						<div class="col-lg-4 col-md-4 h-100" style="overflow-y:scroll">
 							<h3 class="margin-top-elenco-carte">Elenco Carte</h3>
 							<table class="table table-striped">
 								<thead>

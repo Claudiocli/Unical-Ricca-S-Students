@@ -189,25 +189,25 @@ function createEventListenerBtn(risposta){
                 var data = {
                     pan: pan
                 }
-            if(confirm("Vuoi eliminare la carta definiitivamente?")){
-                $.ajax({
-                    url: 'http://localhost:9090/card/deleteCard/'+idUser,
-                    method: 'DELETE',
-                    data: JSON.stringify(data),
-                    contentType: "application/json",
-                    success: function (risposta) {
-                        alert("Carta eliminata con successo");
-                        popolaTabellaCarte();
-                    },
-                    error: function (err) {
-                        alert("ERRORE: Eliminazione non riuscita! Riprovare.");
-                        console.log(err);
-                    }
-                });  
-            } 
-        }
-    });
-}
+                if(confirm("Vuoi eliminare la carta definiitivamente?")){
+                    $.ajax({
+                        url: 'http://localhost:9090/card/deleteCard/'+idUser,
+                        method: 'DELETE',
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        success: function (risposta) {
+                            alert("Carta eliminata con successo");
+                            popolaTabellaCarte();
+                        },
+                        error: function (err) {
+                            alert("ERRORE: Eliminazione non riuscita! Riprovare.");
+                            console.log(err);
+                        }
+                    });  
+                } 
+            }
+        });
+    }
 }
 
 function logout()   {
@@ -252,12 +252,15 @@ function getDateTime(){
     var anno, mese, giorno, ore, minuti, secondi;
     anno = data.getFullYear();
     mese = data.getMonth() + 1;
+    if((mese+"").length==1){
+        mese="0"+mese;
+    }
     giorno = data.getDate();
     ore = data.getHours();
     minuti = data.getMinutes();
     secondi = data.getSeconds();
 
-    var finalDate = giorno + "-" + mese + "-" + anno + " " + ore + ":" + minuti + ":" + secondi;
+    var finalDate = giorno + "-" + mese + "-" + (anno+"").substr(2.4) + " " + ore + ":" + minuti + ":" + secondi;
     
     return finalDate;
 }
