@@ -264,7 +264,7 @@ function checkInputRecharge() {
             amount.placeholder = "0.00";
         }, 2500);
         returnValue = false;
-    } 
+    }
 
     if (pan = "") {
         let oldBorder = pan.style.border;
