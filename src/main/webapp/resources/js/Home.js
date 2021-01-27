@@ -509,6 +509,7 @@ function cercaAmico() {
                             $("#corpoListaAmici").append(ciccia);
                         }
                     }
+                    addListenerToFriendListsRows(risposta);
                 },
                 error: function (err) {
                     window.alert("Abbiamo riscontrato un errore, riprova");
@@ -589,10 +590,8 @@ function createColletta() {
                 //document.getElementById("idQuota").value = "";
                 //document.getElementById("idBeneficiario").value = "";
                 window.location.replace(localHost + "/home");
-                // TODO: success message
             },
             error: function (err) {
-                // TODO: error message
                 window.alert("Abbiamo riscontrato un problema, riprova");
             }
         });
