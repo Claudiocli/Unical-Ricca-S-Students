@@ -267,7 +267,7 @@
 																	<div class="input-group">
 																		<input id="ImportoInputLabel" type="text"
 																			class="form-control" placeholder="0.00"
-																			onkeydown="return onKeyNumeric(event);"> <span
+																			onkeydown="return onKeyNumeric(event,'ImportoInputLabel');"> <span
 																			class="input-group-text euro-label">Euro</span>
 																	</div>
 																</div>
@@ -395,7 +395,7 @@
 															<div class="input-group">
 																<input type="text" class="form-control"
 																	placeholder="0.00" id="idQuota"
-																	onkeydown="return onKeyNumeric(event);" required>
+																	onkeydown="return onKeyNumeric(event,'idQuota');" required>
 																<span class="input-group-text euro-label">Euro</span>
 															</div>
 														</li>
@@ -644,17 +644,7 @@
 		</div>
 	</div>
 	<div id="notification-popup" class="notificationModal">
-		<div class="notification-modal-content" style="overflow-y:scroll">
-			<!-- 
-			<span class="notification-popup-close">&times;</span> </br> <label
-				class="form-label modal-label-info" id="colletta-label-info">Colletta
-				ID: </label> <label class="form-label modal-label-info"
-				id="colletta-beneficiay-name">Nome Beneficiario: </label> <label
-				class="form-label modal-label-info" id="colletta-quote">Quota:
-			</label>
-			<button class="btn" id="refuse-colletta-button" type="button">Rifiuta</button>
-			<button class="btn" id="contribuite-to-colletta" type="button">Contribuisci</button>
-			-->
+		<div class="notification-modal-content" style="overflow-y:scroll;margin: 0 auto;">
 			<span class="notification-popup-close">&times;</span>
 			<table class="table table-striped">
 				<thead>

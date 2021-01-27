@@ -9,7 +9,6 @@ $(document).ready(function () {
 function initStorico() {
 
     var idUser = getCookie("uid");
-    console.log(idUser);
 
     if (idUser) {
         var data = {
@@ -22,18 +21,17 @@ function initStorico() {
             contentType: "application/json",
             success: function (risposta) {
                 calcoloPagine(risposta);
-                console.log(risposta);
             },
             error: function (err) {
-                console.log(err);
             }
         });
         popolaStorico(0, data);
     }
 }
+setInterval(initStorico,2*5000); 
 
 var firebaseConfig = {
-	apiKey: "AIzaSyAlsmnuWM9U1etPRjMB3zEYhP9XXmyUn34",
+    apiKey: "AIzaSyAlsmnuWM9U1etPRjMB3zEYhP9XXmyUn34",
 	authDomain: "payball8-1f27c.firebaseapp.com",
 	databaseURL: "https://payball8-1f27c-default-rtdb.europe-west1.firebasedatabase.app",
 	projectId: "payball8-1f27c",
@@ -60,6 +58,7 @@ function calcoloPagine(size) {
     $("#pagination").append(pros);     
 }
 
+
 function popolaStorico(page, data){
     let listaAmici = JSON.parse(getCookie("friendList"));
     $.ajax({
@@ -68,28 +67,38 @@ function popolaStorico(page, data){
         data: JSON.stringify(data),
         contentType: "application/json",
         success: function (risposta) {
-            console.log(risposta)
             $("#corpoTabella").html("");
             for(var i=0 ;i<risposta.length; i++){
                 var ciccia = "";
-                var verifica = "Ricevi";
+                var verifica = "";
                 var destinatario = "";
-                if(risposta[i].amount < 0)
-                    verifica = "Invia";
-                    
+                
                 if(risposta[i].category == "RECHARGE"){
                     verifica = "Ricarica";
                 } else {
-                    destinatario = risposta[i].recipient;
-                }
-                
-                // se la transazione è avvenuta con un amico sarà presente il suo nominativo altrimenti verrà visualizzato l'id
-                for(var j=0; j<listaAmici.length; j++){
-                    if(risposta[i].recipient == listaAmici[j].id){
-                        destinatario = listaAmici[j].name + " " + listaAmici[j].surname;
+                    var isPresent = false;
+                    for(var j=0; j<listaAmici.length; j++){
+                        // se la transazione è avvenuta con un amico sarà presente il suo nominativo altrimenti verrà visualizzato l'id
+                        if(risposta[i].category.substring(risposta[i].category.length-28, risposta[i].category.length) == listaAmici[j].id){
+                            destinatario = risposta[i].category.substring(0,risposta[i].category.length-28);
+                            destinatario += " " +  listaAmici[j].name + " " + listaAmici[j].surname;
+                            isPresent = true;
+                            break;
+                        }
+                    }
+                    if(!isPresent)
+                    destinatario = risposta[i].category;
+                    
+                    if(risposta[i].amount < 0){
+                        verifica = "Invia";
+                    }
+                    else{
+                        verifica = "Ricevi";
                     }
                 }
-
+                
+                
+                
                 ciccia += "<tr>";
                 ciccia += "<td>" + risposta[i].datetime + "</td>";
                 ciccia += "<td>" + risposta[i].amount + "</td>";
@@ -100,10 +109,10 @@ function popolaStorico(page, data){
             }
         },
         error: function (err) {
-            console.log(err);
         }
     });   
 }
+
 
 function precedente(){
     var idUser = getCookie("uid");
@@ -128,7 +137,6 @@ function prossima(){
 
 function popolaGestioneAccount(){
     var idUser = getCookie("uid");
-    console.log(idUser);
     if (idUser) {
         var data = {
             id: idUser
@@ -140,7 +148,6 @@ function popolaGestioneAccount(){
         contentType: "application/json",
         success: function (risposta) {
             $("#corpoGestioneAccount").html("");
-            console.log(risposta);
             var ciccia = "";
             ciccia += "<tr>";
             ciccia += "<td>" + "ID" + "</td>";
@@ -173,7 +180,6 @@ function popolaGestioneAccount(){
             $("#corpoGestioneAccount").append(ciccia);
         },
         error: function (err) {
-            console.log(err);
         }
     });   
     }

@@ -197,7 +197,7 @@
                             <tr>
                                 <th>Data</th>
                                 <th>Importo</th>
-                                <th>Destinatario</th>
+                                <th>Informazioni</th>
                                 <th>Tipo</th>
                             </tr>
                         </thead>

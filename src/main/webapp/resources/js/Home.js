@@ -174,7 +174,7 @@ function inviaTransizione() {
                 initSaldo();
             },
             error: function (err) {
-                window.alert("Abbiamo riscontrato un problema, riporva");
+                window.alert("Abbiamo riscontrato un problema, riprova");
             }
         });
     } else {
@@ -584,12 +584,15 @@ function createColletta() {
             success: function (risposta) {
                 //Svuota la dropbox dei partecipanti
                 $("#dropDownPartecipanti").html("");
-
+                window.alert("Colletta creata con successo!");
+                //document.getElementById("idQuota").value = "";
+                //document.getElementById("idBeneficiario").value = "";
+                window.location.replace(localHost + "/home");
                 // TODO: success message
             },
             error: function (err) {
                 // TODO: error message
-                window.alert("Abbiamo riscontrato un problema, riporva");
+                window.alert("Abbiamo riscontrato un problema, riprova");
             }
         });
         eraseCookie("list_id");
@@ -696,7 +699,6 @@ function addToDropbox(contribuente) {
                 var ciccio = risposta.name + "-" + risposta.surname;
                 var tizio = "";
                 tizio += "<li><a class=\"dropdown-item\" >" + ciccio + "</a></li>";
-                console.log(ciccio);
                 $("#dropDownPartecipanti").append(tizio);
             },
             error: function (err) {
@@ -792,122 +794,84 @@ document.getElementById("delete-friend-button").addEventListener('click', () => 
     }
 });
 document.getElementById("notifications").addEventListener('click', () => {
+    document.getElementById("notifications").style.backgroundColor = "lightgreen";
     document.getElementById("notification-popup").style.display = "block";
 });
 document.getElementsByClassName("notification-popup-close")[0].onclick = function () {
     document.getElementById("notification-popup").style.display = "none";
 };
 
-/*
-document.getElementById("contribuite-to-colletta").addEventListener('click', () => {
-    // /contribute/pay expect a String id_payer and a Long id_colletta
-    let id_payer = getCookie('uid');
-    let id_colletta = document.getElementById("colletta-label-info").value;
-
-    let data = {
-        contributor: id_payer,
-        colletta: id_colletta,
-    };
-
-    if (id_payer && id_colletta) {
-        $.ajax({
-            url: localHost + "/contribute/pay",
-            method: "DELETE",
-            data: JSON.stringify(data),
-            contentType: "application/json",
-            success: function (response) {
-                window.alert("Contributo versato correttamente");
-                // Button set to "no notification" color
-                document.getElementById("notifications").style.backgroundColor = "lightgreen";
-            },
-            error: function (error) {
-                window.alert("Si è verificato un errore");
-            }
-        });
-    }
-});
-document.getElementById("refuse-colletta-button").addEventListener('click', () => {
-    // /contribute/decline expect a String id_payer and a Long id_colletta
-    let id_payer = getCookie('uid');
-    let id_colletta = document.getElementById("colletta-label-info").value;
-
-    let data = {
-        contributor: id_payer,
-        colletta: id_colletta,
-    };
-
-    if (id_payer && id_colletta) {
-        $.ajax({
-            url: localHost + "/contribute/decline",
-            method: "DELETE",
-            data: JSON.stringify(data),
-            contentType: "application/json",
-            success: function (response) {
-                window.alert("L'invito alla colletta è stato declinato");
-                // Button set to "no notification" color
-                document.getElementById("notifications").style.backgroundColor = "lightgreen";
-            },
-            error: function (error) {
-                window.alert("Si è verificato un errore");
-            }
-        });
-    }
-});
-*/
-
 function popolaListaCollette(){
     var idUser = getCookie("uid");
-    console.log(idUser);
     if (idUser) {
         var data = {
             id: idUser
         }
-    $.ajax({
-        url: 'http://localhost:9090/contribute/all',
-        method: 'POST',
-        data: JSON.stringify(data),
-        contentType: "application/json",
-        success: function (risposta) {
-            var size = 0;
-            $("#corpoTabellaCollette").html("");
-            for(var i=0 ;i<risposta.length; i++){
-                size+=1;
-                var ciccia = "";
-                ciccia += "<tr>";
-                ciccia += "<td>" + risposta[i].colletta.id + "</td>";
-                ciccia += "<td>" + risposta[i].colletta.beneficiary + "</td>";
-                ciccia += "<td>" + risposta[i].colletta.quote + "</td>";
-                if(risposta[i].contribute.stato == "default"){
-                    ciccia += "<td><button class='btn' id='refuse-colletta-button" + i + "' type='button' style='border: revert;'>Rifiuta</button></td>";
-                    ciccia += "<td><button class='btn' id='contribuite-to-colletta" + i + "' type='button' style='border: revert;'>Contribuisci</button></td>";
-                } else if(risposta[i].contribute.stato == "pagata"){
-                    ciccia += "<td>" + ACCETTATA + "</td>";
-                }
+        $.ajax({
+            url: 'http://localhost:9090/contribute/all',
+            method: 'POST',
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function (risposta) {
+                var size = 0;
+                $("#corpoTabellaCollette").html("");
+                for(var i=0 ;i<risposta.length; i++){
+                    size+=1;
+                    var ciccia = "";
+                    ciccia += "<tr>";
+                    ciccia += "<td>" + risposta[i].colletta.id + "</td>";
+                    ciccia += "<td>" + risposta[i].colletta.beneficiary + "</td>";
+                    ciccia += "<td>" + risposta[i].colletta.quote + "</td>";
+                    if(risposta[i].contribute.stato == "default"){
+                        ciccia += "<td><button class='btn' id='refuse-colletta-button" + i + "' type='button' style='border: revert;'>Rifiuta</button></td>";
+                        ciccia += "<td><button class='btn' id='contribuite-to-colletta" + i + "' type='button' style='border: revert;'>Contribuisci</button></td>";
+                        ciccia += "</tr>";
+                        $("#corpoTabellaCollette").append(ciccia);
+                    }
+                    else if(risposta[i].contribute.stato == "pagata"){
+                        ciccia += "<td> RICHIESTA </td>";
+                        ciccia += "<td> ACCETTATA </td>";
+                        ciccia += "</tr>";
+                        $("#corpoTabellaCollette").append(ciccia);
+                    }
                 else { 
-                    ciccia += "<td>" + RIFIUTATA + "</td>";
+                    ciccia += "<td> RICHIESTA </td>";
+                    ciccia += "<td> RIFIUTATA </td>";
+                    ciccia += "</tr>";
+                    $("#corpoTabellaCollette").append(ciccia);
                 }
-                ciccia += "</tr>";
-                $("#corpoTabellaCollette").append(ciccia);
             }
+            
+            var num_collette = getCookie("num_collette");
+            if(num_collette == null)
+            setCookie("num_collette",size,1,false);
+            
+            if(size>num_collette){
+                document.getElementById("notifications").style.backgroundColor = "red";
+                setCookie("num_collette",size,1,false);
+            }
+            
             createEventListenerCollettaPopup(risposta);
         },
         error: function (err) {
-            console.log(err);
         }
     });   
-    }
 }
+}
+
+// funzioni da richiamare ogni tot per non refreshare pagina ogni volta
+setInterval(popolaListaCollette, 5*1000);
+setInterval(initSaldo,5*1000);
 
 function createEventListenerCollettaPopup(risposta) {
     for(let i = 0; i < risposta.length; i++){
-        document.getElementById("contribuite-to-colletta"+i).addEventListener('click', function(e) {   
+        if(risposta[i].contribute.stato != "default")
+            continue;
+        document.getElementById("contribuite-to-colletta"+i).addEventListener("click", function(e) {   
             let id_payer = getCookie('uid');
             let id_contribute = risposta[i].contribute.id;
-            console.log(id_payer)
-            console.log(id_contribute)
             let data = {
-                //contributor: id_payer,
-                colletta: id_contribute,
+                id: id_contribute,
             };
             if (id_payer && id_contribute) {
                 $.ajax({
@@ -918,8 +882,6 @@ function createEventListenerCollettaPopup(risposta) {
                     success: function (response) {
                         window.alert("Contributo versato correttamente");
                         popolaListaCollette();
-                        // Button set to "no notification" color
-                        document.getElementById("notifications").style.backgroundColor = "lightgreen";
                     },
                     error: function (error) {
                         window.alert("Si è verificato un errore");
@@ -927,13 +889,11 @@ function createEventListenerCollettaPopup(risposta) {
                 });
             }
         });
-        document.getElementById("refuse-colletta-button"+i).addEventListener('click', function(e) {
+        document.getElementById("refuse-colletta-button"+i).addEventListener("click", function(e) {
             let id_payer = getCookie('uid');
-            let id_contribute = risposta[i].contribuente.id;
-            console.log(id_payer)
-            console.log(id_contribute)
+            let id_contribute = risposta[i].contribute.id;
             let data = {
-                colletta: id_contribute,
+                id: id_contribute,
             };
             if (id_payer && id_contribute) {
                 $.ajax({
@@ -944,8 +904,6 @@ function createEventListenerCollettaPopup(risposta) {
                     success: function (response) {
                         window.alert("L'invito alla colletta è stato declinato");
                         popolaListaCollette();
-                        // Button set to "no notification" color
-                        document.getElementById("notifications").style.backgroundColor = "lightgreen";
                     },
                     error: function (error) {
                         window.alert("Si è verificato un errore");
@@ -956,13 +914,24 @@ function createEventListenerCollettaPopup(risposta) {
     }
 }
 
-// da aggiustare con cambiamenti
-/*document.getElementById("colletta-label-info").addEventListener('change', () => {
-    // Button set to "you have notifications" color
-    document.getElementById("notifications").style.backgroundColor = "green";
-});*/
+function onKeyNumeric(e, fieldId) {
+    var field = document.getElementById(fieldId);
+    var presenteGia = field.value.indexOf(".");
+    var size = field.value.length;
 
-function onKeyNumeric(e) {
+    // controllo che non sia vuoto il campo e che non sia già presente un punto
+    if(e.keyCode==190){
+        if(size > 0 && presenteGia == -1)
+            return true;
+        else
+            return false;
+    }
+
+    // controllo che ci siano massimo due cifre dopo il punto 
+    if(presenteGia != -1){
+        if(field.value.substring(presenteGia,field.value).length > 2)
+            return false;
+    }
     // Accetto solo numeri e backspace <- tranne per un e uno solo . 
     if (((e.keyCode >= 48) && (e.keyCode <= 57)) || (e.keyCode == 8)) {
         return true;
