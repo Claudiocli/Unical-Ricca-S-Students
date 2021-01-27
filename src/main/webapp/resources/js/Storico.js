@@ -28,7 +28,7 @@ function initStorico() {
         popolaStorico(0, data);
     }
 }
-setInterval(initStorico,2*5000); 
+setInterval(initStorico,60*1000); 
 
 var firebaseConfig = {
     apiKey: "AIzaSyAlsmnuWM9U1etPRjMB3zEYhP9XXmyUn34",
@@ -73,6 +73,10 @@ function popolaStorico(page, data){
                 var verifica = "";
                 var destinatario = "";
                 
+                if(risposta[i].category.substring(0,8) == "Colletta"){
+                    risposta[i].datetime = risposta[i].datetime.substring(0,10) + " " + risposta[i].datetime.substring(11,19);
+                }
+
                 if(risposta[i].category == "RECHARGE"){
                     verifica = "Ricarica";
                 } else {

@@ -736,12 +736,15 @@ function getDateTime() {
     var anno, mese, giorno, ore, minuti, secondi;
     anno = data.getFullYear();
     mese = data.getMonth() + 1;
+    if((mese+"").length==1){
+        mese="0"+mese;
+    }
     giorno = data.getDate();
     ore = data.getHours();
     minuti = data.getMinutes();
     secondi = data.getSeconds();
 
-    var finalDate = giorno + "-" + mese + "-" + anno + " " + ore + ":" + minuti + ":" + secondi;
+    var finalDate = giorno + "-" + mese + "-" + (anno+"").substr(2.4) + " " + ore + ":" + minuti + ":" + secondi;
 
     return finalDate;
 }
