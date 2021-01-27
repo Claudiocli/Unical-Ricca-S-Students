@@ -328,7 +328,7 @@
 																<div class="modal-body">
 																	<div class="input-group mb-3">
 																		<span class="input-group-text euro-label"></span> <input
-																			id="panInputLabel" type="text" class="form-control"
+																			id="panInputLabel" maxlength="16" type="text" class="form-control"
 																			placeholder="Pan-Carta" aria-label="Username"
 																			aria-describedby="basic-addon1">
 																	</div>

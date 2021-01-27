@@ -523,6 +523,7 @@ function cercaAmico() {
 function logout() {
     eraseCookie('uid');
     eraseCookie('friendList');
+    eraseCookie('num_collette');
     window.location.replace("http://localhost:9090/login");
 }
 
@@ -821,13 +822,18 @@ function popolaListaCollette(){
                 for(var i=0 ;i<risposta.length; i++){
                     size+=1;
                     var ciccia = "";
-                    ciccia += "<tr>";
+                    if(risposta[i].contribute.stato == "rifiutata")
+                        ciccia += "<tr style='background-color:indianred'>";    
+                    else if(risposta[i].contribute.stato == "pagata")
+                        ciccia += "<tr style='background-color:#4bbe58'>";
+                    else
+                        ciccia += "<tr>";
                     ciccia += "<td>" + risposta[i].colletta.id + "</td>";
                     ciccia += "<td>" + risposta[i].colletta.beneficiary + "</td>";
                     ciccia += "<td>" + risposta[i].colletta.quote + "</td>";
                     if(risposta[i].contribute.stato == "default"){
-                        ciccia += "<td><button class='btn' id='refuse-colletta-button" + i + "' type='button' style='border: revert;'>Rifiuta</button></td>";
-                        ciccia += "<td><button class='btn' id='contribuite-to-colletta" + i + "' type='button' style='border: revert;'>Contribuisci</button></td>";
+                        ciccia += "<td><button class='btn' id='refuse-colletta-button" + i + "' type='button' style='  background-color: indianred; border: revert;'>Rifiuta</button></td>";
+                        ciccia += "<td><button class='btn' id='contribuite-to-colletta" + i + "' type='button' style=' background-color: #4bbe58; border: revert;'>Contribuisci</button></td>";
                         ciccia += "</tr>";
                         $("#corpoTabellaCollette").append(ciccia);
                     }
@@ -846,10 +852,9 @@ function popolaListaCollette(){
             }
             
             var num_collette = getCookie("num_collette");
-            if(num_collette == null)
+            if(num_collette == null){
             setCookie("num_collette",size,1,false);
-            
-            if(size>num_collette){
+            } else if(size>num_collette){
                 document.getElementById("notifications").style.backgroundColor = "red";
                 setCookie("num_collette",size,1,false);
             }
