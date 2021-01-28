@@ -334,7 +334,7 @@
 																	</div>
 																	<div class="input-group">
 																		<input id="ImportoInputLabel2" type="text"
-																			class="form-control" placeholder="0.00"> <span
+																			class="form-control" placeholder="0.00" onkeydown="return onKeyNumeric(event,'ImportoInputLabel2');"> <span
 																			class="input-group-text euro-label">Euro</span>
 																	</div>
 																</div>
