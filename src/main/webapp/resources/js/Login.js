@@ -4,6 +4,40 @@ let localHost="http://localHost:9090";
 let toggleSignupButton=document.getElementById("toggle-signup");
 let loginButton=document.getElementById("login-button");
 let signupButton=document.getElementById("register-button");
+// Cookie policy consent
+document.getElementById("accept-cookies").addEventListener('click', ()	=>	{
+	// Accepting the policy the user will be able to continue in the site
+	setCookie('cookie_policy', true);
+	// Hiding the popup
+	hidePopUp();
+});
+document.getElementById("refuse-cookies").addEventListener('click', ()	=>	{
+	if (document.getElementById("refuse-cookies").innerHTML==="Accetta")	{
+		// Accepting the policy the user will be able to continue in the site
+		setCookie('cookie_policy', true);
+		// Hiding the popup
+		hidePopUp();
+	}	else if (document.getElementById("refuse-cookies").innerHTML==="Eh! Volevih")	{
+			document.getElementById("refuse-cookies").innerHTML="Accetta";
+	}	else	{
+		document.getElementById("refuse-cookies").innerHTML="Eh! Volevih";
+	}
+});
+function showPopUp()	{
+	let popup=document.getElementById("cookie-pop-up");
+	popup.style.display="block";
+}
+function hidePopUp()	{
+	let popup=document.getElementById("cookie-pop-up");
+	popup.style.display="none";
+}
+window.onload=()	=>	{
+	// If the policy was not accepted
+	if (!getCookie('cookie_policy'))	{
+		// Display cookiePopUp
+		showPopUp();
+	}
+};
 // Firebase initialization
 var firebaseConfig = {
 	apiKey: "AIzaSyAlsmnuWM9U1etPRjMB3zEYhP9XXmyUn34",
@@ -44,16 +78,15 @@ googleButton.addEventListener('click', () =>	{
 		if (debug)	{
 			alert(user.uid);
 		}
-		// FIXME: error calling the server
 		let json={
 			"id": user.uid,
 			"email": user.email,
 			"name": firstName,
 			"surname": lastName,
-			"cf": "ciccio",
-			"address": "ciccia",
-			"dob": new Date(1970, 01, 01)
-			// Made up date, TODO: implement with Google People API - needs approval
+			"cf": " ",
+			"address": " ",
+			"dob": new Date(1970, 01, 01)	// The Epoch
+			// Made up date, TODO: implement with Google People API - needs Google approval
 		}
 		// Sending data to db
 		$.ajax({
@@ -73,12 +106,8 @@ googleButton.addEventListener('click', () =>	{
 					if (c)	{
 						// Refresh existing cookie
 						eraseCookie('uid');
-						setCookie('uid', user.uid, 7);
 					}
-					else	{
-						// Setting a cookie for the user with expiration date by a week
-						setCookie('uid', user.uid, 7);
-					}
+					setCookie('uid', user.uid, 7);
 					window.location.replace(localHost+"/home");
 				},
 			  error: function (e) {
@@ -88,8 +117,6 @@ googleButton.addEventListener('click', () =>	{
 					window.location.replace(localHost+"/error");
 				}
 		});
-		// Redirecting to /home
-		window.location.replace(localHost+"/home");
 	}).catch((error) => {
 		// Handle Errors here.
 		var errorCode = error.code;
@@ -101,6 +128,7 @@ googleButton.addEventListener('click', () =>	{
 		if (debug)	{
 			alert(errorCode+"\n"+errorMessage);
 		}
+		window.location.replace(localHost+"/error");
 	});
 })
 // Login function
@@ -129,7 +157,16 @@ loginButton.addEventListener('click', ()	=>	{
 	.catch((error) => {
 		var errorCode = error.code;
 		var errorMessage = error.message;
-		window.alert("Error "+errorCode+"\n"+errorMessage); 
+		if (debug)	{
+			window.alert("Error "+errorCode+"\n"+errorMessage); 
+		}
+		let mailField=document.getElementById("mail-login-input");
+		let passwordField=document.getElementById("password-login-input");
+
+		mailField.style.borderColor="red";
+		passwordField.style.borderColor="red";
+
+		document.getElementById("login-hint").style.display="block";
 	});
 });
 // Toggle div for reset password
@@ -162,7 +199,7 @@ signupButton.addEventListener('click', ()	=>	{
 	if (checkRegisterInputs())	{
 		// Function to create a new account with Firebase
 		firebase.auth().createUserWithEmailAndPassword(email,
-		 password).then((user) => {
+		 password).then((response) => {
 			// Signed in 
 			let name=document.getElementById("name-input").value;
 			let surname=document.getElementById("surname-input").value;
@@ -175,15 +212,12 @@ signupButton.addEventListener('click', ()	=>	{
 			if (c)	{
 				// Refresh existing cookie
 				eraseCookie('uid');
-				setCookie('uid', user.user.uid, 7);
 			}
-			else	{
-				// Setting a cookie for the user with expiration date by a week
-				setCookie('uid', user.user.uid, 7);
-			}
+			// Setting a cookie for the user with expiration date by a week
+			setCookie('uid', response.user.uid, 7);
 
 			let json={
-				"id": user.user.uid,
+				"id": response.user.uid,
 				"email": email,
 				"name": name,
 				"surname": surname,
@@ -207,7 +241,6 @@ signupButton.addEventListener('click', ()	=>	{
 					if (debug)	{
 						alert("Error: "+e);
 					}
-					// FIXME: Redirect to error page
 					if (!debug)	{
 						window.location.replace(localHost+"/error");
 					}
@@ -356,15 +389,31 @@ function validDateOfBirth(dob)	{
 	return true;
 }
 // Cookie handling functions
-function setCookie(name,value,days) {
-    var expires = "";
-    if (days) {
+function setCookie(name, value, days, daysIsMillisecond) {
+	var expires = "";
+	if (daysIsMillisecond)	{
+		var date = new Date();
+		date.setTime(date.getTime()+(days));
+		expires= "; expires="+date.toUTCString();
+	}
+    else if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days*24*60*60*1000));
         expires = "; expires=" + date.toUTCString();
     }
     document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 }
+/*	Deprecated	@Claudiocli
+function setCookie(name,value,days, daysIsMillisecond) {
+	var expires = "";
+	if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+*/
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -384,3 +433,40 @@ let isLogged=getCookie("uid");
 if (isLogged)	{
 	window.location.replace(localHost+"/home");
 }
+// Online - Offline status check
+/*	WIP - @Claudiocli
+const checkOnlineStatus = async () =>  {
+	// As there are incompatibilities between browsers, it's needed a custom check for internet availability
+	// Can achieve that by "pinging" a trusted site (e.g. google.com) and valuating its status
+    try {
+        const online = await fetch("https://www.google.com");	// FIXME : need to find something to ping to
+        return online.status >= 200 && online.status<300;   // Online
+    } catch (error) {
+        return false;   // Offline
+    }
+}
+*/
+// Handling dc during an operation
+window.addEventListener('offline', ()	=>	{
+	// Setting last page visited into the cookie lastPage
+	setCookie('lastPage', "/login", 1000*60, true);
+	window.location.replace(localHost+"/error");
+});
+window.addEventListener('online', ()	=>	{
+	// Resuming the last operation with the data stored in the cookie, if that exists
+	let resume=getCookie('lastOperationData');
+	if (resume)	{
+		window.replace(localHost+getCookie("lastPage"));
+		let jsonDataOperation=JSON.parse(getCookie('lastOperationData'));
+		// Cycling through every pair key-value in the json (IDElement-ValueStored)
+		for (let key in jsonDataOperation)	{
+			// If key is an actually key of jsonDataOperation
+			if (jsonDataOperation.hasOwnProperty(key))	{
+				// Resetting the value of the element of id key to the value contained in jsonDataOperation[key]
+				document.getElementById(key).value=jsonDataOperation[key];
+			}
+		}
+	}
+	// Erasing that cookie
+	eraseCookie('lastOperationData');
+});

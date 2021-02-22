@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import it.urss.payball8.model.Card;
+import it.urss.payball8.model.Recharge;
 import it.urss.payball8.repository.AccountRepository;
 import it.urss.payball8.repository.CardRepository;
+import it.urss.payball8.repository.RechargeRepository;
 import net.minidev.json.JSONObject;
 
 @Controller
@@ -34,24 +36,29 @@ public class CardController {
 	@Autowired
 	private AccountRepository accountRepository;
 
+	@Autowired
+	private RechargeRepository rechargeRepository;
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String showLoginPage() {
 		return "carte";
 	}
 
 	@PostMapping(path = "/myCard")
-	@ResponseBody List<Card> getAllMyCard(@RequestBody JSONObject id) {
+	@ResponseBody
+	List<Card> getAllMyCard(@RequestBody JSONObject id) {
 		String id_long = id.getAsString("id");
-		
+
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
-		logger.info("GET ALL MY CARD"+ id_long);
-		
+		logger.info("GET ALL MY CARD" + id_long);
+
 		return cardRepository.findAllByAccount(id_long);
 	}
 
 	@PostMapping(path = "/add")
-	@ResponseBody ResponseEntity<Card> addCard(@RequestBody Card card) {
+	@ResponseBody
+	ResponseEntity<Card> addCard(@RequestBody Card card) {
 		accountRepository.findById(card.getAccount())
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
 		logger.info("ADD CARD TO ACCOUNT");
@@ -60,11 +67,15 @@ public class CardController {
 	}
 
 	@DeleteMapping(path = "/deleteCard/{id}")
-	void deleteBypan(@RequestBody String pan, @PathVariable String id) {
-		logger.info(String.format("USER_DELETE deleted card with pan: %d", pan));
-
-		Card current_card = cardRepository.findBypan(pan);
-		if (current_card.getAccount() == id)
-			cardRepository.deleteBypan(pan);
+	void deleteBypan(@RequestBody JSONObject pan, @PathVariable String id) {
+		String pan_Json = pan.getAsString("pan");
+		Card current_card = cardRepository.findBypan(pan_Json);
+		List<Recharge> list_recharge = rechargeRepository.findAllBycard(pan_Json);
+		if (current_card != null && current_card.getAccount().equals(id)) {
+			rechargeRepository.deleteAll(list_recharge);
+			cardRepository.delete(current_card);
+			logger.info("Cart_DELETE deleted card with pan: " + pan);
+			throw new ResponseStatusException(HttpStatus.OK, "DELETE_CARD");
+		}
 	}
 }

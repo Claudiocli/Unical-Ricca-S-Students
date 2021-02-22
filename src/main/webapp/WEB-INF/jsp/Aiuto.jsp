@@ -3,6 +3,13 @@
     <html lang="it">
 
     <head>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+
+        <!-- Firebase products -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-auth.js"></script>
+        
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,11 +43,8 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                        class="bi bi-wallet2 icons-navbar-color" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z" />
-                                    </svg>
+                                    <img class="logo-font" src="../../resources/img/LOGO PAY8BALL_LOGO ORIZZONTALE.png"
+										alt="logo">
                                 </li>
                                 <li class="nav-item">
                                     <a id="riepilogo" class="nav-link nav-link-color"
@@ -181,7 +185,7 @@
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Chiudi</button>
                                                     <button type="button" id="btn-logout"
-                                                        class="btn esci-font">Si</button>
+                                                        class="btn esci-font">S&igrave;</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -195,7 +199,7 @@
         </nav>
 
         <!--Center Section-->
-        <div class="banner banner-color">
+        <div class="container-fluid banner banner-color">
             <div class="row h-100">
                 <div class="col-lg-2 col-md-2 col-sm-2 h-100"></div>
                 <div class="col-lg-8 col-md-8 col-sm-8 h-100">
@@ -217,13 +221,14 @@
                                     Puoi ricaricare il tuo saldo PayBall8 tramite un conto corrente di cui sei titolare,
                                     registrato nello stesso Paese del conto PayBall8. Verifica di averlo collegato al
                                     tuo
-                                    conto PayBall8.
+                                    conto PayBall8.<br>
 
-                                    Ecco come puoi fare per ricaricare il tuo conto PayPal dal tuo conto bancario:
+                                    Ecco come puoi fare per ricaricare il tuo conto PayPal dal tuo conto bancario:<br>
 
-                                    1)Accedi alle tue "Carte" e clicca "Trasferisci denaro".
-                                    2)Clicca "Ricarica il tuo saldo" e segui le istruzioni.
-                                    3)Verra' generato un codice IBAN virtuale, che userai per effettuare il bonifico
+                                    1) Accedi alle tue "Carte" e clicca "Trasferisci denaro".<br>
+                                    2) Clicca "Ricarica il tuo saldo" e segui le istruzioni.<br>
+                                    3) Verr&agrave; generato un codice IBAN virtuale, che userai per effettuare il
+                                    bonifico
                                     bancario.
                                     Tale IBAN identifica in modo univoco il tuo trasferimento a PayBall8.
                                 </div>
@@ -243,7 +248,8 @@
                                 data-parent="#accordion">
                                 <div class="card-body collapse-button-font collapse-body-font">
                                     In caso di dubbi sul tuo acquisto, ti consigliamo innanzitutto di contattare
-                                    direttamente il venditore. Spesso questo e' il modo piu' semplice e rapido per
+                                    direttamente il venditore. Spesso questo &eacute; il modo pi&ugrave; semplice e
+                                    rapido per
                                     chiarire un
                                     equivoco e risolvere un piccolo problema.
                                 </div>
@@ -255,39 +261,43 @@
                                     <a href="#collapseThree" data-toggle="collapse" id="collapseThreeButton"
                                         class="btn btn-link collapsed collapse-button-font" aria-expanded="true"
                                         aria-controls="collapseThree">
-                                        Perche' il mio pagamento e' bloccato e quando sara' disponibile?
+                                        Perch&eacute; il mio pagamento &egrave; bloccato e quando sar&agrave;
+                                        disponibile?
                                     </a>
                                 </h5>
                             </div>
                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                                 data-parent="#accordion">
                                 <div class="card-body collapse-button-font collapse-body-font">
-                                    Ecco alcuni dei motivi piu' comuni per cui un pagamento potrebbe essere
+                                    Ecco alcuni dei motivi pi&ugrave; comuni per cui un pagamento potrebbe essere
                                     temporaneamente
-                                    non disponibile:
+                                    non disponibile:<br>
 
-                                    1)E' necessario del tempo per creare una valida cronologia di transazioni.
-                                    Non hai svolto attivita' di vendita di recente. I conti precedentemente inattivi
+                                    1) &Eacute; necessario del tempo per creare una valida cronologia di transazioni.
+                                    Non hai svolto attivit&agrave; di vendita di recente. I conti precedentemente
+                                    inattivi
                                     possono
                                     essere soggetti a blocchi dei pagamenti mentre viene ricreata una cronologia di
                                     vendita
-                                    positiva.
+                                    positiva.<br>
 
-                                    2)Ricevi un numero elevato di rimborsi, contestazioni o chargeback. Ti consigliamo
+                                    2) Ricevi un numero elevato di rimborsi, contestazioni o chargeback. Ti consigliamo
                                     di
                                     comunicare spesso con i clienti e di collaborare con loro per risolvere eventuali
                                     problemi. Se il cliente ha presentato una contestazione o una richiesta di
                                     chargeback
-                                    perche' qualcun altro ha usato illecitamente il suo conto PayPal per effettuare una
-                                    transazione, non spedire nessun articolo.
+                                    perch&eacute; qualcun altro ha usato illecitamente il suo conto PayBall8 per
+                                    effettuare una
+                                    transazione, non spedire nessun articolo.<br>
 
-                                    3)L'andamento delle vendite e' cambiato. Ad esempio, potrebbe essersi verificato un
+                                    3) L'andamento delle vendite &eacute; cambiato. Ad esempio, potrebbe essersi
+                                    verificato un
                                     aumento
                                     insolito delle transazioni, un cambiamento del prezzo medio di vendita, il ricorso a
                                     una
-                                    nuova piattaforma commerciale.
+                                    nuova piattaforma commerciale.<br>
 
-                                    4)La transazione include articoli a rischio elevato, tra cui biglietti, carte
+                                    4) La transazione include articoli a rischio elevato, tra cui biglietti, carte
                                     regalo,
                                     elettronica di consumo, computer e pacchetti di viaggio.
                                 </div>
@@ -306,18 +316,19 @@
                             <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
                                 data-parent="#accordion">
                                 <div class="card-body collapse-button-font collapse-body-font">
-                                    Puoi annullare solo i pagamenti non riscossi accanto ai quali e' presente il link
-                                    "Annulla".
+                                    Puoi annullare solo i pagamenti non riscossi accanto ai quali &eacute; presente il
+                                    link
+                                    "Annulla".<br>
 
                                     Per annullare un pagamento non riscosso dall'app PayBall8, tocca il pagamento che
                                     desideri
-                                    annullare e seleziona "Annulla pagamento".
+                                    annullare e seleziona "Annulla pagamento".<br>
 
                                     Per annullare un pagamento non riscosso dal computer:
-
-                                    1)Vai nello Storico e individua il pagamento.
-                                    2)Clicca "Annulla" accanto alla transazione.
-                                    3)Conferma la richiesta.
+                                    <br>
+                                    1) Vai nello Storico e individua il pagamento.<br>
+                                    2) Clicca "Annulla" accanto alla transazione.<br>
+                                    3) Conferma la richiesta.
                                 </div>
                             </div>
                         </div>
@@ -352,7 +363,7 @@
                                     d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z" />
                             </svg>
                             <h3>Veloce</h3>
-                            <p class="lead mb-0 text-bold"> Certificato come conto virtuale piu' rapido in Europa.
+                            <p class="lead mb-0 text-bold"> Certificato come conto virtuale pi&ugrave; rapido in Europa.
                             </p>
                         </div>
                     </div>
@@ -365,7 +376,8 @@
                                 <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
                             </svg>
                             <h3>Sicuro</h3>
-                            <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno puo' accedere
+                            <p class="lead mb-0 text-bold"> Eccetto noi della PayBall8 S.P.A. nessuno pu&ograve;
+                                accedere
                                 ai vostri
                                 dati sensibili ;-) .</p>
                         </div>
@@ -385,7 +397,9 @@
                             <li class="list-inline-item"><a class="text-white" href="#">Term of Use</a></li>
                             <li class="list-inline-item"><a class="text-white" href="#">Privacy Policy</a></li>
                         </ul>
-                        <p class="text-white small mb-4 mb-lg-0">@ Your Website 2020. All Rights Reserved.</p>
+                        <p class="text-white small mb-4 mb-lg-0">@ Your Website
+                            <script> document.write(new Date().getFullYear()); </script>. All Rights Reserved.
+                        </p>
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-right">
                         <ul class="list-inline mb-0">

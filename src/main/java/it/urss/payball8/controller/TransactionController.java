@@ -80,7 +80,9 @@ public class TransactionController {
 
 		for (Transaction transaction : transactionRepository.findAllByrecipient(id_long)) {
 			if (!transaction.getCategory().equals("Colletta inviata a: " + id_long)) {
+				transaction.setCategory("Transazione ricevuta da: " + transaction.getSender());
 				list_transaction.add(transaction);
+
 			}
 		}
 
@@ -111,7 +113,8 @@ public class TransactionController {
 		if (account_sender.getBalance() >= transaction.getAmount()) {
 			account_sender.setBalance(account_sender.getBalance() - transaction.getAmount());
 			account_recipient.setBalance(account_recipient.getBalance() + transaction.getAmount());
-			transaction.setCategory("Transazione");
+			transaction.setCategory("Transazione inviata a: " + account_recipient.getId());
+
 			logger.info("SALDO_AGGIORNATO");
 
 			ResponseEntity.ok(accountRepository.save(account_sender));

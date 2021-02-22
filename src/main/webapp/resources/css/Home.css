@@ -1,3 +1,11 @@
+body {
+  overflow-x: hidden;
+}
+.logo-font{
+  width: 4rem;
+  height: 3rem;
+}
+
 .icons-navbar-color {
   color: white;
 }
@@ -16,7 +24,7 @@
   background-color: #001463;
   color: white;
 }
-.euro-label{
+.euro-label {
   background-color: #4bbe58;
   color: white;
 }
@@ -33,10 +41,10 @@
 .saldo-font {
   font-size: 2rem;
 }
-.padding-invia{
+.padding-invia {
   padding-top: 2rem;
 }
-.font-invia-label{
+.font-invia-label {
   width: 5rem !important;
 }
 .padding-richiedi {
@@ -51,7 +59,7 @@
   color: black;
   border: 1px double #96d99f !important;
 }
-.submit-font{
+.submit-font {
   background-color: #4bbe58;
 }
 .card-font-color {
@@ -85,7 +93,7 @@
 .list-inline-item > a {
   color: black;
 }
-.serch-button-font{
+.serch-button-font {
   background-color: #41b450;
 }
 .search-input-dim {
@@ -128,4 +136,60 @@ footer {
     padding-top: 4rem;
     padding-bottom: 4rem;
   }
+}
+#sezione-lista-amici {
+  padding-right: 2.5%;
+}
+#amici-in-lista {
+  border: 5px solid #87d490;
+}
+.row-amico {
+  font-size: auto !important;
+}
+.friendModal,
+.notificationModal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.friend-modal-content,
+.notification-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 10px solid #001463;
+  width: 60%;
+}
+.friend-popup-close,
+.notification-popup-close {
+  color: #001463;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.friend-popup-close:hover,
+.friend-popup-close:focus,
+.notification-popup-close:hover,
+.notification-popup-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal-label-info {
+  display: block;
+  font-size: larger !important;
+}
+#delete-friend-button,
+#refuse-colletta-button,
+#contribuite-to-colletta {
+  display: block;
+  margin: auto;
+  font-size: larger !important;
 }

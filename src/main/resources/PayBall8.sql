@@ -39,6 +39,7 @@ SET default_with_oids = false;
 
 CREATE TABLE public.account (
     id character varying(255) NOT NULL,
+
     name character varying(255),
     surname character varying(255),
     email character varying(255),
@@ -83,6 +84,7 @@ CREATE TABLE public.colletta (
 
 ALTER TABLE public.colletta OWNER TO postgres;
 
+
 --
 -- Name: colletta_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -110,12 +112,35 @@ ALTER SEQUENCE public.colletta_id_seq OWNED BY public.colletta.id;
 --
 
 CREATE TABLE public.contribute (
+	id integer NOT NULL,
     contributor character varying(255) NOT NULL,
-    colletta bigint NOT NULL
+    colletta bigint NOT NULL,
+   	stato character varying(255)
 );
 
 
 ALTER TABLE public.contribute OWNER TO postgres;
+
+--
+-- Name: contribute_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.contribute_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.contribute_id_seq OWNER TO postgres;
+
+--
+-- Name: contribute_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.contribute_id_seq OWNED BY public.contribute.id;
 
 --
 -- Name: friendship; Type: TABLE; Schema: public; Owner: postgres
@@ -227,6 +252,13 @@ ALTER TABLE ONLY public.colletta ALTER COLUMN id SET DEFAULT nextval('public.col
 
 
 --
+-- Name: colletta id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.contribute ALTER COLUMN id SET DEFAULT nextval('public.contribute_id_seq'::regclass);
+
+
+--
 -- Name: recharge id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -268,7 +300,7 @@ COPY public.colletta (id, datetime, quote, beneficiary, amount, amount_temp) FRO
 -- Data for Name: contribute; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.contribute (contributor, colletta) FROM stdin;
+COPY public.contribute (id, contributor, colletta, stato) FROM stdin;
 \.
 
 
@@ -301,6 +333,12 @@ COPY public.transaction (id, datetime, category, sender, recipient, amount) FROM
 --
 
 SELECT pg_catalog.setval('public.colletta_id_seq', 1, false);
+
+--
+-- Name: colletta_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.contribute_id_seq', 1, false);
 
 
 --
@@ -353,7 +391,7 @@ ALTER TABLE ONLY public.colletta
 --
 
 ALTER TABLE ONLY public.contribute
-    ADD CONSTRAINT contribute_pkey PRIMARY KEY (contributor, colletta);
+    ADD CONSTRAINT contribute_pkey PRIMARY KEY (id);
 
 
 --

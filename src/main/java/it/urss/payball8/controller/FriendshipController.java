@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,12 +58,20 @@ public class FriendshipController {
 		return list_account;
 	}
 
-	@PostMapping(path = "/delete/{id_delete}")
-	void deleteFriendship(@PathVariable String id_delete, @RequestBody JSONObject id) {
-		String id_long = id.getAsString("id");
-		logger.info(String.format("FRIENDSHIP_DELETE deleted friendship with id: %d", id_delete));
-		friendshipRepository.deleteByAccount1AndAccount2(id_delete, id_long);
-		friendshipRepository.deleteByAccount2AndAccount1(id_delete, id_long);
+	@DeleteMapping("/delete")
+	void deleteFriendship(@RequestBody Friendship friendship) {
+		Friendship friendship1_2 = friendshipRepository.findByAccount1AndAccount2(friendship.getAccount1(),
+				friendship.getAccount2());
+		Friendship friendship2_1 = friendshipRepository.findByAccount2AndAccount1(friendship.getAccount1(),
+				friendship.getAccount2());
+		if (friendship1_2 != null) {
+			friendshipRepository.delete(friendship1_2);
+			logger.info("FRIENDSHIP_DELETE deleted friendship");
+		}
+		if (friendship2_1 != null) {
+			friendshipRepository.delete(friendship2_1);
+			logger.info("FRIENDSHIP_DELETE deleted friendship");
+		}
 	}
 
 }

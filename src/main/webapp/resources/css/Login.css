@@ -1,3 +1,6 @@
+body {
+  overflow-x: hidden;
+}
 * {
   margin: 0;
   padding: 10px;
@@ -51,13 +54,18 @@ main h1 {
   display: none;
   color: rgba(255, 0, 0, 0.808);
 }
+#login-hint {
+  display: none;
+  color: rgba(255, 0, 0, 0.808);
+}
 #signup-div .form-group label {
   padding-top: 20px;
   padding-bottom: -1px;
 }
 .custom-google-button {
   display: inline-block;
-  background: white;
+  width: auto !important;
+  background: #5d8ffc;
   color: #444;
   width: 190px;
   border-radius: 5px;
@@ -66,21 +74,27 @@ main h1 {
   white-space: nowrap;
 }
 .custom-google-button:hover {
+  background: #fff;
+  color: #5d8ffc;
+  border: 1px solid #5d8ffc;
   cursor: pointer;
 }
 span .icon {
-  background: url("/URSS/src/main/resources/static/google_signin_buttons/web/vector/btn_google_dark_normal_ios.svg")
-    transparent 5px 50% no-repeat;
+  background: transparent 5px 50% no-repeat;
   display: inline-block;
   vertical-align: middle;
   width: 42px;
   height: 42px;
 }
+span .icon img {
+  padding-left: 0%;
+  padding-right: 0%;
+}
 span .buttonText {
   display: inline-block;
   vertical-align: middle;
-  padding-left: 42px;
-  padding-right: 42px;
+  padding-left: 0%;
+  padding-right: 0%;
   font-size: 14px;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
@@ -113,4 +127,69 @@ span .buttonText {
 }
 .recovery-response-text {
   font-size: larger;
+}
+#cookie-pop-up {
+  display: none;
+  position: fixed;
+  padding-top: 10%;
+  text-align: center;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+#pop-up-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 10px solid #888;
+  width: 80%;
+  animation-name: animationPopup;
+  animation-duration: 0.6s;
+}
+@keyframes animationPopup {
+  0% {
+    transform: scale(0.4);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  80% {
+    transform: scale(1);
+  }
+  90% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+#accept-cookies,
+#refuse-cookies {
+  background: #5d8ffc;
+  color: #fff;
+  border: 1px solid #5d8ffc;
+  border-radius: 5px;
+  display: inline;
+  width: 40%;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+}
+#accept-cookies:hover,
+#refuse-cookies:hover {
+  background: #fefefe;
+  color: #5d8ffc;
+  border: 1px solid #5d8ffc;
+  cursor: pointer;
 }
