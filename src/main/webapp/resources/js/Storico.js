@@ -1,5 +1,6 @@
 var paginaCorrente = 0;
 var numPagine = 0;
+
 $(document).ready(function () {
     initStorico();
     document.getElementById("bottoneGestioneAccount").addEventListener("click", popolaGestioneAccount);
@@ -202,9 +203,108 @@ function popolaGestioneAccount(){
     }
 }
 
+function orderBy(filter, list)  {
+    switch (filter) {
+        case 'date':
+            list.sort((a,b) => (a.getDatetime() > b.getDatetime()) ? 1 : -1);
+            break;
+        case 'import':
+            list.sort((a,b) => (a.getAmount() > b.getAmount()) ? 1 : -1);
+            break;
+        case 'type':
+            list.sort((a,b) => (a.getCategory() > b.getCategory()) ? 1 : -1);
+            break;
+        default:
+            break;
+    }
+}
+
 let dataButton=document.getElementById("data-filter");
 let importButton=document.getElementById("import-filter");
+let infoButton=document.getElementById("info-filter");
 let tipoButton=document.getElementById("type-filter");
+
+dataButton.addEventListener('click',()  =>  {
+    let listaAmici = JSON.parse(getCookie("friendList"));
+    let data = {
+        id: idUser
+    };
+
+    $.ajax({
+        url: 'http://localhost:9090/storico/size',
+        method: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (risposta) {
+            calcoloPagine(risposta);
+        },
+        error: function (err) {
+        }
+    });
+
+    $.ajax({
+        url: 'http://localhost:9090/storico/getColumn/' + paginaCorrente,
+        method: 'POST',
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: function (risposta) {
+            orderBy('date', risposta);
+            $("#corpoTabella").html("");
+            for(var i=0 ;i<risposta.length; i++){
+                var ciccia = "";
+                var verifica = "";
+                var destinatario = "";
+                
+                if(risposta[i].category.substring(0,8) == "Colletta"){
+                    risposta[i].datetime = risposta[i].datetime.substring(0,10) + " " + risposta[i].datetime.substring(11,19);
+                }
+
+                if(risposta[i].category == "RECHARGE"){
+                    verifica = "Ricarica";
+                } else {
+                    var isPresent = false;
+                    for(var j=0; j<listaAmici.length; j++){
+                        // se la transazione è avvenuta con un amico sarà presente il suo nominativo altrimenti verrà visualizzato l'id
+                        if(risposta[i].category.substring(risposta[i].category.length-28, risposta[i].category.length) == listaAmici[j].id){
+                            destinatario = risposta[i].category.substring(0,risposta[i].category.length-28);
+                            destinatario += " " +  listaAmici[j].name + " " + listaAmici[j].surname;
+                            isPresent = true;
+                            break;
+                        }
+                    }
+                    if(!isPresent)
+                    destinatario = risposta[i].category;
+                    
+                    if(risposta[i].amount < 0){
+                        verifica = "Invia";
+                    }
+                    else{
+                        verifica = "Ricevi";
+                    }
+                }
+                
+                ciccia += "<tr>";
+                ciccia += "<td>" + risposta[i].datetime + "</td>";
+                ciccia += "<td>" + risposta[i].amount + "</td>";
+                ciccia += "<td>" + destinatario + "</td>";
+                ciccia += "<td>" + verifica + "</td>";
+                ciccia += "</tr>";
+                $("#corpoTabella").append(ciccia);
+            }
+        },
+        error: function (err) {
+        }
+    });
+});
+importButton.addEventListener('click',()  =>  {
+
+});
+infoButton.addEventListener('click',()  =>  {
+
+});
+tipoButton.addEventListener('click',()  =>  {
+
+});
 
 function logout()   {
     eraseCookie('uid');
