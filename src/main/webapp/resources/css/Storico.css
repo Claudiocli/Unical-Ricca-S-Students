@@ -59,8 +59,12 @@ footer {
   padding-bottom: 3rem;
   background-color: #001463;
 }
-#data-filter,
-#import-filter,
-#type-filter {
+#data-filter:hover,
+#import-filter:hover,
+#type-filter:hover {
   cursor: pointer;
+  color: brown;
+}
+#info-filter:hover {
+  cursor: default;
 }
