@@ -188,10 +188,10 @@
                     <table class="table table-striped table-font">
                         <thead>
                             <tr>
-                                <th>Data</th>
-                                <th>Importo</th>
-                                <th>Destinatario</th>
-                                <th>Tipo</th>
+                                <th><a id="data-filter">Data</a></th>
+                                <th><a id="import-filter">Importo</a></th>
+                                <th><a id="">Destinatario</a></th>
+                                <th><a id="type-filter">Tipo</a></th>
                             </tr>
                         </thead>
                         <tbody id="corpoTabella">

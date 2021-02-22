@@ -46,7 +46,8 @@ public class TransactionController {
 	}
 
 	@PostMapping(path = "/size")
-	@ResponseBody int getAll(@RequestBody JSONObject id) {
+	@ResponseBody
+	int getAll(@RequestBody JSONObject id) {
 		String id_long = id.getAsString("id");
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
@@ -62,7 +63,8 @@ public class TransactionController {
 	}
 
 	@PostMapping(path = "/getColumn/{page}")
-	@ResponseBody List<Transaction> getColumnTransaction(@RequestBody JSONObject id, @PathVariable Integer page) {
+	@ResponseBody
+	List<Transaction> getColumnTransaction(@RequestBody JSONObject id, @PathVariable Integer page) {
 		String id_long = id.getAsString("id");
 		accountRepository.findById(id_long)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Unable to find user"));
@@ -75,9 +77,9 @@ public class TransactionController {
 			transaction.setAmount(transaction.getAmount() * -1);
 			list_transaction.add(transaction);
 		}
-		
+
 		for (Transaction transaction : transactionRepository.findAllByrecipient(id_long)) {
-			if(!transaction.getCategory().equals("Colletta inviata a: "+ id_long)) {
+			if (!transaction.getCategory().equals("Colletta inviata a: " + id_long)) {
 				list_transaction.add(transaction);
 			}
 		}
@@ -90,7 +92,7 @@ public class TransactionController {
 			transaction.setDatetime(recharge.getDatetime());
 			list_transaction.add(transaction);
 		}
-
+		// Eliminare l'hardcode del "10". Farlo passare da input nella POST?
 		int startIndex = page * 10;
 		int endIndex = startIndex + 10;
 		if (endIndex > list_transaction.size())

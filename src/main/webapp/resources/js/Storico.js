@@ -32,6 +32,7 @@ function initStorico() {
 }
 
 function calcoloPagine(size) {
+    // 10 is the number of row of the table. It can be changed. Delete the hardcode
     var pagine = Math.floor(size / 10);
     numPagine = pagine;
     var prec = $("#Prec")
@@ -146,6 +147,10 @@ function popolaGestioneAccount(){
     });   
     }
 }
+
+let dataButton=document.getElementById("data-filter");
+let importButton=document.getElementById("import-filter");
+let tipoButton=document.getElementById("type-filter");
 
 function logout()   {
     eraseCookie('uid');
