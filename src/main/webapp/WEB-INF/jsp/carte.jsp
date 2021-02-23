@@ -243,12 +243,12 @@
 															class="form-label">Scadenza</label>
 														<ul class="list-inline mb-2">
 															<li class="list-inline-item scadenza-width"><input
-																	type="texte" class="form-control" placeholder="mm"
+																	type="texte" class="form-control" placeholder="MM"
 																	id="mese" maxlength="2" oninput="checkMese()"
 																	onkeydown="return onKeyNumeric(event);" required>
 															</li>
 															<li class="list-inline-item scadenza-width"><input
-																	type="text" class="form-control" placeholder="aa"
+																	type="text" class="form-control" placeholder="AAAA"
 																	id="anno" minlength="4" maxlength="4"
 																	oninput="checkAnno()"
 																	onkeydown="return onKeyNumeric(event);" required>
