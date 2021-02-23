@@ -4,6 +4,9 @@
 <html>
 <head>
 	<meta charset="utf-8" lang="it">
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="http://localhost:9090/favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="http://localhost:9090/favicon-16x16.png" sizes="16x16" />
 	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<!-- Font -->
