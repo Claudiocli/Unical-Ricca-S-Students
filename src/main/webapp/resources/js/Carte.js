@@ -310,8 +310,8 @@ function checkData(){
     var terminiduso = document.getElementById("exampleCheck1").checked;
     var anno = document.getElementById("anno").value;
     if(pan == "" || holder == "" || expiration_date == "" || cvv == "" || !terminiduso || cvv.length != 3 || pan.length != 16 || anno.length != 4){
-        console.log("Campi richiesti");
-        alert("NONONO")
+        alert("Campi richiesti");
+        //alert("NONONO")
     }
     else{
         insertCard();

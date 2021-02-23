@@ -20,7 +20,7 @@ body {
 .navbar {
   background-color: #001463;
 }
-.chiudi-gestioneAccount {
+.chiudi-gestioneAccount{
   background-color: #001463;
   color: white;
 }
@@ -169,8 +169,6 @@ footer {
 }
 .friend-popup-close,
 .notification-popup-close {
-  color: #001463;
-  font-size: 28px;
   font-weight: bold;
 }
 

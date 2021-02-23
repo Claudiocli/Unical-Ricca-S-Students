@@ -3,6 +3,10 @@
     <html lang="it">
 
     <head>
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="http://localhost:9090/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="http://localhost:9090/favicon-16x16.png" sizes="16x16" />
+
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
 
@@ -19,7 +23,7 @@
             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
         <link href="<c:url value=" /resources/css/Storico.css" />" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="<c:url value=" /resources/js/Storico.js" />"></script>
+        <script defer src="<c:url value=" /resources/js/Storico.js" />"></script>
         <title>Storico Transizioni</title>
     </head>
 
@@ -113,12 +117,12 @@
                                                                                     </div>
                                                                                     <div class="mb-3">
                                                                                         <label
-                                                                                            for="exampleInputPassword1"
+                                                                                            for="exampleInputPassword"
                                                                                             class="form-label">Nuova
                                                                                             Password</label>
                                                                                         <input type="password"
                                                                                             class="form-control"
-                                                                                            id="exampleInputPassword1">
+                                                                                            id="exampleInputPassword">
                                                                                     </div>
                                                                                     <div class="mb-3">
                                                                                         <label
@@ -195,10 +199,10 @@
                     <table class="table table-striped table-font">
                         <thead>
                             <tr>
-                                <th>Data</th>
-                                <th>Importo</th>
-                                <th>Informazioni</th>
-                                <th>Tipo</th>
+                                <th><a id="data-filter">Data</a></th>
+                                <th><a id="import-filter">Importo</a></th>
+                                <th><a id="info-filter">Informazioni</a></th>
+                                <th><a id="type-filter">Tipo</a></th>
                             </tr>
                         </thead>
                         <tbody id="corpoTabella">

@@ -3,6 +3,10 @@
 	<html lang="it">
 
 	<head>
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" href="http://localhost:9090/favicon-32x32.png" sizes="32x32" />
+		<link rel="icon" type="image/png" href="http://localhost:9090/favicon-16x16.png" sizes="16x16" />
+		
 		<!-- The core Firebase JS SDK is always required and must be listed first -->
 		<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
 
@@ -239,12 +243,12 @@
 															class="form-label">Scadenza</label>
 														<ul class="list-inline mb-2">
 															<li class="list-inline-item scadenza-width"><input
-																	type="texte" class="form-control" placeholder="mm"
+																	type="texte" class="form-control" placeholder="MM"
 																	id="mese" maxlength="2" oninput="checkMese()"
 																	onkeydown="return onKeyNumeric(event);" required>
 															</li>
 															<li class="list-inline-item scadenza-width"><input
-																	type="text" class="form-control" placeholder="aa"
+																	type="text" class="form-control" placeholder="AAAA"
 																	id="anno" minlength="4" maxlength="4"
 																	oninput="checkAnno()"
 																	onkeydown="return onKeyNumeric(event);" required>

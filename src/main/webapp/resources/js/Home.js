@@ -867,8 +867,8 @@ function popolaListaCollette(){
 }
 
 // funzioni da richiamare ogni tot per non refreshare pagina ogni volta
-setInterval(popolaListaCollette, 5*1000);
-setInterval(initSaldo,5*1000);
+setInterval(popolaListaCollette, 10*1000);
+setInterval(initSaldo,60*1000);
 
 function createEventListenerCollettaPopup(risposta) {
     for(let i = 0; i < risposta.length; i++){
@@ -926,6 +926,9 @@ function onKeyNumeric(e, fieldId) {
     var presenteGia = field.value.indexOf(".");
     var size = field.value.length;
 
+    if (e.keyCode == 8)
+        return true;
+        
     // controllo che non sia vuoto il campo e che non sia già presente un punto
     if(e.keyCode==190){
         if(size > 0 && presenteGia == -1)
@@ -934,13 +937,13 @@ function onKeyNumeric(e, fieldId) {
             return false;
     }
 
-    // controllo che ci siano massimo due cifre dopo il punto 
-    if(presenteGia != -1){
-        if(field.value.substring(presenteGia,field.value).length > 2)
-            return false;
-    }
     // Accetto solo numeri e backspace <- tranne per un e uno solo . 
-    if (((e.keyCode >= 48) && (e.keyCode <= 57)) || (e.keyCode == 8)) {
+    if (((e.keyCode >= 48) && (e.keyCode <= 57))) {
+        // controllo che ci siano massimo due cifre dopo il punto 
+        if(presenteGia != -1){
+            if(field.value.substring(presenteGia,field.value).length > 2)
+                return false;
+        }
         return true;
     } else {
         return false;
