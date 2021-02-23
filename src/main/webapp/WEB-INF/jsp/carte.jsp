@@ -3,6 +3,10 @@
 	<html lang="it">
 
 	<head>
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" href="http://localhost:9090/favicon-32x32.png" sizes="32x32" />
+		<link rel="icon" type="image/png" href="http://localhost:9090/favicon-16x16.png" sizes="16x16" />
+		
 		<!-- The core Firebase JS SDK is always required and must be listed first -->
 		<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
 
