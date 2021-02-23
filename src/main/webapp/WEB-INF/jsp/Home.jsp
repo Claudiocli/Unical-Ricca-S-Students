@@ -2,9 +2,13 @@
 	<!doctype html>
 	<html lang="it">
 
-	<head>
-		<!-- The core Firebase JS SDK is always required and must be listed first -->
-		<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
+<head>
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="http://localhost:9090/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="http://localhost:9090/favicon-16x16.png" sizes="16x16" />
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-app.js"></script>
 
 		<!-- Firebase products -->
 		<script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-analytics.js"></script>
@@ -333,33 +337,10 @@
 																			data-bs-dismiss="modal"
 																			aria-label="Close"></button>
 																	</div>
-																	<div class="modal-body">
-																		<div class="input-group mb-3">
-																			<span
-																				class="input-group-text euro-label"></span>
-																			<input id="panInputLabel" maxlength="16"
-																				type="text" class="form-control"
-																				placeholder="Pan-Carta"
-																				aria-label="Username"
-																				aria-describedby="basic-addon1">
-																		</div>
-																		<div class="input-group">
-																			<input id="ImportoInputLabel2" type="text"
-																				class="form-control" placeholder="0.00">
-																			<span
-																				class="input-group-text euro-label">Euro</span>
-																		</div>
-																	</div>
-																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary"
-																			data-bs-dismiss="modal">Annulla</button>
-																		<a class="chiudi-gestioneAccount"
-																			href="http://localhost:9090/home">
-																			<button id="bottoneRicaricaSaldo"
-																				type="button"
-																				class="btn chiudi-gestioneAccount">Ricarica
-																			</button>
-																		</a>
+																	<div class="input-group">
+																		<input id="ImportoInputLabel2" type="text"
+																			class="form-control" placeholder="0.00" onkeydown="return onKeyNumeric(event,'ImportoInputLabel2');"> <span
+																			class="input-group-text euro-label">Euro</span>
 																	</div>
 																</div>
 															</div>

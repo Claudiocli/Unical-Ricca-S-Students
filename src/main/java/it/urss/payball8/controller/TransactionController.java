@@ -82,7 +82,7 @@ public class TransactionController {
 			if (!transaction.getCategory().equals("Colletta inviata a: " + id_long)) {
 				transaction.setCategory("Transazione ricevuta da: " + transaction.getSender());
 				list_transaction.add(transaction);
-				
+
 			}
 		}
 
@@ -94,7 +94,7 @@ public class TransactionController {
 			transaction.setDatetime(recharge.getDatetime());
 			list_transaction.add(transaction);
 		}
-
+		// Eliminare l'hardcode del "10". Farlo passare da input nella POST?
 		int startIndex = page * 10;
 		int endIndex = startIndex + 10;
 		if (endIndex > list_transaction.size())
