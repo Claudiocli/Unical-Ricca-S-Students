@@ -307,7 +307,7 @@ function checkData(){
     var holder = document.getElementById("idIntestatario").value;
     var expiration_date = document.getElementById("mese").value + document.getElementById("anno").value;
     var cvv = document.getElementById("cvc").value;
-    var terminiduso = document.getElementById("exampleCheck1").checked;
+    var terminiduso = document.getElementById("checkTOS").checked;
     var anno = document.getElementById("anno").value;
     if(pan == "" || holder == "" || expiration_date == "" || cvv == "" || !terminiduso || cvv.length != 3 || pan.length != 16 || anno.length != 4){
         alert("Campi richiesti");
