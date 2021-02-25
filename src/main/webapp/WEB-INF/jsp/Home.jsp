@@ -63,7 +63,7 @@
 									</input></li>
 								<li class="nav-item">
 									<button type="button" class="btn esci-font" id="bottoneGestioneAccount"
-										data-bs-toggle="modal" data-bs-target="#exampleModal2">
+										data-bs-toggle="modal" data-bs-target="#settings">
 										<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 											fill="currentColor" class="bi bi-gear icons-navbar-color"
 											viewBox="0 0 16 16">
@@ -73,12 +73,12 @@
 												d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z" />
 										</svg>
 									</button>
-									<div class="modal fade" id="exampleModal2" tabindex="-1"
-										aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal fade" id="settings" tabindex="-1"
+										aria-labelledby="settingsModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Gestione
+													<h5 class="modal-title" id="settingsModalLabel">Gestione
 														Account</h5>
 													<button type="button" class="btn-close" data-bs-dismiss="modal"
 														aria-label="Close"></button>
@@ -91,17 +91,17 @@
 																<td>********</td>
 																<td>
 																	<button id="rigaPassword" data-bs-toggle="modal"
-																		data-bs-target="#exampleModal33" type="button"
+																		data-bs-target="#changePassword" type="button"
 																		class="btn chiudi-gestioneAccount">Modifica</button>
 																</td>
 															</tr>
-															<div class="modal fade" id="exampleModal33" tabindex="-1"
-																aria-labelledby="exampleModalLabel" aria-hidden="true">
+															<div class="modal fade" id="changePassword" tabindex="-1"
+																aria-labelledby="changePasswordModalLabel" aria-hidden="true">
 																<div class="modal-dialog">
 																	<div class="modal-content">
 																		<div class="modal-header">
 																			<h5 class="modal-title"
-																				id="exampleModalLabel">
+																				id="changePasswordModalLabel">
 																				Cambia Password</h5>
 																			<button type="button" class="btn-close"
 																				data-bs-dismiss="modal"
@@ -110,12 +110,12 @@
 																		<div class="modal-body">
 																			<form>
 																				<div class="mb-3">
-																					<label for="exampleInputEmail1"
+																					<label for="inputEmail1"
 																						class="form-label">Vecchia
 																						Password</label> <input
 																						type="email"
 																						class="form-control"
-																						id="exampleInputEmail1"
+																						id="inputEmail1"
 																						aria-describedby="emailHelp">
 																					<div id="emailHelp"
 																						class="form-text">Noi non
@@ -123,20 +123,20 @@
 																						sensibili con nessuno.</div>
 																				</div>
 																				<div class="mb-3">
-																					<label for="exampleInputPassword0"
+																					<label for="inputPassword0"
 																						class="form-label">Nuova
 																						Password</label> <input
 																						type="password"
 																						class="form-control"
-																						id="exampleInputPassword0">
+																						id="inputPassword0">
 																				</div>
 																				<div class="mb-3">
-																					<label for="exampleInputPassword1"
+																					<label for="inputConfirmPassword"
 																						class="form-label">Conferma
 																						Password</label> <input
 																						type="password"
 																						class="form-control"
-																						id="exampleInputPassword1">
+																						id="inputConfirmPassword">
 																				</div>
 																			</form>
 																		</div>
@@ -177,14 +177,14 @@
 								</li>
 								<li class="nav-item">
 									<button type="button" class="btn esci-font" data-bs-toggle="modal"
-										data-bs-target="#exampleModal">
+										data-bs-target="#logoutModal">
 										Esci</button>
-									<div class="modal fade" id="exampleModal" tabindex="-1"
-										aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal fade" id="logoutModal" tabindex="-1"
+										aria-labelledby="logoutModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Esci</h5>
+													<h5 class="modal-title" id="logoutModalLabel">Esci</h5>
 													<button type="button" class="btn-close" data-bs-dismiss="modal"
 														aria-label="Close"></button>
 												</div>
@@ -248,14 +248,14 @@
 													<li class="list-inline-item">
 														<button type="button" class="btn card-button-options-font "
 															data-bs-toggle="modal"
-															data-bs-target="#exampleModal4">Invia</button>
+															data-bs-target="#sendTransactionModal">Invia</button>
 														<!-- Modal -->
-														<div class="modal fade" id="exampleModal4" tabindex="-1"
-															aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal fade" id="sendTransactionModal" tabindex="-1"
+															aria-labelledby="sendTransactionModalLabel" aria-hidden="true">
 															<div class="modal-dialog">
 																<div class="modal-content">
 																	<div class="modal-header chiudi-gestioneAccount">
-																		<h5 class="modal-title" id="exampleModalLabel">
+																		<h5 class="modal-title" id="sendTransactionModalLabel">
 																			Invia Denaro</h5>
 																		<button type="button" class="btn-close"
 																			data-bs-dismiss="modal"
@@ -294,13 +294,13 @@
 														</div>
 														<button type="button" id="bottoneGestioneId_Account"
 															class="btn card-button-options-font " data-bs-toggle="modal"
-															data-bs-target="#exampleModal10">Ricevi</button>
-														<div class="modal fade" id="exampleModal10" tabindex="-1"
-															aria-labelledby="exampleModalLabel" aria-hidden="true">
+															data-bs-target="#recieveTransactionModal">Ricevi</button>
+														<div class="modal fade" id="recieveTransactionModal" tabindex="-1"
+															aria-labelledby="recieveTransactionModalLabel" aria-hidden="true">
 															<div class="modal-dialog">
 																<div class="modal-content">
 																	<div class="modal-header">
-																		<h5 class="modal-title" id="exampleModalLabel">
+																		<h5 class="modal-title" id="recieveTransactionModalLabel">
 																			Ricevi</h5>
 																		<button type="button" class="btn-close"
 																			data-bs-dismiss="modal"
@@ -324,23 +324,46 @@
 														</div>
 														<button type="button" class="btn card-button-options-font "
 															data-bs-toggle="modal"
-															data-bs-target="#exampleModal11">Ricarica</button>
+															data-bs-target="#rechargeTransactionModal">Ricarica</button>
 														<!-- Modal -->
-														<div class="modal fade" id="exampleModal11" tabindex="-1"
-															aria-labelledby="exampleModalLabel" aria-hidden="true">
+														<div class="modal fade" id="rechargeTransactionModal" tabindex="-1"
+															aria-labelledby="rechargeTransactionModalLabel" aria-hidden="true">
 															<div class="modal-dialog">
 																<div class="modal-content">
 																	<div class="modal-header chiudi-gestioneAccount">
-																		<h5 class="modal-title" id="exampleModalLabel">
+																		<h5 class="modal-title" id="rechargeTransactionModalLabel">
 																			Ricarica Saldo</h5>
 																		<button type="button" class="btn-close"
 																			data-bs-dismiss="modal"
 																			aria-label="Close"></button>
 																	</div>
-																	<div class="input-group">
-																		<input id="ImportoInputLabel2" type="text"
-																			class="form-control" placeholder="0.00" onkeydown="return onKeyNumeric(event,'ImportoInputLabel2');"> <span
-																			class="input-group-text euro-label">Euro</span>
+																	<div class="modal-body">
+																		<div class="input-group mb-3">
+																			<span
+																				class="input-group-text euro-label"></span>
+																			<input id="panInputLabel" maxlength="16"
+																				type="text" class="form-control"
+																				placeholder="Pan-Carta"
+																				aria-label="Username"
+																				aria-describedby="basic-addon1">
+																		</div>
+																		<div class="input-group">
+																			<input id="ImportoInputLabel2" type="text"
+																				class="form-control" placeholder="0.00">
+																			<span
+																				class="input-group-text euro-label">Euro</span>
+																		</div>
+																	</div>
+																	<div class="modal-footer">
+																		<button type="button" class="btn btn-secondary"
+																			data-bs-dismiss="modal">Annulla</button>
+																		<a class="chiudi-gestioneAccount"
+																			href="http://localhost:9090/home">
+																			<button id="bottoneRicaricaSaldo"
+																				type="button"
+																				class="btn chiudi-gestioneAccount">Ricarica
+																			</button>
+																		</a>
 																	</div>
 																</div>
 															</div>
@@ -399,14 +422,14 @@
 													</div>
 													<button id="submitColletta" type="button" class="btn submit-font"
 														data-bs-toggle="modal"
-														data-bs-target="#exampleModal5">Submit</button>
+														data-bs-target="#submitCollettaModal">Submit</button>
 													<!-- Modal -->
-													<div class="modal fade" id="exampleModal5" tabindex="-1"
-														aria-labelledby="exampleModalLabel5" aria-hidden="true">
+													<div class="modal fade" id="submitCollettaModal" tabindex="-1"
+														aria-labelledby="submitCollettaModalLabel" aria-hidden="true">
 														<div class="modal-dialog">
 															<div class="modal-content">
 																<div class="modal-header chiudi-gestioneAccount">
-																	<h5 class="modal-title" id="exampleModalLabel5">
+																	<h5 class="modal-title" id="submitCollettaModalLabel">
 																		Aggiungi Contribuente</h5>
 																	<button type="button" class="btn-close"
 																		data-bs-dismiss="modal"

@@ -2,6 +2,7 @@ HELP.md
 target/
 .classpath
 .project
+**/src/main/webapp/resources/img/output.jpg
 
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

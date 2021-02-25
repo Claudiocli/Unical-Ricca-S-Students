@@ -36,10 +36,8 @@
 					<div class="col-lg-11 col-md-11">
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-								<li class="nav-item">
-									<img class="logo-font" src="../../resources/img/LOGO PAY8BALL_LOGO ORIZZONTALE.png"
-										alt="logo">
-								</li>
+								<li class="nav-item"><img class="logo-font"
+										src="../../resources/img/LOGO PAY8BALL_LOGO ORIZZONTALE.png" alt="logo"></li>
 								<li class="nav-item"><a id="riepilogo" class="nav-link nav-link-color"
 										href="http://localhost:9090/home">Riepilogo</a></li>
 								<li class="nav-item"><a id="carte" class="nav-link nav-link-color"
@@ -56,7 +54,7 @@
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								<li class="nav-item">
 									<button type="button" class="btn esci-font" id="bottoneGestioneAccount"
-										data-bs-toggle="modal" data-bs-target="#exampleModal2">
+										data-bs-toggle="modal" data-bs-target="#settings">
 										<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30"
 											fill="currentColor" class="bi bi-gear icons-navbar-color"
 											viewBox="0 0 16 16">
@@ -66,85 +64,103 @@
 												d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z" />
 										</svg>
 									</button>
-									<div class="modal fade" id="exampleModal2" tabindex="-1"
-										aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal fade" id="settings" tabindex="-1"
+										aria-labelledby="settingsModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Gestione
+													<h5 class="modal-title" id="settingsModalLabel">Gestione
 														Account</h5>
 													<button type="button" class="btn-close" data-bs-dismiss="modal"
 														aria-label="Close"></button>
 												</div>
 												<div class="modal-body">
 													<table class="table memberListColor table-striped table-hover">
-														<tbody id="corpoGestioneAccount">
+														<thead>
 															<tr>
-																<div class="modal fade" id="exampleModal3" tabindex="-1"
-																	aria-labelledby="exampleModalLabel"
-																	aria-hidden="true">
-																	<div class="modal-dialog">
-																		<div class="modal-content">
-																			<div class="modal-header">
-																				<h5 class="modal-title"
-																					id="exampleModalLabel">
-																					Password</h5>
-																				<button type="button" class="btn-close"
-																					data-bs-dismiss="modal"
-																					aria-label="Close"></button>
-																			</div>
-																			<div class="modal-body">
-																				<form>
-																					<div class="mb-3">
-																						<label for="exampleInputEmail1"
-																							class="form-label">Vecchia
-																							Password</label> <input
-																							type="email"
-																							class="form-control"
-																							id="exampleInputEmail1"
-																							aria-describedby="emailHelp">
-																						<div id="emailHelp"
-																							class="form-text">Noi non
-																							condividiamo i tuoi dati
-																							sensibili con nessuno.</div>
-																					</div>
-																					<div class="mb-3">
-																						<label
-																							for="exampleInputPassword1"
-																							class="form-label">Nuova
-																							Password</label> <input
-																							type="password"
-																							class="form-control"
-																							id="exampleInputPassword1">
-																					</div>
-																					<div class="mb-3">
-																						<label
-																							for="exampleInputPassword1"
-																							class="form-label">Conferma
-																							Password</label> <input
-																							type="password"
-																							class="form-control"
-																							id="exampleInputPassword1">
-																					</div>
-																				</form>
-																			</div>
-																			<div class="modal-footer">
-																				<button type="button"
-																					class="btn btn-secondary"
-																					data-bs-dismiss="modal">Chiudi</button>
-																				<button type="button"
-																					class="btn chiudi-gestioneAccount">Applica</button>
-																			</div>
+																<td>Password</td>
+																<td>********</td>
+																<td>
+																	<button id="rigaPassword" data-bs-toggle="modal"
+																		data-bs-target="#changePassword" type="button"
+																		class="btn chiudi-gestioneAccount">Modifica</button>
+																</td>
+															</tr>
+															<div class="modal fade" id="changePassword" tabindex="-1"
+																aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+																<div class="modal-dialog">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<h5 class="modal-title"
+																				id="changePasswordModalLabel">
+																				Cambia Password</h5>
+																			<button type="button" class="btn-close"
+																				data-bs-dismiss="modal"
+																				aria-label="Close"></button>
+																		</div>
+																		<div class="modal-body">
+																			<form>
+																				<div class="mb-3">
+																					<label for="inputEmail1"
+																						class="form-label">Vecchia
+																						Password</label> <input
+																						type="email"
+																						class="form-control"
+																						id="inputEmail1"
+																						aria-describedby="emailHelp">
+																					<div id="emailHelp"
+																						class="form-text">Noi non
+																						condividiamo i tuoi dati
+																						sensibili con nessuno.</div>
+																				</div>
+																				<div class="mb-3">
+																					<label for="inputPassword0"
+																						class="form-label">Nuova
+																						Password</label> <input
+																						type="password"
+																						class="form-control"
+																						id="inputPassword0">
+																				</div>
+																				<div class="mb-3">
+																					<label for="inputConfirmPassword"
+																						class="form-label">Conferma
+																						Password</label> <input
+																						type="password"
+																						class="form-control"
+																						id="inputConfirmPassword">
+																				</div>
+																			</form>
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button"
+																				class="btn btn-secondary"
+																				data-bs-dismiss="modal">Chiudi</button>
+																			<button type="button"
+																				class="btn chiudi-gestioneAccount">Applica</button>
 																		</div>
 																	</div>
 																</div>
+															</div>
+														</thead>
+														<tbody id="corpoGestioneAccount">
+															<tr>
+
 															</tr>
 														</tbody>
 													</table>
 												</div>
 												<div class="modal-footer">
-													<button type="button" class="btn chiudi-gestioneAccount"
-														data-bs-dismiss="modal">Chiudi</button>
+													<ul class="list-inline mb-2 list-font">
+														<li class="list-inline-item">
+															<button type="button" class="btn chiudi-gestioneAccount"
+																data-bs-dismiss="modal">Chiudi</button>
+														</li>
+														<li class="list-inline-item">
+															<button id="bottoneEliminaAccount" type="button"
+																class="btn chiudi-gestioneAccount">Elimina
+																Account</button>
+														</li>
+													</ul>
 												</div>
 											</div>
 										</div>
@@ -152,14 +168,14 @@
 								</li>
 								<li class="nav-item">
 									<button type="button" class="btn esci-font" data-bs-toggle="modal"
-										data-bs-target="#exampleModal">
+										data-bs-target="#logoutModal">
 										Esci</button>
-									<div class="modal fade" id="exampleModal" tabindex="-1"
-										aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal fade" id="logoutModal" tabindex="-1"
+										aria-labelledby="logoutModalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Esci</h5>
+													<h5 class="modal-title" id="logoutModalLabel">Esci</h5>
 													<button type="button" class="btn-close" data-bs-dismiss="modal"
 														aria-label="Close"></button>
 												</div>
@@ -188,7 +204,7 @@
 				<div class="col-lg-2 col-md-2 h-100"></div>
 				<div class="col-lg-8 col-md-8 h-100">
 					<div class="row h-100">
-						<div class="col-lg-4 col-md-4 h-100" style="overflow-y:scroll">
+						<div class="col-lg-4 col-md-4 h-100" style="overflow-y:auto">
 							<h3 class="margin-top-elenco-carte">Elenco Carte</h3>
 							<table class="table table-striped">
 								<thead>
@@ -221,26 +237,25 @@
 									<li id="form" hidden>
 										<form class="font-form">
 											<div class="mb-3">
-												<label for="exampleInputEmail1" class="form-label">Intestatario
+												<label for="idIntestatario" class="form-label">Intestatario
 													della carta</label> <input type="text" class="form-control "
 													id="idIntestatario" placeholder="Mario Rossi"
 													aria-describedby="emailHelp" required>
 											</div>
 											<div class="mb-3">
-												<label for="exampleInputEmail1" class="form-label">Numero
+												<label for="idNumeroCarta" class="form-label">Numero
 													Carta</label> <input type="text"
 													onkeydown="return onKeyNumeric(event);" minlength="16"
 													maxlength="16" class="form-control " id="idNumeroCarta"
 													placeholder="XXXX-XXXX-XXXX-XXXX" aria-describedby="emailHelp"
 													required>
 												<div id="emailHelp" class="form-text">Noi non
-													condividiamo con nessuno la tua mail...</div>
+													condividiamo con Nessuno la tua mail...</div>
 											</div>
 											<ul class="list-inline-item scadenza-cvc-padding">
 												<li class="list-inline-item">
 													<div class="mb-3">
-														<label for="exampleInputPassword1"
-															class="form-label">Scadenza</label>
+														<label class="form-label">Scadenza</label>
 														<ul class="list-inline mb-2">
 															<li class="list-inline-item scadenza-width"><input
 																	type="texte" class="form-control" placeholder="MM"
@@ -258,7 +273,7 @@
 												</li>
 												<li class="list-inline-item cvc-padding">
 													<div class="mb-3">
-														<label for="exampleInputPassword1"
+														<label for="cvc"
 															class="form-label">CVC</label>
 														<ul class="list-inline mb-2">
 															<li class="list-inline-item cvc-width"><input
@@ -271,9 +286,9 @@
 												</li>
 											</ul>
 											<div class="mb-3 form-check">
-												<input type="checkbox" class="form-check-input" id="exampleCheck1"
+												<input type="checkbox" class="form-check-input" id="checkTOS"
 													required> <label class="form-check-label"
-													for="exampleCheck1">Accetto i termini d'uso</label>
+													for="checkTOS">Accetto i termini d'uso</label>
 											</div>
 											<button type="submit" class="btn submit-font"
 												id="bottoneAggiungiCarta">Submit</button>
